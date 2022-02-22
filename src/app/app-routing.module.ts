@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { MainpageComponent } from './pages/mainpage/mainpage.component';
 
 const routes: Routes = [
   {
@@ -8,9 +9,13 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'mainpage',
     pathMatch: 'full'
   },
+  {
+    path:'mainpage',
+    component: MainpageComponent
+  }
 ];
 
 @NgModule({
