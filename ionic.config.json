@@ -1,0 +1,7 @@
+{
+  "name": "happyplates",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
