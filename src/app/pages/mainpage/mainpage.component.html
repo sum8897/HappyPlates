@@ -11,6 +11,15 @@
 
 
 <ion-content>
+
+  <!-- <div style="display: flex;justify-content: space-between;">
+    <div class="image">
+      <img style="width: 200px;height: 200px;border-radius: 10px;" src="{{croppedImagePath}}"> 
+    </div>
+     <div class="button">
+       <ion-button (click)="selectImage()" size="small" expand='round'>Click image</ion-button>
+     </div>
+  </div> -->
   <div class="card-full">
     <ion-searchbar placeholder="Filter Schedules"></ion-searchbar>
     <div class="chef-view">
@@ -29,9 +38,10 @@
                 <span class="chef-specialization">Specialises In:</span>
               </div>
               <span class="chef-specialization-type">Italian,Chinese</span>
-              <div>
-                <ion-button size="small" expand="round" class="see-menu">See Menu </ion-button>
-              </div>
+              
+            </div>
+            <div class="chef-button">
+              <ion-button size="small" expand="round" class="see-menu">See Menu </ion-button>
             </div>
           </ion-card>
 
@@ -152,9 +162,11 @@
             </div>
             <div class="event-location-date">
               <div class="event-date"><img style="width: 10px;" src="../../../assets/img/time.png"><span>Sepetember 29,
-                  2020</span></div>
+                  2020</span>
+                </div>
               <div class="event-location"><img style="width: 10px;"
-                  src="../../../assets/img/location.png"><span>Madison</span></div>
+                  src="../../../assets/img/location.png"><span>Madison</span>
+                </div>
             </div>
           </div>
         </ion-slide>
@@ -173,7 +185,7 @@
               <ion-card-content class="blog-content">
                 <span>{{blog.text}}</span>
                 <div class="spna-date"><img style="width: 10px;"
-                    src="../../../assets/img/time.png"><span>{{blog.date}}</span></div>
+                    src="../../../assets/img/date.png"><span>{{blog.date}}</span></div>
               </ion-card-content>
             </ion-card>
 
@@ -182,5 +194,10 @@
       </div>
     </div>
   </div>
-
+  <ion-button (click)="AppleSignIn()" color="light" expand="full" class="apple-login">
+    <ion-icon expand="full" name="logo-apple" slot="start"></ion-icon>
+    Sign in with Apple
+  </ion-button>
+<div style="height: 20px;">
+</div>
 </ion-content>

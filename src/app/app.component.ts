@@ -110,23 +110,48 @@ async presentAlertConfirm() {
     [
       {
         title : "Home",
-        url   : "/home",
+        url   : "/mainpage",
         icon  : "home"
       },
       {
-        title : "Chef",
-        url   : "/doctorlist",
-        icon  : "people-outline"
+        title : "About Us",
+        url   : "/about",
+        icon  : "browsers-outline"
       },
       {
-        title : "Dashboard",
-        url   : "/dashboard",
-        icon  : "podium-outline"
+        title : "Contact Us",
+        url   : "/contact",
+        icon  : "people-circle-outline"
       },
       {
-        title : "Support",
-        url   : "/support",
-        icon  : "call-outline"
+        title : "Blog",
+        url   : "/blog",
+        icon  : "reader-outline"
+      },
+      {
+        title : "Team",
+        url   : "/team",
+        icon  : "person-add-outline"
+      },
+      {
+        title : "Testimonials",
+        url   : "/testimonials",
+        icon  : "chatbox-ellipses-outline"
+      },
+      {
+        title : "FAQ",
+        url   : "/faq",
+        icon  : "information-outline"
+      },
+      {
+        title : "Events",
+        url   : "/event",
+        icon  : "basketball"
+      },
+      {
+        title : "Photo Gallery ",
+        url   : "/home",
+        icon  : "image"
       },
       {
         title : "LogIn",

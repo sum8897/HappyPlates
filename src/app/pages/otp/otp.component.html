@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="login-container">
+  <div class="bg-image">
+    <img src="../../../assets/img/login_bg.jpeg">
+    </div>
+    <div class="login-input">
+      <div class="app-name">
+        <h1>Happy plates</h1>
+        <span>Welcome! SignUp and get started</span>
+      </div>
+      <div class="otp-input">
+        <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:4}"></ng-otp-input>
+      </div>
+      <div class="submit-div">
+        <ion-button class="submit-login-button" expand="round">Submit OTP</ion-button>
+          </div>
+          <div class="create-new-account">
+            <p class="create-account-p">Don't receive the verification OTP ?<br><a>Resend OTP</a></p>
+          </div>
+    </div>
+</ion-content>

@@ -324,7 +324,7 @@ ion-searchbar {
             border-radius: 9px;
             margin-bottom: -170px;
             z-index      : 9999;
-            box-shadow   : 1px 1px 1px 1px rgb(167, 166, 166);
+            box-shadow   : 2px 2px 2px 2px rgb(0 0 0 / 18%);
 
             .event-name {
                 text-align: center;
@@ -349,7 +349,7 @@ ion-searchbar {
                 border-top        : 1px solid grey;
                 padding-top       : 10px;
                 color             : #d32235;
-
+                justify-content   : center;
                 .event-location {
                     padding-left: 15px;
 
@@ -386,7 +386,7 @@ ion-searchbar {
             border-radius: 10px;
             box-shadow   : none;
             margin       : 0 5px;
-            bottom       : 15px;
+            // bottom       : 15px;
 
             .blog-content {
                 padding: 2px;

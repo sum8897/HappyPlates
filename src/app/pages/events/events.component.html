@@ -1,0 +1,68 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="event-year">
+    <span class="event-1">Event</span>
+    <span class="year">2021</span>
+  </div>
+
+    <ion-card class="event-card" *ngFor="let ev of eventData2021">
+      <ion-list>
+        <ion-item lines="none" (click)="openEventDetails(ev)" class="item-event-list">
+            <img class="event-img" src="../../../assets/img/blog_1.jpg">
+          <ion-label class="event-label">
+            <div class="event-all">
+            <p class="event-location-name">{{ev.name}}</p>
+            <div class="img-span">
+              <img class="date-icon" src="../../../assets/img/time.png">
+              <span>29, May 2021</span>
+            </div>
+            <div class="img-span">
+              <img class="location-icon" src="../../../assets/img/location.png">
+              <span>Ahmedbad</span>
+            </div>
+          </div>
+          </ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+        </ion-item>
+      </ion-list>
+  
+    </ion-card>
+
+    <div class="event-year">
+      <span class="event-1"></span>
+      <span class="year">2020</span>
+    </div>
+  
+      <ion-card class="event-card" *ngFor="let ev of eventData2020">
+        <ion-list>
+          <ion-item lines="none" class="item-event-list">
+              <img class="event-img" src="../../../assets/img/blog_1.jpg">
+            <ion-label class="event-label">
+              <div class="event-all">
+              <p class="event-location-name">{{ev.name}}</p>
+              <div class="img-span">
+                <img class="date-icon" src="../../../assets/img/time.png">
+                <span>29, May 2021</span>
+              </div>
+              <div class="img-span">
+                <img class="location-icon" src="../../../assets/img/location.png">
+                <span>Ahmedbad</span>
+              </div>
+            </div>
+            </ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+          </ion-item>
+        </ion-list>
+    
+      </ion-card>
+
+</ion-content>

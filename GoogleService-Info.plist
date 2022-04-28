@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>836945092951-ejbopug9jee9pds5sibmbk2ui9ondpjb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.836945092951-ejbopug9jee9pds5sibmbk2ui9ondpjb</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>836945092951-128l1viorr27te38hn5d2r2utkradpki.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDEpRGkwAUQLsoy_PcZUR5dS0vjNnsXTDo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>836945092951</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.midas.solarsmiths</string>
+	<key>PROJECT_ID</key>
+	<string>solarsmiths-7b2a7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>solarsmiths-7b2a7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:836945092951:ios:33ab9e224f7a0dfaa81e12</string>
+</dict>
+</plist>
