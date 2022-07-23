@@ -1,0 +1,57 @@
+.contact-card-info{
+    border-radius: 21px;
+    --background: #f4f8f9;
+    box-shadow: none;
+    ion-list{
+     background: #f4f8f9;
+     margin-top: -8px;
+    }
+    ion-item{
+        --background: #f4f8f9;
+    }
+    .contact-project-name{
+        font-size: 15px;
+        padding-left: 20px;
+        color: #1c5c75;
+    }
+    .contact-icon{
+        margin: auto;
+        ion-icon{
+            border: 1px solid #7399ad;
+            padding: 5px;
+            border-radius: 50%;
+            color: red;
+        }
+    }
+    ion-label{
+        margin-top: -3px;
+        span{
+            font-size: 13px;
+        }
+    }
+    
+}
+.contact-input{
+    border-radius: 21px;
+    .contact-project-input{
+    font-size: 15px;
+    padding-left: 20px;
+    color: black;
+    }
+}
+.contact-label-float{
+    margin: 0px 10px;
+}
+.label-float {
+    input{
+        height: 45px;
+    }
+    }
+    .contact-button{
+        width: 90%;
+        margin: 15px 0 40px 0;
+        text-transform: capitalize;
+    }
+    .message-text{
+        min-height: 75px;
+    }

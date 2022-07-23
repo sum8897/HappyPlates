@@ -120,7 +120,7 @@ async presentAlertConfirm() {
       },
       {
         title : "Contact Us",
-        url   : "/contact",
+        url   : "/contactus",
         icon  : "people-circle-outline"
       },
       {
@@ -150,19 +150,29 @@ async presentAlertConfirm() {
       },
       {
         title : "Photo Gallery ",
-        url   : "/home",
+        url   : "/third",
         icon  : "image"
       },
       {
-        title : "LogIn",
-        url   : "/login",
+        title : "Chef Account",
+        url   : "/chefaccount",
         icon  : "call-outline"
       },
       {
-        title : "Register",
-        url   : "/register",
-        icon  : "call-outline"
+        title : "Cart",
+        url   : "/cart",
+        icon  : "cart-outline"
+      },
+      {
+        title : "Search",
+        url   : "/search",
+        icon  : "search-outline"
       },
     ]
+  }
+  logout(){
+    localStorage.clear();
+    localStorage.removeItem('amantran_token');
+    this.router.navigate(['login']);
   }
 }

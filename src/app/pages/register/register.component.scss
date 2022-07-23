@@ -1,0 +1,48 @@
+.chef-segment{
+    margin-top: 25px;
+    margin-left: 20px;
+    margin-right: 20px;
+  .segment-button-checked{
+    background: red;
+    border-radius: 21px;
+    --indicator-color: none;
+    color: white;
+    letter-spacing: 0px;
+}
+}
+
+.register-segment{
+    background: #dae5e9;
+    border-radius: 21px;
+}
+.submit-div{
+    // margin-top: 7vh;
+}
+.remember-checkbox {
+    margin-right: 10px;
+}
+.check-checkbox{
+    span{
+        font-size: 13px;
+    }
+    a{
+        color: black;
+        text-decoration: underline;
+    }
+}
+.create-new-account{
+    text-align: right;
+    margin-right: 25px;
+    .create-account-p{
+        font-size: 13px;
+    }
+}
+#create-new-account{
+    margin-top: 0;
+    padding-bottom: 20px;
+}
+.error-message{
+    color: red;
+    padding-left: 15px;
+    font-size: 10px;
+}

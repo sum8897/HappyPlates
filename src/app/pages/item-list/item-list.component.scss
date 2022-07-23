@@ -1,0 +1,20 @@
+ion-searchbar{
+    --border-radius: 21px;
+    .searchbar-input-container{
+        input {
+            border: 1px solid #d32235;
+        }
+    }
+
+    .sc-ion-searchbar-md {
+        --border: 1px solid #d32235;
+    }
+
+
+}
+
+.searchbar-input{
+    .sc-ion-searchbar-md {
+        border: 1px solid #d32235;
+    }
+}

@@ -48,3 +48,15 @@
     color: #1c5c75;
     }
 }
+.logout{
+    --background: red;
+    color: white;
+    font-weight: 400;
+    opacity: 1;
+    font-size: 20px;
+    border-radius: 21px;
+    margin: 0 14px;
+    .menu-list-icon{
+    color: white;
+    }
+}

@@ -1,0 +1,106 @@
+
+.profile-address{
+    margin: 20px 10px;
+    border: 1px solid #dee9ed;
+    border-radius: 10px;
+    padding-bottom: 20px;
+    .user-addrs1{
+        display: inline-flex;
+        background: #dee9ed;
+        min-height: 30px;
+        width: 100%;
+        justify-content: space-between;
+        padding: 10px;
+        border-radius: 10px;
+        .user-addrs2{
+            display: inline-flex;
+            .user-addrs-span{
+                color: #1a5e73;
+                margin-top: 2px;
+                font-weight: 500;
+            }
+            .user-addrs-forword-icon{
+                font-size: 25px;
+                color: #d52336;
+            }
+        }
+    }
+    
+}
+.chef-input{
+    position: relative;
+    background-color: transparent;
+    border: 2px solid #e1eaec;
+    border-radius: 21px;
+    outline: none;
+    // min-width: 100%;
+    font-size: 12px;
+    margin: 10px;
+    ion-input{
+        margin-left: 10px;
+        min-height: 40px;
+    }
+}
+.label-float {
+    position: relative;
+    padding-top: 13px;
+    margin: 0 10px;
+}
+.chef-error-alert{
+    margin-top: -5px;
+    padding-left: 10px;
+}
+.address-show{
+    position: relative;
+    margin: 25px 20px 5px 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #dceaed;
+    .name-address{
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
+    .name{
+        margin-top: 10px;
+        margin-left: 12px;
+        font-size: 15px;
+        font-weight: 500;
+        color: #010101;
+        opacity: 0.8;
+    }
+    .edit{
+        text-align: right;
+        margin-top: -6px;
+        box-shadow: none;
+        .edit-button{
+            --background: #dee9ed;
+            color: #1b5b77;
+            opacity: 99;
+            text-transform: capitalize;
+            font-size: 10px;
+            height: 19px;
+            --box-shadow: none;
+            margin-right: 0;
+            --border-top-right-radius: 10px;
+        }
+    }
+    }
+    .address-in-details{
+        width: 70%;
+        padding-left: 15px;
+        line-height: 1;
+        span{
+            font-size: 12px;
+            font-weight: 400;
+            color: #010101;
+            opacity: .9;
+        }
+    }
+}
+#more-details{
+    border-radius: 0;
+    border: none;
+    .user-addrs1{
+        margin-top: 10px;
+    }
+}

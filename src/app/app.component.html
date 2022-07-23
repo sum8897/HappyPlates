@@ -23,8 +23,14 @@
                {{pages.title}} 
         </ion-item>
       </ion-menu-toggle>
+    
       </ion-list>
+      <ion-item lines='none' class="logout" (click)="logout()">
+        <ion-icon name="power-outline" slot="start" class="menu-list-icon"></ion-icon>
+        Logout
+      </ion-item>
     </ion-content>
   </ion-menu>
+
 <ion-router-outlet id="content1"></ion-router-outlet>
 </ion-app>

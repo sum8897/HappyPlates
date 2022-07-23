@@ -8,6 +8,20 @@ ion-content {
     top                : -3px;
 }
 
+.searchbar-input-container {
+    .sc-ion-searchbar-md {
+        --border: 1px solid #d32235;
+    }
+
+    input {
+        border: 1px solid #d32235;
+    }
+}
+
+.searchbar-input {
+    border: 1px solid #d32235;
+}
+
 .card-full {
     margin                       : 0;
     border-bottom-left-radius    : 30px;
@@ -119,14 +133,15 @@ ion-searchbar {
 
     .chef-1 {
         color      : #1c5c74;
-        font-weight: 700;
-        font-size  : 24px;
+        font-weight: 500;
+        font-size  : 18px;
     }
 
     .chef-more {
         color      : #1c5c74;
         font-weight: 500;
-        font-size  : 16px;
+        font-size  : 12px;
+        margin-top : 8px;
     }
 }
 
@@ -227,13 +242,14 @@ ion-searchbar {
     padding-left : 15px;
     color        : white;
     font-weight  : 700;
-    font-size    : 24px;
+    font-size    : 18px;
     font-family  : sans-serif;
 }
 
 .slides-latest-chef {
+    padding-bottom: 15px;
     .latest-chef-card {
-        width        : 100%;
+        // width        : 100%;
         border-radius: 21px;
         margin       : 0 16px 0 10px;
         padding      : auto;
@@ -281,7 +297,7 @@ ion-searchbar {
         .chef-specialization-details {
             color      : #1c1c1c;
             padding    : 5px 0;
-            font-size  : 13px;
+            font-size  : 11px;
             white-space: normal;
         }
 
@@ -307,14 +323,14 @@ ion-searchbar {
 
     .event-heading {
         padding    : 15px 0 10px 15px;
-        font-size  : 20px;
+        font-size  : 18px;
         color      : #1c5c74;
-        font-weight: 700;
+        font-weight: 500;
     }
 
     .event-slider-div {
         ion-slide {
-            margin-bottom: 130px;
+            margin-bottom: 110px;
         }
 
         .event-details {
@@ -326,18 +342,22 @@ ion-searchbar {
             z-index      : 9999;
             box-shadow   : 2px 2px 2px 2px rgb(0 0 0 / 18%);
 
-            .event-name {
+            .event-div {
                 text-align: center;
 
-                h5 {
+                .event-name {
                     color      : #1c5c74;
-                    font-weight: 600;
-                    font-size  : 15px;
+                    font-weight: 500;
+                    font-size  : 14px;
                     text-align : center;
+                    padding-top: 15px;
                 }
 
-                span {
-                    font-size: 12px;
+                .latest-event-details {
+                    font-size  : 12px;
+                    font-weight: 400;
+                    opacity    : 0.8;
+                    padding    : 6px;
                 }
             }
 
@@ -346,10 +366,11 @@ ion-searchbar {
                 font-size         : 12px;
                 // justify-content: space-between;
                 margin            : 10px 29px;
-                border-top        : 1px solid grey;
+                border-top        : 1px solid #e6f0f3;
                 padding-top       : 10px;
                 color             : #d32235;
                 justify-content   : center;
+
                 .event-location {
                     padding-left: 15px;
 
@@ -386,22 +407,135 @@ ion-searchbar {
             border-radius: 10px;
             box-shadow   : none;
             margin       : 0 5px;
+
             // bottom       : 15px;
+            .blog-img {
+                border-radius: 21px;
+            }
 
             .blog-content {
                 padding: 2px;
 
-                span {
-                    font-size: 12px;
+                .blog-type {
+                    font-size  : 11px;
+                    color      : #5b8794;
+                    font-weight: 500;
+                    line-height: normal;
                 }
 
                 .spna-date {
-                    color: #d32235;
+                    color      : #d32235;
+                    font-size  : 11px;
+                    margin     : 5px 0 20px 0;
+                    font-weight: 500;
+                    z-index    : 999;
+                    opacity    : 9;
 
-                    span {
+                    .blog-date {
                         padding-left: 5px;
+                        color       : #e12f41;
                     }
                 }
+            }
+        }
+    }
+}
+
+
+.test1 {
+    height       : 210px;
+    width        : 87%;
+    margin-left  : 6%;
+    border-radius: 21px;
+
+}
+
+.test2 {
+    // position: absolute;
+    margin-top   : -204px;
+    width        : 100%;
+    border-radius: 21px;
+
+    ion-card {
+        border-radius: 21px;
+    }
+}
+
+.testimonial {
+    margin     : 20px 10px;
+    align-items: center;
+
+    .testimonials-heading {
+        text-align   : center;
+        margin-bottom: -15px;
+
+        span {
+            color      : white;
+            font-size  : 18px;
+            font-weight: 500;
+        }
+    }
+
+    .testimonials-last-hideDiv {
+        background    : #f2c5ca;
+        width         : 100%;
+        height        : 200px;
+        border-radius : 21px;
+        margin        : 55px auto 55px auto;
+        padding-bottom: 32px;
+    }
+
+    .testimonials-second-last-hideDiv {
+        background   : #f6d7dc;
+        height       : 230px;
+        width        : 90%;
+        margin       : auto;
+        border-radius: 21px;
+        position     : absolute;
+    }
+
+    .testimonials-top-upder-hideDiv {
+        background   : white;
+        height       : 250px;
+        width        : 80%;
+        margin       : auto;
+        border-radius: 21px;
+        position     : absolute;
+
+        .testimonial-image {
+            ion-avatar {
+                margin: 10px auto;
+
+                img {}
+            }
+        }
+
+        .testimonial-details {
+            display: inline-grid;
+
+            .testimonial-name {
+                color      : #1d5b76;
+                opacity    : 99999;
+                font-weight: 500;
+                font-size  : 15px;
+            }
+
+            .testimonial-specialization {
+                color    : #e8878c;
+                font-size: 12px;
+                margin   : 4px;
+            }
+        }
+
+        .testimonial-disc {
+            .testimonial-detail-span {
+                font-size     : 11px;
+                letter-spacing: 0px;
+                margin        : 0 10px;
+                color         : #080808;
+                line-height   : 1.5;
+                font-weight   : 500;
+                opacity       : 0.8;
             }
         }
     }

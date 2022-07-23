@@ -33,7 +33,7 @@
     }
 
     span {
-        font-size  : 13px;
+        font-size  : 11px;
         font-weight: 500;
     }
 }
@@ -53,25 +53,25 @@
         }
     }
 
-    input {
+    ion-input {
         background-color  : transparent;
         border            : 2px solid #e1eaec;
         border-radius     : 21px;
         outline           : none;
         min-width         : 100%;
         padding           : 15px 0;
-        font-size         : 16px;
+        font-size         : 12px;
         transition        : all 0.1s linear;
         -webkit-transition: all 0.1s linear;
         -moz-transition   : all 0.1s linear;
         -webkit-appearance: none;
-
+        padding-left: 15px;
         &:focus {
             border: 2px solid #e1eaec;
         }
 
         &::placeholder {
-            color: transparent;
+            color: black;
         }
     }
 
@@ -86,6 +86,7 @@
         -webkit-transition: all 0.1s linear;
         -moz-transition   : all 0.1s linear;
         background-color  : white;
+        background: white;
         padding-top       : 5px;
         margin-left       : 3px;
         padding-left      : 5px;
@@ -94,16 +95,18 @@
     }
 }
 
-.label-float input:focus+label,
-input:not(:placeholder-shown):not(.invalid)+label {
-    font-size: 15px;
-    top      : 0;
+.label-float ion-input:focus+label,
+ion-input:not(:placeholder-shown):not(.invalid)+label {
+    font-size: 12px;
+    top: 3px;
     color    : #000;
+    background: white;
+    z-index: 9999;
 }
 
-.label-float input:not(:focus):not(:placeholder-shown):not(.invalid)+label {
-    font-size: 15px;
-    top      : 0;
+.label-float ion-input:not(:focus):not(:placeholder-shown):not(.invalid)+label {
+    font-size: 12px;
+    top: 3px;
     color    : #000;
 }
 
@@ -120,6 +123,11 @@ input:not(:placeholder-shown):not(.invalid)+label {
     .remember-checkbox {
         margin-right: 10px;
     }
+    .check-checkbox{
+        ion-label{
+            font-size: 13px;
+        }
+    }
 }
 
 .login-input-value {
@@ -132,7 +140,7 @@ input:not(:placeholder-shown):not(.invalid)+label {
         opacity        : 1;
         font-weight    : 500;
         text-decoration: underline;
-        font-size: 15px;
+        font-size: 13px;
         margin-top: 18px;
         padding-right: 25px;
     }

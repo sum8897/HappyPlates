@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-contactus',
@@ -6,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contactus.component.scss'],
 })
 export class ContactusComponent implements OnInit {
-
-  constructor() { }
+  ionicForm: FormGroup;
+  constructor(public formBuilder: FormBuilder) { }
 
   ngOnInit() {}
-
+  submitForm() {
+    console.log(this.ionicForm.value)
+  }
 }

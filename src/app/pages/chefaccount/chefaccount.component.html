@@ -1,0 +1,132 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="title-text">
+      <!-- <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png"> -->
+      My Account
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="profile-top-div">
+    <ion-card class="profile-card">
+      <img class="profile-card-image" src="../../../assets/img/blog_1.jpg">
+    </ion-card>
+    <div class="profile-div-image">
+      <div> <img class="profile-image" src="../../../assets/img/user_1.jpg">
+        <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon>
+      </div>
+      <div class="user-data">
+        <h3>Anthony Bourdain</h3>
+        <div class="user-specialization"><img src="../../../assets/img/chef_icon.png"><span
+            class="user-specialization-heading">Specialises In:</span><span>Italian,Chinese</span></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="profile-address">
+    <div class="user-addrs1">
+      <div class="user-location-icons">
+        <img style="width: 28px;" src="../../../assets/img/location.png">
+      </div>
+      <div class="user-addrs2"><span class="user-addrs-span">My Address</span>
+        <ion-icon class="user-addrs-forword-icon" name="chevron-forward-outline"></ion-icon>
+      </div>
+    </div>
+    <div class="login-input-value">
+      <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+        <div class="chef-input-form">
+          <div class="chef-input ">
+            <ion-input type="text" name="fullname" #fullname="ngModel" required placeholder="Enter Full Name *" ngModel>
+            </ion-input>
+          </div>
+          <div class="chef-error-alert"> <span class="text-danger"
+              *ngIf="(fullname.touched || contactForm.submitted) && fullname.errors?.required">
+              Please Enter Full Name *
+            </span></div>
+        </div>
+        <div class="chef-input-form">
+          <div class="chef-input ">
+            <ion-input type="text" name="phone" #phone="ngModel" required placeholder="Enter Phone Number" ngModel>
+            </ion-input>
+          </div>
+          <div class="chef-error-alert"> <span class="text-danger"
+              *ngIf="(phone.touched || contactForm.submitted) && phone.errors?.required">
+              Phone Number Enter Full Name *
+            </span></div>
+        </div>
+        <div class="chef-input-form">
+          <div class="chef-input ">
+            <ion-input type="text" name="state" #state="ngModel" required placeholder="Enter State *" ngModel>
+            </ion-input>
+          </div>
+          <div class="chef-error-alert"> <span class="text-danger"
+              *ngIf="(state.touched || contactForm.submitted) && state.errors?.required">
+              Please Enter State *
+            </span></div>
+        </div>
+        <div class="chef-input-form">
+          <div class="chef-input ">
+            <ion-input type="text" name="city" #city="ngModel" required placeholder="City *" ngModel>
+            </ion-input>
+          </div>
+          <div class="chef-error-alert"> <span class="text-danger"
+              *ngIf="(city.touched || contactForm.submitted) && city.errors?.required">
+              Please Enter City Name *
+            </span></div>
+        </div>
+        <div class="chef-input-form">
+          <div class="chef-input ">
+            <ion-input type="text" name="location" #location="ngModel" required placeholder="Location *" ngModel>
+            </ion-input>
+          </div>
+          <div class="chef-error-alert"> <span class="text-danger"
+              *ngIf="(location.touched || contactForm.submitted) && location.errors?.required">
+              Please Enter Location *
+            </span></div>
+        </div>
+        <div class="submit-div">
+          <ion-button class="submit-login-button" expand="round" type="submit">Save Address</ion-button>
+        </div>
+      </form>
+    </div>
+ 
+    <div class="address-show">
+      <div class="name-address">
+        <div class="name">Ashish Chaurasiya</div>
+        <div class="edit"><ion-button class="edit-button">Edit <ion-icon name="create-outline"></ion-icon></ion-button></div>
+      </div>
+     <div class="address-in-details">
+      <ion-text style="width: 80%;"><span>A-211 , DLF Mall, Noida Sector 16, Uttar Pradesh</span></ion-text>
+     </div>
+    </div>
+  </div>
+  <div class="profile-address" id="more-details">
+    <div class="user-addrs1">
+      <div class="user-location-icons">
+        <img style="width: 28px;" src="../../../assets/img/location.png">
+      </div>
+      <div class="user-addrs2" (click)="gotoChefmenupage('menu')"><span class="user-addrs-span">My Menu Items</span>
+        <ion-icon class="user-addrs-forword-icon" name="chevron-forward-outline"></ion-icon>
+      </div>
+    </div>
+    <div class="user-addrs1">
+      <div class="user-location-icons">
+        <img style="width: 28px;" src="../../../assets/img/location.png">
+      </div>
+      <div class="user-addrs2"><span class="user-addrs-span">About Me</span>
+        <ion-icon class="user-addrs-forword-icon" name="chevron-forward-outline"></ion-icon>
+      </div>
+    </div>
+    <div class="user-addrs1">
+      <div class="user-location-icons">
+        <img style="width: 28px;" src="../../../assets/img/location.png">
+      </div>
+      <div class="user-addrs2" (click)="gotoChefmenupage('review')"><span class="user-addrs-span">My Reviews</span>
+        <ion-icon class="user-addrs-forword-icon" name="chevron-forward-outline"></ion-icon>
+      </div>
+    </div>
+  </div>
+</ion-content>

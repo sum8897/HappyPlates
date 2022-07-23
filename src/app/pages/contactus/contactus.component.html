@@ -1,3 +1,65 @@
-<p>
-  contactus works!
-</p>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="title-text">
+      <!-- <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png"> -->
+    Contact Us
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="container">
+  <ion-card class="contact-card-info">
+      <h1 class="contact-project-name">Happy Plates Pvt Limited</h1>
+      <ion-list>
+        <ion-item lines="none">
+          <ion-avatar slot="start" class="contact-icon">
+            <!-- <img src="./avatar-finn.png" /> -->
+            <ion-icon name="call-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label><span>+917897196188</span></ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-avatar slot="start" class="contact-icon">
+            <!-- <img src="./avatar-finn.png" /> -->
+            <ion-icon name="mail-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label><span>support@gmail.com</span></ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-avatar slot="start" class="contact-icon">
+            <ion-icon name="location-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label><span>New Delhi, India</span></ion-label>
+        </ion-item>
+      </ion-list>
+
+  </ion-card>
+  <ion-card class="contact-input">
+    <h1 class="contact-project-input">Have any question</h1>
+    <div class="login-input-value">
+      <div class="label-float contact-label-float">
+        <ion-input type="text" placeholder="Enter First Name "></ion-input>
+        <label>Full  Name<span class="span-star">*</span></label>
+      </div>
+      <div class="label-float contact-label-float">
+        <ion-input type="text"  placeholder="Enter Phone " ></ion-input>
+        <label>Phone No<span class="span-star">*</span></label>
+      </div>
+      <div class="label-float contact-label-float">
+        <ion-input type="text"  placeholder="Enter Email " ></ion-input>
+        <label>Email<span class="span-star">*</span></label>
+      </div>
+  
+      <div class="label-float contact-label-float">
+        <ion-input type="text"  placeholder="Your name here" class="message-text"></ion-input>
+        <label>Message<span class="span-star">*</span></label>
+      </div>
+      <div class="submit-div">
+        <ion-button class="submit-login-button contact-button" expand="round">Sent Message</ion-button>
+          </div>
+    </div>
+  </ion-card>
+  
+</ion-content>

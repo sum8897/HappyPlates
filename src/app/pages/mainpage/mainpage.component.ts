@@ -4,6 +4,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import SwiperCore, { SwiperOptions } from 'swiper';
 import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -59,7 +60,8 @@ export class MainpageComponent implements OnInit {
   constructor(private camera: Camera,
     public actionSheetController: ActionSheetController,
     private file: File,
-    private signInWithApple: SignInWithApple) { }
+    private signInWithApple: SignInWithApple,
+    public auth: AuthService,) { }
 
   ngOnInit() { }
   onSwiper([swiper]) {
@@ -140,6 +142,19 @@ export class MainpageComponent implements OnInit {
       img: '../../../assets/img/blog_3.jpg'
     },
   ]
+ 
+  loginClick(){
+    let userBody={
+      "email": "vinaym@midaswebtech.com",
+      "password": "12345678"
+    }
+    this.auth.loginUser(userBody).subscribe(data=>{
+   
+console.log(data)
+    },err=>{
+
+    })
+  }
 
   pickImage(sourceType) {
     const options: CameraOptions = {

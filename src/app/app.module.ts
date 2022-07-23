@@ -21,6 +21,24 @@ import { SignInWithApple } from '@awesome-cordova-plugins/sign-in-with-apple/ngx
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { OtpComponent } from './pages/otp/otp.component';
+import { ContactusComponent } from './pages/contactus/contactus.component';
+import { CommonModule } from '@angular/common';
+import { BlogdetailsComponent } from './pages/blogdetails/blogdetails.component';
+import { ChefaccountComponent } from './pages/chefaccount/chefaccount.component';
+import { CartpageComponent } from './pages/cartpage/cartpage.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ItemListComponent } from './pages/item-list/item-list.component';
+import { FaqComponent } from './pages/faq/faq.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { ForgotpassComponent } from './pages/forgotpass/forgotpass.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuardGuard } from './services/auth-guard.guard';
+import { ChefMenuReviewComponent } from './pages/chef-menu-review/chef-menu-review.component';
+import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
+import { SearchComponent } from './pages/search/search.component';
 
 
 @NgModule({
@@ -31,13 +49,30 @@ import { OtpComponent } from './pages/otp/otp.component';
                  LoginComponent,
                  RegisterComponent,
                  OtpComponent,
+                 RegisterComponent,
+                 ContactusComponent,
+                 BlogdetailsComponent,
+                 ChefaccountComponent,
+                 CartpageComponent,
+                 ProfileComponent,
+                 ItemListComponent,
+                 FaqComponent,
+                 ForgotpassComponent,
+                 ChefMenuReviewComponent,
+                 PaymentPageComponent,
+                 SearchComponent
                 ],
   entryComponents: [],
   imports: [BrowserModule, 
             IonicModule.forRoot(), 
             AppRoutingModule,
+            FormsModule,
             SwiperModule,
-            NgOtpInputModule],
+            NgOtpInputModule,
+            CommonModule,
+            HttpClientModule,
+            ReactiveFormsModule,
+          ],
   providers: [
     Platform,
     StatusBar,
@@ -46,6 +81,9 @@ import { OtpComponent } from './pages/otp/otp.component';
     Camera,
     File,
     SignInWithApple,
+    SQLite,
+    AuthService,
+    AuthGuardGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

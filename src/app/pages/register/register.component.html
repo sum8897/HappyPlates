@@ -5,23 +5,156 @@
     <div class="login-input">
       <div class="app-name">
         <h1>Happy plates</h1>
-        <p class="otp-paragraph">Enter the 4 digit OTP send by sms on your phone</p>
+<span>Welcome! SignUp and get started</span>
       </div>
    <div class="chef-segment">
-    <ion-segment value="all">
-      <ion-segment-button value="all">
-        <ion-label>All</ion-label>
+    <ion-segment value="customer" class="register-segment" [(ngModel)]="type" (ionChange)="segmentChanged($event)"> 
+      <ion-segment-button value="customer">
+        <ion-label>I'M A CUSTOMER</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="favorites">
-        <ion-label>Favorites</ion-label>
+      <ion-segment-button value="chef">
+        <ion-label>I'M A CHEF</ion-label>
       </ion-segment-button>
     </ion-segment>
    </div>
+
+   <div class="login-input-value" *ngIf="customer">
+     <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" novalidate>
+    <div class="label-float">
+      <ion-input type="text" formControlName="firstname" placeholder="Enter Email " required="true"></ion-input>
+      <label>First Name<span class="span-star">*</span></label>
+      <div *ngFor="let error of errorMessages.firstname">
+        <ng-container *ngIf="firstname.hasError(error.type) && (firstname.dirty || firstname.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+    </div>
+    <div class="label-float">
+      <ion-input type="text" formControlName="lastname" placeholder="Enter First Name " required="true"></ion-input>
+      <label>Last Name<span class="span-star">*</span></label>
+      <div *ngFor="let error of errorMessages.lastname">
+        <ng-container *ngIf="lastname.hasError(error.type) && (lastname.dirty || lastname.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+    </div>
+    <div class="label-float">
+      <ion-input type="text" formControlName="phone" placeholder="Enter Phone " required="true"></ion-input>
+      <label>Phone<span class="span-star">*</span></label>
+      <div *ngFor="let error of errorMessages.phone">
+        <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+    </div>
+    <div class="label-float">
+      <ion-input type="text" formControlName="email" placeholder="Enter Email " required="true"></ion-input>
+      <label>EMail<span class="span-star">*</span></label>
+      <div *ngFor="let error of errorMessages.email">
+        <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+    </div>
+    <div class="label-float">
+      <ion-input type="text" formControlName="password" placeholder="Enter Password " required="true"></ion-input>
+      <label>Password<span class="span-star">*</span></label>
+      <div *ngFor="let error of errorMessages.password">
+        <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+    </div>
+    <div class="label-float">
+      <ion-input type="text" formControlName="cpassword" placeholder="Enter Confirm Password " required="true"></ion-input>
+      <label>Confirm Password<span class="span-star">*</span></label>
+      <div *ngFor="let error of errorMessages.cpassword">
+        <ng-container *ngIf="cpassword.hasError(error.type) && (cpassword.dirty || cpassword.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+    </div>
+    <div class="check-checkbox">
+      <ion-item lines='none'>
+        <span>By signing up you agree to platform's <a>Terms of Service</a>and <a>Privacy Policy.</a></span>
+        <ion-checkbox slot="start" mode="md" class="remember-checkbox"></ion-checkbox>
+      </ion-item>
+    </div>
+    <div class="submit-div">
+      <ion-button class="submit-login-button" expand="round" type="submit" [disabled]="!registrationForm.valid">Submit OTP</ion-button>
+    </div>
+  </form>
+  </div>
+
+  <div class="login-input-value" *ngIf="chef">
+    <form [formGroup]="registrationForm" (ngSubmit)="submitForm()">
+      <div class="label-float">
+        <ion-input type="text" formControlName="firstname" placeholder="Enter Email " required="true"></ion-input>
+        <label>First Name<span class="span-star">*</span></label>
+        <div *ngFor="let error of errorMessages.firstname">
+          <ng-container *ngIf="firstname.hasError(error.type) && (firstname.dirty || firstname.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="label-float">
+        <ion-input type="text" formControlName="lastname" placeholder="Enter First Name " required="true"></ion-input>
+        <label>Last Name<span class="span-star">*</span></label>
+        <div *ngFor="let error of errorMessages.lastname">
+          <ng-container *ngIf="lastname.hasError(error.type) && (lastname.dirty || lastname.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="label-float">
+        <ion-input type="text" formControlName="phone" placeholder="Enter Phone " required="true"></ion-input>
+        <label>Phone<span class="span-star">*</span></label>
+        <div *ngFor="let error of errorMessages.phone">
+          <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="label-float">
+        <ion-input type="text" formControlName="email" placeholder="Enter Email " required="true"></ion-input>
+        <label>EMail<span class="span-star">*</span></label>
+        <div *ngFor="let error of errorMessages.email">
+          <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="label-float">
+        <ion-input type="text" formControlName="password" placeholder="Enter Password " required="true"></ion-input>
+        <label>Password<span class="span-star">*</span></label>
+        <div *ngFor="let error of errorMessages.password">
+          <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="label-float">
+        <ion-input type="text" formControlName="cpassword" placeholder="Enter Confirm Password " required="true"></ion-input>
+        <label>Confirm Password<span class="span-star">*</span></label>
+        <div *ngFor="let error of errorMessages.cpassword">
+          <ng-container *ngIf="cpassword.hasError(error.type) && (cpassword.dirty || cpassword.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="check-checkbox">
+        <ion-item lines='none'>
+          <span>By signing up you agree to platform's <a>Terms of Service</a>and <a>Privacy Policy.</a></span>
+          <ion-checkbox slot="start" mode="md" class="remember-checkbox"></ion-checkbox>
+        </ion-item>
+      </div>
       <div class="submit-div">
-        <ion-button class="submit-login-button" expand="round">Submit OTP</ion-button>
-          </div>
-          <div class="create-new-account">
-            <p class="create-account-p">Don't receive the verification OTP ?<br><a>Resend OTP</a></p>
+        <ion-button class="submit-login-button" expand="round" type="submit" [disabled]="!registrationForm.valid">Submit OTP</ion-button>
+      </div>
+    </form>
+  </div>
+          <div class="create-new-account" id="create-new-account">
+            <p class="create-account-p" (click)="clickLogin()">Already have an Account ?<a>Sign In</a></p>
           </div>
     </div>
 </ion-content>
