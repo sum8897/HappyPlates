@@ -39,6 +39,9 @@ import { AuthGuardGuard } from './services/auth-guard.guard';
 import { ChefMenuReviewComponent } from './pages/chef-menu-review/chef-menu-review.component';
 import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
 import { SearchComponent } from './pages/search/search.component';
+import { ChefHomeComponent } from './chefpage/chef-home/chef-home.component';
+import { ChefprofileComponent } from './chefpage/chefprofile/chefprofile.component';
+import { ChefaddmenuComponent } from './chefpage/chefaddmenu/chefaddmenu.component';
 
 
 @NgModule({
@@ -60,7 +63,10 @@ import { SearchComponent } from './pages/search/search.component';
                  ForgotpassComponent,
                  ChefMenuReviewComponent,
                  PaymentPageComponent,
-                 SearchComponent
+                 SearchComponent,
+                 ChefHomeComponent,
+                 ChefprofileComponent,
+                 ChefaddmenuComponent
                 ],
   entryComponents: [],
   imports: [BrowserModule, 
