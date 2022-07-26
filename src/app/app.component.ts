@@ -43,31 +43,19 @@ export class AppComponent {
     // this.sideMenuAdmin();
     this.initializeApp();
     this.backButtonEvent();
-    if(this.user.user_type=="admin"){
-      this.sideMenuAdmin();
-    this.user.chef_user=true;
-    this.user.customer_user=false;
-    console.log("admin chef user")
-    }else{
-      this.sideMenu();
-      this.user.chef_user=false;
-    this.user.customer_user=true;
-    }
-    
-    // this.menuData=this.navigate.filter(data=>{
-    //   if(data.role==this.user_type){
-    //     console.log(typeof(data))
-    //     return this.menuData  ;
-    //   }
-    // })
-
-    //  this.NetworkButtonEvent()
+  
+      
      window.addEventListener('offline',()=>{
        this.openAlert();
      })
-     //console.log(this.navigate)
+ 
+     
   }
-
+ ngOnInit(){
+  this.sideMenu()
+  this.user.menuData=this.navigate
+  console.log(this.menuData)
+ }
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -211,14 +199,6 @@ async presentAlertConfirm() {
         icon  : "search-outline",
         role: "customer"
       },
-
-    ]
-  
-  }
-  sideMenuAdmin()
-  {
-    this.navigateChef =
-    [
       {
         title : "Chef Home",
         url   : "/chef-home",
@@ -237,12 +217,20 @@ async presentAlertConfirm() {
         icon  : "search-outline",
         role: "admin"
       },
-    ]
-  
+    ].filter(data=>{
+      return ( data.role==this.user.user_type)
+  //  { 
+  //   this.menuData.push(data);
+  //    return this.menuData
+  //   }
+    })
+      console.log(this.navigate)
   }
+  
   logout(){
     localStorage.clear();
     localStorage.removeItem('amantran_token');
     this.router.navigateByUrl('login');
   }
+ 
 }
