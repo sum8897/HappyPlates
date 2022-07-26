@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ChefHomeComponent } from './chefpage/chef-home/chef-home.component';
+import { ChefaddmenuComponent } from './chefpage/chefaddmenu/chefaddmenu.component';
+import { ChefprofileComponent } from './chefpage/chefprofile/chefprofile.component';
 import { AboutusComponent } from './pages/aboutus/aboutus.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { BlogdetailsComponent } from './pages/blogdetails/blogdetails.component';
@@ -21,7 +24,95 @@ import { RegisterComponent } from './pages/register/register.component';
 import { SearchComponent } from './pages/search/search.component';
 import { AuthGuardGuard } from './services/auth-guard.guard';
 
+  
+if(localStorage.getItem('admin')=='admin'){
 
+}else{
+  const routes: Routes = [
+    {
+      path: 'home',
+      loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    },
+    {
+      path: '',
+      redirectTo: 'mainpage',
+      pathMatch: 'full'
+    },
+    { path: 'mainpage', component: MainpageComponent, canActivate: [AuthGuardGuard]},
+    {
+      path:'mainpage',
+      component: MainpageComponent
+    },
+    {
+      path: 'event',
+      component: EventsComponent
+    },
+    {
+      path:'event-details',
+      component: EventDetailsComponent
+    },
+    {
+      path:'login',
+      component: LoginComponent
+    },
+    {
+      path:'register',
+      component: RegisterComponent
+    },
+    {
+      path:'otp',
+      component: OtpComponent
+    },
+    {
+      path:'contactus',
+      component: ContactusComponent
+    },
+    {
+      path:'about',
+      component: AboutusComponent
+    },
+    {
+      path:'blog',
+      component: BlogComponent
+    },
+    {
+      path:'blog-details',
+      component: BlogdetailsComponent
+    },
+    {
+      path:'chefaccount',
+      component: ChefaccountComponent
+    },
+    {
+      path:'cart',
+      component: CartpageComponent
+    },
+    {
+      path:'item-list',
+      component: ItemListComponent
+    },
+    {
+      path:'profile',
+      component: ProfileComponent
+    },
+    {
+      path:'faq',
+      component: FaqComponent
+    },
+    {
+      path:'chef-menu-review',
+      component: ChefMenuReviewComponent
+    },
+  {
+    path:'payment',
+    component: PaymentPageComponent
+  },
+  {
+    path:'search',
+    component: SearchComponent
+  },
+  ];
+}
 const routes: Routes = [
   {
     path: 'home',
@@ -104,6 +195,21 @@ const routes: Routes = [
 {
   path:'search',
   component: SearchComponent
+},
+{
+  path:'chef-home',
+  component: ChefHomeComponent,
+  canActivate: [AuthGuardGuard]
+},
+{
+  path:'chef-add-menu',
+  component: ChefaddmenuComponent,
+  canActivate: [AuthGuardGuard]
+},
+{
+  path:'chef-profile',
+  component: ChefprofileComponent,
+  canActivate: [AuthGuardGuard]
 },
 ];
 

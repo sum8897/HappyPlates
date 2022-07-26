@@ -48,10 +48,20 @@ export class LoginComponent implements OnInit {
       this.user_token = this.user_response.token;
       localStorage.setItem('amantran_token', this.user_token);
       this.user_name = this.user_response.user;
-      this.user_type = this.user_response.user_role;
-      localStorage.setItem('user_name', this.user_name);
-      localStorage.setItem('user_role', this.user_type);
-      this.router.navigateByUrl('/mainpage')
+      this.user.user_type = this.user_response.user_role;
+      this.user.user_name=this.user_name;
+      localStorage.setItem('user_name', this.user.user_name);
+      localStorage.setItem('user_role', this.user.user_type);
+      if(this.user.user_type=="admin"){
+        this.user.chef_user=true;
+        this.user.customer_user=false;
+        this.router.navigateByUrl('/chef-home')
+      }else{
+        this.user.customer_user=true;
+        this.user.chef_user=false;
+        this.router.navigateByUrl('/mainpage')
+      }
+     
     }, err => {
     this.user.dismiss();
     })
