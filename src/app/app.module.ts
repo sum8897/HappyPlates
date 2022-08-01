@@ -42,6 +42,7 @@ import { SearchComponent } from './pages/search/search.component';
 import { ChefHomeComponent } from './chefpage/chef-home/chef-home.component';
 import { ChefprofileComponent } from './chefpage/chefprofile/chefprofile.component';
 import { ChefaddmenuComponent } from './chefpage/chefaddmenu/chefaddmenu.component';
+import { ViewallchefComponent } from './pages/viewallchef/viewallchef.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { ChefaddmenuComponent } from './chefpage/chefaddmenu/chefaddmenu.compone
                  SearchComponent,
                  ChefHomeComponent,
                  ChefprofileComponent,
-                 ChefaddmenuComponent
+                 ChefaddmenuComponent,
+                 ViewallchefComponent
                 ],
   entryComponents: [],
   imports: [BrowserModule, 

@@ -5,6 +5,8 @@ import { File } from '@awesome-cordova-plugins/file/ngx';
 import SwiperCore, { SwiperOptions } from 'swiper';
 import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -21,6 +23,9 @@ export class MainpageComponent implements OnInit {
   // };
   croppedImagePath = "";
   isLoading = false;
+
+  menu_data;
+  menu_data_list;
 
   imagePickerOptions = {
     maximumImagesCount: 1,
@@ -61,11 +66,148 @@ export class MainpageComponent implements OnInit {
     public actionSheetController: ActionSheetController,
     private file: File,
     private signInWithApple: SignInWithApple,
-    public auth: AuthService,) { }
+    public auth: AuthService,
+    public router: Router,
+    public user: UserService) {
+    // this.menuData();
+    this.chefAllData()
+    this.testimonialsAllData();
+    this.latestChefsAllData();
+    this.latestEvents();
+  }
 
   ngOnInit() { }
   onSwiper([swiper]) {
     console.log(swiper);
+  }
+
+
+  menuData() {
+    this.user.present('...');
+    this.auth.getMenuData().subscribe((data) => {
+      console.log(data);
+      this.user.dismiss();
+      this.menu_data = data;
+      this.menu_data_list = this.menu_data.data;
+      // console.log(this.menu_data_list)
+    }, err => {
+      this.user.dismiss();
+      console.log(err)
+    }
+    )
+  }
+  professionData;
+professionAllData;
+searchTermProfession:any='';
+filterTermProfession=[];
+filterTermss=[];
+  chefsResp: any;
+  chefsRespoData: any;
+  chefAllData() {
+    this.user.present('...')
+    this.auth.getAllChefData().subscribe((res) => {
+      console.log(res)
+      this.user.dismiss();
+      this.chefsResp = res;
+      this.chefsRespoData = this.chefsResp.data;
+      for (let i = 0; i < this.chefsRespoData.length; i++) {
+        this.filterTermProfession[i] = [{
+          "id": this.chefsRespoData[i].id,
+          "firstname": this.chefsRespoData[i].firstname,
+          "lastname": this.chefsRespoData[i].lastname,
+          "specialization": this.chefsRespoData[i].specialization,
+          "city": this.chefsRespoData[i].city
+        }]
+      }
+      console.log(this.filterTermProfession)
+    }, err => {
+      console.log(err.name);
+      this.user.dismiss();
+
+    }
+    )
+  }
+  filterItemProfession() {
+    this.filterTermProfession = [];
+    this.filterTermss = this.chefsRespoData.filter(item => item.firstname.toLowerCase().indexOf(this.searchTermProfession.toLowerCase()) > -1);
+    console.log(this.filterTermss)
+    for (let i = 0; i < this.filterTermss.length; i++) {
+      this.filterTermProfession[i] = [{
+        "id": this.filterTermss[i].id,
+        "firstname": this.filterTermss[i].firstname,
+        "lastname": this.filterTermss[i].lastname,
+        "specialization": this.filterTermss[i].specialization,
+        "city": this.filterTermss[i].city
+
+      }]
+    }
+    console.log(typeof(this.filterTermProfession));
+    // if(this.filterTermProfession.length==0){
+    //   this.filterTermProfession=[];
+    //   console.log('data not found')
+    // }else{
+    //   console.log(this.filterTermProfession)
+    // }
+  }
+
+  testimonialeRes: any;
+  testimonialsData: any;
+
+  testimonialsAllData() {
+    this.auth.getAllTestimonials().subscribe(res => {
+      this.testimonialeRes = res;
+      this.testimonialsData = this.testimonialeRes.data;
+      console.log(this.testimonialsData);
+    }, err => {
+      console.log(err)
+    })
+  }
+
+latestchefRes;
+latestchefsData;
+  latestChefsAllData(){
+    this.auth.getAllLatestChefs().subscribe((data)=>{
+      this.latestchefRes=data;
+      this.latestchefsData=this.latestchefRes.data;
+      console.log(this.latestchefRes)
+    },err=>{
+console.log(err)
+    })
+  }
+
+  latestEventRes;
+  latestEventData;
+  latestEventAllData:any=[];
+  latestEvents(){
+    
+    this.auth.getAllEvents().subscribe(data=>{
+      this.latestEventRes=data;
+      this.latestEventData=this.latestEventRes.data;
+      console.log(this.latestEventData);
+      for(let i=0;i<this.latestEventData.length;i++){
+            this.latestEventAllData[i]=
+              {
+                id: this.latestEventData[i].id,
+                date: this.latestEventData[i].date,
+                event_image: this.latestEventData[i].event_image,
+                intro: this.latestEventData[i].intro,
+                mediaId: this.latestEventData[i].mediaId,
+                status:this.latestEventData[i].status,
+                location: this.latestEventData[i].location,
+                title: this.latestEventData[i].title
+              }
+            
+      }
+      console.log(this.latestEventAllData)
+    },err=>{
+      console.log(err)
+    })
+  }
+  seeChefMenu() {
+    this.router.navigateByUrl('nav/chef-menu-review')
+  }
+  clickViewChef(){
+    this.router.navigateByUrl('nav/viewallchef')
   }
   onSlideChange() {
     console.log('slide change');
@@ -142,19 +284,19 @@ export class MainpageComponent implements OnInit {
       img: '../../../assets/img/blog_3.jpg'
     },
   ]
- 
-  loginClick(){
-    let userBody={
-      "email": "vinaym@midaswebtech.com",
-      "password": "12345678"
-    }
-    this.auth.loginUser(userBody).subscribe(data=>{
-   
-console.log(data)
-    },err=>{
 
-    })
-  }
+  //   loginClick(){
+  //     let userBody={
+  //       "email": "vinaym@midaswebtech.com",
+  //       "password": "12345678"
+  //     }
+  //     this.auth.loginUser(userBody).subscribe(data=>{
+
+  // console.log(data)
+  //     },err=>{
+
+  //     })
+  //   }
 
   pickImage(sourceType) {
     const options: CameraOptions = {
@@ -197,7 +339,7 @@ console.log(data)
   }
 
   AppleSignIn() {
-    
+
     this.signInWithApple
       .signin({
         requestedScopes: [
@@ -209,7 +351,7 @@ console.log(data)
         console.log("Apple login success:- " + res);
       })
       .catch((error: AppleSignInErrorResponse) => {
-        console.log("Apple Login Error:"+error);
+        console.log("Apple Login Error:" + error);
       });
   }
 }

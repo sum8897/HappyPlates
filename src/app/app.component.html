@@ -1,13 +1,14 @@
 <ion-app>
   <ion-menu side="start" menuId="first" contentId="content1" >
     <ion-content class="menu-container" >
-<div *ngIf="customer_user">
+
   <div class="top-header">
     <div class="user-image">
     <img class="user-img" src="../assets/img/user_1.jpg">
     </div>
     <div class="user-details">
-      <h3>{{user.user_name}}</h3>
+      <!-- <h3>{{user.user_name}}</h3> -->
+      <h3>Ashish</h3>
       <div class="user-contact"><ion-icon name="call-outline"></ion-icon><p class="contact">7897196188</p></div>
       <div class="ediit-menu-prfile"><ion-icon class="edit-menu-image" name="pencil-outline"></ion-icon></div>
     </div>
@@ -26,7 +27,7 @@
     <ion-icon name="power-outline" slot="start" class="menu-list-icon"></ion-icon>
     Logout
   </ion-item>
-</div>
+
     </ion-content>
   </ion-menu>
 

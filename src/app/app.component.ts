@@ -35,24 +35,25 @@ export class AppComponent {
               private network: Network,
               public user: UserService
   ) {
-    this.user.user_type=localStorage.getItem('user_role');
-    this.user.user_name=localStorage.getItem('user_name');
+    // this.user.user_type=localStorage.getItem('user_role');
+    // this.user.user_name=localStorage.getItem('user_name');
     
-    console.log(this.user.user_name)
-    // this.sideMenu();
+    // console.log(this.user.user_name)
+  
     // this.sideMenuAdmin();
     this.initializeApp();
+    this.sideMenu();
     this.backButtonEvent();
-    if(this.user.user_type=="admin"){
-      this.sideMenuAdmin();
-    this.user.chef_user=true;
-    this.user.customer_user=false;
-    console.log("admin chef user")
-    }else{
-      this.sideMenu();
-      this.user.chef_user=false;
-    this.user.customer_user=true;
-    }
+    // if(this.user.user_type=="admin"){
+    //   this.sideMenuAdmin();
+    // this.user.chef_user=true;
+    // this.user.customer_user=false;
+    // console.log("admin chef user")
+    // }else{
+    //   this.sideMenu();
+    //   this.user.chef_user=false;
+    // this.user.customer_user=true;
+    // }
     
     // this.menuData=this.navigate.filter(data=>{
     //   if(data.role==this.user_type){
@@ -215,31 +216,31 @@ async presentAlertConfirm() {
     ]
   
   }
-  sideMenuAdmin()
-  {
-    this.navigateChef =
-    [
-      {
-        title : "Chef Home",
-        url   : "/chef-home",
-        icon  : "search-outline",
-        role: "admin"
-      },
-      {
-        title : "Add Menu",
-        url   : "/chef-add-menu",
-        icon  : "search-outline",
-        role: "admin"
-      },
-      {
-        title : "Chef Profile",
-        url   : "/chef-profile",
-        icon  : "search-outline",
-        role: "admin"
-      },
-    ]
+  // sideMenuAdmin()
+  // {
+  //   this.navigateChef =
+  //   [
+  //     {
+  //       title : "Chef Home",
+  //       url   : "/chef-home",
+  //       icon  : "search-outline",
+  //       role: "admin"
+  //     },
+  //     {
+  //       title : "Add Menu",
+  //       url   : "/chef-add-menu",
+  //       icon  : "search-outline",
+  //       role: "admin"
+  //     },
+  //     {
+  //       title : "Chef Profile",
+  //       url   : "/chef-profile",
+  //       icon  : "search-outline",
+  //       role: "admin"
+  //     },
+  //   ]
   
-  }
+  // }
   logout(){
     localStorage.clear();
     localStorage.removeItem('amantran_token');

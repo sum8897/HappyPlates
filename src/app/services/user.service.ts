@@ -14,7 +14,7 @@ export class UserService {
     chefMenuType:any;
   isLoading = false;
            
-  async present( msg ) {
+  async present( msg:any ) {
     this.isLoading = true;
     return await this.loadingController.create({
      message: msg,

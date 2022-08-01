@@ -22,110 +22,119 @@ import { PaymentPageComponent } from './pages/payment-page/payment-page.componen
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { SearchComponent } from './pages/search/search.component';
+import { ViewallchefComponent } from './pages/viewallchef/viewallchef.component';
 import { AuthGuardGuard } from './services/auth-guard.guard';
 
-  
-if(localStorage.getItem('admin')=='admin'){
 
-}else{
+if (localStorage.getItem('admin') == 'admin') {
+
+} else {
   const routes: Routes = [
     {
       path: 'home',
-      loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+      loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
     },
+    // {
+    //   path: '',
+    //   redirectTo: 'mainpage',
+    //   pathMatch: 'full'
+    // },
+    { path: 'mainpage', component: MainpageComponent, canActivate: [AuthGuardGuard] },
     {
-      path: '',
-      redirectTo: 'mainpage',
-      pathMatch: 'full'
-    },
-    { path: 'mainpage', component: MainpageComponent, canActivate: [AuthGuardGuard]},
-    {
-      path:'mainpage',
+      path: 'nav/mainpage',
       component: MainpageComponent
     },
     {
-      path: 'event',
+      path: 'nav/event',
       component: EventsComponent
     },
     {
-      path:'event-details',
+      path: 'nav/event-details',
       component: EventDetailsComponent
     },
     {
-      path:'login',
+      path: 'login',
       component: LoginComponent
     },
     {
-      path:'register',
+      path: 'register',
       component: RegisterComponent
     },
     {
-      path:'otp',
+      path: 'nav/otp',
       component: OtpComponent
     },
     {
-      path:'contactus',
+      path: 'nav/contactus',
       component: ContactusComponent
     },
     {
-      path:'about',
+      path: 'nav/about',
       component: AboutusComponent
     },
     {
-      path:'blog',
+      path: 'nav/blog',
       component: BlogComponent
     },
     {
-      path:'blog-details',
+      path: 'nav/blog-details',
       component: BlogdetailsComponent
     },
     {
-      path:'chefaccount',
+      path: 'nav/chefaccount',
       component: ChefaccountComponent
     },
     {
-      path:'cart',
+      path: 'nav/cart',
       component: CartpageComponent
     },
     {
-      path:'item-list',
+      path: 'nav/item-list',
       component: ItemListComponent
     },
     {
-      path:'profile',
+      path: 'nav/profile',
       component: ProfileComponent
     },
     {
-      path:'faq',
+      path: 'nav/faq',
       component: FaqComponent
     },
     {
-      path:'chef-menu-review',
+      path: 'nav/chef-menu-review',
       component: ChefMenuReviewComponent
     },
-  {
-    path:'payment',
-    component: PaymentPageComponent
-  },
-  {
-    path:'search',
-    component: SearchComponent
-  },
+    {
+      path: 'nav/payment',
+      component: PaymentPageComponent
+    },
+    {
+      path: 'nav/search',
+      component: SearchComponent
+    },
+    {
+      path: 'sidenav',
+      loadChildren: () => import('./sidenav/sidenav.module').then(m => m.SidenavPageModule)
+    },
   ];
 }
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
-    redirectTo: 'mainpage',
-    pathMatch: 'full'
+    loadChildren: () => import('./sidenav/sidenav.module').then(m => m.SidenavPageModule)
   },
-  { path: 'mainpage', component: MainpageComponent, canActivate: [AuthGuardGuard]},
+  // {
+  //   path: '',
+  //   redirectTo: 'mainpage',
+  //   pathMatch: 'full'
+  // },
+  // { path: 'mainpage', component: MainpageComponent, canActivate: [AuthGuardGuard]},
   {
-    path:'mainpage',
+    path: 'nav/mainpage',
     component: MainpageComponent
   },
   {
@@ -133,84 +142,88 @@ const routes: Routes = [
     component: EventsComponent
   },
   {
-    path:'event-details',
+    path: 'nav/event-details',
     component: EventDetailsComponent
   },
   {
-    path:'login',
+    path: 'nav/login',
     component: LoginComponent
   },
   {
-    path:'register',
+    path: 'register',
     component: RegisterComponent
   },
   {
-    path:'otp',
+    path: 'otp',
     component: OtpComponent
   },
   {
-    path:'contactus',
+    path: 'contactus',
     component: ContactusComponent
   },
   {
-    path:'about',
+    path: 'nav/about',
     component: AboutusComponent
   },
   {
-    path:'blog',
+    path: 'blog',
     component: BlogComponent
   },
   {
-    path:'blog-details',
+    path: 'blog-details',
     component: BlogdetailsComponent
   },
   {
-    path:'chefaccount',
+    path: 'chefaccount',
     component: ChefaccountComponent
   },
   {
-    path:'cart',
+    path: 'cart',
     component: CartpageComponent
   },
   {
-    path:'item-list',
+    path: 'item-list',
     component: ItemListComponent
   },
   {
-    path:'profile',
+    path: 'profile',
     component: ProfileComponent
   },
   {
-    path:'faq',
+    path: 'faq',
     component: FaqComponent
   },
   {
-    path:'chef-menu-review',
+    path: 'chef-menu-review',
     component: ChefMenuReviewComponent
   },
-{
-  path:'payment',
-  component: PaymentPageComponent
-},
-{
-  path:'search',
-  component: SearchComponent
-},
-{
-  path:'chef-home',
-  component: ChefHomeComponent,
-  canActivate: [AuthGuardGuard]
-},
-{
-  path:'chef-add-menu',
-  component: ChefaddmenuComponent,
-  canActivate: [AuthGuardGuard]
-},
-{
-  path:'chef-profile',
-  component: ChefprofileComponent,
-  canActivate: [AuthGuardGuard]
-},
+  {
+    path: 'payment',
+    component: PaymentPageComponent
+  },
+  {
+    path:'nav/viewallchef',
+    component: ViewallchefComponent
+  },
+  {
+    path: 'search',
+    component: SearchComponent
+  },
+  {
+    path: 'chef-home',
+    component: ChefHomeComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'chef-add-menu',
+    component: ChefaddmenuComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'chef-profile',
+    component: ChefprofileComponent,
+    canActivate: [AuthGuardGuard]
+  },
 ];
 
 @NgModule({

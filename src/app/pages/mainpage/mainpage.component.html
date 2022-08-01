@@ -1,7 +1,10 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <!-- <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title>
       <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
@@ -21,95 +24,31 @@
      </div>
   </div> -->
   <div class="card-full">
-    <ion-searchbar placeholder="Filter Schedules" class=""></ion-searchbar>
+    <ion-searchbar placeholder="Search For Meal,Chef or Location" class="" [(ngModel)]="searchTermProfession" (ionChange)="filterItemProfession()"></ion-searchbar>
     <div class="chef-view">
-      <span class="chef-1" (click)="loginClick()">Chef</span>
-      <span class="chef-more">View All Chef</span>
+      <span class="chef-1">Chef</span>
+      <span class="chef-more" (click)="clickViewChef()">View All Chef</span>
     </div>
     <div class="slider-chef-div">
       <ion-slides [options]="slideOpts" class="slides-main">
-        <ion-slide>
+
+        <ion-slide *ngFor="let chef of filterTermProfession">
           <ion-card class="slider-card">
             <img src="../../../assets/img/chef_1.jpg">
             <div class="chef-detail">
-              <span class="chef-name">Gordon Ramsy'</span>
+              <span class="chef-name">{{chef[0].firstname}} {{chef[0].lastname}}</span>
               <div class="chef-specialization-div">
                 <img src="../../../assets/img/chef_icon.png">
                 <span class="chef-specialization">Specialises In:</span>
               </div>
-              <span class="chef-specialization-type">Italian,Chinese</span>
+              <span class="chef-specialization-type">{{chef[0].specialization}}</span>
               
             </div>
             <div class="chef-button">
-              <ion-button size="small" expand="round" class="see-menu">See Menu </ion-button>
+              <ion-button size="small" expand="round" class="see-menu" (click)="seeChefMenu()">See Menu </ion-button>
             </div>
           </ion-card>
-
-        </ion-slide>
-        <ion-slide>
-          <ion-card class="slider-card">
-            <img src="../../../assets/img/chef_1.jpg">
-            <div class="chef-detail">
-              <span class="chef-name">Gordon Ramsy</span>
-              <div class="chef-specialization-div">
-                <img src="../../../assets/img/chef_icon.png">
-                <span class="chef-specialization">Specialises In:</span>
-              </div>
-              <span class="chef-specialization-type">Italian,Chinese</span>
-              <div>
-                <ion-button size="small" expand="round" class="see-menu">See Menu </ion-button>
-              </div>
-            </div>
-          </ion-card>
-        </ion-slide>
-        <ion-slide>
-          <ion-card class="slider-card">
-            <img src="../../../assets/img/chef_3.jpg">
-            <div class="chef-detail">
-              <span class="chef-name">Jamse Apperts</span>
-              <div class="chef-specialization-div">
-                <img src="../../../assets/img/chef_icon.png">
-                <span class="chef-specialization">Specialises In:</span>
-              </div>
-              <span class="chef-specialization-type">Bengali,South Indain</span>
-              <div>
-                <ion-button size="small" expand="round" class="see-menu">See Menu </ion-button>
-              </div>
-            </div>
-          </ion-card>
-        </ion-slide>
-        <ion-slide>
-          <ion-card class="slider-card">
-            <img src="../../../assets/img/chef_1.jpg">
-            <div class="chef-detail">
-              <span class="chef-name">Harpal Singh Sokhi</span>
-              <div class="chef-specialization-div">
-                <img src="../../../assets/img/chef_icon.png">
-                <span class="chef-specialization">Specialises In:</span>
-              </div>
-              <span class="chef-specialization-type">Italian,Chinese</span>
-              <div>
-                <ion-button size="small" expand="round" class="see-menu">See Menu </ion-button>
-              </div>
-            </div>
-          </ion-card>
-        </ion-slide>
-        <ion-slide>
-          <ion-card class="slider-card">
-            <img src="../../../assets/img/chef_3.jpg">
-            <div class="chef-detail">
-              <span class="chef-name">Jordon Apperts</span>
-              <div class="chef-specialization-div">
-                <img src="../../../assets/img/chef_icon.png">
-                <span class="chef-specialization">Specialises In:</span>
-              </div>
-              <span class="chef-specialization-type">Bengali,South Indain</span>
-              <div>
-                <ion-button size="small" expand="round" class="see-menu">See Menu </ion-button>
-              </div>
-            </div>
-          </ion-card>
-        </ion-slide>
+</ion-slide>
       </ion-slides>
     </div>
   </div>
@@ -117,9 +56,9 @@
     <div class="latest-chef-heading-div">
       <span class="letest-chef-heading"> Latest Chef</span>
     </div>
-    <!-- <div> -->
+
       <ion-slides [options]="slidesLatest" pager="true" class="slides-latest-chef">
-        <ion-slide *ngFor="let latest of chefData">
+        <ion-slide *ngFor="let latest of latestchefsData">
           <div class="latest-chef-shadow">
             <div class="test1" style="background: #f2c5ca;"></div>
           <div class="test2">
@@ -127,18 +66,17 @@
               <ion-list>
                 <ion-item lines="none">
                   <ion-avatar>
-                    <img src="{{latest.img}}">
+                    <img src="../../../assets/img/chef_1.jpg">
                   </ion-avatar>
                   <ion-label>
                     <div class="chef-detail">
-                      <span class="chef-name">{{latest.name}}</span>
+                      <span class="chef-name">{{latest.firstname}} {{latest.lastname}}</span>
                       <div class="chef-specialization-div">
                         <img style="width: 12px;height:13px;margin-bottom: -2px;" src="../../../assets/img/chef_icon.png">
                         <span class="chef-specialization">Specialises In:</span>
-                        <span class="chef-specialization-type">{{latest.spel}}</span>
+                        <span class="chef-specialization-type">{{latest.specialization}}</span>
                       </div>
-                      <div class="chef-specialization-details">Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry.</div>
+                      <div class="chef-specialization-details">{{latest.aboutme}}</div>
                       <div class="chef-button">
                         <ion-button size="small" expand="round">See Menu </ion-button>
                       </div>
@@ -149,29 +87,27 @@
             </ion-card>
           </div>
           </div>
-
         </ion-slide>
+
       </ion-slides>
-    <!-- </div> -->
   </div>
 
   <div class="event-blog">
     <div class="event-heading"> Latest Event</div>
     <div class="event-slider-div">
       <ion-slides [options]="slidesEvent" pager="true">
-        <ion-slide *ngFor="let ev of eventData">
-          <ion-card class="event-card"><img src="{{ev.img}}"></ion-card>
+        <ion-slide *ngFor="let ev of latestEventAllData">
+          <ion-card class="event-card"><img src="../../../assets/img/blog_1.jpg"></ion-card>
           <div class="event-details">
             <div class="event-div">
-              <div class="event-name">{{ev.name}}</div>
-              <div class="latest-event-details">{{ev.details}}</div>
+              <div class="event-name">{{ev.title}}</div>
+              <div class="latest-event-details">{{ev.intro}}</div>
             </div>
             <div class="event-location-date">
-              <div class="event-date"><img style="width: 10px;" src="../../../assets/img/time.png"><span>Sepetember 29,
-                  2020</span>
+              <div class="event-date"><img style="width: 10px;" src="../../../assets/img/time.png"><span>{{ev.date}}</span>
                 </div>
               <div class="event-location"><img style="width: 10px;"
-                  src="../../../assets/img/location.png"><span>Madison</span>
+                  src="../../../assets/img/location.png"><span>{{ev.location}}</span>
                 </div>
             </div>
           </div>
@@ -203,7 +139,7 @@
   <div class="testimonial">
    <div class="testimonials-heading"><span>Testimonials</span></div>
    <ion-slides [options]="slidesLatest" pager="true" class="slides-testimonial">
-<ion-slide *ngFor="let latest of chefData">
+<ion-slide *ngFor="let test of testimonialsData">
   <div class="testimonials-last-hideDiv">
   </div>
   <div class="testimonials-second-last-hideDiv">
@@ -211,15 +147,15 @@
   <div class="testimonials-top-upder-hideDiv">
     <div class="testimonial-image">
       <ion-avatar>
-        <img src="{{latest.img}}">
+        <img src="../../../assets/img/chef_1.jpg">
       </ion-avatar>
     </div>
 <div class="testimonial-details">
-  <span class="testimonial-name">{{latest.name}}</span>
-  <span class="testimonial-specialization">{{latest.spel}}</span>
+  <span class="testimonial-name">{{test.userId}}</span>
+  <span class="testimonial-specialization">{{test.location}}</span>
 </div>
 <div class="testimonial-disc">
-  <div class="testimonial-detail-span">Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available..
+  <div class="testimonial-detail-span">{{test.title}}
 
   </div>
 </div>
