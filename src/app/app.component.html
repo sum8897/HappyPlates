@@ -13,7 +13,7 @@
       <div class="ediit-menu-prfile"><ion-icon class="edit-menu-image" name="pencil-outline"></ion-icon></div>
     </div>
   </div>
-  <ion-list *ngFor="let pages of navigate">
+  <!-- <ion-list *ngFor="let pages of navigate">
   <ion-menu-toggle auto-hide="true">
     <ion-item [routerLink]="pages.url" routerDirection="forward" lines='none' class="menu-list-name">
         <ion-icon [name]="pages.icon" slot="start" class="menu-list-icon"></ion-icon>
@@ -21,12 +21,12 @@
     </ion-item>
   </ion-menu-toggle>
 
-  </ion-list>
+  </ion-list> -->
   
-  <ion-item lines='none' class="logout" (click)="logout()">
+  <!-- <ion-item lines='none' class="logout" (click)="logout()">
     <ion-icon name="power-outline" slot="start" class="menu-list-icon"></ion-icon>
     Logout
-  </ion-item>
+  </ion-item> -->
 
     </ion-content>
   </ion-menu>
@@ -39,12 +39,13 @@
         <img class="user-img" src="../assets/img/user_1.jpg">
         </div>
         <div class="user-details">
-          <h3>{{user.user_name}}</h3>
+          <h3>{{user.user_name}} </h3>
           <div class="user-contact"><ion-icon name="call-outline"></ion-icon><p class="contact">7897196188</p></div>
           <div class="ediit-menu-prfile"><ion-icon class="edit-menu-image" name="pencil-outline"></ion-icon></div>
         </div>
       </div>
-      <ion-list *ngFor="let pages of navigateChef">
+      
+      <ion-list *ngFor="let pages of user.menuData">
       <ion-menu-toggle auto-hide="true">
         <ion-item [routerLink]="pages.url" routerDirection="forward" lines='none' class="menu-list-name">
             <ion-icon [name]="pages.icon" slot="start" class="menu-list-icon"></ion-icon>

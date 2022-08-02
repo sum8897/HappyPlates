@@ -66,9 +66,14 @@ export class AppComponent {
      window.addEventListener('offline',()=>{
        this.openAlert();
      })
-     //console.log(this.navigate)
+ 
+     
   }
-
+ ngOnInit(){
+  this.sideMenu()
+  // this.user.menuData=this.navigate
+  // console.log(this.menuData)
+ }
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -212,9 +217,7 @@ async presentAlertConfirm() {
         icon  : "search-outline",
         role: "customer"
       },
-
-    ]
-  
+  ]
   }
   // sideMenuAdmin()
   // {
@@ -246,4 +249,5 @@ async presentAlertConfirm() {
     localStorage.removeItem('amantran_token');
     this.router.navigateByUrl('login');
   }
+ 
 }

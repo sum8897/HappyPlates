@@ -8,6 +8,7 @@ export class UserService {
   user_name;
   user_type;
   chef_user:boolean;
+  menuData
   customer_user:boolean;
   constructor(  public toast:ToastController,
     public loadingController: LoadingController,) { }
