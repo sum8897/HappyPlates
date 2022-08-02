@@ -71,8 +71,8 @@ export class AppComponent {
   }
  ngOnInit(){
   this.sideMenu()
-  this.user.menuData=this.navigate
-  console.log(this.menuData)
+  // this.user.menuData=this.navigate
+  // console.log(this.menuData)
  }
   initializeApp() {
     this.platform.ready().then(() => {
@@ -217,9 +217,7 @@ async presentAlertConfirm() {
         icon  : "search-outline",
         role: "customer"
       },
-
-    ]
-  
+  ]
   }
   // sideMenuAdmin()
   // {

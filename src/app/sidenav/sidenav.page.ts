@@ -11,7 +11,7 @@ import { Router, RouterEvent } from '@angular/router';
 export class SidenavPage implements OnInit {
 
   active = '';
-
+  sideMenu=[]
   NAV = [
     {
       title : "Home",
@@ -112,10 +112,11 @@ export class SidenavPage implements OnInit {
       this.active = event.url
     });
     this.NAV.filter((data)=>{
-
-      return data.role===this.user_type;
+      if(data.role===this.user_type){
+           this.sideMenu.push(data)  ;
+          }
+          return this.sideMenu;
     })
-    console.log(this.NAV)
   }
 
   ngOnInit() { }
