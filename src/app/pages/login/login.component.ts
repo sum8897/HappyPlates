@@ -29,10 +29,12 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/forgotpass')
   }
   onSubmit(contactForm) {
+    // localStorage.setItem('user_role', 'customer');
+    // this.router.navigateByUrl('/nav/mainpage')
     console.log(contactForm.value);
     console.log("form" + JSON.stringify(contactForm.value));
     let userBody = {
-      "email": contactForm.value.email,
+      "username": contactForm.value.email,
       "password": contactForm.value.password
     }
     if(contactForm.value.email="" || contactForm.value.password==""){
@@ -55,11 +57,11 @@ export class LoginComponent implements OnInit {
       if(this.user.user_type=="admin"){
         this.user.chef_user=true;
         this.user.customer_user=false;
-        this.router.navigateByUrl('/chef-home')
+        this.router.navigateByUrl('/nav/chef-home')
       }else{
         this.user.customer_user=true;
         this.user.chef_user=false;
-        this.router.navigateByUrl('/mainpage')
+        this.router.navigateByUrl('/nav/mainpage')
       }
      
     }, err => {

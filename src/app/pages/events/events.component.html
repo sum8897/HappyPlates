@@ -14,55 +14,61 @@
     <span class="year">2021</span>
   </div>
 
-    <ion-card class="event-card" *ngFor="let ev of eventData2021">
-      <ion-list>
-        <ion-item lines="none" (click)="openEventDetails(ev)" class="item-event-list">
-            <img class="event-img" src="../../../assets/img/blog_1.jpg">
-          <ion-label class="event-label">
-            <div class="event-all">
-            <p class="event-location-name">{{ev.name}}</p>
-            <div class="img-span">
-              <img class="date-icon" src="../../../assets/img/time.png">
-              <span>29, May 2021</span>
-            </div>
-            <div class="img-span">
-              <img class="location-icon" src="../../../assets/img/location.png">
-              <span>Ahmedbad</span>
-            </div>
-          </div>
-          </ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-      </ion-list>
-  
-    </ion-card>
+  <div class="chef-menu">
+    <ion-card style="border-radius: 11px;" *ngFor="let ev of latestEventAllData">
 
-    <div class="event-year">
-      <span class="event-1"></span>
-      <span class="year">2020</span>
-    </div>
-  
-      <ion-card class="event-card" *ngFor="let ev of eventData2020">
-        <ion-list>
-          <ion-item lines="none" class="item-event-list">
-              <img class="event-img" src="../../../assets/img/blog_1.jpg">
-            <ion-label class="event-label">
-              <div class="event-all">
-              <p class="event-location-name">{{ev.name}}</p>
-              <div class="img-span">
-                <img class="date-icon" src="../../../assets/img/time.png">
-                <span>29, May 2021</span>
-              </div>
-              <div class="img-span">
-                <img class="location-icon" src="../../../assets/img/location.png">
-                <span>Ahmedbad</span>
-              </div>
-            </div>
-            </ion-label>
-            <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-          </ion-item>
-        </ion-list>
-    
-      </ion-card>
+      <div style="display: inline-flex;width: 100%;">
+       <div class="item-menu" style="display: inline-flex;width: 90%;">
+         <div><img style="width: 85px;
+           height: 85px;
+           border-radius: 11px;margin: 7px 0 5px 6px;" src="../../../assets/img/chef_1.jpg">
+           </div>
+       <div style="display: block;
+       padding-left: 10px;
+       width: 65%;
+       margin: 5px 0 0 0;">
+       <div style="font-size: 12px;
+       font-weight: 600;
+       margin-top: 7px;
+       white-space: normal;
+       color: #010101;">{{ev.title}}
+       </div>
+       <div class="cart-item-price-main-count" 
+       style="display: block;width: 100%;margin-top: 5px;">
+       <div class="img-span">
+        <img class="date-icon" src="../../../assets/img/time.png" style="width: 10px;
+        height: 10px;color: #010101;">
+        <span style="padding-left: 7px;
+        font-size: 10px;
+        font-weight: 500;
+        font-family: sans-serif;color: #010101;">{{ev.month}},{{ev.date_year}}</span>
+      </div>
+      <div class="img-span">
+        <img class="location-icon" src="../../../assets/img/location.png" style="    width: 10px;
+        height: 10px;"> 
+        <span style="padding-left: 7px;
+        font-size: 10px;
+        font-weight: 500;
+        font-family: sans-serif;color: #010101;">{{ev.location}}</span>
+      </div>
+       </div>
+       </div>
+       </div>
+        <div style="width: 10%;
+        display: block;
+        justify-content: space-between;
+        position: relative;
+        background: #f4f8f9;
+        padding-top: 13%;
+        text-align: center;
+        font-size: 20px;">
+       <div style="height: 100%;" (click)="openEventDetails(ev)"><ion-icon name="chevron-forward-outline" style="color: #2a647a;"></ion-icon></div>
+       <!-- <div style=""><ion-icon name="chevron-forward-outline"></ion-icon></div> -->
+     </div>
+      </div>
+
+    </ion-card>
+  </div>
+
 
 </ion-content>
