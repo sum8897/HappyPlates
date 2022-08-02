@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router, RouterEvent } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sidenav',
@@ -106,7 +107,8 @@ export class SidenavPage implements OnInit {
 
   ]
   user_type;
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    public menuCtrl: MenuController) {
     this.user_type=localStorage.getItem('user_role');
     this.router.events.subscribe((event: RouterEvent) => {
       this.active = event.url
@@ -122,6 +124,7 @@ export class SidenavPage implements OnInit {
   logout(){
     localStorage.clear();
     localStorage.removeItem('amantran_token');
-    this.router.navigateByUrl('nav/login');
+    this.menuCtrl.close();
+    this.router.navigate(['nav/login']);
   }
 }
