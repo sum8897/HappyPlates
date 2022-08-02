@@ -74,6 +74,7 @@ export class MainpageComponent implements OnInit {
     this.testimonialsAllData();
     this.latestChefsAllData();
     this.latestEvents();
+    this.blogMainData();
   }
 
   ngOnInit() { }
@@ -208,6 +209,14 @@ console.log(err)
   }
   clickViewChef(){
     this.router.navigateByUrl('nav/viewallchef')
+  }
+
+  blogMainData(){
+    this.auth.getAllBlogs().subscribe((data)=>{
+      console.log(data);
+    },err=>{
+      console.log('blog error..')
+    })
   }
   onSlideChange() {
     console.log('slide change');

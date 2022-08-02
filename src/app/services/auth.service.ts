@@ -92,6 +92,14 @@ getAllEvents(){
   return this.http.get(this.url + 'api/events', { headers: headers }).pipe(tap(res => {
   }))
 }
+getAllBlogs(){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json ');
+  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  return this.http.get(this.url + 'api/blogs', { headers: headers }).pipe(tap(res => {
+  }))
+}
  
 
   
