@@ -1,15 +1,77 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/mainpage"></ion-back-button>
+        <ion-back-button defaultHref="/nav/mainpage"></ion-back-button>
       </ion-buttons>
     <ion-title style="text-align: center;">
-     All Event
+     All Chefs
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-<ion-list>
+  <div class="chef-menu">
+    <ion-card style="border-radius: 11px;" *ngFor="let ev of chefAllData">
+
+      <div style="display: inline-flex;width: 100%;">
+       <div class="item-menu" style="display: inline-flex;width: 90%;">
+         <div><img style="width: 85px;
+           height: 85px;
+           border-radius: 11px;margin: 7px 0 5px 6px;" src="{{ev.prof_image}}">
+           </div>
+       <div style="display: block;
+       padding-left: 10px;
+       width: 65%;
+       margin: 5px 0 0 0;">
+       <div style="font-size: 12px;
+       font-weight: 600;
+       margin-top: 7px;
+       white-space: normal;
+       color: #010101;">{{ev.firstname}} {{ev.lastname}}
+       </div>
+
+       <div class="cart-item-price-main-count" 
+       style="display: block;width: 100%;margin-top: 5px;">
+       <div class="img-span">
+
+        <span style="padding-left: 7px;
+        font-size: 10px;
+        font-weight: 500;
+        font-family: sans-serif;color: #010101;">{{ev.aboutme}}
+        </span>
+        <span style="padding-left: 7px;
+        font-size: 10px;
+        font-weight: 500;
+        font-family: sans-serif;color: #010101;">{{ev.city}}, {{ev.country}}
+        </span><br>
+        <span style="padding-left: 7px;
+        font-size: 10px;
+        font-weight: 500;
+        font-family: sans-serif;color: #010101;">{{ev.specialization}}
+        </span>
+        
+      </div>
+       </div>
+       </div>
+       </div>
+        <div style="width: 10%;
+        display: block;
+        justify-content: space-between;
+        position: relative;
+        background: #f4f8f9;
+        padding-top: 13%;
+        text-align: center;
+        font-size: 20px;">
+       <div style="height: 100%;" (click)="openSingleDetails(ev)"><ion-icon name="chevron-forward-outline" style="color: #2a647a;"></ion-icon></div>
+       <!-- <div style=""><ion-icon name="chevron-forward-outline"></ion-icon></div> -->
+     </div>
+      </div>
+
+    </ion-card>
+  </div>
+
+
+
+<!-- <ion-list>
   <ion-item lines="none" *ngFor="let ev of latestEventAllData" class="event-item">
     <ion-avatar slot="start">
       <img src="../../../assets/img/chef_1.jpg">
@@ -25,5 +87,5 @@
     </ion-label>
     <ion-button fill="outline" slot="end">View</ion-button>
   </ion-item>
-</ion-list>
+</ion-list> -->
 </ion-content>

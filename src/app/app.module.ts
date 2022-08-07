@@ -43,6 +43,7 @@ import { ChefHomeComponent } from './chefpage/chef-home/chef-home.component';
 import { ChefprofileComponent } from './chefpage/chefprofile/chefprofile.component';
 import { ChefaddmenuComponent } from './chefpage/chefaddmenu/chefaddmenu.component';
 import { ViewallchefComponent } from './pages/viewallchef/viewallchef.component';
+import { BlogComponent } from './pages/blog/blog.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { ViewallchefComponent } from './pages/viewallchef/viewallchef.component'
                  ChefHomeComponent,
                  ChefprofileComponent,
                  ChefaddmenuComponent,
-                 ViewallchefComponent
+                 ViewallchefComponent,
+                 BlogComponent
                 ],
   entryComponents: [],
   imports: [BrowserModule, 
@@ -80,6 +82,7 @@ import { ViewallchefComponent } from './pages/viewallchef/viewallchef.component'
             CommonModule,
             HttpClientModule,
             ReactiveFormsModule,
+            
           ],
   providers: [
     Platform,

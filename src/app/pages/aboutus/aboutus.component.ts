@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-aboutus',
@@ -8,7 +10,10 @@ import { CommonModule } from '@angular/common';
 })
 export class AboutusComponent implements OnInit {
 
-  constructor() { }
+  constructor(public auth:AuthService,
+             public user:UserService) { 
+              this.user.menu();
+             }
 
   ngOnInit() {}
   slideOpts = {

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgOtpInputComponent, NgOtpInputConfig } from 'ng-otp-input';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-otp',
   templateUrl: './otp.component.html',
@@ -17,7 +18,7 @@ export class OtpComponent implements OnInit {
     disableAutoFocus: false,
     placeholder: ''
   };
-  constructor() { }
+  constructor(public user:UserService) { }
 
   ngOnInit() {}
   onOtpChange(ev){

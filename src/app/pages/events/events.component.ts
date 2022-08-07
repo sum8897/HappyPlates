@@ -17,6 +17,7 @@ export class EventsComponent implements OnInit {
     public user: UserService,
     public router: Router) { 
       this.latestEvents();
+      this.user.menu();
     }
 
   ngOnInit() {}

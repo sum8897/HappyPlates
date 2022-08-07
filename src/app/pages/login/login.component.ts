@@ -37,13 +37,17 @@ export class LoginComponent implements OnInit {
       "username": contactForm.value.email,
       "password": contactForm.value.password
     }
-    if(contactForm.value.email="" || contactForm.value.password==""){
+    if(contactForm.value.email===false){
+    alert('please enter Email Id')
+    }
+    else if(contactForm.value.email="" || contactForm.value.password==""){
       alert('Please enter user Id and Password.')
     }else{
 
    this.user.present('wait...');
     this.auth.loginUser(userBody).subscribe(data => {
       this.user.dismiss();
+      this.user.sideMenu=[];
       console.log(data);
       this.user_response_data = data;
       this.user_response = this.user_response_data.success;
@@ -54,6 +58,15 @@ export class LoginComponent implements OnInit {
       this.user.user_name=this.user_name;
       localStorage.setItem('user_name', this.user.user_name);
       localStorage.setItem('user_role', this.user.user_type);
+      this.user_type=localStorage.getItem('user_role');
+      this.user.NAV.filter((data)=>{
+       
+        if(data.role===this.user_type){
+             this.user.sideMenu.push(data)  ;
+            }
+            return this.user.sideMenu;
+      })
+      console.log(this.user.sideMenu);
       if(this.user.user_type=="admin"){
         this.user.chef_user=true;
         this.user.customer_user=false;
@@ -65,6 +78,7 @@ export class LoginComponent implements OnInit {
       }
      
     }, err => {
+      this.user.showToast(JSON.stringify(err.error.message));
     this.user.dismiss();
     })
   }

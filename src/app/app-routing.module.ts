@@ -5,6 +5,7 @@ import { ChefaddmenuComponent } from './chefpage/chefaddmenu/chefaddmenu.compone
 import { ChefprofileComponent } from './chefpage/chefprofile/chefprofile.component';
 import { AboutusComponent } from './pages/aboutus/aboutus.component';
 import { BlogComponent } from './pages/blog/blog.component';
+// import { BlogallComponent } from './pages/blogall/blogall.component';
 import { BlogdetailsComponent } from './pages/blogdetails/blogdetails.component';
 import { CartpageComponent } from './pages/cartpage/cartpage.component';
 import { ChefMenuReviewComponent } from './pages/chef-menu-review/chef-menu-review.component';
@@ -73,7 +74,7 @@ if (localStorage.getItem('admin') == 'admin') {
       component: AboutusComponent
     },
     {
-      path: 'nav/blog',
+      path: 'nav/blog-all',
       component: BlogComponent
     },
     {
@@ -165,14 +166,11 @@ const routes: Routes = [
     path: 'nav/about',
     component: AboutusComponent
   },
-  {
-    path: 'blog',
-    component: BlogComponent
-  },
-  {
-    path: 'blog-details',
-    component: BlogdetailsComponent
-  },
+
+  // {
+  //   path: 'nav/blog-all',
+  //   component: BlogallComponent
+  // },
   {
     path: 'chefaccount',
     component: ChefaccountComponent
@@ -224,6 +222,10 @@ const routes: Routes = [
     component: ChefprofileComponent,
     canActivate: [AuthGuardGuard]
   },
+  {
+    path:'nav/blog-all',
+    component: BlogComponent
+  }
 ];
 
 @NgModule({

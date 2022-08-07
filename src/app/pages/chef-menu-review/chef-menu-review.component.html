@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="/nav/mainpage"></ion-back-button>
     </ion-buttons>
     <ion-title>
       <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
@@ -15,13 +15,13 @@
       <img class="profile-card-image" src="../../../assets/img/blog_1.jpg">
     </ion-card>
     <div class="profile-div-image">
-      <div> <img class="profile-image" src="../../../assets/img/user_1.jpg">
+      <div> <img class="profile-image" src="{{chef_pro_img}}">
         <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon>
       </div>
       <div class="user-data">
-        <h3>Anthony Bourdain</h3>
+        <h3>{{chef_name}}</h3>
         <div class="user-specialization"><img src="../../../assets/img/chef_icon.png"><span
-            class="user-specialization-heading">Specialises In:</span><span>Italian,Chinese</span></div>
+            class="user-specialization-heading">Specialises In:</span><span>{{chef_specialisation}}</span></div>
       </div>
     </div>
   

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { ChefMenuReviewComponent } from '../chef-menu-review/chef-menu-review.component';
 
 @Component({
   selector: 'app-viewallchef',
@@ -12,40 +14,54 @@ export class ViewallchefComponent implements OnInit {
 
   constructor(public auth: AuthService,
              public user: UserService,
-             public router: Router) { 
-               this.latestEvents();
+             public router: Router,
+             private modalController: ModalController,) { 
+               this.allChefData();
+               this.user.menu();
              }
 
   ngOnInit() {}
-  latestEventRes;
-  latestEventData;
-  latestEventAllData:any=[];
-  date;
-  latestEvents(){
-    
-    this.auth.getAllEvents().subscribe(data=>{
-      this.latestEventRes=data;
-      this.latestEventData=this.latestEventRes.data;
-      console.log(this.latestEventData);
-      for(let i=0;i<this.latestEventData.length;i++){
-            this.latestEventAllData[i]=
-              {
-                id: this.latestEventData[i].id,
-                date: (new Date(this.latestEventData[i].date).toString().slice(4,15)),
-                month: (new Date(this.latestEventData[i].date).toString().slice(4,8)),
-                date_year: (new Date(this.latestEventData[i].date).toString().slice(8,15)),
-                event_image: this.latestEventData[i].event_image,
-                intro: this.latestEventData[i].intro,
-                mediaId: this.latestEventData[i].mediaId,
-                status:this.latestEventData[i].status,
-                location: this.latestEventData[i].location,
-                title: this.latestEventData[i].title
-              }
-            
-      }
-      console.log(this.latestEventAllData)
-    },err=>{
-      console.log(err)
-    })
-  }
+  chefRes;
+  chefAllData:any;
+  chefArrayData=[];
+allChefData(){
+  // this.chefAllData="";
+  this.auth.getAllChefData().subscribe(res=>{
+    this.chefRes=res;
+    this.chefAllData=this.chefRes.data;
+    console.log(this.chefAllData)
+    for(let i=0;i<this.chefAllData.length;i++){
+  this.chefArrayData[i]=[
+    {
+      "id":this.chefAllData[i].id,
+      "firstname": this.chefAllData[i].firstname,
+      "lastname": this.chefAllData[i].lastname,
+      "aboutme": this.chefAllData[i].aboutme,
+      "address": this.chefAllData[i].address,
+      "prof_image": this.chefAllData[i].prof_image,
+      "specialization": this.chefAllData[i].specialization,
+      "city": this.chefAllData[i].city,
+      "country": this.chefAllData[i].country,
+      "pin": this.chefAllData[i].pin,
+      "phone": this.chefAllData[i].phone
+    }
+  ]
+    }
+    console.log(this.chefArrayData)
+  },err=>{
+    console.log(err)
+  })
+}
+async openSingleDetails(chef){
+  // const modal = await this.modalController.create({
+  //   component: ChefMenuReviewComponent,
+  //   cssClass: 'my-custom-class',
+  //   componentProps: {
+  // eventData: chef
+  //   }
+  // });
+  // return await modal.present();
+  this.user.chef_id=chef;
+  this.router.navigateByUrl('/nav/chef-menu-review')
+}
 }

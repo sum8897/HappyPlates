@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router, RouterEvent } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { UserService } from '../services/user.service';
+
 
 @Component({
   selector: 'app-sidenav',
@@ -108,17 +110,20 @@ export class SidenavPage implements OnInit {
   ]
   user_type;
   constructor(private router: Router,
-    public menuCtrl: MenuController) {
+    public menuCtrl: MenuController,
+    public user: UserService) {
     this.user_type=localStorage.getItem('user_role');
-    this.router.events.subscribe((event: RouterEvent) => {
-      this.active = event.url
-    });
     this.NAV.filter((data)=>{
       if(data.role===this.user_type){
            this.sideMenu.push(data)  ;
           }
           return this.sideMenu;
     })
+    console.log(this.sideMenu)
+    this.router.events.subscribe((event: RouterEvent) => {
+      this.active = event.url
+    });
+  
   }
 
   ngOnInit() { }

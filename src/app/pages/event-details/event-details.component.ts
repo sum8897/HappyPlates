@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-event-details',
@@ -8,7 +9,10 @@ import { ModalController } from '@ionic/angular';
 })
 export class EventDetailsComponent implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController,
+    public user:UserService) {
+    this.user.menu();
+   }
 
   ngOnInit() {}
 

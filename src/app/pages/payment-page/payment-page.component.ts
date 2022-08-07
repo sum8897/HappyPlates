@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-payment-page',
@@ -11,7 +12,7 @@ export class PaymentPageComponent implements OnInit {
   selectedRadioGroup:any;
   //Get value on ionSelect on IonRadio item
   selectedRadioItem:any;
-  constructor() { }
+  constructor(public user: UserService) { }
 
   ngOnInit() {}
 

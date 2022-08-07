@@ -58,6 +58,14 @@ export class AuthService {
     return this.http.get(this.url + 'api/menus', { headers: headers }).pipe(tap(res => {
     }))
   }
+  getChefMenuData(chef_id) {
+    let token = localStorage.getItem('amantran_token');
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json ');
+    headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+    return this.http.get(this.url + 'api/menus/show/'+chef_id, { headers: headers }).pipe(tap(res => {
+    }))
+  }
 
   getAllChefData() {
     let token = localStorage.getItem('amantran_token');
@@ -65,6 +73,14 @@ export class AuthService {
     headers = headers.append('Content-Type', 'application/json ');
     headers = headers.append('Authorization', 'Bearer' + ' ' + token);
     return this.http.get(this.url + 'api/chefs', { headers: headers }).pipe(tap(res => {
+    }))
+  }
+  getSingleChefData(chef_id) {
+    let token = localStorage.getItem('amantran_token');
+    var headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json ');
+    headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+    return this.http.get(this.url + 'api/chefs/show/'+chef_id, { headers: headers }).pipe(tap(res => {
     }))
   }
 getAllTestimonials(){
@@ -92,6 +108,14 @@ getAllEvents(){
   return this.http.get(this.url + 'api/events', { headers: headers }).pipe(tap(res => {
   }))
 }
+getSingleEvents(ev_id){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json ');
+  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  return this.http.get(this.url + 'api/events/show/'+ev_id, { headers: headers }).pipe(tap(res => {
+  }))
+}
 getAllBlogs(){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
@@ -101,6 +125,13 @@ getAllBlogs(){
   }))
 }
  
-
+getSingleBlogs(id){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json ');
+  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  return this.http.get(this.url + 'api/blogs/show/'+id, { headers: headers }).pipe(tap(res => {
+  }))
+}
   
 }

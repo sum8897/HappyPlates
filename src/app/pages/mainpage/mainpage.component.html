@@ -117,15 +117,15 @@
     <div class="blog">
       <div class="chef-view">
         <span class="chef-1">Latest Blog</span>
-        <span class="chef-more">View All Blogs</span>
+        <span class="chef-more" (click)="viewAllBlogs()">View All Blogs</span>
       </div>
       <div class="blog-slider">
         <ion-slides [options]="slidesBlog" pager="false">
-          <ion-slide *ngFor="let blog of blogData" style="display: block;">
+          <ion-slide *ngFor="let blog of blogDataAll" style="display: block;">
             <ion-card class="blog-card">
-              <img class="blog-img" src="{{blog.img}}">
+              <img class="blog-img" style="width: 134px;height: 134px;" src="{{blog.blogs_image}}">
               <ion-card-content class="blog-content">
-                <div class="blog-type">{{blog.text}}</div>
+                <div class="blog-type">{{blog.title}}</div>
                 <div class="spna-date"><img style="width: 10px;"
                     src="../../../assets/img/date.png"><span class="blog-date">{{blog.date}}</span></div>
               </ion-card-content>

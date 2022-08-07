@@ -12,7 +12,9 @@ export class ChefaccountComponent implements OnInit {
 
   constructor(  private router: Router,
     private auth: AuthService,
-    private user: UserService) { }
+    private user: UserService) { 
+      this.user.menu();
+    }
 
   ngOnInit() {}
   onSubmit(contactForm) {

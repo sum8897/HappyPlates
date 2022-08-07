@@ -62,6 +62,7 @@ export class MainpageComponent implements OnInit {
     speed: 400,
     slidesPerView: 2.5,
   }
+  user_type
   constructor(private camera: Camera,
     public actionSheetController: ActionSheetController,
     private file: File,
@@ -75,6 +76,15 @@ export class MainpageComponent implements OnInit {
     this.latestChefsAllData();
     this.latestEvents();
     this.blogMainData();
+    this.user_type=localStorage.getItem('user_role');
+    this.user.sideMenu=[];
+    this.user.NAV.filter((data)=>{
+     
+      if(data.role===this.user_type){
+           this.user.sideMenu.push(data)  ;
+          }
+          return this.user.sideMenu;
+    })
   }
 
   ngOnInit() { }
@@ -211,12 +221,19 @@ console.log(err)
     this.router.navigateByUrl('nav/viewallchef')
   }
 
+  blogRes;
+  blogDataAll;
   blogMainData(){
     this.auth.getAllBlogs().subscribe((data)=>{
       console.log(data);
+      this.blogRes=data;
+      this.blogDataAll=this.blogRes.data;
     },err=>{
       console.log('blog error..')
     })
+  }
+  viewAllBlogs(){
+    this.router.navigateByUrl('nav/blog-all')
   }
   onSlideChange() {
     console.log('slide change');

@@ -10,10 +10,14 @@ export class BlogdetailsComponent implements OnInit {
 @Input() blogname:any;
   constructor(public modalCtrl: ModalController) { 
     this.blogname;
+   
   }
 
   ngOnInit() {
 
+  }
+  ionViewWillEnter(){
+    console.log(this.blogname);
   }
   dismiss(){
 this.modalCtrl.dismiss();
