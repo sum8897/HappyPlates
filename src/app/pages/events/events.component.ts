@@ -56,13 +56,10 @@ export class EventsComponent implements OnInit {
   }
 
  async openEventDetails(ev:any){
-   console.log('event open')
+   console.log('event open'+ JSON.stringify(ev.id))
   const modal = await this.modalController.create({
     component: EventDetailsComponent,
-    cssClass: 'my-custom-class',
-    componentProps: {
-  eventData: ev
-    }
+    componentProps: {ev_data: ev.id}
   });
   return await modal.present();
   }

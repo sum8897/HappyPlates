@@ -13,6 +13,7 @@ export class AboutusComponent implements OnInit {
   constructor(public auth:AuthService,
              public user:UserService) { 
               this.user.menu();
+              this.aboutus();
              }
 
   ngOnInit() {}
@@ -43,4 +44,19 @@ export class AboutusComponent implements OnInit {
      },
 
   ]
+about_res:any;
+about_data:any;
+about_desc;
+  aboutus(){
+    this.user.present('');
+    this.auth.getAboutUs().subscribe((data)=>{
+this.about_res=data;
+this.about_data= this.about_res.data;
+this.about_desc=this.about_data.description;
+      this.user.dismiss();
+      console.log(this.about_data)
+    },err=>{
+      this.user.dismiss();
+    })
+  }
 }

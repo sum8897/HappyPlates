@@ -219,31 +219,7 @@ async presentAlertConfirm() {
       },
   ]
   }
-  // sideMenuAdmin()
-  // {
-  //   this.navigateChef =
-  //   [
-  //     {
-  //       title : "Chef Home",
-  //       url   : "/chef-home",
-  //       icon  : "search-outline",
-  //       role: "admin"
-  //     },
-  //     {
-  //       title : "Add Menu",
-  //       url   : "/chef-add-menu",
-  //       icon  : "search-outline",
-  //       role: "admin"
-  //     },
-  //     {
-  //       title : "Chef Profile",
-  //       url   : "/chef-profile",
-  //       icon  : "search-outline",
-  //       role: "admin"
-  //     },
-  //   ]
-  
-  // }
+
   logout(){
     localStorage.clear();
     localStorage.removeItem('amantran_token');

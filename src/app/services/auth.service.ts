@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpRequest ,HttpParams} from '@angular/common
 import { tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +17,25 @@ export class AuthService {
   };
 
   constructor(private http: HttpClient,
+    public router: Router,
     private sqlite: SQLite) { }
   url='http://103.139.58.242/~clientpro/amantran/public/';
 
   isAuthenticated():any{
     let token = localStorage.getItem('amantran_token')
+    let user_type=localStorage.getItem('user_role')
       if (token)
         {
           return true;
+      //       if(user_type=="admin"){
+      //   console.log('admin')
+      //   this.router.navigateByUrl('/nav/chef-home');
+       
+      // }else{
+      //   this.router.navigateByUrl('/nav/mainpage');
+       
+      // }
+          
         } else {
           return false;
         }
@@ -133,5 +145,30 @@ getSingleBlogs(id){
   return this.http.get(this.url + 'api/blogs/show/'+id, { headers: headers }).pipe(tap(res => {
   }))
 }
-  
+uploadSingleMenuImage(image){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json ');
+  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  return this.http.post(this.url + 'api/uploadmenufile',image, { headers: headers }).pipe(tap(res => {
+  }))
+}
+
+uploadMenulist(chefmenu){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json ');
+  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  return this.http.post(this.url + 'api/menus',chefmenu, { headers: headers }).pipe(tap(res => {
+  }))
+}
+
+getAboutUs(){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json ');
+  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  return this.http.get(this.url + 'api/aboutus', { headers: headers }).pipe(tap(res => {
+  }))
+}
 }

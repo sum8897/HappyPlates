@@ -8,8 +8,10 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class AuthGuardGuard implements CanActivate, CanActivateChild, CanLoad {
-  constructor (private navCtrl: NavController, private auth: AuthService){
-    
+user_type:any;
+  constructor (private navCtrl: NavController,
+     private auth: AuthService){
+    this.user_type=localStorage.getItem('user_role');
   }
   // canActivate(
   //   route: ActivatedRouteSnapshot,
@@ -19,12 +21,21 @@ export class AuthGuardGuard implements CanActivate, CanActivateChild, CanLoad {
   async canActivate(): Promise<boolean> {
     const authed = await this.auth.isAuthenticated();
     if (authed) {
+      
       console.log('if true its automatically router on given full path in app-routing.module.');
+      // if(this.user_type=="admin"){
+      //   console.log('admin')
+      //   this.navCtrl.navigateRoot('/nav/chef-home');
+       
+      // }else{
+      //   this.navCtrl.navigateRoot('/nav/mainpage');
+       
+      // }
       return true;
      
     } else {
       console.log('false means token not available then we can route on login page again');
-      this.navCtrl.navigateRoot('/login');
+      this.navCtrl.navigateRoot('/nav/login');
       return false;
     }
   }

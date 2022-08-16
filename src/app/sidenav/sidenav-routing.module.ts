@@ -32,7 +32,8 @@ const routes: Routes = [
     children: [
       {
       path:'mainpage',
-      component: MainpageComponent
+      component: MainpageComponent,
+      canActivate: [AuthGuardGuard]
       },
       {
         path: 'aboutus',

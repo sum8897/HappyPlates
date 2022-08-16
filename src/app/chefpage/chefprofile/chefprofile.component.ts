@@ -32,17 +32,8 @@ export class ChefprofileComponent implements OnInit {
     console.log("form" + JSON.stringify(contactAddressForm.value));
     contactAddressForm.reset();
   }
-  onMenuSubmit(contactMenuForm:any){
-    console.log(contactMenuForm.value);
-    console.log("form" + JSON.stringify(contactMenuForm.value));
-    contactMenuForm.reset();
-  }
-  selectedRadioGroup:any;
-  radioGroupChange(event) {
-    console.log("radioGroupChange",event.detail.value);
-    this.selectedRadioGroup = event.detail.value;
-  }
-
+ 
+imagepath:any="";
   pickImage(sourceType) {
     const options: CameraOptions = {
       quality: 100,
@@ -54,6 +45,10 @@ export class ChefprofileComponent implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
+      this.imagepath=imageData;
+      // alert(this.croppedImagePath);
+      // console.log(this.croppedImagePath);
+      // alert(imageData);
     }, (err) => {
       // Handle error
     });
@@ -85,6 +80,64 @@ export class ChefprofileComponent implements OnInit {
     await actionSheet.present();
   }
 
+  uploadSingleRes;
+  uploadSingleResData;
+  multipleImageArray:any=[];
+  uploadImage(){
+    // alert(this.croppedImagePath);
+    let body={
+      mediafile: this.croppedImagePath
+    };
+    this.auth.uploadSingleMenuImage(body).subscribe(res=>{
+      this.uploadSingleRes=res;
+this.uploadSingleResData=this.uploadSingleRes.data;
+this.multipleImageArray.push(this.uploadSingleResData.filename)
+// if(this.multipleImageArray.length=== 0){
+//   this.multipleImageArray.push(this.uploadSingleResData.filename)
+// }else{
+//   for(let i=0;i<this.multipleImageArray.length;i++){
+//     if(this.multipleImageArray[i] !=this.uploadSingleResData.filename){
+//       this.multipleImageArray.push(this.uploadSingleResData.filename)
+//     }else{
+//       return this.multipleImageArray;
+//     }
+//   }
+// }
+
+console.log(this.multipleImageArray);
+      // alert(res)
+      // console.log(res);
+    },err=>{
+      alert(JSON.stringify(err))
+      console.log(err.error)
+    })
+  }
+  selectedRadioGroup:any;
+  radioGroupChange(event:any) {
+    console.log("radioGroupChange",event.detail.value);
+    this.selectedRadioGroup = event.detail.value;
+  }
+menulist:any;
+  onMenuSubmit(contactMenuForm:any){
+    console.log(contactMenuForm.value);
+    this.menulist=contactMenuForm.value;
+    console.log("form" + JSON.stringify(contactMenuForm.value));
+    let menuList={
+      userId:"16",
+      title: contactMenuForm.value.foodname,
+      description: contactMenuForm.value.details,
+      price: contactMenuForm.value.regular_price,
+      media_files: this.multipleImageArray
+       }
+       console.log(menuList);
+   this.auth.uploadMenulist(menuList).subscribe(res=>{
+     console.log(JSON.stringify(res));
+   },err=>{
+     console.log(err)
+   })
+    contactMenuForm.reset();
+  }
+ 
 
 
   menuData=[

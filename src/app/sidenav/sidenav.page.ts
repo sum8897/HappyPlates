@@ -70,12 +70,12 @@ export class SidenavPage implements OnInit {
       icon  : "image",
       role: "customer"
     },
-    {
-      title : "Chef Account",
-      url   : "/nav/chefaccount",
-      icon  : "call-outline",
-      role: "customer"
-    },
+    // {
+    //   title : "Chef Account",
+    //   url   : "/nav/chefaccount",
+    //   icon  : "call-outline",
+    //   role: "customer"
+    // },
     {
       title : "Cart",
       url   : "/nav/cart",
@@ -120,9 +120,17 @@ export class SidenavPage implements OnInit {
           return this.sideMenu;
     })
     console.log(this.sideMenu)
-    this.router.events.subscribe((event: RouterEvent) => {
-      this.active = event.url
-    });
+    if(this.sideMenu.length===0){
+      console.log('length zero');
+      this.router.navigateByUrl('/nav/login')
+    }else{
+      console.log('length found');
+      this.router.events.subscribe((event: RouterEvent) => {
+        console.log(event)
+        this.active = event.url
+      });
+    }
+
   
   }
 

@@ -174,7 +174,11 @@
               <ion-icon name="add-outline" slot="start"></ion-icon>Upload Image
             </ion-label>
           </ion-item>
-          <ion-item><img src="{{croppedImagePath}}"></ion-item>
+          <ion-item>
+            <ion-avatar slot="start"><img src="{{croppedImagePath}}"></ion-avatar>
+            <!-- <img src="{{croppedImagePath}}"></ion-item> -->
+            <ion-button slot="end" size="small" (click)="uploadImage()">upload</ion-button>
+            </ion-item>
         </ion-list>
             <form #contactMenuForm="ngForm" (ngSubmit)="onMenuSubmit(contactMenuForm)" >
             <div class="form-group label-float">
@@ -237,7 +241,7 @@
           </span>
             </div>
           <div class="submit-div">
-        <ion-button class="submit-login-button" expand="round" type="submit">Save Address</ion-button>
+        <ion-button class="submit-login-button" expand="round" type="submit">Save Menu</ion-button>
           </div>
         </form>
      
@@ -313,4 +317,32 @@
       </ion-accordion>
     </ion-card>
     </ion-accordion-group>
+
+    <ion-accordion-group>
+      <ion-card class="accordion-card">
+      <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
+        
+          
+       
+        <ion-item slot="header" color="light">
+          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          <ion-label style="text-align: right;">My Reviews</ion-label>
+        </ion-item>
+        <div class="ion-padding login-input-value" slot="content">
+    
+          <!-- <ionic-rating-component #rating
+          activeIcon = "ios-star"
+          defaultIcon = "ios-star-outline"
+          activeColor = "#488aff" 
+          defaultColor = "#f4f4f4"
+          readonly="false"
+          rating="3"
+          fontSize = "32px"
+          (ratingChanged)="onRatingChange($event)">
+      </ionic-rating-component> -->
+        </div>
+      </ion-accordion>
+    </ion-card>
+    </ion-accordion-group>
+
 </ion-content>
