@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,8 +9,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CartpageComponent implements OnInit {
 
-  constructor(public user:UserService) {
+  constructor(public user:UserService,
+              public auth: AuthService) {
     this.user.menu();
+    this.getcartItem();
    }
 
   ngOnInit() { }
@@ -39,6 +42,14 @@ export class CartpageComponent implements OnInit {
     // if(this.cartArray=[]){
     //   console.log('No Item available in your cart..');
     // }
+  }
+
+  getcartItem(){
+    this.auth.getCart().subscribe((data)=>{
+      console.log(data)
+    },err=>{
+      console.log(err.error)
+    })
   }
 
   cartArray = [

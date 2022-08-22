@@ -87,4 +87,76 @@ this.chef_specialisation=this.chef_prof_res.data.specialization;
   console.log(err)
 })
   }
+  addItemClick(){
+    let body={
+      amount: 760,
+      deliverydate:"2022-08-25",
+      description: "Added One itmes only",
+      qtty: 1,
+      menuId:"16"
+    }
+    this.auth.addCartItem(body).subscribe((item_res)=>{
+console.log(item_res)
+    },err=>{
+      console.log(err)
+    })
+  }
+  decreaseItem(data:any){
+    
+    if(data.count>1){
+      data.count--;
+    }
+    else{
+      data.count=1;
+    }
+    console.log(data);
+
+  }
+  price:any=0;
+  increaseItem(data){
+    data.count++;
+    data.price = this.price+data.price;
+    console.log(data)
+    if(data.count>0 && data.count<2){
+      this.price=data.price;
+      console.log(data);
+    }
+    else{
+      this.price=data.price+(data.count)
+      console.log(this.price);
+    }
+  
+  }
+
+  menuArray = [
+    {
+      id: 1,
+      name: 'Spcicy Prawns with Sweet Dipping',
+      price: 500,
+      mrp: 700,
+      count: 1,
+    },
+    {
+      id: 2,
+      name: 'Spcicy Prawns with Sweet Dipping',
+      price: 100,
+      mrp: 300,
+      count: 1,
+    },
+    {
+      id: 3,
+      name: 'Spcicy Prawns with Sweet Dipping',
+      price: 250,
+      mrp: 600,
+      count: 1,
+    },
+    {
+      id: 4,
+      name: 'Spcicy Prawns with Sweet Dipping',
+      price: 850,
+      mrp: 375,
+      count: 1,
+    },
+  ]
+
 }

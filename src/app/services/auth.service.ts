@@ -171,4 +171,21 @@ getAboutUs(){
   return this.http.get(this.url + 'api/aboutus', { headers: headers }).pipe(tap(res => {
   }))
 }
+getCart(){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json ');
+  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  return this.http.get(this.url + 'api/customercarts', { headers: headers }).pipe(tap(res => {
+  }))
+}
+
+addCartItem(cart_data){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json ');
+  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  return this.http.post(this.url + 'api/customercarts',cart_data, { headers: headers }).pipe(tap(res => {
+  }))
+}
 }

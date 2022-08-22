@@ -96,8 +96,9 @@ export class MainpageComponent implements OnInit {
   menuData() {
     this.user.present('...');
     this.auth.getMenuData().subscribe((data) => {
-      console.log(data);
       this.user.dismiss();
+      console.log(data);
+     
       this.menu_data = data;
       this.menu_data_list = this.menu_data.data;
       // console.log(this.menu_data_list)
@@ -117,8 +118,9 @@ filterTermss=[];
   chefAllData() {
     this.user.present('...')
     this.auth.getAllChefData().subscribe((res) => {
-      console.log(res)
       this.user.dismiss();
+      console.log(res)
+     
       this.chefsResp = res;
       this.chefsRespoData = this.chefsResp.data;
       for (let i = 0; i < this.chefsRespoData.length; i++) {
@@ -132,8 +134,9 @@ filterTermss=[];
       }
       console.log(this.filterTermProfession)
     }, err => {
-      console.log(err.name);
       this.user.dismiss();
+      console.log(err.name);
+    
 
     }
     )

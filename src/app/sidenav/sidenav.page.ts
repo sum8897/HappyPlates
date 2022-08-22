@@ -126,7 +126,7 @@ export class SidenavPage implements OnInit {
     }else{
       console.log('length found');
       this.router.events.subscribe((event: RouterEvent) => {
-        console.log(event)
+        // console.log(event)
         this.active = event.url
       });
     }
