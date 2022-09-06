@@ -44,6 +44,8 @@ import { ChefprofileComponent } from './chefpage/chefprofile/chefprofile.compone
 import { ChefaddmenuComponent } from './chefpage/chefaddmenu/chefaddmenu.component';
 import { ViewallchefComponent } from './pages/viewallchef/viewallchef.component';
 import { BlogComponent } from './pages/blog/blog.component';
+import { MenudetailsComponent } from './pages/menudetails/menudetails.component';
+import { OrderHistryComponent } from './pages/order-histry/order-histry.component';
 
 
 @NgModule({
@@ -70,7 +72,9 @@ import { BlogComponent } from './pages/blog/blog.component';
                  ChefprofileComponent,
                  ChefaddmenuComponent,
                  ViewallchefComponent,
-                 BlogComponent
+                 BlogComponent,
+                 MenudetailsComponent,
+                 OrderHistryComponent
                 ],
   entryComponents: [],
   imports: [BrowserModule, 

@@ -45,7 +45,7 @@
               
             </div>
             <div class="chef-button">
-              <ion-button size="small" expand="round" class="see-menu" (click)="seeChefMenu()">See Menu </ion-button>
+              <ion-button size="small" expand="round" class="see-menu" (click)="openSingleDetails(chef[0])">See Menu </ion-button>
             </div>
           </ion-card>
 </ion-slide>
@@ -58,7 +58,7 @@
     </div>
 
       <ion-slides [options]="slidesLatest" pager="true" class="slides-latest-chef">
-        <ion-slide *ngFor="let latest of latestchefsData">
+        <ion-slide *ngFor="let latest of chefsRespoData">
           <div class="latest-chef-shadow">
             <div class="test1" style="background: #f2c5ca;"></div>
           <div class="test2">
@@ -78,7 +78,7 @@
                       </div>
                       <div class="chef-specialization-details">{{latest.aboutme}}</div>
                       <div class="chef-button">
-                        <ion-button size="small" expand="round">See Menu </ion-button>
+                        <ion-button size="small" expand="round" (click)="openSingleDetails(latest)">See Menu </ion-button>
                       </div>
                     </div>
                   </ion-label>

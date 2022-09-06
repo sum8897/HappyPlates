@@ -1,3 +1,123 @@
-<p>
-  profile works!
-</p>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/nav/mainpage"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="profile-div-image">
+    <div class="pro-img">
+       <img class="profile-image" src="../../../assets/img/chef_1.jpg">
+      <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon>
+    </div>
+    <div class="user-data">
+      <h3>Ashish Chaurasiya</h3>
+      <div class="user-phone">
+        <ion-icon name="call-outline" class="call"></ion-icon>
+        <span class="user-specialization-heading call">Phone:</span><span>7897196188</span></div>
+    </div>
+  </div>
+
+
+<div style="margin-top: 5vh;">
+  <ion-accordion-group [multiple]="true" [value]="['first']">
+    <ion-card class="accordion-card">
+    <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
+      
+        
+     
+      <ion-item slot="header" color="light">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-label style="text-align: right;">My Address</ion-label>
+      </ion-item>
+      <div class="ion-padding login-input-value" slot="content">
+          <form #contactAddressForm="ngForm" (ngSubmit)="onAddressSubmit(contactAddressForm)" >
+          <div class="form-group label-float">
+            <ion-input type="text" name="fullname" #fullname="ngModel" required placeholder="Full Name * " ngModel></ion-input>
+        
+            <span class="text-danger"
+            *ngIf="(fullname.touched || contactAddressForm.submitted) && fullname.errors?.required">
+            Full Name is required *
+        </span>
+          </div>
+      
+          <div class="form-group label-float">
+            <ion-input type="tel" name="phone" #phone="ngModel" required placeholder="Phone Number * " ngModel></ion-input>
+            <span class="text-danger"
+            *ngIf="(phone.touched || contactAddressForm.submitted) && phone.errors?.required">
+            Phone Number is required *
+        </span>
+          </div>
+          <div class="form-group label-float">
+            <ion-input type="text" name="state" #state="ngModel" required placeholder="State * " ngModel></ion-input>
+        
+            <span class="text-danger"
+            *ngIf="(state.touched || contactAddressForm.submitted) && state.errors?.required">
+            State is required *
+        </span>
+          </div>
+          <div class="city-pin" style="display: flex;">
+            <div class="form-group label-float">
+              <ion-input type="text" name="city" #city="ngModel" required placeholder="City * " ngModel></ion-input>
+          
+              <span class="text-danger"
+              *ngIf="(city.touched || contactAddressForm.submitted) && city.errors?.required">
+              City is required *
+          </span>
+            </div>
+        
+            <div class="form-group label-float">
+              <ion-input type="tel" name="pin" #pin="ngModel" required placeholder="Pin * " ngModel></ion-input>
+              <span class="text-danger"
+              *ngIf="(pin.touched || contactAddressForm.submitted) && pin.errors?.required">
+              Pin is required *
+          </span>
+            </div>
+          </div>
+          <div class="form-group label-float">
+            <ion-input type="text" name="location" #location="ngModel" required placeholder="Location * " ngModel></ion-input>
+            <span class="text-danger"
+            *ngIf="(location.touched || contactAddressForm.submitted) && location.errors?.required">
+            Location is required *
+        </span>
+          </div>
+        <div class="submit-div">
+      <ion-button class="submit-login-button" expand="round" type="submit" [disabled]="contactAddressForm.form.invalid">Save Address</ion-button>
+        </div>
+      </form>
+      <div class="address-show">
+        <div class="name-address">
+          <div class="name">{{user_name}}</div>
+          <div class="edit"><ion-button class="edit-button" >Edit <ion-icon name="create-outline"></ion-icon></ion-button></div>
+        </div>
+       <div class="address-in-details">
+        <ion-text style="width: 80%;"><span ></span>{{address}}</ion-text>
+       </div>
+      </div>
+      </div>
+    </ion-accordion>
+  </ion-card>
+  </ion-accordion-group>
+
+  <ion-accordion-group>
+    <ion-card class="accordion-card">
+    <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
+      
+        
+     
+      <ion-item slot="header" color="light">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-label style="text-align: right;">My Reviews</ion-label>
+      </ion-item>
+      <div class="ion-padding login-input-value" slot="content">
+  
+      </div>
+    </ion-accordion>
+  </ion-card>
+  </ion-accordion-group>
+</div>
+</ion-content>

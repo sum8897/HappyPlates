@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Amantran.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>0.0.2</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>2ED855B458342AFFA6BEBE83BB7BD4DF5FB43024</string>
+				<key>dateExpires</key>
+				<string>18/01/23</string>
+				<key>type</key>
+				<string>Cloud Managed Apple Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>5E2TTWN5YT.com.midas.SolarSmiths1</string>
+				<key>com.apple.developer.applesignin</key>
+				<array>
+					<string>Default</string>
+				</array>
+				<key>com.apple.developer.team-identifier</key>
+				<string>5E2TTWN5YT</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>Amantran.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>817f72b3-a5bf-48bc-a164-8d93ea5562e1</string>
+				<key>dateExpires</key>
+				<string>18/01/23</string>
+				<key>name</key>
+				<string>iOS Team Ad Hoc Provisioning Profile: com.midas.SolarSmiths1</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>5E2TTWN5YT</string>
+				<key>name</key>
+				<string>Midas IT Services India Private Limited</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>0.0.2</string>
+		</dict>
+	</array>
+</dict>
+</plist>

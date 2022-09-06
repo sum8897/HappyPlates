@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       this.user_token = this.user_response.token;
       localStorage.setItem('amantran_token', this.user_token);
       this.user_name = this.user_response.user;
-      this.user.user_type = this.user_response.user_role;
+      this.user.user_type = (this.user_response.user_role).toLowerCase();
       this.user.user_name=this.user_name;
       localStorage.setItem('user_name', this.user.user_name);
       localStorage.setItem('user_role', this.user.user_type);

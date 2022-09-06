@@ -16,6 +16,7 @@ import { FaqComponent } from '../pages/faq/faq.component';
 import { ItemListComponent } from '../pages/item-list/item-list.component';
 import { LoginComponent } from '../pages/login/login.component';
 import { MainpageComponent } from '../pages/mainpage/mainpage.component';
+import { OrderHistryComponent } from '../pages/order-histry/order-histry.component';
 import { OtpComponent } from '../pages/otp/otp.component';
 import { PaymentPageComponent } from '../pages/payment-page/payment-page.component';
 import { ProfileComponent } from '../pages/profile/profile.component';
@@ -124,6 +125,11 @@ const routes: Routes = [
     {
       path:'chef-add-menu',
       component: ChefaddmenuComponent,
+      canActivate: [AuthGuardGuard]
+    },
+    {
+      path:'order-history',
+      component: OrderHistryComponent,
       canActivate: [AuthGuardGuard]
     },
     {

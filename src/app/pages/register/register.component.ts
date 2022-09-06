@@ -136,7 +136,7 @@ get cpassword(){
     this.user.present('wait..');
     this.auth.userRegister(user_reg).subscribe((response)=>{
       this.user.dismiss();
-      this.router.navigateByUrl('login');
+      this.router.navigateByUrl('nav/login');
       console.log(response);
     }),err=>{
       this.user.dismiss();
@@ -144,6 +144,6 @@ get cpassword(){
     }
   }
   clickLogin(){
-    this.router.navigateByUrl('login')
+    this.router.navigateByUrl('nav/login')
   }
 }

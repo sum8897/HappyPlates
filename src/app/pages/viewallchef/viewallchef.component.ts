@@ -52,7 +52,7 @@ allChefData(){
     console.log(err)
   })
 }
-async openSingleDetails(chef){
+async openSingleDetails(chef:any){
   // const modal = await this.modalController.create({
   //   component: ChefMenuReviewComponent,
   //   cssClass: 'my-custom-class',

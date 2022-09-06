@@ -18,6 +18,8 @@ import { ForgotpassComponent } from './pages/forgotpass/forgotpass.component';
 import { ItemListComponent } from './pages/item-list/item-list.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
+import { MenudetailsComponent } from './pages/menudetails/menudetails.component';
+import { OrderHistryComponent } from './pages/order-histry/order-histry.component';
 import { OtpComponent } from './pages/otp/otp.component';
 import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -112,6 +114,14 @@ if (localStorage.getItem('admin') == 'admin') {
     {
       path: 'nav/search',
       component: SearchComponent
+    },
+    {
+      path: 'nav/menu-details',
+      component: MenudetailsComponent
+    },
+    {
+      path: 'nav/order-history',
+      component: OrderHistryComponent
     },
     {
       path: 'sidenav',

@@ -73,7 +73,7 @@ export class MainpageComponent implements OnInit {
     // this.menuData();
     this.chefAllData()
     this.testimonialsAllData();
-    this.latestChefsAllData();
+    // this.latestChefsAllData();
     this.latestEvents();
     this.blogMainData();
     this.user_type=localStorage.getItem('user_role');
@@ -123,6 +123,7 @@ filterTermss=[];
      
       this.chefsResp = res;
       this.chefsRespoData = this.chefsResp.data;
+      console.log(this.chefsRespoData);
       for (let i = 0; i < this.chefsRespoData.length; i++) {
         this.filterTermProfession[i] = [{
           "id": this.chefsRespoData[i].id,
@@ -163,6 +164,11 @@ filterTermss=[];
     //   console.log(this.filterTermProfession)
     // }
   }
+  async openSingleDetails(chef:any){
+    console.log(chef)
+    this.user.chef_id=chef;
+    this.router.navigateByUrl('/nav/chef-menu-review')
+  }
 
   testimonialeRes: any;
   testimonialsData: any;
@@ -179,15 +185,15 @@ filterTermss=[];
 
 latestchefRes;
 latestchefsData;
-  latestChefsAllData(){
-    this.auth.getAllLatestChefs().subscribe((data)=>{
-      this.latestchefRes=data;
-      this.latestchefsData=this.latestchefRes.data;
-      console.log(this.latestchefRes)
-    },err=>{
-console.log(err)
-    })
-  }
+//   latestChefsAllData(){
+//     this.auth.getAllLatestChefs().subscribe((data)=>{
+//       this.latestchefRes=data;
+//       this.latestchefsData=this.latestchefRes.data;
+//       console.log(this.latestchefRes)
+//     },err=>{
+// console.log(err)
+//     })
+//   }
 
   latestEventRes;
   latestEventData;

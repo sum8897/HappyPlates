@@ -99,12 +99,12 @@ export class UserService {
       icon  : "image",
       role: "customer"
     },
-    {
-      title : "Chef Account",
-      url   : "/nav/chefaccount",
-      icon  : "call-outline",
-      role: "customer"
-    },
+    // {
+    //   title : "Chef Account",
+    //   url   : "/nav/chefaccount",
+    //   icon  : "call-outline",
+    //   role: "customer"
+    // },
     {
       title : "Cart",
       url   : "/nav/cart",
@@ -112,8 +112,14 @@ export class UserService {
       role: "customer"
     },
     {
-      title : "Search",
-      url   : "/nav/search",
+      title : "Profile",
+      url   : "/nav/profile",
+      icon  : "search-outline",
+      role: "customer"
+    },
+    {
+      title : "Order History",
+      url   : "/nav/order-history",
       icon  : "search-outline",
       role: "customer"
     },

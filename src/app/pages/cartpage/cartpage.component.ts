@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,49 +10,131 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CartpageComponent implements OnInit {
 
-  constructor(public user:UserService,
-              public auth: AuthService) {
-    this.user.menu();
-    this.getcartItem();
-   }
+  constructor(public user: UserService,
+              public auth: AuthService,
+              public alertController: AlertController) {
+              this.user.menu();
+              this.getcartItem();
+  }
 
   ngOnInit() { }
   increaseItem(data) {
-   data.count++;
-   console.log(data);
+   let itemPrePrice=data.qtty*data.amount
+    data.qtty++;
+    data.peritemTotal
+    let itemPrice=data.qtty*data.amount;
+    let result=itemPrice-itemPrePrice
+    this.tottal_Amount=this.tottal_Amount+result;
+    console.log(result);
+    console.log(this.tottal_Amount)
   }
-  decreaseItem(data) {
-    console.log(data);
-    if(data.count<1){
-     data.count=1;
-    }
-    if(data.count >1) {
-   data.count--;
+  decreaseItem(data:any) {
+   
+    if (data.qtty ==1) {
+      data.qtty=1;
+      this.deleteAlertConfirm(data)
 
     }
+    if (data.qtty >1) {
+      let itemPrePrice=data.qtty*data.amount
+      data.qtty--;
+      let itemPrice=data.qtty*data.amount;
+      let result=itemPrePrice-itemPrice
+      console.log(data);
+      this.tottal_Amount=this.tottal_Amount-result;
+      console.log(result);
+      console.log(this.tottal_Amount)
+    }
   }
 
-  removeCartItem(data){
-    console.log(data);
- const items=this.cartArray.filter(item=>item.id===data.id);
- const index=this.cartArray.indexOf(items[0]);
- if(index > -1){
-   this.cartArray.splice(index,1);
- }
-    console.log(this.cartArray);
+  async deleteAlertConfirm(data:any) {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Do You want to Delete this Item... ',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          cssClass: 'primary',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.removeCartItem(data);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  removeCartItem(data_item) {
+    console.log(data_item);
+    this.user.present('deleting...');
+    this.auth.deleteCartItem(data_item.id).subscribe((data) => {
+      this.user.dismiss();
+      console.log(data);
+      this.tottal_Amount=this.tottal_Amount-data_item.amount*data_item.qtty;
+      console.log(this.tottal_Amount);
+    }, err => {
+      this.user.dismiss();
+      console.log(err)
+    })
+    const items = this.cartDataList.filter(item => item.id === data_item.id);
+    const index = this.cartDataList.indexOf(items[0]);
+    if (index > -1) {
+      this.cartDataList.splice(index, 1);
+    }
+    console.log(this.cartDataList);
+    this.cart_length=this.cartDataList.length;
+    console.log(this.cart_length)
     // if(this.cartArray=[]){
     //   console.log('No Item available in your cart..');
     // }
   }
 
-  getcartItem(){
-    this.auth.getCart().subscribe((data)=>{
-      console.log(data)
-    },err=>{
+  cartDataRes: any;
+  cartDataList: any;
+  tottal_Amount: any;
+  cart_length;
+  getcartItem() {
+    this.auth.getCart().subscribe((data) => {
+      this.cartDataRes = data;
+      this.cartDataList = this.cartDataRes.data;
+      console.log(this.cartDataList);
+      this.cart_length=this.cartDataList.length;
+      this.tottal_Amount=this.cartDataRes.totalamount
+      console.log(this.tottal_Amount)
+      console.log(this.cartDataList.length)
+
+    }, err => {
       console.log(err.error)
     })
   }
-
+  placeOrder() {
+    let check_data = {
+      instructions: "yutyuytytu",
+      deliverystatus: "1",
+      contactNumber: "7748875509",
+      address: "ald",
+      country: "india",
+      city: "naini",
+      state: "up",
+      addresslat: 3443.44,
+      addresslong: 434.444
+    }
+    this.user.present('');
+    this.auth.checkoutApi(check_data).subscribe((data) => {
+      this.user.dismiss();
+      this.user.showToast('Your order successfully placeed. We will Notify Soon')
+    }, err => {
+      this.user.dismiss();
+    })
+  }
   cartArray = [
     {
       id: 1,
