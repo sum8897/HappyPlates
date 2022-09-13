@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('user_name', this.user.user_name);
       localStorage.setItem('user_role', this.user.user_type);
       this.user_type=localStorage.getItem('user_role');
+      localStorage.setItem('password',contactForm.value.password)
       this.user.NAV.filter((data)=>{
        
         if(data.role===this.user_type){
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit {
             return this.user.sideMenu;
       })
       console.log(this.user.sideMenu);
-      if(this.user.user_type=="admin"){
+      if(this.user.user_type=="chef"){
         this.user.chef_user=true;
         this.user.customer_user=false;
         this.router.navigateByUrl('/nav/chef-home')

@@ -7,6 +7,7 @@ import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { UserService } from './services/user.service';
+import { NetworkStatusService } from './services/network-status.service';
 
 @Component({
   selector: 'app-root',
@@ -33,7 +34,8 @@ export class AppComponent {
               private splashScreen: SplashScreen,
               private router : Router,
               private network: Network,
-              public user: UserService
+              public user: UserService,
+              public networkProvider:NetworkStatusService
   ) {
     // this.user.user_type=localStorage.getItem('user_role');
     // this.user.user_name=localStorage.getItem('user_name');
@@ -75,10 +77,33 @@ export class AppComponent {
   // console.log(this.menuData)
  }
   initializeApp() {
+    // alert('initialisation...');
+    if(localStorage.getItem('user_role')=="chef"){
+      this.router.navigateByUrl('/nav/chef-home')
+    }
+    else if(localStorage.getItem('user_role')=="customer"){
+      this.router.navigateByUrl('/nav/mainpage')
+    }
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.network.onConnect().subscribe(data => {
+        this.networkProvider.setNetworkStatus(data.type);
+        this.displayNetworkUpdate(data.type);
+      }, error => {
+        console.log(error);
+      });
+
+      this.network.onDisconnect().subscribe(data => {
+        console.log(data);
+        this.networkProvider.setNetworkStatus(data.type);
+        this.displayNetworkUpdate(data.type);
+      }, error => {
+        console.log(error);
+      });
     });
+
   }
 
   NetworkButtonEvent(){
@@ -94,9 +119,9 @@ const alert=await this.alertController.create({
   message: 'You do not have Internet Connection',
   buttons:[{
     text:'ok',
-    handler:()=>{
-      navigator['app'].exitApp();
-    }
+    // handler:()=>{
+    //   navigator['app'].exitApp();
+    // }
   }]
 });
 await alert.present();
@@ -118,7 +143,9 @@ backButtonEvent() {
     });
   });
 }
-
+displayNetworkUpdate(connectionState: string) {
+  console.log(connectionState)
+}
 async presentAlertConfirm() {
   const alert = await this.alertController.create({
     header: 'Happy Plates Confirmation',

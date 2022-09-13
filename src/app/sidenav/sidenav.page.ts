@@ -92,19 +92,19 @@ export class SidenavPage implements OnInit {
         title : "Chef Home",
         url   : "/nav/chef-home",
         icon  : "search-outline",
-        role: "admin"
+        role: "chef"
       },
       {
         title : "Add Menu",
         url   : "/nav/chef-add-menu",
         icon  : "search-outline",
-        role: "admin"
+        role: "chef"
       },
       {
         title : "Chef Profile",
         url   : "/nav/chef-profile",
         icon  : "search-outline",
-        role: "admin"
+        role: "chef"
       },
 
   ]

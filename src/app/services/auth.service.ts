@@ -41,6 +41,8 @@ export class AuthService {
         }
   }
 
+ 
+
   userRegister(body: any): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json ');
@@ -244,6 +246,58 @@ orderHistroty(){
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/orders/history', { headers: headers }).pipe(tap(res => {
+  }))
+}
+updateProfileData(check_data:any){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.put(this.url + 'api/users/users',check_data, { headers: headers }).pipe(tap(res => {
+  }))
+}
+getChefOrders() {
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append('Authorization', 'Bearer'+' '+ token);
+  console.log(headers);
+  return this.http.get(this.url + 'api/orders/cheforder', { headers: headers }).pipe(tap(res => {
+  }))
+}
+passwordUpdate(check_data:any){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.post(this.url + 'api/users/changepassword',check_data, { headers: headers }).pipe(tap(res => {
+  }))
+}
+
+deleteMenuByChef(menu_id:any){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.delete(this.url + 'api/menus/menu/'+menu_id,{ headers: headers }).pipe(tap(res => {
+  }))
+}
+editMenuByChef(check_data:any,id){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.put(this.url + 'api/menus/menu/'+id,check_data, { headers: headers }).pipe(tap(res => {
   }))
 }
 }

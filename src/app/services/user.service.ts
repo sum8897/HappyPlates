@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,11 @@ export class UserService {
   chef_user:boolean;
   menuData
   customer_user:boolean;
-  chef_id;
-  constructor(  public toast:ToastController,
-    public loadingController: LoadingController,) { }
+  chef_id:any;
+  constructor(public toast:ToastController,
+              public loadingController: LoadingController,
+              public auth:AuthService
+         ) { }
     chefMenuType:any;
   isLoading = false;
            
@@ -41,8 +44,48 @@ export class UserService {
     });
     toast.present();
   }
+  userRes:any;
+  userData:any;
+  userAllData:any;
+  specialization;
+  user_location;
+ userDetails(){
+  //  this.present('wait..');
+   this.auth.getUserProfile().subscribe((data)=>{
+    //  this.dismiss();
+    //  console.log(data)
+     this.userRes=data;
+     this.userData=this.userRes.data;
+     this.userAllData=this.userData[0];
+     this.specialization= this.userAllData.specialization;
+     this.user_name=this.userAllData.firstname+" "+ this.userAllData.lastname;
+     this.user_location=this.userAllData.address;
+     this.chef_id=this.userAllData.id;
+    //  console.log(this.userAllData);
+    //  console.log(this.specialization);
+     this.chefmenuData(this.chef_id);
+   },err=>{
+    // this.dismiss();
+     console.log(err)
+   })
+ }
+  menu_data:any;menu_data_list:any;
+  chefmenuData(chef_id:any) {
+    this.present('wait...');
+    this.auth.getSingleChefsAllMenu(chef_id).subscribe((data) => {
+      this.dismiss();
+      this.menu_data = data;
+      this.menu_data_list = this.menu_data.data;
+      // console.log(this.menu_data_list);
+      if(this.menu_data_list.length==0){
+        console.log('empty menu data')
+      }
 
-  
+    }, err => {
+      this.dismiss();
+      console.log(err)
+    })
+  }
   sideMenu=[];
   NAV = [
     {
@@ -127,19 +170,19 @@ export class UserService {
         title : "Chef Home",
         url   : "/nav/chef-home",
         icon  : "search-outline",
-        role: "admin"
+        role: "chef"
       },
       {
         title : "Add Menu",
         url   : "/nav/chef-add-menu",
         icon  : "search-outline",
-        role: "admin"
+        role: "chef"
       },
       {
         title : "Chef Profile",
         url   : "/nav/chef-profile",
         icon  : "search-outline",
-        role: "admin"
+        role: "chef"
       },
 
   ]

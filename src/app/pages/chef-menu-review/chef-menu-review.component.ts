@@ -71,7 +71,6 @@ export class ChefMenuReviewComponent implements OnInit {
       this.menu_data_list = this.menu_data.data;
       console.log(this.menu_data_list);
 
-
     }, err => {
       this.user.dismiss();
       console.log(err)

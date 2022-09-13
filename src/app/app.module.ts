@@ -46,6 +46,8 @@ import { ViewallchefComponent } from './pages/viewallchef/viewallchef.component'
 import { BlogComponent } from './pages/blog/blog.component';
 import { MenudetailsComponent } from './pages/menudetails/menudetails.component';
 import { OrderHistryComponent } from './pages/order-histry/order-histry.component';
+import { EditmenuComponent } from './chefpage/editmenu/editmenu.component';
+
 
 
 @NgModule({
@@ -74,7 +76,8 @@ import { OrderHistryComponent } from './pages/order-histry/order-histry.componen
                  ViewallchefComponent,
                  BlogComponent,
                  MenudetailsComponent,
-                 OrderHistryComponent
+                 OrderHistryComponent,
+                 EditmenuComponent
                 ],
   entryComponents: [],
   imports: [BrowserModule, 
@@ -87,8 +90,10 @@ import { OrderHistryComponent } from './pages/order-histry/order-histry.componen
             HttpClientModule,
             ReactiveFormsModule,
             
+            
           ],
-  providers: [
+  providers: [ 
+
     Platform,
     StatusBar,
     SplashScreen,
@@ -99,6 +104,8 @@ import { OrderHistryComponent } from './pages/order-histry/order-histry.componen
     SQLite,
     AuthService,
     AuthGuardGuard,
+
+   
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

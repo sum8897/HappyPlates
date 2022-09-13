@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ChefHomeComponent } from './chefpage/chef-home/chef-home.component';
 import { ChefaddmenuComponent } from './chefpage/chefaddmenu/chefaddmenu.component';
 import { ChefprofileComponent } from './chefpage/chefprofile/chefprofile.component';
+import { EditmenuComponent } from './chefpage/editmenu/editmenu.component';
 import { AboutusComponent } from './pages/aboutus/aboutus.component';
 import { BlogComponent } from './pages/blog/blog.component';
 // import { BlogallComponent } from './pages/blogall/blogall.component';
@@ -29,7 +30,7 @@ import { ViewallchefComponent } from './pages/viewallchef/viewallchef.component'
 import { AuthGuardGuard } from './services/auth-guard.guard';
 
 
-if (localStorage.getItem('admin') == 'admin') {
+if (localStorage.getItem('chef') == 'chef') {
 
 } else {
   const routes: Routes = [
@@ -118,6 +119,10 @@ if (localStorage.getItem('admin') == 'admin') {
     {
       path: 'nav/menu-details',
       component: MenudetailsComponent
+    },
+    {
+      path: 'nav/edit-menu',
+      component: EditmenuComponent
     },
     {
       path: 'nav/order-history',
