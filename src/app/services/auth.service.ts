@@ -19,7 +19,7 @@ export class AuthService {
   constructor(private http: HttpClient,
     public router: Router,
     private sqlite: SQLite) { }
-  url='http://103.139.58.242/~clientpro/amantran/public/';
+  url='http://103.139.58.242/~clientpro/bonhomey/public/';
 
   isAuthenticated():any{
     let token = localStorage.getItem('amantran_token')

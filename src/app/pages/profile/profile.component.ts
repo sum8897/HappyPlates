@@ -31,7 +31,7 @@ user_name:any="Ashish Chaurasiya";
       this.userAllData = this.userData[0];
       this.user_name = this.userAllData.firstname + " " + this.userAllData.lastname;
       this.user_phone=this.userAllData.phone;
-      this.user_location = this.userAllData.address;
+      this.user_location = this.userAllData.address+ this.userAllData.city+" "+this.userAllData.state+" "+ this.userAllData.pin;
       this.user.chef_id = this.userAllData.id;
       console.log(this.userAllData);
 

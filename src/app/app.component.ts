@@ -148,8 +148,8 @@ displayNetworkUpdate(connectionState: string) {
 }
 async presentAlertConfirm() {
   const alert = await this.alertController.create({
-    header: 'Happy Plates Confirmation',
-    message: 'Are you sure you want to exit Happy Plates App?',
+    header: 'BonHomey Confirmation',
+    message: 'Are you sure you want to exit BonHomey App?',
     buttons: [{
       text: 'Cancel',
       role: 'cancel',

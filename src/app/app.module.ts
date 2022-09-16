@@ -33,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 import { ForgotpassComponent } from './pages/forgotpass/forgotpass.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardGuard } from './services/auth-guard.guard';
@@ -90,7 +91,6 @@ import { EditmenuComponent } from './chefpage/editmenu/editmenu.component';
             HttpClientModule,
             ReactiveFormsModule,
             
-            
           ],
   providers: [ 
 
@@ -109,4 +109,6 @@ import { EditmenuComponent } from './chefpage/editmenu/editmenu.component';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+
+}
