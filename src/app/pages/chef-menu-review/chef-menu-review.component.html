@@ -28,11 +28,12 @@
     <div class="chef-segment">
       <ion-segment value="menu" class="register-segment" [(ngModel)]="type" (ionChange)="segmentChanged($event)">
         <ion-segment-button value="menu">
-          <ion-label>Menu</ion-label>
+          
+          <ion-label><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;Menu</ion-label>
         </ion-segment-button>
         <ion-segment-button value="review">
-          <fa-icon icon="home"></fa-icon>
-          <ion-label>Review</ion-label>
+          
+          <ion-label><i class="fa-solid fa-star"></i>&nbsp;&nbsp;Review</ion-label>
         </ion-segment-button>
       </ion-segment>
     </div>
@@ -51,7 +52,9 @@
               <div style="font-size: 12px;
          font-weight: 500;
          margin-top: 7px;
-         color: #010101;" (click)="addItemClick()">{{menu.title}}</div>
+         text-transform: capitalize;
+         color: #010101;" (click)="addItemClick()">{{menu.title}}
+         </div>
               <div class="cart-item-price-main-count" style="display: inline-flex;width: 100%;margin-top: 10px;;">
                 <div class="cart-item-price" style="display: inline-flex;
            width: 60%;

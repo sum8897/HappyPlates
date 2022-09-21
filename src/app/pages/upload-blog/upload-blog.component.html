@@ -1,0 +1,41 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon name="arrow-back-outline" class="back-button" (click)="dismiss()" slot="start"></ion-icon>
+    <ion-title class="title-text" style="text-align: center;">
+     <!-- {{blogname.title}} -->
+     <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
+     <!-- About Us -->
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="ion-padding login-input-value">
+    <form #contactAddressForm="ngForm" (ngSubmit)="onAddressSubmit(contactAddressForm)" >
+    <div class="form-group label-float">
+      <ion-input type="text" name="title" #title="ngModel" required placeholder="Title * " ngModel></ion-input>
+      <span class="text-danger"
+      *ngIf="(title.touched || contactAddressForm.submitted) && title.errors?.required">
+      Title is required *
+  </span>
+    </div>
+    <div class="form-group label-float">
+      <ion-input type="text" name="into" #intro="ngModel" required placeholder="Intro * " ngModel></ion-input>
+      <span class="text-danger"
+      *ngIf="(intro.touched || contactAddressForm.submitted) && intro.errors?.required">
+      Intro is required *
+  </span>
+    </div>
+    <div class="form-group label-float">
+      <ion-textarea type="text" name="descr" #descr="ngModel" required placeholder="Description * " ngModel></ion-textarea>
+      <span class="text-danger"
+      *ngIf="(descr.touched || contactAddressForm.submitted) && descr.errors?.required">
+      Description is required *
+  </span>
+    </div>
+  <div class="submit-div">
+<ion-button class="submit-login-button" expand="round" type="submit" [disabled]="contactAddressForm.form.invalid">Submit</ion-button>
+  </div>
+</form>
+
+</div>
+</ion-content>

@@ -45,12 +45,12 @@ export class MainpageComponent implements OnInit {
   slidesLatest = {
     initialSlide: 0,
     speed: 400,
-    slidesPerView: 1,
+    slidesPerView: 0.9,
     // slidesPerColumn: 1,
     // slidesPerGroup: 1,
     // watchSlidesProgress: true,
     // resistanceRatio: 0,
-    spaceBetween: 10,
+    // spaceBetween: 10,
   };
   slidesEvent = {
     initialSlide: 0,

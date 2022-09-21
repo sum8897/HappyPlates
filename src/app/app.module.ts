@@ -49,6 +49,9 @@ import { MenudetailsComponent } from './pages/menudetails/menudetails.component'
 import { OrderHistryComponent } from './pages/order-histry/order-histry.component';
 import { EditmenuComponent } from './chefpage/editmenu/editmenu.component';
 
+import { NgxStarRatingModule } from 'ngx-star-rating';
+import { UploadBlogComponent } from './pages/upload-blog/upload-blog.component';
+import { AddEventComponent } from './chefpage/add-event/add-event.component';
 
 
 @NgModule({
@@ -78,19 +81,22 @@ import { EditmenuComponent } from './chefpage/editmenu/editmenu.component';
                  BlogComponent,
                  MenudetailsComponent,
                  OrderHistryComponent,
-                 EditmenuComponent
+                 EditmenuComponent,
+                 UploadBlogComponent,
+                 AddEventComponent
+
                 ],
   entryComponents: [],
   imports: [BrowserModule, 
             IonicModule.forRoot(), 
             AppRoutingModule,
+            NgxStarRatingModule,
             FormsModule,
             SwiperModule,
             NgOtpInputModule,
             CommonModule,
             HttpClientModule,
             ReactiveFormsModule,
-            
           ],
   providers: [ 
 
@@ -103,9 +109,7 @@ import { EditmenuComponent } from './chefpage/editmenu/editmenu.component';
     SignInWithApple,
     SQLite,
     AuthService,
-    AuthGuardGuard,
-
-   
+    AuthGuardGuard,   
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

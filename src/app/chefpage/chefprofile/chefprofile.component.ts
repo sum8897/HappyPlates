@@ -14,6 +14,12 @@ export class ChefprofileComponent implements OnInit {
   specialization: any;
   user_name: any;
   user_location: any;
+
+  ratingValue5:any=5;
+  ratingValue4:any=4;
+  ratingValue3:any=3;
+  ratingValue2:any=2;
+  ratingValue1:any=1;
   constructor(public user: UserService,
     public auth: AuthService,
     public actionSheetController: ActionSheetController,

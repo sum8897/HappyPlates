@@ -38,12 +38,12 @@
         font-weight: 500;
         font-family: sans-serif;color: #010101;">{{ev.aboutme}}
         </span> -->
-        <span style="padding-left: 7px;
+        <span style="padding-left: 0px;
         font-size: 10px;
         font-weight: 500;
-        font-family: sans-serif;color: #010101;">{{ev.specialization}}
-        </span>
-        <span style="padding-left: 7px;
+        font-family: sans-serif;color: #010101;">{{(ev.specialization).substring(0,65)}}..
+        </span><br>
+        <span style="padding-left: 0px;
         font-size: 10px;
         font-weight: 500;
         font-family: sans-serif;color: #010101;">{{ev.city}}, {{ev.country}}

@@ -58,7 +58,7 @@
     </div>
 
       <ion-slides [options]="slidesLatest" pager="true" class="slides-latest-chef">
-        <ion-slide *ngFor="let latest of chefsRespoData">
+        <ion-slide *ngFor="let latest of chefsRespoData" style="display: block;width: auto;">
           <div class="latest-chef-shadow">
             <div class="test1" style="background: #f2c5ca;"></div>
           <div class="test2">
@@ -72,11 +72,11 @@
                     <div class="chef-detail">
                       <span class="chef-name">{{latest.firstname}} {{latest.lastname}}</span>
                       <div class="chef-specialization-div">
-                        <img style="width: 12px;height:13px;margin-bottom: -2px;" src="../../../assets/img/chef_icon.png">
+                        <img style="width: 12px;height:13px;margin-bottom: -2px;" src="../../../assets/img/chef_icon.png">  
                         <span class="chef-specialization">Specialises In:</span>
                         <span class="chef-specialization-type">{{latest.specialization}}</span>
                       </div>
-                      <!-- <div class="chef-specialization-details">{{latest.aboutme}}</div> -->
+                      <div class="chef-specialization-details">{{(latest.aboutme).substring(0,75)}}...</div>
                       <div class="chef-button">
                         <ion-button size="small" expand="round" (click)="openSingleDetails(latest)">See Menu </ion-button>
                       </div>
@@ -101,7 +101,7 @@
           <div class="event-details">
             <div class="event-div">
               <div class="event-name">{{ev.title}}</div>
-              <div class="latest-event-details">{{ev.intro}}</div>
+              <div class="latest-event-details">{{(ev.intro).substring(0,200)}}..</div>
             </div>
             <div class="event-location-date">
               <div class="event-date"><img style="width: 10px;" src="../../../assets/img/time.png"><span>{{ev.date}}</span>
@@ -155,7 +155,7 @@
   <span class="testimonial-specialization">{{test.location}}</span>
 </div>
 <div class="testimonial-disc">
-  <div class="testimonial-detail-span">{{test.title}}
+  <div class="testimonial-detail-span">{{(test.title).substring(0,150)}}...
 
   </div>
 </div>

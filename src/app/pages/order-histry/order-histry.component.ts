@@ -26,7 +26,7 @@ orderedData:any;
       this.orderedRes=order;
       this.orderedData=this.orderedRes.data;
       this.user.dismiss();
-  console.log(order);
+  console.log(this.orderedData);
     },err=>{
       this.user.dismiss();
       console.log(err)

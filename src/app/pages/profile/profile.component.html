@@ -18,7 +18,9 @@
       <h3>{{user_name}}</h3>
       <div class="user-phone">
         <ion-icon name="call-outline" class="call"></ion-icon>
-        <span class="user-specialization-heading call">Phone:</span><span>{{user_phone}}</span></div>
+        <span class="user-specialization-heading call">Phone:</span><span>{{user_phone}}</span>
+      </div>
+      
     </div>
   </div>
 
@@ -27,9 +29,6 @@
   <ion-accordion-group [multiple]="true" [value]="['first']">
     <ion-card class="accordion-card">
     <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
-      
-        
-     
       <ion-item slot="header" color="light">
         <ion-icon name="person-circle-outline" slot="start"></ion-icon>
         <ion-label style="text-align: right;">My Address</ion-label>
@@ -86,7 +85,7 @@
             </div>
           </div>
           <div class="form-group label-float">
-            <ion-input type="text" name="location" #location="ngModel" required placeholder="Location * " ngModel></ion-input>
+            <ion-textarea type="text" name="location" #location="ngModel" required placeholder="Location * " ngModel></ion-textarea>
             <span class="text-danger"
             *ngIf="(location.touched || contactAddressForm.submitted) && location.errors?.required">
             Location is required *
@@ -113,19 +112,73 @@
   <ion-accordion-group>
     <ion-card class="accordion-card">
     <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
-      
-        
-     
       <ion-item slot="header" color="light">
         <ion-icon name="person-circle-outline" slot="start"></ion-icon>
         <ion-label style="text-align: right;">My Reviews</ion-label>
       </ion-item>
       <div class="ion-padding login-input-value" slot="content">
-  
+        <div class="rating-order-wrp">
+          <!-- <div class="w-25">
+            <div class="rating-average">4.7</div>
+            <div class="ratings">450 ratings</div>
+            
+          </div> -->
+    <div class="w-100">
+      <div class="d-flex rating-list align-items-center">
+        <p class="w-50 rating-text">Excellent & Awesome</p>
+        <div class="star w-50 rating-star">
+            <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue5" [disabled]="false"></ngx-star-rating>
+        </div>
+    </div>
+    <div class="d-flex rating-list align-items-center">
+      <p class="w-50 rating-text">Very Good</p>
+      <div class="star w-50 rating-star">
+          <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue4" [disabled]="false"></ngx-star-rating>
+      </div>
+  </div>
+  <div class="d-flex rating-list align-items-center">
+    <p class="w-50 rating-text">Good</p>
+    <div class="star w-50 rating-star">
+        <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue3" [disabled]="false"></ngx-star-rating>
+    </div>
+</div>
+<div class="d-flex rating-list align-items-center">
+  <p class="w-50 rating-text">Average</p>
+  <div class="star w-50 rating-star">
+      <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue2" [disabled]="true"></ngx-star-rating>
+  </div>
+</div>
+<div class="d-flex rating-list align-items-center">
+<p class="w-50 rating-text">Ok</p>
+<div class="star w-50 rating-star">
+    <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue1" [disabled]="false"></ngx-star-rating>
+</div>
+</div>
+<div class="selectStar">
+  <ion-card>
+    <ion-card-content>
+      Please Select Stars As your Review For Custome
+    </ion-card-content>
+    <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue" [disabled]="false"></ngx-star-rating>
+  </ion-card>
+</div>
+</div>      
+      </div>
       </div>
     </ion-accordion>
   </ion-card>
   </ion-accordion-group>
+
+<ion-card class="addBlogs">
+  <ion-list>
+    <ion-item lines="none" (click)="addBlogs()">
+      <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+      <ion-label style="text-align: right;">Add Blogs</ion-label>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-card>
+
 </div>
 
 </ion-content>

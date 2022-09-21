@@ -49,6 +49,10 @@ export class UserService {
   userAllData:any;
   specialization;
   user_location;
+  user_mobile:any;
+  user_city:any;
+  user_state:any;
+  user_country:any;
  userDetails(){
   //  this.present('wait..');
    this.auth.getUserProfile().subscribe((data)=>{
@@ -59,7 +63,11 @@ export class UserService {
      this.userAllData=this.userData[0];
      this.specialization= this.userAllData.specialization;
      this.user_name=this.userAllData.firstname+" "+ this.userAllData.lastname;
-     this.user_location=this.userAllData.address;
+     this.user_location=this.userAllData.address +" "+this.userAllData.state+" "+this.userAllData.pin;
+     this.user_mobile=this.userAllData.phone;
+     this.user_city=this.userAllData.city;
+     this.user_state=this.userAllData.state;
+     this.user_country=this.userAllData.country;
      this.chef_id=this.userAllData.id;
     //  console.log(this.userAllData);
     //  console.log(this.specialization);

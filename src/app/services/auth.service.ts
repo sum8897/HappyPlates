@@ -300,4 +300,14 @@ editMenuByChef(check_data:any,id){
   return this.http.put(this.url + 'api/menus/menu/'+id,check_data, { headers: headers }).pipe(tap(res => {
   }))
 }
+postBlogs(blogs:any){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.post(this.url + 'api/blogs',blogs, { headers: headers }).pipe(tap(res => {
+  }))
+}
 }

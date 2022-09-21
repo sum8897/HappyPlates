@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { UploadBlogComponent } from '../upload-blog/upload-blog.component';
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +13,24 @@ import { UserService } from 'src/app/services/user.service';
 export class ProfileComponent implements OnInit {
 address:any="A-211 , DLF Mall, Noida Sector 16, Uttar Pradesh";
 user_name:any="Ashish Chaurasiya";
+
+ratingValue5:any=5;
+ratingValue4:any=4;
+ratingValue3:any=3;
+ratingValue2:any=2;
+ratingValue1:any=1;
+ratingValue:any;
+
+public form: FormGroup;
   constructor(public auth: AuthService,
-              public user: UserService) { 
+              public user: UserService,
+              private fb: FormBuilder,
+              public modalCtrl: ModalController,) { 
                 this.userDetails();
+    //             this.rating3 = 0;
+    // this.form = this.fb.group({
+    //   rating: ['', Validators.required],
+    // })
               }
 
   ngOnInit() {}
@@ -79,5 +97,11 @@ user_name:any="Ashish Chaurasiya";
       console.log(err);
     })
   }
-
+async addBlogs(){
+  const modal = await this.modalCtrl.create({  
+    component: UploadBlogComponent,
+    componentProps: { user_id: this.user.chef_id}
+  });  
+  return await modal.present();  
+}
 }

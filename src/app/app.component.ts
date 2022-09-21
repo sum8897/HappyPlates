@@ -77,6 +77,9 @@ export class AppComponent {
   // console.log(this.menuData)
  }
   initializeApp() {
+    this.platform.ready().then(()=>{
+      this.user.userDetails();
+    })
     // alert('initialisation...');
     if(localStorage.getItem('user_role')=="chef"){
       this.router.navigateByUrl('/nav/chef-home')

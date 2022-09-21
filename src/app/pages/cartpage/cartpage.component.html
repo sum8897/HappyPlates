@@ -13,7 +13,16 @@
   <div *ngIf="cart_length==0" style="text-align: center;margin: 20vh 15px;">
      No Item Found in cart , Please Add Items in the cart
     </div>
- 
+ <div class="address-show" style="margin: 10px 12px;" *ngIf="cart_length>0">
+  <div class="name-address">
+    <div class="name">{{user.user_name}}</div>
+    <div class="edit"><ion-button class="edit-button" >Edit <ion-icon name="create-outline"></ion-icon></ion-button></div>
+  </div>
+ <div class="address-in-details">
+  <ion-text style="width: 80%;"><span ></span>{{user.user_mobile}}</ion-text><br>
+  <ion-text style="width: 80%;"><span ></span>{{user.user_location}}</ion-text>
+ </div>
+</div>
   <ion-card style="border-radius: 11px;" *ngFor="let item of cartDataList; let index=index">
 
     <div style="width: 100%;">

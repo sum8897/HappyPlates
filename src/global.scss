@@ -264,9 +264,10 @@ ion-input:not(:placeholder-shown):not(.invalid)+label {
     .user-data{
         margin-top: 25px;
         width: auto;
+        padding-left: 15px;
         h3{
         font-size: 15px;
-        padding-left: 10px;
+        padding-left: 13px;
         margin-bottom: 2px;
         }
         .user-specialization{
@@ -364,12 +365,85 @@ ion-title{
     .address-in-details{
         width: 100%;
         padding-left: 15px;
-        line-height: 1;
+        font-size: 12px;
+        margin-top: 6px;
+        line-height: 1.2;
         span{
             font-size: 12px;
             font-weight: 400;
             color: #010101;
             opacity: .9;
+        }
+    }
+}
+
+// ***  Rating Star in chef page, profile page and add ... ****//
+.rating-order-wrp {
+    display: flex;
+    width: 100%;
+    .d-flex {
+        display: flex;
+    }
+    .align-items-center {
+        align-items: center;
+    }
+    .w-25{
+        width: 25%;
+        margin-top: 40px;
+        .rating-average{
+            color: #d32236;
+            font-weight: 900;
+            font-size: 40px;
+        }
+        .ratings{
+            color: #171717;
+        }
+    }
+    .w-75{
+        width: 75%;
+    }
+    .w-50 {
+       
+        width: 50%;
+        // font-size: 10px;
+    }
+    .rating-text{
+        font-size: 10px;
+        text-align: right;
+    }
+    .rating-list {
+        // border-top: 1px solid #ddd;
+        // padding: 15px 0;
+    }
+}
+
+
+/**Rating**/
+
+::ng-deep label.star {
+    padding: 0 5px !important;
+    font-size: 10px !important;
+    // color: #ddd !important;
+    color: #d12235 !important;
+    &::before {
+        color: #d12235 !important;
+        // content: "\f005" !important;
+    }
+    &:hover {
+        transform: rotate(0deg) scale(1.2) !important;
+    }
+}
+ion-modal{
+    --background:rgba(44,39,45,0.2);
+    &::part(content){
+        backdrop-filter: blur(6px);
+    }
+    ion-content{
+        --background:transparent;
+        --padding-top: 25vh;
+        --padding-bottom: 20px;
+        ion-datetime{
+            border-radius: 8px;
         }
     }
 }

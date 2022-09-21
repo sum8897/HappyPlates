@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CartpageComponent implements OnInit {
 
+  
   constructor(public user: UserService,
               public auth: AuthService,
               public alertController: AlertController) {
@@ -18,6 +19,9 @@ export class CartpageComponent implements OnInit {
   }
 
   ngOnInit() { }
+  ionViewWillEnter(){
+
+  }
   increaseItem(data) {
    let itemPrePrice=data.qtty*data.amount
     data.qtty++;
@@ -115,26 +119,77 @@ export class CartpageComponent implements OnInit {
       console.log(err.error)
     })
   }
-  placeOrder() {
-    let check_data = {
-      instructions: "yutyuytytu",
-      deliverystatus: "1",
-      contactNumber: "7748875509",
-      address: "ald",
-      country: "india",
-      city: "naini",
-      state: "up",
-      addresslat: 3443.44,
-      addresslong: 434.444
-    }
-    this.user.present('');
-    this.auth.checkoutApi(check_data).subscribe((data) => {
-      this.user.dismiss();
-      this.user.showToast('Your order successfully placeed. We will Notify Soon')
-    }, err => {
-      this.user.dismiss();
-    })
+
+  instructions:any;
+  async placeOrder() {
+    const alert = await this.alertController.create({
+      header: 'Please enter your info',
+      mode: 'ios',
+      inputs: [
+        {
+          placeholder: 'Please Enter Description...',
+          name: 'name1',
+          type: 'text'
+        },
+   
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('dismiss')
+          },
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: (alertData) => {
+            console.log(alertData.name1);
+            if(alertData.name1===" " || alertData.name1==[]){
+              this.instructions=alertData.name1;
+              console.log('Please Enter SomeThings...');
+              
+            }else{
+              this.placeOrder1();
+            }
+        }
+        },
+      ],
+    });
+
+    await alert.present();
   }
+
+  check_data
+  placeOrder1() {
+    if(this.instructions==[]){
+   alert('Please add instructions/Description...');
+    }
+    else{
+      this.check_data = {
+        instructions: this.instructions,
+        deliverystatus: "1",
+        contactNumber: this.user.user_mobile,
+        address: this.user.user_location,
+        country: this.user.user_country,
+        city: this.user.user_city,
+        state: this.user.user_state,
+        addresslat: 3443.44,
+        addresslong: 434.444
+      }
+      this.user.present('');
+      this.auth.checkoutApi(this.check_data).subscribe((data) => {
+        this.user.dismiss();
+        this.user.showToast('Your order successfully placeed. We will Notify Soon')
+      }, err => {
+        this.user.dismiss();
+      })
+    }
+  
+  }
+
+
   cartArray = [
     {
       id: 1,

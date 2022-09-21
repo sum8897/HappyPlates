@@ -94,9 +94,9 @@ export class ChefMenuReviewComponent implements OnInit {
     this.auth.getSingleChefDataProfile(chef_id).subscribe((data) => {
       this.chef_prof_res = data;
       console.log(this.chef_prof_res.data);
-      this.chef_name = this.chef_prof_res.data.firstname + this.chef_prof_res.data.lastname;
+      this.chef_name = this.chef_prof_res.data.firstname +" "+ this.chef_prof_res.data.lastname;
       this.chef_pro_img = this.chef_prof_res.data.prof_image;
-      this.chef_specialisation = this.chef_prof_res.data.specialization;
+      this.chef_specialisation = (this.chef_prof_res.data.specialization);
     }, err => {
       console.log(err)
     })

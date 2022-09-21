@@ -100,6 +100,9 @@ ion-searchbar {
             color    : #1c1c1c;
             padding  : 5px 0;
             font-size: 11px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: clip;
         }
 
         .chef-button {
@@ -251,7 +254,7 @@ ion-searchbar {
     .latest-chef-card {
         // width        : 100%;
         border-radius: 21px;
-        margin       : 0 16px 0 10px;
+        margin       : 10px 16px 0 10px;
         padding      : auto;
     }
 
@@ -365,11 +368,11 @@ ion-searchbar {
                 display           : flex;
                 font-size         : 12px;
                 // justify-content: space-between;
-                margin            : 10px 29px;
+                margin            : 10px 9px;
                 border-top        : 1px solid #e6f0f3;
                 padding-top       : 10px;
                 color             : #d32235;
-                justify-content   : center;
+                justify-content   : space-around;
 
                 .event-location {
                     padding-left: 15px;
@@ -443,18 +446,19 @@ ion-searchbar {
 
 
 .test1 {
-    height       : 210px;
-    width        : 87%;
-    margin-left  : 6%;
+    height: 210px;
+    width: 80%;
+    margin-left: 2.5vh;
     border-radius: 21px;
 
 }
 
 .test2 {
     // position: absolute;
-    margin-top   : -204px;
-    width        : 100%;
+    margin-top: -204px;
+    width: 95%;
     border-radius: 21px;
+    margin-left: -6px;
 
     ion-card {
         border-radius: 21px;
@@ -462,7 +466,7 @@ ion-searchbar {
 }
 
 .testimonial {
-    margin     : 20px 10px;
+    // margin     : 20px 10px;
     align-items: center;
 
     .testimonials-heading {
@@ -483,25 +487,27 @@ ion-searchbar {
         border-radius : 21px;
         margin        : 55px auto 55px auto;
         padding-bottom: 32px;
+        margin-right: 42px;
     }
 
     .testimonials-second-last-hideDiv {
         background   : #f6d7dc;
         height       : 230px;
-        width        : 90%;
+        width        : 80%;
         margin       : auto;
         border-radius: 21px;
         position     : absolute;
+        margin-right : 40px;
     }
 
     .testimonials-top-upder-hideDiv {
         background   : white;
         height       : 250px;
-        width        : 80%;
+        width        : 70%;
         margin       : auto;
         border-radius: 21px;
         position     : absolute;
-
+        margin-right : 40px;
         .testimonial-image {
             ion-avatar {
                 margin: 10px auto;
