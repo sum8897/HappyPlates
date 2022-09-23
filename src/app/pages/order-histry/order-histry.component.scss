@@ -1,0 +1,29 @@
+.ordered-item-img{
+    width: 75px;
+    height: 75px;
+}
+.ordered-main-div{
+    width: 100%;
+    display: flex;
+    .first-ordered-div{
+        width: 70%;
+        margin-left: 5px;
+        .ordered-item-name{
+            font-size: 15px;
+            font-weight: 500;
+            font-family: sans-serif;
+        }
+    }
+    .second-ordered-div{
+        width: 30%;
+        font-weight: 400;
+        text-align: center;
+        margin-top: 3px;
+        .ordered-date{
+            font-size: 12px;
+        }
+        .ordered-status{
+            font-size: 12px;
+        }
+    }
+}

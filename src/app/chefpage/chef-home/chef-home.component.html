@@ -1,0 +1,92 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="--background: #fef6f6;">
+  <div class="latest-order" style="color: #1d5b74;
+  margin-top: 15px;
+  font-size: 20px;">Latest order</div>
+  <div class="data_not_found" *ngIf="allorderedDataList==0" style="height: 40vh;text-align:center;padding-top: 20vh;">No Order Found</div>
+  <div *ngIf="allorderedDataList > 0">
+  <ion-card *ngFor="let order of orderDData">
+  <div class="orderId-date">
+    <div class="orderId">Order # {{order.orderId}}</div>
+    <div class="date"> {{order.ordered_date}}</div>
+  </div>
+  <div class="d_address same"><div class="delivery_loc">Delivery Location:</div><div class="delivery_location">{{order.address}}</div> </div>
+  <div class="d_date same"><div class="delivery_loc">Delivery Date:</div><div class="delivery_location">{{order.delivery_date}}</div></div>
+  <div class="d_date same"><div class="delivery_loc">Contact No:</div><div class="delivery_location">{{order.contact}}</div> </div>
+  <div class="d_price same"><div class="delivery_loc">Price:</div> <div class="delivery_location">{{order.price | currency:'INR':'symbol'}}</div></div>
+  </ion-card>
+</div>
+
+  <div class="chef-menu" style="margin: 10px 0;">
+    <div style="color: #1d5b74;
+    margin-top: 15px;
+    font-size: 20px;margin-left: 10px;">My Item List</div>
+    <div class="data_not_found" *ngIf="allorderedDataList==0" style="text-align:center;padding-top: 10vh;">
+      <div class="data_not_found">No Data Found</div>  
+    <ion-button expand="round" size="small" (click)="addMenu()">Add Menu</ion-button>
+    </div>
+    <ion-card style="border-radius: 11px;margin: 10px;" *ngFor="let menu of user.menu_data_list">
+
+      <div style="display: inline-flex;width: 100%;">
+       <div class="item-menu" style="display: inline-flex;width: 100%;">
+         <div><img style="width: 85px;
+           height: 85px;
+           border-radius: 11px;margin: 7px 0 5px 6px;" src="http://103.139.58.242/~clientpro/amantran/public{{menu.medias[0].path}}">
+           </div>
+       <div style="display: block;
+       padding-left: 10px;
+       width: 65%;
+       margin: 5px 0 0 0;text-transform: capitalize;">
+       <div style="font-size: 15px;
+       font-weight: 500;
+       margin-top: 7px;
+       color: #010101;">{{menu.title}}</div>
+         <div style="font-size: 12px;
+         font-weight: 500;
+         margin-top: 3px;
+         color: #010101;">{{menu.description}}</div>
+       <div class="cart-item-price-main-count" 
+       style="display: inline-flex;width: 100%;margin-top: 10px;;">
+         <div class="cart-item-price" 
+         style="display: inline-flex;
+         width: 60%;
+         padding-top: 10px;">
+           <p style="margin-top: 0;
+           font-size: 18px;
+           font-weight: 600;">{{menu.price | currency:'INR':'symbol'}}</p>
+           <!-- <del style="padding-left: 5px;
+           font-size: 12px;
+           padding-top: 7px;
+           opacity: 99999;
+   color: #a9a9a9;">{{menu.offer | currency:'INR':'symbol'}}</del> -->
+         </div>
+        
+       </div>
+       </div>
+       </div>
+        <div style="width: 10%;
+        display: block;
+        justify-content: space-between;
+        position: relative;
+        background: #f4f8f9;
+        padding-top: 15px;
+        text-align: center;
+        font-size: 20px;">
+       <div style="height: 50%;"><ion-icon name="create-outline" (click)="editMenu(menu)"></ion-icon></div>
+       <div style=""><ion-icon name="trash-outline" (click)="deleteMenu(menu)"></ion-icon></div>
+     </div>
+      </div>
+
+    </ion-card>
+
+   </div>
+</ion-content>

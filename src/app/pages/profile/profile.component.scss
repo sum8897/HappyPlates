@@ -1,0 +1,104 @@
+.profile-div-image {
+    text-align: center;
+    .pro-img {
+        text-align: center;
+        margin-top: 20px;
+        .profile-image {
+            width        : 100px;
+            height       : 100px;
+            text-align   : center;
+            border       : 1px solid white;
+            border-radius: 50%;
+        }
+        .profile-edit-icon{
+            background: #be1414;
+            margin-left: -28px;
+            border-radius: 50%;
+            color: white;
+            opacity: 999;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+        }
+    }
+    .user-data{
+        h3{
+            font-size: 16px;
+            color: #1c5c74;
+        }
+        .user-phone{
+            font-size: 12px;
+            margin-top: -5px;
+            .call{
+                color: #d32235;
+             margin-right: 5px;
+            }
+        }
+    }
+}
+
+.rating-order-wrp {
+    display: flex;
+    width: 100%;
+    .d-flex {
+        display: flex;
+    }
+    .align-items-center {
+        align-items: center;
+        height: 30px;
+    }
+    .w-25{
+        width: 25%;
+        margin-top: 40px;
+        .rating-average{
+            color: #d32236;
+            font-weight: 900;
+            font-size: 40px;
+        }
+        .ratings{
+            color: #171717;
+        }
+    }
+    .w-100{
+        width: 100%;
+    }
+    .w-50 {
+       
+        width: 50%;
+        // font-size: 10px;
+    }
+    .rating-text{
+        font-size: 10px;
+        text-align: right;
+    }
+    .rating-list {
+        // border-top: 1px solid #ddd;
+        // padding: 15px 0;
+    }
+}
+
+
+/**Rating**/
+
+::ng-deep label.star {
+    padding: 0 5px !important;
+    font-size: 10px !important;
+    // color: #ddd !important;
+    color: #d12235 !important;
+    &::before {
+        color: #d12235 !important;
+        // content: "\f005" !important;
+    }
+    &:hover {
+        transform: rotate(0deg) scale(1.2) !important;
+    }
+}
+.addBlogs{
+    box-shadow: none;
+    border: 1px solid #dfe8ed;
+    border-radius: 11px;
+    ion-item{
+        margin: -7px 0;
+        --background: #f4f5f8;
+    }
+}

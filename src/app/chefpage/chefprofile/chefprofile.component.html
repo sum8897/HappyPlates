@@ -1,0 +1,422 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/nav/chef-home"></ion-back-button>
+    </ion-buttons>
+  <ion-title>
+    My Account
+  </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="profile-top-div">
+    <ion-card class="profile-card">
+      <img class="profile-card-image" src="../../../assets/img/blog_1.jpg">
+    </ion-card>
+    <div class="profile-div-image">
+      <div> <img class="profile-image" src="../../../assets/img/chef_1.jpg">
+        <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon>
+      </div>
+      <div class="user-data">
+        <h3>{{user_name}}</h3>
+        <div class="user-specialization"><img src="../../../assets/img/chef_icon.png"><span
+            class="user-specialization-heading">Specialises In:</span><span>{{specialization}}</span></div>
+      </div>
+    </div>
+    </div>
+    <ion-accordion-group>
+      <ion-card class="accordion-card">
+      <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
+        <ion-item slot="header" color="light">
+          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          <ion-label style="text-align: right;">About Me</ion-label>
+        </ion-item>
+        <div class="ion-padding login-input-value" slot="content">
+            <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" >
+            <div class="form-group label-float">
+              <ion-input type="text" name="specialization" #specialization="ngModel" required placeholder="Specialises In * " ngModel></ion-input>
+              <span class="text-danger"
+              *ngIf="(specialization.touched || contactForm.submitted) && specialization.errors?.required">
+              specialization is required *
+          </span>
+            </div>
+        
+            <div class="form-group label-float">
+              <ion-input type="text" name="skills" #skills="ngModel" required placeholder="Skills * " ngModel></ion-input>
+              <span class="text-danger"
+              *ngIf="(skills.touched || contactForm.submitted) && skills.errors?.required">
+              Skills is required *
+          </span>
+            </div>
+            <div class="form-group label-float">
+              <ion-textarea type="text" name="descr" #descr="ngModel" required placeholder="Description * " ngModel></ion-textarea>
+              <span class="text-danger"
+              *ngIf="(descr.touched || contactForm.submitted) && descr.errors?.required">
+              Descriptionis required *
+          </span>
+            </div>
+          <div class="submit-div">
+        <ion-button class="submit-login-button" expand="round" type="submit">Save About Me</ion-button>
+          </div>
+        </form>
+        <div class="address-show">
+          <div class="name-address">
+            <div class="name">Specialises In: {{specialization}}</div>
+            <div class="edit"><ion-button class="edit-button">Edit <ion-icon name="create-outline"></ion-icon></ion-button></div>
+          </div>
+         <div class="address-in-details">
+          <ion-text style="width: 80%;"><span>Skills: Bachelor of Hotel Management (BHM) in Culinary.</span></ion-text>
+         </div>
+         <div class="address-in-details">
+          <ion-text style="width: 80%;"><span>Description: B.Sc. in Hospitality and Hotel Management. B.Sc. in Hospitality and Hotel Management.</span></ion-text>
+         </div>
+        </div>
+        <!-- </div> --> 
+        </div>
+      </ion-accordion>
+    </ion-card>
+    </ion-accordion-group>
+
+    <ion-accordion-group>
+      <ion-card class="accordion-card">
+      <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
+        <ion-item slot="header" color="light">
+          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          <ion-label style="text-align: right;">My Address</ion-label>
+        </ion-item>
+        <div class="ion-padding login-input-value" slot="content">
+            <form #contactAddressForm="ngForm" (ngSubmit)="onAddressSubmit(contactAddressForm)" >
+            <div class="form-group label-float">
+              <ion-input type="text" name="firstname" #firstname="ngModel" required placeholder="First Name * " ngModel></ion-input>
+          
+              <span class="text-danger"
+              *ngIf="(firstname.touched || contactAddressForm.submitted) && firstname.errors?.required">
+              First Name is required *
+          </span>
+            </div>
+            <div class="form-group label-float">
+              <ion-input type="text" name="lastname" #lastname="ngModel" required placeholder="Last Name * " ngModel></ion-input>
+          
+              <span class="text-danger"
+              *ngIf="(lastname.touched || contactAddressForm.submitted) && lastname.errors?.required">
+              Last Name is required *
+          </span>
+            </div>
+            <div class="form-group label-float">
+              <ion-input type="tel" name="phone" #phone="ngModel" required placeholder="Phone Number * " ngModel></ion-input>
+              <span class="text-danger"
+              *ngIf="(phone.touched || contactAddressForm.submitted) && phone.errors?.required">
+              Phone Number is required *
+          </span>
+            </div>
+            <div class="city-pin" style="display: flex;">
+              <div class="form-group label-float">
+                <ion-input type="text" name="city" #city="ngModel" required placeholder="City * " ngModel></ion-input>
+            
+                <span class="text-danger"
+                *ngIf="(city.touched || contactAddressForm.submitted) && city.errors?.required">
+                City is required *
+            </span>
+              </div>
+          
+              <div class="form-group label-float">
+                <ion-input type="tel" name="pin" #pin="ngModel" required placeholder="Pin * " ngModel></ion-input>
+                <span class="text-danger"
+                *ngIf="(pin.touched || contactAddressForm.submitted) && pin.errors?.required">
+                Pin is required *
+            </span>
+              </div>
+            </div>
+            <div class="form-group label-float">
+              <ion-input type="text" name="location" #location="ngModel" required placeholder="Location * " ngModel></ion-input>
+              <span class="text-danger"
+              *ngIf="(location.touched || contactAddressForm.submitted) && location.errors?.required">
+              Location is required *
+          </span>
+            </div>
+          <div class="submit-div">
+        <ion-button class="submit-login-button" expand="round" type="submit">Save Address</ion-button>
+          </div>
+        </form>
+        <div class="address-show">
+          <div class="name-address">
+            <div class="name">{{user_name}}</div>
+            <div class="edit"><ion-button class="edit-button">Edit <ion-icon name="create-outline"></ion-icon></ion-button></div>
+          </div>
+         <div class="address-in-details">
+          <ion-text style="width: 80%;"><span>{{user_location}}</span></ion-text>
+         </div>
+        </div>
+        <!-- </div> --> 
+        </div>
+      </ion-accordion>
+    </ion-card>
+    </ion-accordion-group>
+
+    <ion-accordion-group>
+      <ion-card class="accordion-card">
+      <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
+        <ion-item slot="header" color="light">
+          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          <ion-label style="text-align: right;">My Menu Items</ion-label>
+        </ion-item>
+        <div class="ion-padding login-input-value" slot="content">
+        <ion-list>
+          <ion-item style="border: 1px dotted #dfe8ed;
+          border-radius: 21px;
+          text-align: center;">
+            <ion-label (click)="selectImage()">
+              <ion-icon name="add-outline" slot="start"></ion-icon>Upload Image
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start"><img src="{{croppedImagePath}}"></ion-avatar>
+            <ion-button slot="end" size="small" (click)="uploadImage()">upload</ion-button>
+            </ion-item>
+        </ion-list>
+            <form #contactMenuForm="ngForm" (ngSubmit)="onMenuSubmit(contactMenuForm)" >
+            <div class="form-group label-float">
+              <ion-input type="text" name="foodname" #foodname="ngModel" required placeholder="Food Name * " ngModel></ion-input>
+          
+              <span class="text-danger"
+              *ngIf="(foodname.touched || contactMenuForm.submitted) && foodname.errors?.required">
+              Food Name is required *
+          </span>
+            </div>
+        
+            <div class="form-group label-float">
+              <ion-input type="number" name="regular_price" #regular_price="ngModel" required placeholder="Regular Price * " ngModel></ion-input>
+              <span class="text-danger"
+              *ngIf="(regular_price.touched || contactMenuForm.submitted) && regular_price.errors?.required">
+              Regular Price is required *
+          </span>
+            </div>
+            <div class="city-pin" style="display: flex;">
+              <div class="form-group label-float">
+                <ion-input type="number" name="other_price" #other_price="ngModel" required placeholder="Other Price * " ngModel></ion-input>
+            
+                <span class="text-danger"
+                *ngIf="(other_price.touched || contactMenuForm.submitted) && other_price.errors?.required">
+                Other Price is required *
+            </span>
+              </div>
+          
+              <div class="form-group label-float">
+                <ion-input type="tel" name="pin" #pin="ngModel" required placeholder="Pin * " ngModel></ion-input>
+                <span class="text-danger"
+                *ngIf="(pin.touched || contactMenuForm.submitted) && pin.errors?.required">
+                Pin is required *
+            </span>
+              </div>
+            </div>
+            <div class="form-group label-float" style="display: flex;">
+             
+                <ion-radio-group  style="width: 100%;" (ionChange)="radioGroupChange($event)" #radioGroup>
+             <div style="display: flex;width: 100%;">
+              <div>Food Type</div>
+              <div style="display: flex;margin-left: 15px;">
+                <ion-radio slot="start" value="veg" style="margin: 0 5px;"></ion-radio>Veg
+              </div>
+              <div style="display: flex;">
+                <ion-radio slot="start" value="noveg" style="margin: 0 5px;"></ion-radio>Non Veg
+              </div>
+             </div>
+              
+               
+          
+                </ion-radio-group>
+            
+            </div>
+            <div class="form-group label-float">
+              <ion-textarea type="text" name="details" #details="ngModel" required placeholder="Details * " ngModel></ion-textarea>
+              <span class="text-danger"
+              *ngIf="(details.touched || contactForm.submitted) && details.errors?.required">
+              Details is required *
+          </span>
+            </div>
+          <div class="submit-div">
+        <ion-button class="submit-login-button" expand="round" type="submit">Save Menu</ion-button>
+          </div>
+        </form>
+     
+        <div class="chef-menu" style="margin: 10px 0;">
+          <div style="color: #1d5b74;margin: 10px;">My Item List</div>
+          <ion-card style="border-radius: 11px;margin: 5px 0;" *ngFor="let menu of menu_data_list">
+    
+            <div style="display: inline-flex;width: 100%;">
+             <div class="item-menu" style="display: inline-flex;width: 100%;">
+               <div><img style="width: 85px;
+                 height: 85px;
+                 border-radius: 11px;margin: 7px 0 5px 6px;" src="'http://103.139.58.242/~clientpro/amantran/public'{{menu.medias[0].path}}">
+                 </div>
+             <div style="display: block;
+             padding-left: 10px;
+             width: 65%;
+             margin: 5px 0 0 0;">
+             <div style="font-size: 12px;
+             font-weight: 500;
+             margin-top: 7px;
+             color: #010101;">{{menu.description}}</div>
+             <div class="cart-item-price-main-count" 
+             style="display: inline-flex;width: 100%;margin-top: 10px;;">
+               <div class="cart-item-price" 
+               style="display: inline-flex;
+               width: 60%;
+               padding-top: 10px;">
+                 <p style="margin-top: 0;
+                 font-size: 18px;
+                 font-weight: 600;">{{menu.price | currency:'INR':'symbol'}}</p>
+                 <p>{{menu.medias[0].path}}</p>
+                 <!-- <del style="padding-left: 5px;
+                 font-size: 12px;
+                 padding-top: 7px;
+                 opacity: 99999;
+         color: #a9a9a9;">{{menu.offer | currency:'INR':'symbol'}}</del> -->
+               </div>
+               <!-- <div class="cart-item-count" 
+               style="display: inline-flex;
+               width: 35%;
+               border: 1px solid #edf1f3;
+               border-radius: 5px;
+               justify-content: space-around;
+               padding-top: 5px;
+               margin-right: -2px;
+               margin-top: 8px;
+               height: 25px;">
+                 <ion-icon name="remove-outline" class="cart-delete-icon"></ion-icon>
+                 <span>5</span>
+                 <ion-icon name="add-outline" class="cart-delete-icon"></ion-icon>
+               </div> -->
+             </div>
+             </div>
+             </div>
+              <div style="width: 10%;
+              display: block;
+              justify-content: space-between;
+              position: relative;
+              background: #f4f8f9;
+              padding-top: 15px;
+              text-align: center;
+              font-size: 20px;">
+             <!-- <div style="height: 50%;"><ion-icon name="bag-handle-outline"></ion-icon></div>
+             <div style=""><ion-icon name="chevron-forward-outline"></ion-icon></div> -->
+           </div>
+            </div>
+      
+          </ion-card>
+
+         </div>
+         
+        </div>
+       
+
+      </ion-accordion>
+    </ion-card>
+    </ion-accordion-group>
+
+    <ion-accordion-group>
+      <ion-card class="accordion-card">
+      <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
+        
+          
+       
+        <ion-item slot="header" color="light">
+          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          <ion-label style="text-align: right;">My Reviews</ion-label>
+        </ion-item>
+        <div class="ion-padding login-input-value" slot="content">
+          <div class="rating-order-wrp">
+            <div class="w-25">
+              <div class="rating-average">4.7</div>
+              <div class="ratings">450 ratings</div>
+              
+            </div>
+      <div class="w-75">
+        <div class="d-flex rating-list align-items-center">
+          <p class="w-50 rating-text">Excellent & Awesome</p>
+          <div class="star w-50 rating-star">
+              <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue5" [disabled]="false"></ngx-star-rating>
+          </div>
+      </div>
+      <div class="d-flex rating-list align-items-center">
+        <p class="w-50 rating-text">Very Good</p>
+        <div class="star w-50 rating-star">
+            <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue4" [disabled]="false"></ngx-star-rating>
+        </div>
+    </div>
+    <div class="d-flex rating-list align-items-center">
+      <p class="w-50 rating-text">Good</p>
+      <div class="star w-50 rating-star">
+          <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue3" [disabled]="false"></ngx-star-rating>
+      </div>
+  </div>
+  <div class="d-flex rating-list align-items-center">
+    <p class="w-50 rating-text">Average</p>
+    <div class="star w-50 rating-star">
+        <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue2" [disabled]="true"></ngx-star-rating>
+    </div>
+  </div>
+  <div class="d-flex rating-list align-items-center">
+  <p class="w-50 rating-text">Ok</p>
+  <div class="star w-50 rating-star">
+      <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue1" [disabled]="false"></ngx-star-rating>
+  </div>
+  </div>
+      </div>      
+        </div>
+        </div>
+      </ion-accordion>
+    </ion-card>
+    </ion-accordion-group>
+
+      <!-- <ion-list style="margin: 10px;
+      border-radius: 21px;">
+    <ion-item  slot="header" color="light">
+      <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+      <ion-label style="text-align: right;">My Reviews</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list> -->
+  <ion-accordion-group>
+    <ion-card class="accordion-card">
+    <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
+      <ion-item slot="header" color="light">
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-label style="text-align: right;">Update Password</ion-label>
+      </ion-item>
+      <div class="ion-padding login-input-value" slot="content">
+          <form #userUpdateForm="ngForm" (ngSubmit)="onPasswordSubmit(userUpdateForm)" >
+          <div class="form-group label-float">
+            <ion-input type="text" name="oldpass" #oldpass="ngModel" required placeholder="Old Password * " ngModel></ion-input>
+        
+            <span class="text-danger"
+            *ngIf="(oldpass.touched || userUpdateForm.submitted) && oldpass.errors?.required">
+           Old Password is required *
+        </span>
+          </div>
+          <div class="form-group label-float">
+            <ion-input type="text" name="newpass" #newpass="ngModel" required placeholder="New Password * " ngModel></ion-input>
+        
+            <span class="text-danger"
+            *ngIf="(newpass.touched || userUpdateForm.submitted) && newpass.errors?.required">
+            New Password is required *
+        </span>
+          </div>
+          <div class="form-group label-float">
+            <ion-input type="text" name="newpassc" #newpassc="ngModel" required placeholder="Confirm New Password * " ngModel></ion-input>
+            <span class="text-danger"
+            *ngIf="(newpassc.touched || userUpdateForm.submitted) && newpassc.errors?.required">
+            Confirm New is required *
+        </span>
+          </div>
+        <div class="submit-div">
+      <ion-button class="submit-login-button" expand="round" type="submit">Update Password</ion-button>
+        </div>
+      </form>
+
+      </div>
+    </ion-accordion>
+  </ion-card>
+  </ion-accordion-group>
+ 
+</ion-content>

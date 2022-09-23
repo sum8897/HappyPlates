@@ -1,0 +1,63 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/mainpage"></ion-back-button>
+      </ion-buttons>
+    <ion-title>
+     Payments
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<div class="payment-text" style="margin-left: 18px;margin-top: 20px;">All Payment Options</div>
+<ion-list>
+  <ion-radio-group allow-empty-selection="true" name="radio-group" (ionChange)="radioGroupChange($event)" #radioGroup>
+
+    <ion-item lines="none" *ngFor="let item of radio_list" (ionFocus)="radioFocus()" (ionSelect)="radioSelect($event)"
+      (ionBlur)="radioBlur()">
+      <ion-label>{{item.text}}</ion-label>
+      <ion-radio slot="start" name="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"
+        color="{{item.color}}" disabled="{{item.disabled}}"></ion-radio>
+    </ion-item>
+
+  </ion-radio-group>
+</ion-list>
+
+
+<div style="border-top: 1px solid #ecf1f4;
+border-bottom: 1px solid #ecf1f4;
+padding: 10px 0 10px 10px;
+margin-top: 20px;"><table style="width: 75%;
+  margin-left: 20%;
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 300;">
+    <tr>
+      <th>Total</th>
+      <th> INR 1000.00</th>
+    </tr>
+    <tr>
+      <th>Sale tax 10%</th>
+      <th>INR 100.00</th>
+    </tr>
+  </table></div>
+  <div style="margin-top: 7px;">
+    <table style="width: 75%;
+  margin-left: 20%;
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 300;">
+    <tr>
+      <th>Total Amount</th>
+      <th> INR 1100.00</th>
+    </tr>
+  </table>
+  </div>
+</ion-content>
+<ion-footer collapse="fade">
+  <ion-toolbar>
+    <ion-title slot="start" style="ont-size: 15px;
+    font-weight: 500;">INR 1100.00</ion-title>
+    <ion-button expand="round" size='small' style="--background: #d32235;color: white;">PLACE ORDER</ion-button>
+  </ion-toolbar>
+</ion-footer>

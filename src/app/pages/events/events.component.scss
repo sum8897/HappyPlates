@@ -1,0 +1,60 @@
+.event-year{
+    display        : flex;
+    justify-content: space-between;
+    margin         : 20px 15px 10px 15px;
+
+    .event-1 {
+        color: #1c5c74;
+    font-weight: 600;
+    font-size: 16px;
+    }
+
+    .year {
+        color      : #1c5c74;
+        font-weight: 500;
+        font-size  : 15px;
+    }
+}
+.item-event-list{
+    margin: 0;
+}
+.event-card{
+    background: white;
+    border-radius: 21px;
+    .event-img{
+        width: 80px;
+        height: 80px;
+        border-radius: 21px;
+    }
+    .event-label{
+        margin: 0 0 0 13px;
+        .event-location-name{
+            font-size: 13px;
+    font-weight: 600;
+    font-family: sans-serif;
+    white-space: normal;
+        }
+        .img-span{
+            display: flex;
+            margin: 4px 0;
+            .date-icon{
+                width: 10px;
+                height: 10px;
+            }
+            .location-icon{
+                width: 10px;
+                height: 10px;
+            }
+            span{
+                padding-left: 7px;
+                font-size: 10px;
+                font-weight: 500;
+                font-family: sans-serif;
+            }
+        }
+
+    }
+
+}
+
+

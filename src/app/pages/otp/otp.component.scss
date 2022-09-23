@@ -1,0 +1,23 @@
+.otp-paragraph {
+    margin: 35px;
+}
+
+.otp-input {
+    text-align: center;
+    margin: 30px 0;
+}
+
+#otp_0_i1f8e7dg9cl2hmfgkw {
+    width    : 40px;
+    font-size: 25px;
+    height   : 40px;
+}
+
+@media screen and (max-width: 240px) {
+    .otp-input[_ngcontent-leu-c140] {
+        width    : 40px;
+        font-size: 18px;
+        height   : 40px;
+        margin   : 0 20px;
+    }
+}

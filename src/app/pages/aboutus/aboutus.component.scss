@@ -1,0 +1,29 @@
+.contact-slider-card{
+    border-radius: 21px;
+}
+.about-heading{
+    margin-left: 15px;
+    color: #1c5c75;
+    opacity: 11;
+    font-size: 15px;
+    margin-top: 10px;
+    span{
+    text-transform: uppercase;
+    font-weight: 600;
+    }
+}
+.about-text{
+    margin: 15px;
+    span{
+        font-size: 12px;
+    }
+}
+.slides-main{
+    ion-card{
+        img{
+            height: 150px;
+            width: 360px;
+            margin-bottom: -5px;
+        }
+    }
+}

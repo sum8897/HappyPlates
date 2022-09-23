@@ -1,0 +1,46 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="title-text">
+      <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="about-slider-div">
+    <ion-slides [options]="slideOpts" class="slides-main" pager="true">
+      <ion-slide >
+        <ion-card class="contact-slider-card">
+         <img src="../../../assets/img/chef_1.jpg" />
+        </ion-card>
+      </ion-slide>
+      <ion-slide >
+        <ion-card class="contact-slider-card">
+         <img src="../../../assets/img/chef_2.jpg" />
+        </ion-card>
+      </ion-slide>
+      <ion-slide >
+        <ion-card class="contact-slider-card">
+         <img src="../../../assets/img/chef_3.jpg" />
+        </ion-card>
+      </ion-slide>
+        </ion-slides>
+  </div>
+  <div class="about-heading">
+    <span>We the Chef</span>
+  </div>
+  <div class="about-text">
+    <span>
+      The cuisine of India is as ancient as it is varied, and in this 
+      attractive, oversized volume, food expert A.K. Achaya captures 
+      the full range and history of the Indian diet, from prehistoric
+       times to the modern era. An informative volume that boasts over
+    </span><br>
+    <span> 
+      {{about_desc}}
+ </span>
+  </div>
+</ion-content>

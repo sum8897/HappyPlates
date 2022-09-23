@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon name="arrow-back-outline" class="back-button" (click)="dismiss()" slot="start"></ion-icon>
+    <ion-title class="title-text" style="text-align: center;">
+     <!-- {{blogname.title}} -->
+     <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
+     <!-- About Us -->
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="about-slider-div">
+    <ion-slides [options]="slideOpts" class="slides-main" pager="true">
+      <ion-slide >
+        <ion-card class="contact-slider-card">
+         <img src="../../../assets/img/chef_1.jpg" class="slider-image" />
+        </ion-card>
+      </ion-slide>
+      <ion-slide >
+        <ion-card class="contact-slider-card">
+         <img src="../../../assets/img/chef_2.jpg" class="slider-image"/>
+        </ion-card>
+      </ion-slide>
+      <ion-slide >
+        <ion-card class="contact-slider-card">
+         <img src="../../../assets/img/chef_3.jpg" class="slider-image"/>
+        </ion-card>
+      </ion-slide>
+        </ion-slides>
+  </div>
+  <div class="blog-date-admin-icon">
+ <div class="blog-date-icon"><img src="../../../assets/img/date.png"><span class="blog-date-text">22, Jan2022</span></div>
+ <div class="blog-admin-icon"><img src="../../../assets/img/location.png"><span class="blog-admin-text">Admin</span></div>
+  </div>
+  <div class="blog-name">
+    <p class="blog-script-name">Food Festivals- Restaurants Golden Ticket To Customer's Heart- The Restaurant Times</p>
+  </div>
+  <div class="blog-paragraph">
+    <h6 class="blog-paragraph-h6">The cuisine of India is as ancient as it is varied, and in this 
+      attractive, oversized volume, food expert A.K. Achaya captures 
+      the full range and history of the Indian diet, from prehistoric
+       times to the modern era. An informative volume that boasts over
+      </h6>
+      <h6 class="blog-paragraph-h6"> 150 black-and-white illustrations (including line drawings,
+        photographs, and maps) and fifty-five color photographs on 
+        twenty plates, Indian Food draws on archaeology, anthropology,
+         literature, philology,
+        </h6>
+        <h6 class="blog-paragraph-h6">The cuisine of India is as ancient as it is varied, and in this 
+          attractive, oversized volume, food expert A.K. Achaya captures 
+          the full range and history of the Indian diet, from prehistoric
+           times to the modern era. An informative volume that boasts over
+          </h6>
+  </div>
+  </ion-content>

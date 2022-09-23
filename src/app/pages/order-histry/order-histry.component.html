@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/nav/mainpage"></ion-back-button>
+      </ion-buttons>
+    <ion-title style="text-align: center;">
+     Order History
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-list>
+  <ion-card *ngFor="let order of orderedData">
+    <ion-item>
+      <ion-avatar class="ordered-item-img">
+        <img src="../../../assets/img/chef_1.jpg">
+      </ion-avatar>
+      <ion-label>
+    <div class="ordered-main-div">
+<div class="first-ordered-div">
+  <div class="ordered-item-name">{{order.instructions}}</div>
+  <div class="ordered-item-price">{{order.totalamount}}</div>
+</div>
+<div class="second-ordered-div">
+  <div class="ordered-date">
+    {{(order.deliverydate).slice(0,10)}}
+</div>
+<div class="ordered-status">running</div>
+</div>
+    </div>
+      </ion-label>
+  
+    </ion-item>
+  </ion-card>
+</ion-list>
+</ion-content>

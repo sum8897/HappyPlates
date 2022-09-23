@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/nav/mainpage"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="title-text">
+      <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
+    <!-- About Us -->
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<div class="blog-heading">
+  <div class="blog-head"><p>Blog</p></div>
+  <div class="blog-year"><p>2021</p></div>
+</div>
+<div class="blog-card-img"  *ngFor="let blog of blogDataAll">
+  <ion-card>
+    <ion-card class="second-blog-card" (click)="showBlogModal(blog)">
+      <img src="{{blog.blogs_image}}">
+    </ion-card>
+
+ 
+  <div class="blog-date-admin-icon">
+    <div class="blog-date-icon"><img src="../../../assets/img/date.png"><span class="blog-date-text">{{blog.date}}</span></div>
+    <div class="blog-admin-icon"><img src="../../../assets/img/location.png"><span class="blog-admin-text">{{blog.userId}}</span></div>
+     </div>
+     <div class="blog-name">
+      <p class="blog-script-name">{{blog.title}}</p>
+    </div>
+    <div class="blog-details">
+      <span class="blog-span-details">{{(blog.intro).substring(0,300)}}...</span>
+    </div>
+  </ion-card>
+</div>
+
+
+  </ion-content>

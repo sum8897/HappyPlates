@@ -1,0 +1,42 @@
+.latest-order{
+    margin-left: 15px;
+    font-size: 20px;
+    font-family: ui-sans-serif;
+}
+ion-card{
+    background: white;
+    opacity: 999;
+    border-radius: 10px;
+    padding: 10px 5px;
+    .orderId-date{
+        display: flex;
+    justify-content: space-between;
+    margin: 10px 10px 0 10px;
+    .orderId{
+        font-size: 20px;
+    font-family: sans-serif;
+    color: black;
+    font-weight: 500;
+    }
+    }
+    .same{
+        margin: 2px 10px;
+        display: flex;
+    }
+    .delivery_loc{
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    clear: both;
+    display: inline-block;
+    white-space: nowrap;
+    }
+    .delivery_location{
+        margin-left: 10px;
+    }
+}
+.data_not_found{
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-family: sans-serif;
+}

@@ -6,6 +6,8 @@ import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { UserService } from './services/user.service';
+import { NetworkStatusService } from './services/network-status.service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +21,11 @@ export class AppComponent {
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
   navigate : any;
+  navigateChef: any;
+  user_type;
+ 
+  menuData:any=[];
+
   constructor(
     private alertController: AlertController,
               private location: Location,
@@ -27,21 +34,79 @@ export class AppComponent {
               private splashScreen: SplashScreen,
               private router : Router,
               private network: Network,
+              public user: UserService,
+              public networkProvider:NetworkStatusService
   ) {
-    this.sideMenu();
+    // this.user.user_type=localStorage.getItem('user_role');
+    // this.user.user_name=localStorage.getItem('user_name');
+    
+    // console.log(this.user.user_name)
+  
+    // this.sideMenuAdmin();
     this.initializeApp();
+    this.sideMenu();
     this.backButtonEvent();
+    // if(this.user.user_type=="admin"){
+    //   this.sideMenuAdmin();
+    // this.user.chef_user=true;
+    // this.user.customer_user=false;
+    // console.log("admin chef user")
+    // }else{
+    //   this.sideMenu();
+    //   this.user.chef_user=false;
+    // this.user.customer_user=true;
+    // }
+    
+    // this.menuData=this.navigate.filter(data=>{
+    //   if(data.role==this.user_type){
+    //     console.log(typeof(data))
+    //     return this.menuData  ;
+    //   }
+    // })
+
     //  this.NetworkButtonEvent()
      window.addEventListener('offline',()=>{
        this.openAlert();
      })
+ 
+     
   }
-
+ ngOnInit(){
+  this.sideMenu()
+  // this.user.menuData=this.navigate
+  // console.log(this.menuData)
+ }
   initializeApp() {
+    this.platform.ready().then(()=>{
+      this.user.userDetails();
+    })
+    // alert('initialisation...');
+    if(localStorage.getItem('user_role')=="chef"){
+      this.router.navigateByUrl('/nav/chef-home')
+    }
+    else if(localStorage.getItem('user_role')=="customer"){
+      this.router.navigateByUrl('/nav/mainpage')
+    }
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.network.onConnect().subscribe(data => {
+        this.networkProvider.setNetworkStatus(data.type);
+        this.displayNetworkUpdate(data.type);
+      }, error => {
+        console.log(error);
+      });
+
+      this.network.onDisconnect().subscribe(data => {
+        console.log(data);
+        this.networkProvider.setNetworkStatus(data.type);
+        this.displayNetworkUpdate(data.type);
+      }, error => {
+        console.log(error);
+      });
     });
+
   }
 
   NetworkButtonEvent(){
@@ -57,9 +122,9 @@ const alert=await this.alertController.create({
   message: 'You do not have Internet Connection',
   buttons:[{
     text:'ok',
-    handler:()=>{
-      navigator['app'].exitApp();
-    }
+    // handler:()=>{
+    //   navigator['app'].exitApp();
+    // }
   }]
 });
 await alert.present();
@@ -81,11 +146,13 @@ backButtonEvent() {
     });
   });
 }
-
+displayNetworkUpdate(connectionState: string) {
+  console.log(connectionState)
+}
 async presentAlertConfirm() {
   const alert = await this.alertController.create({
-    header: 'Happy Plates Confirmation',
-    message: 'Are you sure you want to exit Happy Plates App?',
+    header: 'BonHomey Confirmation',
+    message: 'Are you sure you want to exit BonHomey App?',
     buttons: [{
       text: 'Cancel',
       role: 'cancel',
@@ -110,34 +177,83 @@ async presentAlertConfirm() {
     [
       {
         title : "Home",
-        url   : "/home",
-        icon  : "home"
+        url   : "/mainpage",
+        icon  : "home",
+        role  : "customer"
       },
       {
-        title : "Chef",
-        url   : "/doctorlist",
-        icon  : "people-outline"
+        title : "About Us",
+        url   : "/about",
+        icon  : "browsers-outline",
+        role  : "customer"
       },
       {
-        title : "Dashboard",
-        url   : "/dashboard",
-        icon  : "podium-outline"
+        title : "Contact Us",
+        url   : "/contactus",
+        icon  : "people-circle-outline",
+        role  : "customer"
       },
       {
-        title : "Support",
-        url   : "/support",
-        icon  : "call-outline"
+        title : "Blog",
+        url   : "/blog",
+        icon  : "reader-outline",
+        role  : "customer"
       },
       {
-        title : "LogIn",
-        url   : "/login",
-        icon  : "call-outline"
+        title : "Team",
+        url   : "/team",
+        icon  : "person-add-outline",
+        role  : "customer"
       },
       {
-        title : "Register",
-        url   : "/register",
-        icon  : "call-outline"
+        title : "Testimonials",
+        url   : "/testimonials",
+        icon  : "chatbox-ellipses-outline",
+        role  : "customer"
       },
-    ]
+      {
+        title : "FAQ",
+        url   : "/faq",
+        icon  : "information-outline",
+        role  : "customer"
+      },
+      {
+        title : "Events",
+        url   : "/event",
+        icon  : "basketball",
+         role: "customer",
+      },
+      {
+        title : "Photo Gallery ",
+        url   : "/third",
+        icon  : "image",
+        role: "customer"
+      },
+      {
+        title : "Chef Account",
+        url   : "/chefaccount",
+        icon  : "call-outline",
+        role: "customer"
+      },
+      {
+        title : "Cart",
+        url   : "/cart",
+        icon  : "cart-outline",
+        role: "customer"
+      },
+      {
+        title : "Search",
+        url   : "/search",
+        icon  : "search-outline",
+        role: "customer"
+      },
+  ]
   }
+
+  logout(){
+    localStorage.clear();
+    localStorage.removeItem('amantran_token');
+    this.router.navigateByUrl('login');
+  }
+ 
 }

@@ -1,0 +1,71 @@
+.profile-top-div{
+    .user-data{
+        margin-left: 10px;
+    }
+    .profile-image{
+        width: 105px;
+        height: 95px;
+    }
+}
+
+.submit-login-button{
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+.rating-order-wrp {
+    display: flex;
+    width: 100%;
+    .d-flex {
+        display: flex;
+    }
+    .align-items-center {
+        align-items: center;
+    }
+    .w-25{
+        width: 25%;
+        margin-top: 40px;
+        .rating-average{
+            color: #d32236;
+            font-weight: 900;
+            font-size: 40px;
+        }
+        .ratings{
+            color: #171717;
+        }
+    }
+    .w-75{
+        width: 75%;
+    }
+    .w-50 {
+       
+        width: 50%;
+        // font-size: 10px;
+    }
+    .rating-text{
+        font-size: 10px;
+        text-align: right;
+    }
+    .rating-list {
+        // border-top: 1px solid #ddd;
+        // padding: 15px 0;
+    }
+}
+
+
+/**Rating**/
+
+::ng-deep label.star {
+    padding: 0 5px !important;
+    font-size: 10px !important;
+    // color: #ddd !important;
+    color: #d12235 !important;
+    &::before {
+        color: #d12235 !important;
+        // content: "\f005" !important;
+    }
+    &:hover {
+        transform: rotate(0deg) scale(1.2) !important;
+    }
+}
