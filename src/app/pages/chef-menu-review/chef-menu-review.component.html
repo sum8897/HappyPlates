@@ -15,7 +15,10 @@
       <img class="profile-card-image" src="../../../assets/img/blog_1.jpg">
     </ion-card>
     <div class="profile-div-image">
-      <div> <img class="profile-image" src="{{chef_pro_img}}">
+      <div *ngIf="none"> <img class="profile-image" src="../../../assets/img/chef_1.jpg">
+        <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon>
+      </div>
+      <div *ngIf="no_none"> <img class="profile-image" src="{{chef_pro_img}}">
         <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon>
       </div>
       <div class="user-data">
@@ -60,8 +63,8 @@
            width: 60%;
            padding-top: 10px;">
                   <p style="margin-top: 0;
-             font-size: 18px;
-             font-weight: 600;">$ {{menu.price}}</p>
+             font-size: 12px;
+             font-weight: 600;">{{menu.price | currency:'INR':'symbol'}}</p>
                   <!-- <del style="padding-left: 5px;
              font-size: 12px;
              padding-top: 7px;

@@ -92,11 +92,12 @@ import { AddEventComponent } from './chefpage/add-event/add-event.component';
             AppRoutingModule,
             NgxStarRatingModule,
             FormsModule,
+            ReactiveFormsModule,
             SwiperModule,
             NgOtpInputModule,
             CommonModule,
             HttpClientModule,
-            ReactiveFormsModule,
+            
           ],
   providers: [ 
 
