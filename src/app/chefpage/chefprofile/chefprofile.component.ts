@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
+
 @Component({
   selector: 'app-chefprofile',
   templateUrl: './chefprofile.component.html',

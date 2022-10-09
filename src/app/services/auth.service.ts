@@ -310,4 +310,39 @@ postBlogs(blogs:any){
   return this.http.post(this.url + 'api/blogs',blogs, { headers: headers }).pipe(tap(res => {
   }))
 }
+
+
+getCountry() {
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append('Authorization', 'Bearer'+' '+ token);
+  console.log(headers);
+  return this.http.get(this.url + 'api/country', { headers: headers }).pipe(tap(res => {
+  }))
+}
+
+getState(country_id:any){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.post(this.url + 'api/states',country_id, { headers: headers }).pipe(tap(res => {
+  }))
+}
+getCities(state_id:any){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers = headers.append('Content-Type', 'application/json');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.post(this.url + 'api/cities',state_id, { headers: headers }).pipe(tap(res => {
+  }))
+}
+
 }

@@ -97,7 +97,7 @@ export class MainpageComponent implements OnInit {
     this.user.present('...');
     this.auth.getMenuData().subscribe((data) => {
       this.user.dismiss();
-      console.log(data);
+      // console.log(data);
      
       this.menu_data = data;
       this.menu_data_list = this.menu_data.data;
@@ -119,21 +119,21 @@ filterTermss=[];
     this.user.present('...')
     this.auth.getAllChefData().subscribe((res) => {
       this.user.dismiss();
-      console.log(res)
-     
+      // console.log(res)
       this.chefsResp = res;
       this.chefsRespoData = this.chefsResp.data;
-      console.log(this.chefsRespoData);
+      // console.log(this.chefsRespoData);
       for (let i = 0; i < this.chefsRespoData.length; i++) {
         this.filterTermProfession[i] = [{
           "id": this.chefsRespoData[i].id,
           "firstname": this.chefsRespoData[i].firstname,
           "lastname": this.chefsRespoData[i].lastname,
           "specialization": this.chefsRespoData[i].specialization,
-          "city": this.chefsRespoData[i].city
+          "city": this.chefsRespoData[i].city,
+          "prof_image": this.chefsRespoData[i].prof_image,
         }]
       }
-      console.log(this.filterTermProfession)
+      console.log(this.filterTermProfession);
     }, err => {
       this.user.dismiss();
       console.log(err.name);
@@ -145,18 +145,18 @@ filterTermss=[];
   filterItemProfession() {
     this.filterTermProfession = [];
     this.filterTermss = this.chefsRespoData.filter(item => item.firstname.toLowerCase().indexOf(this.searchTermProfession.toLowerCase()) > -1);
-    console.log(this.filterTermss)
+    // console.log(this.filterTermss);
     for (let i = 0; i < this.filterTermss.length; i++) {
       this.filterTermProfession[i] = [{
         "id": this.filterTermss[i].id,
         "firstname": this.filterTermss[i].firstname,
         "lastname": this.filterTermss[i].lastname,
         "specialization": this.filterTermss[i].specialization,
-        "city": this.filterTermss[i].city
-
+        "city": this.filterTermss[i].city,
+        "pro_image": this.filterTermss[i].prof_image,
       }]
     }
-    console.log(typeof(this.filterTermProfession));
+    // console.log(typeof(this.filterTermProfession));
     // if(this.filterTermProfession.length==0){
     //   this.filterTermProfession=[];
     //   console.log('data not found')
@@ -177,14 +177,24 @@ filterTermss=[];
     this.auth.getAllTestimonials().subscribe(res => {
       this.testimonialeRes = res;
       this.testimonialsData = this.testimonialeRes.data;
-      console.log(this.testimonialsData);
+      // console.log(this.testimonialsData);
     }, err => {
       console.log(err)
     })
   }
-
-latestchefRes;
-latestchefsData;
+  getImage(imgPath:any){
+    console.log(imgPath)
+   const endPath= imgPath.substring(60)
+   console.log(endPath.length);
+   if(endPath.length==0){
+     return '../../../assets/img/chef_1.jpg'
+   }
+   else{
+     return imgPath;
+   }
+  }
+latestchefRes:any;
+latestchefsData:any;
 //   latestChefsAllData(){
 //     this.auth.getAllLatestChefs().subscribe((data)=>{
 //       this.latestchefRes=data;
@@ -203,7 +213,7 @@ latestchefsData;
     this.auth.getAllEvents().subscribe(data=>{
       this.latestEventRes=data;
       this.latestEventData=this.latestEventRes.data;
-      console.log(this.latestEventData);
+      // console.log(this.latestEventData);
       for(let i=0;i<this.latestEventData.length;i++){
             this.latestEventAllData[i]=
               {
@@ -218,7 +228,7 @@ latestchefsData;
               }
             
       }
-      console.log(this.latestEventAllData)
+      // console.log(this.latestEventAllData);
     },err=>{
       console.log(err)
     })
@@ -234,7 +244,7 @@ latestchefsData;
   blogDataAll;
   blogMainData(){
     this.auth.getAllBlogs().subscribe((data)=>{
-      console.log(data);
+      // console.log(data);
       this.blogRes=data;
       this.blogDataAll=this.blogRes.data;
     },err=>{

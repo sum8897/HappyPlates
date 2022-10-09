@@ -161,7 +161,7 @@ export class CartpageComponent implements OnInit {
     await alert.present();
   }
 
-  check_data
+  check_data:any;
   placeOrder1() {
     if(this.instructions==[]){
    alert('Please add instructions/Description...');

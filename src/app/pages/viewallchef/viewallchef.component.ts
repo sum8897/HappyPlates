@@ -52,6 +52,19 @@ allChefData(){
     console.log(err)
   })
 }
+
+getImage(imgPath:any){
+  console.log(imgPath)
+ const endPath= imgPath.substring(60)
+ console.log(endPath.length);
+ if(endPath.length==0){
+   return '../../../assets/img/chef_1.jpg'
+ }
+ else{
+   return imgPath;
+ }
+}
+
 async openSingleDetails(chef:any){
   // const modal = await this.modalController.create({
   //   component: ChefMenuReviewComponent,

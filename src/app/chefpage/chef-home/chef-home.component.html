@@ -46,20 +46,18 @@
        padding-left: 10px;
        width: 65%;
        margin: 5px 0 0 0;text-transform: capitalize;">
-       <div style="font-size: 15px;
+       <div style="font-size: 17px;
        font-weight: 500;
-       margin-top: 7px;
        color: #010101;">{{menu.title}}</div>
          <div style="font-size: 12px;
          font-weight: 500;
          margin-top: 3px;
-         color: #010101;">{{menu.description}}</div>
+         color: #010101;">{{(menu.description).substring(0,50)}}..</div>
        <div class="cart-item-price-main-count" 
        style="display: inline-flex;width: 100%;margin-top: 10px;;">
          <div class="cart-item-price" 
          style="display: inline-flex;
-         width: 60%;
-         padding-top: 10px;">
+         width: 60%;">
            <p style="margin-top: 0;
            font-size: 18px;
            font-weight: 600;">{{menu.price | currency:'INR':'symbol'}}</p>

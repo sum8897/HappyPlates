@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
+    private alertController: AlertController,
     public camera: Camera,) { }
 
   ngOnInit() {
@@ -50,6 +51,101 @@ export class RegisterComponent implements OnInit {
     }
     console.log('Segment changed', this.type);
   }
+  minheightcard = false;
+  minHeightShow() {
+    this.minheightcard = true;
+    this.selectCountry();
+  }
+  selectedMinHeight:any;
+  country_id:any;
+  selectMinHeight(e:any) {
+    console.log(e.currentTarget.value.country_name);
+    this.price=e.currentTarget.value.country_name;
+    this.country_id=e.currentTarget.value.id;
+    this.minheightcard = false;
+  }
+  stateCard=false;
+  stateshow(){
+    this.stateCard=true;
+    this.stateList(this.country_id);
+  }
+  stateList(country_id:any){
+this.auth.getState(country_id).subscribe(state_data=>{
+console.log(state_data)
+},err=>{
+
+})
+  }
+  async selectCountry(){
+    this.auth.getCountry().subscribe(country=>{
+ this.country_res=country;
+ this.country_data=this.country_res.country;
+ console.log(this.country_data);
+    },err=>{
+
+    })
+  }
+  price:any;
+  country_res:any;
+  country_data:any;
+  async selectCountry1(){
+    this.auth.getCountry().subscribe(country=>{
+ this.country_res=country;
+ this.country_data=this.country_res.country;
+ console.log(this.country_data);
+    },err=>{
+
+    })
+    const alert = await this.alertController.create({
+      header: 'Select Price',
+ 
+      inputs: [
+        {
+          label: '250',
+          type: 'radio',
+          value: '250',
+        },
+        {
+          label: '500',
+          type: 'radio',
+          value: '500',
+        },
+        {
+          label: '600',
+          type: 'radio',
+          value: '600',
+        },
+        {
+          label: '800',
+          type: 'radio',
+          value: '800',
+        },
+        {
+          label: '1000',
+          type: 'radio',
+          value: '1000',
+        },
+      ],
+      buttons: [
+     {
+      text:'ok',
+      role: 'confirm',
+     handler:(user_type)=>{
+      this.price=user_type;
+    
+     if(user_type==undefined){
+      console.log('please enter user type...');
+     }else{
+      console.log(user_type);
+     }
+     },
+     }
+      ],
+    });
+
+    await alert.present();
+  }
+
   checkParent:boolean;
   checkCheckbox(e:any){
     console.log(e);

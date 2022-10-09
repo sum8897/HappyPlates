@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,7 +18,8 @@ export class ChefMenuReviewComponent implements OnInit {
   constructor(private user: UserService,
     public auth: AuthService,
     public platform: Platform,
-    public router:Router) {
+    public router:Router,
+    public alertController:AlertController) {
     //  this.menuData();
     this.user.menu();
     console.log(this.user.chef_id.id);
@@ -63,14 +64,20 @@ export class ChefMenuReviewComponent implements OnInit {
     }
     console.log('Segment changed', this.type);
   }
-  menuData(chef_id) {
+  menu_data_list_all=[];
+  menuData(chef_id:any) {
     this.user.present('wait...');
     this.auth.getSingleChefsAllMenu(chef_id).subscribe((data) => {
       this.user.dismiss();
       this.menu_data = data;
       this.menu_data_list = this.menu_data.data;
       console.log(this.menu_data_list);
+    //  for(let i=0;i<this.menu_data_list.length;i++){
+    //   this.menu_data_list_all[i] = [{
+    //     "id": this.menu_data_list[i].id,
 
+    //   }]
+    //  }
     }, err => {
       this.user.dismiss();
       console.log(err)
@@ -90,35 +97,107 @@ export class ChefMenuReviewComponent implements OnInit {
   chef_name: any;
   chef_pro_img: any;
   chef_specialisation: any;
+  none:boolean;
+  no_none:boolean;
   chefProfileGet(chef_id: any) {
     this.auth.getSingleChefDataProfile(chef_id).subscribe((data) => {
       this.chef_prof_res = data;
       console.log(this.chef_prof_res.data);
       this.chef_name = this.chef_prof_res.data.firstname +" "+ this.chef_prof_res.data.lastname;
       this.chef_pro_img = this.chef_prof_res.data.prof_image;
+      console.log(this.chef_pro_img);
+      const endPath= this.chef_pro_img.substring(60);
+      console.log(endPath.length);
+      if(endPath==0){
+        console.log('zero');
+        this.none=true;
+        this.no_none=false;
+      }else{
+        console.log('not zero');
+        this.none=false;
+        this.no_none=true;
+      }
       this.chef_specialisation = (this.chef_prof_res.data.specialization);
     }, err => {
       console.log(err)
     })
   }
+
+  async placeOrder() {
+    const alert = await this.alertController.create({
+      header: 'Please enter your info',
+      mode: 'ios',
+      inputs: [
+        {
+          placeholder: 'Please Enter Description...',
+          name: 'name1',
+          type: 'text'
+        },
+   
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('dismiss')
+          },
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: (alertData) => {
+            console.log(alertData.name1);
+            if(alertData.name1===" " || alertData.name1==[]){
+              // this.instructions=alertData.name1;
+              console.log('Please Enter SomeThings...');
+              
+            }else{
+              // this.placeOrder1();
+            }
+        }
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  getImage(imgPath:any){
+    console.log(imgPath)
+   const endPath= imgPath.substring(60);
+   console.log(endPath.length);
+   if(endPath.length==0){
+     return '../../../assets/img/chef_1.jpg'
+   }
+   else{
+     return imgPath;
+   }
+  }
   addItemClick(menu_data: any) {
-    let body = {
-      amount: menu_data.counter * menu_data.price,
-      deliverydate: "2022-09-02",
-      description: "Added One itmes only",
-      qtty: menu_data.counter,
-      menuId: menu_data.id
+    if(menu_data.counter=='0'){
+      alert('You have to select minimum one item...');
     }
-    console.log(body)
-    this.user.present('');
-    this.auth.addCartItem(body).subscribe((item_res) => {
-      this.router.navigateByUrl('/nav/cart')
-      this.user.dismiss();
-      console.log(item_res);
-    }, err => {
-      this.user.dismiss();
-      console.log(err)
-    })
+    else{
+      let body = {
+        amount: menu_data.counter * menu_data.price,
+        deliverydate: "2022-09-02",
+        description: "Added One itmes only",
+        qtty: menu_data.counter,
+        menuId: menu_data.id
+      }
+      console.log(body)
+      this.user.present('');
+      this.auth.addCartItem(body).subscribe((item_res) => {
+        this.router.navigateByUrl('/nav/cart')
+        this.user.dismiss();
+        console.log(item_res);
+      }, err => {
+        this.user.dismiss();
+        console.log(err)
+      })
+    }
+  
   }
 
 

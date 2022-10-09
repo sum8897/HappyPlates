@@ -70,22 +70,36 @@
       </div>
     </div>
     <div class="label-float">
-      <ion-input type="text" formControlName="country" placeholder="Enter Country Name " required="true"></ion-input>
+      <ion-item lines="none" (click)="minHeightShow()" class="form-item">
+        <ion-label>Select Country</ion-label>
+      <ion-label>{{price}}</ion-label>
+      <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+        <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
+          required></ion-input> -->
+      </ion-item>
+      <!-- <ion-input type="text" formControlName="country" placeholder="Enter Country Name " required="true"></ion-input>
       <label>Country Name<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.country">
         <ng-container *ngIf="country.hasError(error.type) && (country.dirty || country.touched)">
           <small class="error-message">{{error.message}}</small>
         </ng-container>
-      </div>
+      </div> -->
     </div>
     <div class="label-float">
-      <ion-input type="text" formControlName="state" placeholder="Enter State Name " required="true"></ion-input>
+      <ion-item lines="none" (click)="stateshow()" class="form-item">
+        <ion-label>Select Country</ion-label>
+      <ion-label>{{price}}</ion-label>
+      <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+        <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
+          required></ion-input> -->
+      </ion-item>
+      <!-- <ion-input type="text" formControlName="state" placeholder="Enter State Name " required="true"></ion-input>
       <label>State Name<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.state">
         <ng-container *ngIf="state.hasError(error.type) && (state.dirty || state.touched)">
           <small class="error-message">{{error.message}}</small>
         </ng-container>
-      </div>
+      </div> -->
     </div>
     <div class="label-float">
       <ion-input type="text" formControlName="city" placeholder="Enter City Name " required="true"></ion-input>
@@ -310,4 +324,23 @@
             <p class="create-account-p" (click)="clickLogin()">Already have an Account ?<a>Sign In</a></p>
           </div>
     </div>
+
+    <ion-card *ngIf="minheightcard" class="countrycard">
+      <div class="crossCut" (click)="minheightcard =! minheightcard"><ion-icon  name="close-outline" ></ion-icon></div>
+        <ion-radio-group (ionChange)="selectMinHeight($event)">
+          <ion-item *ngFor="let h of country_data">
+            <ion-label>{{h.country_name}}</ion-label>
+            <ion-radio slot="start" [value]="h"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+    </ion-card>
+    <ion-card *ngIf="stateCard" class="stateCard">
+      <div class="crossCut" (click)="stateCard =! stateCard"><ion-icon  name="close-outline" ></ion-icon></div>
+        <ion-radio-group (ionChange)="selectState($event)">
+          <ion-item *ngFor="let h of state_data">
+            <ion-label>{{h.country_name}}</ion-label>
+            <ion-radio slot="start" [value]="h"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+    </ion-card>
 </ion-content>
