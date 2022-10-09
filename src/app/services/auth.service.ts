@@ -2,23 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest ,HttpParams} from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
+// import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  databaseObj: SQLiteObject;
-  tables = {
-    categories: "categories",
-    persons: "persons",
-    subpersons: "subpersons",
-  };
+
 
   constructor(private http: HttpClient,
-    public router: Router,
-    private sqlite: SQLite) { }
+    public router: Router,) { }
   url='http://103.139.58.242/~clientpro/bonhomey/public/';
 
   isAuthenticated():any{

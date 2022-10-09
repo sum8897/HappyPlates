@@ -3,7 +3,7 @@ import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import SwiperCore, { SwiperOptions } from 'swiper';
-import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
+// import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -66,7 +66,6 @@ export class MainpageComponent implements OnInit {
   constructor(private camera: Camera,
     public actionSheetController: ActionSheetController,
     private file: File,
-    private signInWithApple: SignInWithApple,
     public auth: AuthService,
     public router: Router,
     public user: UserService) {
@@ -373,21 +372,21 @@ latestchefsData;
     await actionSheet.present();
   }
 
-  AppleSignIn() {
+  // AppleSignIn() {
 
-    this.signInWithApple
-      .signin({
-        requestedScopes: [
-          ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
-          ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
-        ]
-      })
-      .then((res: AppleSignInResponse) => {
-        console.log("Apple login success:- " + res);
-      })
-      .catch((error: AppleSignInErrorResponse) => {
-        console.log("Apple Login Error:" + error);
-      });
-  }
+  //   this.signInWithApple
+  //     .signin({
+  //       requestedScopes: [
+  //         ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
+  //         ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
+  //       ]
+  //     })
+  //     .then((res: AppleSignInResponse) => {
+  //       console.log("Apple login success:- " + res);
+  //     })
+  //     .catch((error: AppleSignInErrorResponse) => {
+  //       console.log("Apple Login Error:" + error);
+  //     });
+  // }
 }
 
