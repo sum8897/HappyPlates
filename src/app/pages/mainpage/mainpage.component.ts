@@ -24,8 +24,8 @@ export class MainpageComponent implements OnInit {
   croppedImagePath = "";
   isLoading = false;
 
-  menu_data;
-  menu_data_list;
+  menu_data:any;
+  menu_data_list:any;
 
   imagePickerOptions = {
     maximumImagesCount: 1,
@@ -62,7 +62,7 @@ export class MainpageComponent implements OnInit {
     speed: 400,
     slidesPerView: 2.5,
   }
-  user_type
+  user_type:any;
   constructor(private camera: Camera,
     public actionSheetController: ActionSheetController,
     private file: File,
@@ -107,8 +107,8 @@ export class MainpageComponent implements OnInit {
     }
     )
   }
-  professionData;
-professionAllData;
+  professionData:any;
+professionAllData:any;
 searchTermProfession:any='';
 filterTermProfession=[];
 filterTermss=[];
