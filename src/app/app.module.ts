@@ -17,7 +17,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { EventDetailsComponent } from './pages/event-details/event-details.component';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
-import { SignInWithApple } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
+// import { SignInWithApple } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { OtpComponent } from './pages/otp/otp.component';
@@ -30,7 +30,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ItemListComponent } from './pages/item-list/item-list.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
+// import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -107,8 +107,8 @@ import { AddEventComponent } from './chefpage/add-event/add-event.component';
     Network,
     Camera,
     File,
-    SignInWithApple,
-    SQLite,
+    // SignInWithApple,
+    // SQLite,
     AuthService,
     AuthGuardGuard,   
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
