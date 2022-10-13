@@ -13,8 +13,14 @@ export class ChefMenuReviewComponent implements OnInit {
   type: string;
   menu = true;
   chef = false;
-  menu_data;
-  menu_data_list;
+  menu_data:any;
+  menu_data_list:any;
+  ratingValue5:any=5;
+  ratingValue4:any=4;
+  ratingValue3:any=3;
+  ratingValue2:any=2;
+  ratingValue1:any=1;
+  ratingValue0:any=4;
   constructor(private user: UserService,
     public auth: AuthService,
     public platform: Platform,
@@ -107,13 +113,13 @@ export class ChefMenuReviewComponent implements OnInit {
       this.chef_pro_img = this.chef_prof_res.data.prof_image;
       console.log(this.chef_pro_img);
       const endPath= this.chef_pro_img.substring(60);
-      console.log(endPath.length);
+      // console.log(endPath.length);
       if(endPath==0){
-        console.log('zero');
+        // console.log('zero');
         this.none=true;
         this.no_none=false;
       }else{
-        console.log('not zero');
+        // console.log('not zero');
         this.none=false;
         this.no_none=true;
       }
@@ -166,7 +172,7 @@ export class ChefMenuReviewComponent implements OnInit {
   getImage(imgPath:any){
     console.log(imgPath)
    const endPath= imgPath.substring(60);
-   console.log(endPath.length);
+  //  console.log(endPath.length);
    if(endPath.length==0){
      return '../../../assets/img/chef_1.jpg'
    }

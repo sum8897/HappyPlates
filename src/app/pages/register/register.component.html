@@ -70,10 +70,11 @@
       </div>
     </div>
     <div class="label-float">
-      <ion-item lines="none" (click)="minHeightShow()" class="form-item">
-        <ion-label>Select Country</ion-label>
-      <ion-label>{{price}}</ion-label>
-      <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+      <ion-item lines="none"  class="form-item"> <!-- (click)="minHeightShow()" -->
+  
+        <ion-label>Country</ion-label>
+      <ion-label>India</ion-label>
+      <!-- <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon> -->
         <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
           required></ion-input> -->
       </ion-item>
@@ -87,8 +88,8 @@
     </div>
     <div class="label-float">
       <ion-item lines="none" (click)="stateshow()" class="form-item">
-        <ion-label>Select Country</ion-label>
-      <ion-label>{{price}}</ion-label>
+        <ion-label>Select State</ion-label>
+      <ion-label>{{statename}}</ion-label>
       <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
         <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
           required></ion-input> -->
@@ -102,13 +103,20 @@
       </div> -->
     </div>
     <div class="label-float">
-      <ion-input type="text" formControlName="city" placeholder="Enter City Name " required="true"></ion-input>
+      <ion-item lines="none" (click)="cityshow()" class="form-item">
+        <ion-label>Select City</ion-label>
+      <ion-label>{{cityname}}</ion-label>
+      <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+        <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
+          required></ion-input> -->
+      </ion-item>
+      <!-- <ion-input type="text" formControlName="city" placeholder="Enter City Name " required="true"></ion-input>
       <label>City Name<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.city">
         <ng-container *ngIf="city.hasError(error.type) && (city.dirty || city.touched)">
           <small class="error-message">{{error.message}}</small>
         </ng-container>
-      </div>
+      </div> -->
     </div>
     <div class="label-float">
       <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true"></ion-input>
@@ -234,31 +242,53 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="country" placeholder="Enter Country Name " required="true"></ion-input>
+        <ion-item lines="none"  class="form-item"> <!-- (click)="minHeightShow()" -->
+    
+          <ion-label>Country</ion-label>
+        <ion-label>India</ion-label>
+        <!-- <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon> -->
+          <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
+            required></ion-input> -->
+        </ion-item>
+        <!-- <ion-input type="text" formControlName="country" placeholder="Enter Country Name " required="true"></ion-input>
         <label>Country Name<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.country">
           <ng-container *ngIf="country.hasError(error.type) && (country.dirty || country.touched)">
             <small class="error-message">{{error.message}}</small>
           </ng-container>
-        </div>
+        </div> -->
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="state" placeholder="Enter State Name " required="true"></ion-input>
+        <ion-item lines="none" (click)="stateshow()" class="form-item">
+          <ion-label>Select State</ion-label>
+        <ion-label>{{statename}}</ion-label>
+        <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+          <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
+            required></ion-input> -->
+        </ion-item>
+        <!-- <ion-input type="text" formControlName="state" placeholder="Enter State Name " required="true"></ion-input>
         <label>State Name<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.state">
           <ng-container *ngIf="state.hasError(error.type) && (state.dirty || state.touched)">
             <small class="error-message">{{error.message}}</small>
           </ng-container>
-        </div>
+        </div> -->
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="city" placeholder="Enter City Name " required="true"></ion-input>
+        <ion-item lines="none" (click)="cityshow()" class="form-item">
+          <ion-label>Select City</ion-label>
+        <ion-label>{{cityname}}</ion-label>
+        <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+          <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
+            required></ion-input> -->
+        </ion-item>
+        <!-- <ion-input type="text" formControlName="city" placeholder="Enter City Name " required="true"></ion-input>
         <label>City Name<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.city">
           <ng-container *ngIf="city.hasError(error.type) && (city.dirty || city.touched)">
             <small class="error-message">{{error.message}}</small>
           </ng-container>
-        </div>
+        </div> -->
       </div>
       <div class="label-float">
         <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true"></ion-input>
@@ -326,7 +356,7 @@
     </div>
 
     <ion-card *ngIf="minheightcard" class="countrycard">
-      <div class="crossCut" (click)="minheightcard =! minheightcard"><ion-icon  name="close-outline" ></ion-icon></div>
+      <div class="crossCut" (click)="minheightcard =! minheightcard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
         <ion-radio-group (ionChange)="selectMinHeight($event)">
           <ion-item *ngFor="let h of country_data">
             <ion-label>{{h.country_name}}</ion-label>
@@ -334,11 +364,21 @@
           </ion-item>
         </ion-radio-group>
     </ion-card>
-    <ion-card *ngIf="stateCard" class="stateCard">
-      <div class="crossCut" (click)="stateCard =! stateCard"><ion-icon  name="close-outline" ></ion-icon></div>
+    <ion-card *ngIf="stateCard" class="countrycard">
+      <div class="crossCut" (click)="stateCard =! stateCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
         <ion-radio-group (ionChange)="selectState($event)">
           <ion-item *ngFor="let h of state_data">
-            <ion-label>{{h.country_name}}</ion-label>
+            <ion-label>{{h.state_name}}</ion-label>
+            <ion-radio slot="start" [value]="h"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+    </ion-card>
+
+    <ion-card *ngIf="cityCard" class="countrycard">
+      <div class="crossCut" (click)="cityCard =! cityCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
+        <ion-radio-group (ionChange)="selectCity($event)">
+          <ion-item *ngFor="let h of city_data">
+            <ion-label>{{h.city_name}}</ion-label>
             <ion-radio slot="start" [value]="h"></ion-radio>
           </ion-item>
         </ion-radio-group>

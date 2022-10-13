@@ -56,49 +56,97 @@ export class RegisterComponent implements OnInit {
     this.minheightcard = true;
     this.selectCountry();
   }
-  selectedMinHeight:any;
-  country_id:any;
-  selectMinHeight(e:any) {
+  selectedMinHeight: any;
+  country_id: any=1;
+  selectMinHeight(e: any) {
     console.log(e.currentTarget.value.country_name);
-    this.price=e.currentTarget.value.country_name;
-    this.country_id=e.currentTarget.value.id;
+    this.price = e.currentTarget.value.country_name;
+    this.country_id = e.currentTarget.value.id;
     this.minheightcard = false;
   }
-  stateCard=false;
-  stateshow(){
-    this.stateCard=true;
-    this.stateList(this.country_id);
-  }
-  stateList(country_id:any){
-this.auth.getState(country_id).subscribe(state_data=>{
-console.log(state_data)
-},err=>{
+  stateCard = false;
+  state_res: any;
+  state_data: any;
 
-})
+  stateshow() {
+    this.stateCard = true;
+    
+    this.stateList();
   }
-  async selectCountry(){
-    this.auth.getCountry().subscribe(country=>{
- this.country_res=country;
- this.country_data=this.country_res.country;
- console.log(this.country_data);
-    },err=>{
+  cityCard: boolean = false;
+  city_data: any;
+  city_res: any;
+  cityname:any;
+  cityId:any;
+  cityshow() {
+    console.log('city show...');
+    this.cityCard = true;
+    this.cityList(this.selectState_id);
+  }
+  cityList(state_id: any) {
+    console.log(state_id)
+    let body = {
+      state_id: state_id,
+    }
+    this.user.present('');
+    this.auth.getCities(body).subscribe(state_data => {
+      this.city_res = state_data;
+      this.city_data = this.city_res.city;
+      this.user.dismiss();
+    }, err => {
+      this.user.dismiss();
+    })
+  }
+  selectCity(e: any) {
+    console.log(e.currentTarget.value.city_name);
+    this.cityname = e.currentTarget.value.city_name;
+    this.cityId = e.currentTarget.value.id;
+    this.cityCard = false;
+  }
+  selectState_id;
+  stateList() {
+    let body = {
+      country_id: 1,
+    }
+    this.user.present('');
+    this.auth.getState(body).subscribe(state_data => {
+      this.state_res = state_data;
+      this.state_data = this.state_res.state;
+      this.user.dismiss();
+    }, err => {
+      this.user.dismiss();
+    })
+  }
+  statename: any
+  selectState(e: any) {
+    console.log(e.currentTarget.value.state_name);
+    this.statename = e.currentTarget.value.state_name;
+    this.selectState_id = e.currentTarget.value.id;
+    this.stateCard = false;
+  }
+  async selectCountry() {
+    this.auth.getCountry().subscribe(country => {
+      this.country_res = country;
+      this.country_data = this.country_res.country;
+      console.log(this.country_data);
+    }, err => {
 
     })
   }
-  price:any;
-  country_res:any;
-  country_data:any;
-  async selectCountry1(){
-    this.auth.getCountry().subscribe(country=>{
- this.country_res=country;
- this.country_data=this.country_res.country;
- console.log(this.country_data);
-    },err=>{
+  price: any;
+  country_res: any;
+  country_data: any;
+  async selectCountry1() {
+    this.auth.getCountry().subscribe(country => {
+      this.country_res = country;
+      this.country_data = this.country_res.country;
+      console.log(this.country_data);
+    }, err => {
 
     })
     const alert = await this.alertController.create({
       header: 'Select Price',
- 
+
       inputs: [
         {
           label: '250',
@@ -127,27 +175,27 @@ console.log(state_data)
         },
       ],
       buttons: [
-     {
-      text:'ok',
-      role: 'confirm',
-     handler:(user_type)=>{
-      this.price=user_type;
-    
-     if(user_type==undefined){
-      console.log('please enter user type...');
-     }else{
-      console.log(user_type);
-     }
-     },
-     }
+        {
+          text: 'ok',
+          role: 'confirm',
+          handler: (user_type) => {
+            this.price = user_type;
+
+            if (user_type == undefined) {
+              console.log('please enter user type...');
+            } else {
+              console.log(user_type);
+            }
+          },
+        }
       ],
     });
 
     await alert.present();
   }
 
-  checkParent:boolean;
-  checkCheckbox(e:any){
+  checkParent: boolean;
+  checkCheckbox(e: any) {
     console.log(e);
     console.log(this.checkParent)
   }
@@ -274,7 +322,7 @@ console.log(state_data)
       { type: 'required', message: 'You must enter Address' },
       { type: 'maxlength', message: 'Name cant be longer than 30 characters' }
     ],
-  
+
     password: [
       { type: 'required', message: 'You must enter password' },
       { type: 'minlength', message: 'password must be at least 8 characters long.' },
@@ -385,43 +433,50 @@ console.log(state_data)
       console.log(err.error)
     })
   }
-  checkedValue(e:any){
+  checkedValue(e: any) {
     console.log(e.detail.checked)
   }
-  user_reg:any;
+  user_reg: any;
   submitForm() {
-    console.log(this.registrationForm.value);
-    if(this.type=='customer'){
-      this.user_reg = {
-        "firstname": this.registrationForm.value.firstname,
-        "lastname": this.registrationForm.value.lastname,
-        "phone": this.registrationForm.value.phone,
-        "email": this.registrationForm.value.email,
-        "country": this.registrationForm.value.country,
-        "state": this.registrationForm.value.state,
-        "city": this.registrationForm.value.city,
-        "pin": this.registrationForm.value.pin,
-        "address": this.registrationForm.value.address,
-        "prof_image": this.croppedImagePath,
-        "password": this.registrationForm.value.password,
-        "role": this.type,
-        "agreeterms": "Yes"
-      }
-      
+    // console.log(this.registrationForm.value);
+    console.log(this.selectState_id);
+    console.log(this.cityId);
+    if(this.selectState_id==undefined || this.cityId==undefined){
+      alert('Please Fill Details...')
     }
     else{
+    console.log('all good');
+    if (this.type == 'customer') {
       this.user_reg = {
         "firstname": this.registrationForm.value.firstname,
         "lastname": this.registrationForm.value.lastname,
         "phone": this.registrationForm.value.phone,
         "email": this.registrationForm.value.email,
-        'specialization':this.registrationForm.value.specialization,
-        'skills':this.registrationForm.value.skills,
-        'description':this.registrationForm.value.description,
-        'aboutme':this.registrationForm.value.aboutme,
-        "country": this.registrationForm.value.country,
-        "state": this.registrationForm.value.state,
-        "city": this.registrationForm.value.city,
+        "country": this.country_id,
+        "state": this.selectState_id,
+        "city": this.cityId,
+        "pin": this.registrationForm.value.pin,
+        "address": this.registrationForm.value.address,
+        "prof_image": this.croppedImagePath,
+        "password": this.registrationForm.value.password,
+        "role": this.type,
+        "agreeterms": "Yes"
+      }
+ console.log(this.user_reg)
+    }
+    else {
+      this.user_reg = {
+        "firstname": this.registrationForm.value.firstname,
+        "lastname": this.registrationForm.value.lastname,
+        "phone": this.registrationForm.value.phone,
+        "email": this.registrationForm.value.email,
+        'specialization': this.registrationForm.value.specialization,
+        'skills': this.registrationForm.value.skills,
+        'description': this.registrationForm.value.description,
+        'aboutme': this.registrationForm.value.aboutme,
+        "country": this.country_id,
+        "state": this.selectState_id,
+        "city": this.cityId,
         "pin": this.registrationForm.value.pin,
         "address": this.registrationForm.value.address,
         "prof_image": this.croppedImagePath,
@@ -430,16 +485,18 @@ console.log(state_data)
         "agreeterms": "Yes"
       }
     }
-  console.log(this.user_reg);
+    console.log(this.user_reg);
     this.user.present('wait..');
     this.auth.userRegister(this.user_reg).subscribe((response) => {
       this.user.dismiss();
       this.router.navigateByUrl('nav/login');
       console.log(response);
-    },err=>{
+    }, err => {
       this.user.dismiss();
-      console.log('user Register Error'+ JSON.stringify(err));
+      console.log('user Register Error' + JSON.stringify(err));
     })
+    }
+   
   }
   clickLogin() {
     this.router.navigateByUrl('nav/login')

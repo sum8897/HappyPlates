@@ -79,6 +79,7 @@ export class LoginComponent implements OnInit {
       }
      
     }, err => {
+      console.log(err)
       this.user.showToast(JSON.stringify(err.error.message));
     this.user.dismiss();
     })

@@ -45,7 +45,12 @@ export class AuthService {
 
   userRegister(body: any): Observable<any> {
     let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json ');
+    // headers.append('Content-Type', 'application/json ');
+    headers.append('Content-Type', 'multipart/form-data');
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('Access-Control-Allow-Origin', '*');
+    headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+    headers = headers.append('Connection', 'keep-alive');
     console.log(body)
     console.log(typeof body);
     return this.http.post(this.url + 'api/register', body, { headers: headers }).pipe(tap(res => {
@@ -55,7 +60,8 @@ export class AuthService {
   loginUser(b: any): Observable<any> {
 
     let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json ');
+    headers.append('Content-Type', 'multipart/form-data');
+    headers = headers.append('Access-Control-Allow-Origin', '*');
     return this.http.post(this.url + 'api/login', b, { headers: headers }
     ).pipe(
       tap((res) => {
@@ -67,8 +73,13 @@ export class AuthService {
   getMenuData() {
     let token = localStorage.getItem('amantran_token');
     var headers = new HttpHeaders();
-    headers = headers.append('Content-Type', 'application/json ');
-    headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+    // headers = headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'multipart/form-data');
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('Access-Control-Allow-Origin', '*');
+    headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+    headers = headers.append('Connection', 'keep-alive');
+    headers = headers.append("Authorization", 'Bearer'+' '+ token);
     return this.http.get(this.url + 'api/menus', { headers: headers }).pipe(tap(res => {
     }))
   }
@@ -77,8 +88,13 @@ export class AuthService {
   getAllChefData() {
     let token = localStorage.getItem('amantran_token');
     var headers = new HttpHeaders();
-    headers = headers.append('Content-Type', 'application/json ');
-    headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+    // headers = headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'multipart/form-data');
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('Access-Control-Allow-Origin', '*');
+    headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+    headers = headers.append('Connection', 'keep-alive');
+    headers = headers.append("Authorization", 'Bearer'+' '+ token);
     return this.http.get(this.url + 'api/chefs', { headers: headers }).pipe(tap(res => {
     }))
   }
@@ -86,16 +102,26 @@ export class AuthService {
 getAllTestimonials(){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json ');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/testimonials', { headers: headers }).pipe(tap(res => {
   }))
 }
 getAllLatestChefs(){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json ');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/users', { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -103,24 +129,39 @@ getAllLatestChefs(){
 getAllEvents(){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json ');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/events', { headers: headers }).pipe(tap(res => {
   }))
 }
 getSingleEvents(ev_id){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json ');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/events/show/'+ev_id, { headers: headers }).pipe(tap(res => {
   }))
 }
 getAllBlogs(){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json ');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/blogs', { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -128,16 +169,26 @@ getAllBlogs(){
 getSingleBlogs(id){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/blogs/show/'+id, { headers: headers }).pipe(tap(res => {
   }))
 }
 uploadSingleMenuImage(image){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.post(this.url + 'api/uploadmenufile',image, { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -145,8 +196,13 @@ uploadSingleMenuImage(image){
 uploadMenulist(chefmenu){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.post(this.url + 'api/menus',chefmenu, { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -154,16 +210,26 @@ uploadMenulist(chefmenu){
 getAboutUs(){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/aboutus', { headers: headers }).pipe(tap(res => {
   }))
 }
 getCart(){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/customercarts', { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -171,8 +237,13 @@ getCart(){
 addCartItem(cart_data:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.post(this.url + 'api/customercarts',cart_data, { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -181,8 +252,13 @@ addCartItem(cart_data:any){
 deleteCartItem(item_id:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.delete(this.url + 'api/customercarts/customercarts/'+item_id, { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -190,8 +266,13 @@ deleteCartItem(item_id:any){
 getSingleChefDataProfile(chef_id:any) {
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/chefs/show/'+chef_id, { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -199,8 +280,13 @@ getSingleChefDataProfile(chef_id:any) {
 getSingleChefsAllMenu(chef_id:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/menus/chefmenulist/'+chef_id, { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -208,8 +294,13 @@ getSingleChefsAllMenu(chef_id:any){
 getSingleMenuDetails(menu_id:any) {
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
-  headers = headers.append('Authorization', 'Bearer' + ' ' + token);
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.get(this.url + 'api/menus/show/'+menu_id, { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -217,12 +308,16 @@ getSingleMenuDetails(menu_id:any) {
 getUserProfile() {
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept', 'application/json');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append('Authorization', 'Bearer'+' '+ token);
   console.log(headers);
-  return this.http.get(this.url + 'api/users/details', { headers: headers }).pipe(tap(res => {
+  return this.http.post(this.url + 'api/users/details', { headers: headers }).pipe(tap(res => {
   }))
 }
 
@@ -230,7 +325,10 @@ getUserProfile() {
 checkoutApi(check_data:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
@@ -241,7 +339,10 @@ checkoutApi(check_data:any){
 orderHistroty(){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
@@ -251,7 +352,10 @@ orderHistroty(){
 updateProfileData(check_data:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
@@ -261,7 +365,10 @@ updateProfileData(check_data:any){
 getChefOrders() {
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append('Authorization', 'Bearer'+' '+ token);
@@ -272,7 +379,10 @@ getChefOrders() {
 passwordUpdate(check_data:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
@@ -283,7 +393,10 @@ passwordUpdate(check_data:any){
 deleteMenuByChef(menu_id:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
@@ -293,7 +406,10 @@ deleteMenuByChef(menu_id:any){
 editMenuByChef(check_data:any,id){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
@@ -303,7 +419,10 @@ editMenuByChef(check_data:any,id){
 postBlogs(blogs:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
@@ -315,7 +434,10 @@ postBlogs(blogs:any){
 getCountry() {
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append('Authorization', 'Bearer'+' '+ token);
@@ -327,7 +449,10 @@ getCountry() {
 getState(country_id:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
@@ -337,11 +462,14 @@ getState(country_id:any){
 getCities(state_id:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  headers = headers.append('Content-Type', 'application/json');
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
-  return this.http.post(this.url + 'api/cities',state_id, { headers: headers }).pipe(tap(res => {
+  return this.http.post(this.url + 'api/citys',state_id, { headers: headers }).pipe(tap(res => {
   }))
 }
 
