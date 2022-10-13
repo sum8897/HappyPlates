@@ -6,10 +6,10 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class UserService {
-  user_name;
+  user_name:any;
   user_type:any;
   chef_user:boolean;
-  menuData
+  menuData:any;
   customer_user:boolean;
   chef_id:any;
   constructor(public toast:ToastController,
@@ -165,13 +165,13 @@ export class UserService {
     {
       title : "Profile",
       url   : "/nav/profile",
-      icon  : "search-outline",
+      icon  : "person-outline",
       role: "customer"
     },
     {
       title : "Order History",
       url   : "/nav/order-history",
-      icon  : "search-outline",
+      icon  : "bag-outline",
       role: "customer"
     },
           {
@@ -189,12 +189,12 @@ export class UserService {
       {
         title : "Chef Profile",
         url   : "/nav/chef-profile",
-        icon  : "search-outline",
+        icon  : "person-outline",
         role: "chef"
       },
 
   ]
-  user_type1
+  user_type1:any;
   menu(){
     this.sideMenu=[];
     this.user_type1=localStorage.getItem('user_role');

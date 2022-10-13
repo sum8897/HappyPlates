@@ -54,9 +54,9 @@ allChefData(){
 }
 
 getImage(imgPath:any){
-  console.log(imgPath)
+  // console.log(imgPath);
  const endPath= imgPath.substring(60)
- console.log(endPath.length);
+//  console.log(endPath.length);
  if(endPath.length==0){
    return '../../../assets/img/chef_1.jpg'
  }

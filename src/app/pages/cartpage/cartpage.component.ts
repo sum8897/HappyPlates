@@ -167,6 +167,7 @@ export class CartpageComponent implements OnInit {
    alert('Please add instructions/Description...');
     }
     else{
+      console.log(this.user.user_location);
       this.check_data = {
         instructions: this.instructions,
         deliverystatus: "1",

@@ -103,7 +103,7 @@ export class SidenavPage implements OnInit {
       {
         title : "Chef Profile",
         url   : "/nav/chef-profile",
-        icon  : "search-outline",
+        icon  : "person-outline",
         role: "chef"
       },
 

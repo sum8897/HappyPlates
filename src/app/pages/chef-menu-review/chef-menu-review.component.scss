@@ -1,16 +1,108 @@
-.chef-segment{
-    margin-top: 25px;
-    margin-left: 20px;
-    margin-right: 20px;
-  .segment-button-checked{
-    background: red;
-    border-radius: 21px;
+.chef-segment {
+  margin-top  : 25px;
+  margin-left : 20px;
+  margin-right: 20px;
+
+  .segment-button-checked {
+    background       : red;
+    border-radius    : 21px;
     --indicator-color: none;
-    color: white;
-    letter-spacing: 0px;
+    color            : white;
+    letter-spacing   : 0px;
+  }
 }
+
+.register-segment {
+  background   : #dae5e9;
+  border-radius: 21px;
 }
-.register-segment{
-    background: #dae5e9;
-    border-radius: 21px;
+
+.rating_div {
+  border       : 1px solid #ebe8e8;
+  margin       : 10px;
+  border-radius: 21px;
+}
+
+.rating-order-wrp {
+  display: flex;
+  width  : 100%;
+
+  .d-flex {
+    display: flex;
+  }
+
+  .align-items-center {
+    align-items: center;
+  }
+
+  .w-25 {
+    width     : 25%;
+    margin-top: 40px;
+
+    .rating-average {
+      color      : #d32236;
+      font-weight: 900;
+      font-size  : 40px;
+    }
+
+    .ratings {
+      color: #171717;
+    }
+  }
+
+  .w-75 {
+    width: 75%;
+  }
+
+  .w-50 {
+
+    width       : 50%;
+    // font-size: 10px;
+  }
+
+  .rating-text {
+    font-size : 10px;
+    text-align: right;
+  }
+
+  .rating-list {
+    // border-top: 1px solid #ddd;
+    // padding: 15px 0;
+  }
+}
+
+::ng-deep label.star {
+  padding  : 0 5px !important;
+  font-size: 10px !important;
+  // color: #ddd !important;
+  color    : #d12235 !important;
+
+  &::before {
+    color     : #d12235 !important;
+    // content: "\f005" !important;
+  }
+
+  &:hover {
+    transform: rotate(0deg) scale(1.2) !important;
+  }
+}
+
+.skills_details {
+  margin: 20px 10px 20px 10px;
+
+  .skills_heading {
+    color         : #1c5c74;
+    font-weight   : 500;
+    font-size     : 18px;
+    padding-bottom: 5px;
+  }
+
+  .skills_text {
+    font-size  : 14px;
+    line-height: 1.2;
+  }
+
+  .skills_bottom {
+    margin-bottom: 40px;
+  }
 }
