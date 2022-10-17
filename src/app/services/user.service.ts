@@ -51,23 +51,37 @@ export class UserService {
   user_location;
   user_mobile:any;
   user_city:any;
+  user_city_id:any;
   user_state:any;
+  user_state_id:any;
   user_country:any;
+  user_country_id:any;
+  user_first_name:any;
+  user_last_name:any;
+  user_pin:any;
  userDetails(){
   //  this.present('wait..');
    this.auth.getUserProfile().subscribe((data)=>{
     //  this.dismiss();
-    //  console.log(data)
+     console.log(data)
      this.userRes=data;
      this.userData=this.userRes.data;
      this.userAllData=this.userData[0];
      this.specialization= this.userAllData.specialization;
+     this.user_first_name=this.userAllData.firstname;
+     this.user_last_name=this.userAllData.lastname;
+     this.user_pin=this.userAllData.pin;
      this.user_name=this.userAllData.firstname+" "+ this.userAllData.lastname;
-     this.user_location=this.userAllData.address +" "+this.userAllData.state+" "+this.userAllData.pin;
+     localStorage.setItem('user_name',this.user_name);
+     this.user_location=this.userAllData.address +" "+this.userAllData.state.state_name+" "+this.userAllData.pin;
      this.user_mobile=this.userAllData.phone;
-     this.user_city=this.userAllData.city;
-     this.user_state=this.userAllData.state;
-     this.user_country=this.userAllData.country;
+     localStorage.setItem('user_mobile',this.user_mobile);
+     this.user_city=this.userAllData.city.city_name;
+     this.user_city_id=this.userAllData.city.id;
+     this.user_state=this.userAllData.state.state_name;
+     this.user_state_id=this.userAllData.state.id;
+     this.user_country=this.userAllData.country.country_name;
+     this.user_country_id=this.userAllData.country.id;
      this.chef_id=this.userAllData.id;
     //  console.log(this.userAllData);
     //  console.log(this.specialization);

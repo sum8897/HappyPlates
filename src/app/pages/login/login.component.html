@@ -33,7 +33,7 @@
 <div class="check-checkbox">
   <ion-item lines='none'>
     <ion-label>Remember Me</ion-label>
-    <ion-checkbox slot="start" mode="md" class="remember-checkbox"></ion-checkbox>
+    <ion-checkbox slot="start" mode="md" name="check" #ng class="remember-checkbox" value="yes" (ionChange)="checkedValue($event)" ngModel></ion-checkbox>
   </ion-item>
 </div>
    <div class="forgot-div">

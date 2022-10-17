@@ -96,7 +96,7 @@ import { AddEventComponent } from './chefpage/add-event/add-event.component';
             SwiperModule,
             NgOtpInputModule,
             CommonModule,
-            HttpClientModule,
+            HttpClientModule,     
             
           ],
   providers: [ 

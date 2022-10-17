@@ -13,6 +13,7 @@ export class ChefMenuReviewComponent implements OnInit {
   type: string;
   menu = true;
   chef = false;
+  dateCard:boolean=false;
   menu_data:any;
   menu_data_list:any;
   ratingValue5:any=5;
@@ -187,7 +188,7 @@ export class ChefMenuReviewComponent implements OnInit {
     else{
       let body = {
         amount: menu_data.counter * menu_data.price,
-        deliverydate: "2022-09-02",
+        deliverydate: "2022-10-20",
         description: "Added One itmes only",
         qtty: menu_data.counter,
         menuId: menu_data.id

@@ -474,9 +474,12 @@ export class RegisterComponent implements OnInit {
         'skills': this.registrationForm.value.skills,
         'description': this.registrationForm.value.description,
         'aboutme': this.registrationForm.value.aboutme,
-        "country": this.country_id,
-        "state": this.selectState_id,
-        "city": this.cityId,
+        // "country": this.country_id,
+        // "state": this.selectState_id,
+        // "city": this.cityId,
+        "country": 'India',
+        "state": 'Up',
+        "city": 'Mirzapur',
         "pin": this.registrationForm.value.pin,
         "address": this.registrationForm.value.address,
         "prof_image": this.croppedImagePath,
@@ -490,6 +493,7 @@ export class RegisterComponent implements OnInit {
     this.auth.userRegister(this.user_reg).subscribe((response) => {
       this.user.dismiss();
       this.router.navigateByUrl('nav/login');
+      this.user.showToast('You are register successfully...');
       console.log(response);
     }, err => {
       this.user.dismiss();

@@ -93,9 +93,9 @@ export class MainpageComponent implements OnInit {
 
 
   menuData() {
-    this.user.present('...');
+    // this.user.present('...');
     this.auth.getMenuData().subscribe((data) => {
-      this.user.dismiss();
+      // this.user.dismiss();
       // console.log(data);
      
       this.menu_data = data;
@@ -115,7 +115,7 @@ filterTermss=[];
   chefsResp: any;
   chefsRespoData: any;
   chefAllData() {
-    this.user.present('...')
+    // this.user.present('...');
     this.auth.getAllChefData().subscribe((res) => {
       this.user.dismiss();
       // console.log(res)
@@ -144,7 +144,7 @@ filterTermss=[];
   filterItemProfession() {
     this.filterTermProfession = [];
     this.filterTermss = this.chefsRespoData.filter(item => item.firstname.toLowerCase().indexOf(this.searchTermProfession.toLowerCase()) > -1);
-    // console.log(this.filterTermss);
+    console.log(this.filterTermss);
     for (let i = 0; i < this.filterTermss.length; i++) {
       this.filterTermProfession[i] = [{
         "id": this.filterTermss[i].id,
@@ -184,6 +184,17 @@ filterTermss=[];
   getImage(imgPath:any){
     // console.log(imgPath)
    const endPath= imgPath.substring(60)
+  //  console.log(endPath.length);
+   if(endPath.length==0){
+     return '../../../assets/img/chef_1.jpg'
+   }
+   else{
+     return imgPath;
+   }
+  }
+  getblogImage(imgPath:any){
+    // console.log(imgPath)
+   const endPath= imgPath.substring(62)
   //  console.log(endPath.length);
    if(endPath.length==0){
      return '../../../assets/img/chef_1.jpg'

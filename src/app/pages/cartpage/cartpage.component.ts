@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController, IonDatetime } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { format, parseISO } from 'date-fns';
+
 
 @Component({
   selector: 'app-cartpage',
@@ -10,12 +13,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CartpageComponent implements OnInit {
 
-  
+  showPicker=false;
+  dateValue=format(new Date(),'yyyy-mm-dd')+'T09:00:00.000Z';
+  formateString='';
+  @ViewChild(IonDatetime) datetime:IonDatetime;
   constructor(public user: UserService,
               public auth: AuthService,
-              public alertController: AlertController) {
+              public alertController: AlertController,
+              public router:Router) {
               this.user.menu();
               this.getcartItem();
+              this.setToday();
   }
 
   ngOnInit() { }
@@ -120,6 +128,22 @@ export class CartpageComponent implements OnInit {
     })
   }
 
+  setToday(){
+    this.formateString = format(parseISO(format(new Date (),'yyyy-MM-dd')+'T09:00:00.000Z'),
+                        'HH:mm,mmM d,yyyy');
+                        console.log(this.formateString)
+  }
+  dateChanged(value:any){
+this.dateValue=value;
+this.formateString=format(parseISO(value),'HH:mm,mmM d, yyyyy');
+this.showPicker=false;
+  }
+  close(){
+    this.datetime.cancel(true);
+  }
+  select(){
+    this.datetime.confirm(true);
+  }
   instructions:any;
   async placeOrder() {
     const alert = await this.alertController.create({
@@ -173,16 +197,19 @@ export class CartpageComponent implements OnInit {
         deliverystatus: "1",
         contactNumber: this.user.user_mobile,
         address: this.user.user_location,
-        country: this.user.user_country,
-        city: this.user.user_city,
-        state: this.user.user_state,
+        country: this.user.user_country_id,
+        city: this.user.user_city_id,
+        state: this.user.user_state_id,
+        deliverydate: "2022-10-20",
         addresslat: 3443.44,
         addresslong: 434.444
       }
+      console.log(this.check_data)
       this.user.present('');
       this.auth.checkoutApi(this.check_data).subscribe((data) => {
         this.user.dismiss();
-        this.user.showToast('Your order successfully placeed. We will Notify Soon')
+        this.router.navigateByUrl('/nav/order-history')
+        this.user.showToast('Your order successfully placeed. We will Notify Soon');
       }, err => {
         this.user.dismiss();
       })
