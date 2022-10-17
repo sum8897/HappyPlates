@@ -14,6 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient,
     public router: Router,) { }
   url='http://103.139.58.242/~clientpro/bonhomey/public/';
+  // url='http://103.139.58.242/~clientpro/bonhomey/apitest/test.php/'
 
   isAuthenticated():any{
     let token = localStorage.getItem('amantran_token')
@@ -173,6 +174,19 @@ getSingleBlogs(id){
   return this.http.get(this.url + 'api/blogs/show/'+id, { headers: headers }).pipe(tap(res => {
   }))
 }
+ 
+// getUserShow(id){
+//   let token = localStorage.getItem('amantran_token');
+//   var headers = new HttpHeaders();
+//   headers.append('Content-Type', 'multipart/form-data');
+//   headers = headers.append('Accept', 'application/json');
+//   headers = headers.append('Access-Control-Allow-Origin', '*');
+//   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+//   headers = headers.append('Connection', 'keep-alive');
+//   headers = headers.append("Authorization", 'Bearer'+' '+ token);
+//   return this.http.get(this.url + 'api/blogs/show/'+id, { headers: headers }).pipe(tap(res => {
+//   }))
+// }
 uploadSingleMenuImage(image){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
@@ -302,16 +316,14 @@ getSingleMenuDetails(menu_id:any) {
 getUserProfile() {
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  // headers = headers.append('Content-Type', 'application/json');
   headers.append('Content-Type', 'multipart/form-data');
   headers = headers.append('Accept', 'application/json');
   headers = headers.append('Access-Control-Allow-Origin', '*');
-  headers = headers.append('Accept', 'application/json');
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
-  headers = headers.append('Authorization', 'Bearer'+' '+ token);
+  headers = headers.append('Authorization', 'Bearer'+' '+ token.replace(/^\s+|\s+$/gm,''));
   console.log(headers);
-  return this.http.post(this.url + 'api/users/details', { headers: headers }).pipe(tap(res => {
+  return this.http.get(this.url + 'api/users/details', { headers: headers }).pipe(tap(res => {
   }))
 }
 

@@ -112,6 +112,8 @@ export class SidenavPage implements OnInit {
   constructor(private router: Router,
     public menuCtrl: MenuController,
     public user: UserService) {
+      this.user.user_name=localStorage.getItem('user_name');
+     
     this.user_type=localStorage.getItem('user_role');
     this.NAV.filter((data)=>{
       if(data.role===this.user_type){
@@ -134,11 +136,16 @@ export class SidenavPage implements OnInit {
   
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.user.userDetails();
+  }
   logout(){
     localStorage.clear();
     localStorage.removeItem('amantran_token');
     this.menuCtrl.close();
     this.router.navigate(['nav/login']);
+  }
+  editProfile(){
+    this.router.navigateByUrl('profile')
   }
 }

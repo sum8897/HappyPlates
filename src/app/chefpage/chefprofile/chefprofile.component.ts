@@ -193,12 +193,12 @@ export class ChefprofileComponent implements OnInit {
   }
   menulist: any;
   onMenuSubmit(contactMenuForm: any) {
-    alert(typeof (this.user.chef_id));
+    // alert(typeof (this.user.chef_id));
     console.log(contactMenuForm.value);
     this.menulist = contactMenuForm.value;
     console.log("form" + JSON.stringify(contactMenuForm.value));
     let menuList = {
-      userId: (this.user.chef_id).toString(),
+      userId: (this.user.chef_id),
       title: contactMenuForm.value.foodname,
       description: contactMenuForm.value.details,
       price: contactMenuForm.value.regular_price,

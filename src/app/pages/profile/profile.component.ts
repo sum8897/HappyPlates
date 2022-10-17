@@ -120,22 +120,28 @@ stateCard = false;
   city_res: any;
   cityshow() {
     console.log('city show...');
-    this.cityCard = true;
+   
     this.cityList(this.selectState_id);
   }
   cityList(state_id: any) {
-    console.log(state_id)
-    let body = {
-      state_id: state_id,
+    console.log(state_id);
+    if(state_id==undefined){
+      alert('Please you have to select state first...')
+    }else{
+      this.cityCard = true;
+      let body = {
+        state_id: state_id,
+      }
+      this.user.present('');
+      this.auth.getCities(body).subscribe(state_data => {
+        this.city_res = state_data;
+        this.city_data = this.city_res.city;
+        this.user.dismiss();
+      }, err => {
+        this.user.dismiss();
+      })
     }
-    this.user.present('');
-    this.auth.getCities(body).subscribe(state_data => {
-      this.city_res = state_data;
-      this.city_data = this.city_res.city;
-      this.user.dismiss();
-    }, err => {
-      this.user.dismiss();
-    })
+ 
   }
   cityname:any;
   cityId:any;

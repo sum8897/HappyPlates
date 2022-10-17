@@ -6,9 +6,9 @@
       </div>
       <div class="user-details">
         <!-- <h3>{{user.user_name}}</h3> -->
-        <h3>Ashish</h3>
-        <div class="user-contact"><ion-icon name="call-outline"></ion-icon><p class="contact">7897196188</p></div>
-        <div class="ediit-menu-prfile"><ion-icon class="edit-menu-image" name="pencil-outline"></ion-icon></div>
+        <h3>{{user.user_name}}</h3>
+        <div class="user-contact"><ion-icon name="call-outline"></ion-icon><p class="contact">{{user.user_mobile}}</p></div>
+        <div class="ediit-menu-prfile" (click)="editProfile()"><ion-icon class="edit-menu-image" name="pencil-outline"></ion-icon></div>
       </div>
     </div>
 
