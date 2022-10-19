@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, IonDatetime, Platform } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-chef-menu-review',
@@ -10,6 +11,12 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./chef-menu-review.component.scss'],
 })
 export class ChefMenuReviewComponent implements OnInit {
+  descriptionValue:any;
+  showPicker=false;
+  dateValue=format(new Date(),'yyyy-MM-dd')+'T05:00:00.000Z';
+  formateString='';
+  @ViewChild(IonDatetime) datetime:IonDatetime;
+
   type: string;
   menu = true;
   chef = false;
@@ -32,6 +39,7 @@ export class ChefMenuReviewComponent implements OnInit {
     console.log(this.user.chef_id.id);
     this.chefProfileGet(this.user.chef_id.id);
     this.menuData(this.user.chef_id.id);
+    this.setToday();
   }
   ionViewWillEnter() {
 
@@ -55,6 +63,75 @@ export class ChefMenuReviewComponent implements OnInit {
     }
 
   }
+
+  setToday(){
+    this.formateString = format(parseISO(format(new Date (),'yyyy-MM-dd')+'T09:00:00.000Z'),
+                        'yyyy-MM-dd');
+                        console.log(this.formateString)
+  }
+  dateChanged(value:any){
+this.dateValue=value;
+this.formateString=format(parseISO(value),'yyyy-MM-dd HH:mm:ssXXX');
+this.showPicker=false;
+console.log(this.dateValue);
+console.log(this.formateString);
+console.log(this.descriptionValue);
+  }
+  addToCart(){
+// if(this.descriptionValue===undefined){
+  // console.log(this.descriptionValue.length);
+//  alert('Pleas add description about your order...')
+//   console.log('Please add description...');
+//   console.log(this.dateValue);
+//   console.log(this.formateString);
+
+// }else{
+  console.log(this.dateValue);
+  console.log(this.formateString);
+  console.log(this.descriptionValue);
+
+ let body = {
+  amount: this.selectedMenuData.counter * this.selectedMenuData.price,
+  deliverydate: this.formateString,
+  description: this.descriptionValue,
+  qtty: this.selectedMenuData.counter,
+  menuId: this.selectedMenuData.id
+}
+console.log(body)
+this.user.present('');
+this.auth.addCartItem(body).subscribe((item_res) => {
+  this.router.navigateByUrl('/nav/cart')
+  this.user.dismiss();
+  this.dateCard=false;
+  console.log(item_res);
+}, err => {
+  this.user.dismiss();
+  console.log(err)
+})
+
+// }
+  }
+  selectedMenuData:any='';
+  addItemClick(menu_data: any) {
+  this.selectedMenuData=menu_data;
+  console.log(this.selectedMenuData);
+    if(menu_data.counter=='0'){
+      alert('You have to select minimum one item...');
+    }
+    else{
+      this.dateCard=true;
+     
+      
+    }
+  
+  }
+  close(){
+    this.datetime.cancel(true);
+  }
+  select(){
+    this.datetime.confirm(true);
+  }
+
   segmentChanged(ev: any) {
     this.type = ev.detail.value;
     if (this.type == 'menu') {
@@ -181,31 +258,7 @@ export class ChefMenuReviewComponent implements OnInit {
      return imgPath;
    }
   }
-  addItemClick(menu_data: any) {
-    if(menu_data.counter=='0'){
-      alert('You have to select minimum one item...');
-    }
-    else{
-      let body = {
-        amount: menu_data.counter * menu_data.price,
-        deliverydate: "2022-10-20",
-        description: "Added One itmes only",
-        qtty: menu_data.counter,
-        menuId: menu_data.id
-      }
-      console.log(body)
-      this.user.present('');
-      this.auth.addCartItem(body).subscribe((item_res) => {
-        this.router.navigateByUrl('/nav/cart')
-        this.user.dismiss();
-        console.log(item_res);
-      }, err => {
-        this.user.dismiss();
-        console.log(err)
-      })
-    }
-  
-  }
+ 
 
 
 

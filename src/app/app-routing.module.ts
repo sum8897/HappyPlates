@@ -17,6 +17,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { ForgotpassComponent } from './pages/forgotpass/forgotpass.component';
 import { ItemListComponent } from './pages/item-list/item-list.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
 import { MenudetailsComponent } from './pages/menudetails/menudetails.component';
@@ -30,110 +31,7 @@ import { ViewallchefComponent } from './pages/viewallchef/viewallchef.component'
 import { AuthGuardGuard } from './services/auth-guard.guard';
 
 
-if (localStorage.getItem('chef') == 'chef') {
 
-} else {
-  const routes: Routes = [
-    {
-      path: 'home',
-      loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-    },
-    // {
-    //   path: '',
-    //   redirectTo: 'mainpage',
-    //   pathMatch: 'full'
-    // },
-    { path: 'mainpage', component: MainpageComponent, canActivate: [AuthGuardGuard] },
-    {
-      path: 'nav/mainpage',
-      component: MainpageComponent
-    },
-    {
-      path: 'nav/event',
-      component: EventsComponent
-    },
-    {
-      path: 'nav/event-details',
-      component: EventDetailsComponent
-    },
-    {
-      path: 'login',
-      component: LoginComponent
-    },
-    {
-      path: 'register',
-      component: RegisterComponent
-    },
-    {
-      path: 'nav/otp',
-      component: OtpComponent
-    },
-    {
-      path: 'nav/contactus',
-      component: ContactusComponent
-    },
-    {
-      path: 'nav/about',
-      component: AboutusComponent
-    },
-    {
-      path: 'nav/blog-all',
-      component: BlogComponent
-    },
-    {
-      path: 'nav/blog-details',
-      component: BlogdetailsComponent
-    },
-    {
-      path: 'nav/chefaccount',
-      component: ChefaccountComponent
-    },
-    {
-      path: 'nav/cart',
-      component: CartpageComponent
-    },
-    {
-      path: 'nav/item-list',
-      component: ItemListComponent
-    },
-    {
-      path: 'nav/profile',
-      component: ProfileComponent
-    },
-    {
-      path: 'nav/faq',
-      component: FaqComponent
-    },
-    {
-      path: 'nav/chef-menu-review',
-      component: ChefMenuReviewComponent
-    },
-    {
-      path: 'nav/payment',
-      component: PaymentPageComponent
-    },
-    {
-      path: 'nav/search',
-      component: SearchComponent
-    },
-    {
-      path: 'nav/menu-details',
-      component: MenudetailsComponent
-    },
-    {
-      path: 'nav/edit-menu',
-      component: EditmenuComponent
-    },
-    {
-      path: 'nav/order-history',
-      component: OrderHistryComponent
-    },
-    {
-      path: 'sidenav',
-      loadChildren: () => import('./sidenav/sidenav.module').then(m => m.SidenavPageModule)
-    },
-  ];
-}
 const routes: Routes = [
   {
     path: 'home',
@@ -143,11 +41,11 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./sidenav/sidenav.module').then(m => m.SidenavPageModule)
   },
-  // {
-  //   path: '',
-  //   redirectTo: 'mainpage',
-  //   pathMatch: 'full'
-  // },
+  {
+    path: '',
+    redirectTo: 'loginpage',
+    pathMatch: 'full'
+  },
   // { path: 'mainpage', component: MainpageComponent, canActivate: [AuthGuardGuard]},
   {
     path: 'nav/mainpage',
@@ -164,6 +62,10 @@ const routes: Routes = [
   {
     path: 'nav/login',
     component: LoginComponent
+  },
+  {
+    path: 'loginpage',
+    component: LoginPageComponent
   },
   {
     path: 'register',

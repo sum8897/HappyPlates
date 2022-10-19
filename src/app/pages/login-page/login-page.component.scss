@@ -1,0 +1,169 @@
+.login-container {
+    height: 100vh;
+}
+
+.bg-image {
+    height: 35vh;
+    width : 100%;
+}
+
+.login-input {
+    height                 : 65vh;
+    border-top-left-radius : 21px;
+    border-top-right-radius: 21px;
+    width                  : 100%;
+    background-color       : #fff;
+    right                  : 0;
+    bottom                 : 0;
+    // margin-top: -5vh;
+    opacity                : 0.9;
+    margin-top             : -50px;
+}
+
+.app-name {
+    text-align : center;
+    padding-top: 7px;
+
+    h1 {
+        font-size     : 35px;
+        font-weight   : 500;
+        letter-spacing: 1px;
+        line-height   : 20px;
+        color         : #1c5c75;
+    }
+
+    span {
+        font-size  : 11px;
+        font-weight: 500;
+    }
+}
+
+.label-float {
+    position   : relative;
+    padding-top: 13px;
+    margin     : 0 30px;
+
+    &.invalid {
+        label {
+            color: #f53d3d !important;
+        }
+
+        input {
+            border: 2px solid #f53d3d !important;
+        }
+    }
+
+    ion-input {
+        background-color  : transparent;
+        border            : 2px solid #e1eaec;
+        border-radius     : 21px;
+        outline           : none;
+        min-width         : 100%;
+        padding           : 15px 0;
+        font-size         : 15px;
+        transition        : all 0.1s linear;
+        -webkit-transition: all 0.1s linear;
+        -moz-transition   : all 0.1s linear;
+        -webkit-appearance: none;
+        padding-left: 15px;
+        &:focus {
+            border: 2px solid #e1eaec;
+        }
+
+        &::placeholder {
+            color: black;
+        }
+    }
+
+    label {
+        color             : black;
+        pointer-events    : none;
+        position          : absolute;
+        // top: calc(50% - 8px);
+        top               : 0;
+        left              : 20px;
+        transition        : all 0.1s linear;
+        -webkit-transition: all 0.1s linear;
+        -moz-transition   : all 0.1s linear;
+        background-color  : white;
+        background: white;
+        padding-top       : 5px;
+        margin-left       : 3px;
+        padding-left      : 5px;
+        padding-right     : 8px;
+        box-sizing        : border-box;
+    }
+}
+
+.label-float ion-input:focus+label,
+ion-input:not(:placeholder-shown):not(.invalid)+label {
+    font-size: 12px;
+    top: 3px;
+    color    : #000;
+    background: white;
+    z-index: 9999;
+}
+
+.label-float ion-input:not(:focus):not(:placeholder-shown):not(.invalid)+label {
+    font-size: 12px;
+    top: 3px;
+    color    : #000;
+}
+
+.span-star {
+    color       : red;
+    padding-left: 5px;
+}
+
+.remember-forgot {
+    display        : inline-flex;
+    justify-content: space-around;
+    width          : 100%;
+
+    .remember-checkbox {
+        margin-right: 10px;
+    }
+    .check-checkbox{
+        ion-label{
+            font-size: 13px;
+        }
+    }
+}
+
+.login-input-value {
+    margin: 29px 0 10px 0;
+}
+
+.forgot-div {
+    .forgot-p {
+        color          : #1e5c75;
+        opacity        : 1;
+        font-weight    : 500;
+        text-decoration: underline;
+        font-size: 13px;
+        margin-top: 18px;
+        padding-right: 25px;
+    }
+}
+.submit-div{
+    text-align: center;
+    width: 100%;
+    .submit-login-button{
+        --background: #1c5c75;
+        border-radius: 21px;
+        width: 80%;
+    }
+}
+.create-new-account{
+    text-align: center;
+    margin-top: 30px;
+    .create-account-p{
+        font-size: 15px;
+    }
+    a{
+        color: #1c5c75;
+        margin-left: 5px;
+        text-decoration: underline;
+        opacity: 1;
+    }
+}

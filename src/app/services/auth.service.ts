@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-
   constructor(private http: HttpClient,
     public router: Router,) { }
   url='http://103.139.58.242/~clientpro/bonhomey/public/';
@@ -22,15 +21,6 @@ export class AuthService {
       if (token)
         {
           return true;
-      //       if(user_type=="admin"){
-      //   console.log('admin')
-      //   this.router.navigateByUrl('/nav/chef-home');
-       
-      // }else{
-      //   this.router.navigateByUrl('/nav/mainpage');
-       
-      // }
-          
         } else {
           return false;
         }
@@ -40,20 +30,16 @@ export class AuthService {
 
   userRegister(body: any): Observable<any> {
     let headers = new HttpHeaders();
-    // headers.append('Content-Type', 'application/json ');
     headers.append('Content-Type', 'multipart/form-data');
     headers = headers.append('Accept', 'application/json');
     headers = headers.append('Access-Control-Allow-Origin', '*');
     headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
     headers = headers.append('Connection', 'keep-alive');
-    console.log(body)
-    console.log(typeof body);
     return this.http.post(this.url + 'api/register', body, { headers: headers }).pipe(tap(res => {
     }))
   }
 
   loginUser(b: any): Observable<any> {
-
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     headers = headers.append('Access-Control-Allow-Origin', '*');

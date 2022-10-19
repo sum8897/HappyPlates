@@ -40,6 +40,7 @@ public form: FormGroup;
   userAllData: any;
   user_location;
   user_phone;
+  user_image:any;
   userDetails() {
     this.user.present('');
     this.auth.getUserProfile().subscribe((data) => {
@@ -47,6 +48,7 @@ public form: FormGroup;
       this.userRes = data;
       this.userData = this.userRes.data;
       this.userAllData = this.userData[0];
+      this.user_image= this.userAllData.prof_image;
       this.user_name = this.userAllData.firstname + " " + this.userAllData.lastname;
       this.user_phone=this.userAllData.phone;
       this.user_location = this.userAllData.address+ this.userAllData.city+" "+this.userAllData.state+" "+ this.userAllData.pin;

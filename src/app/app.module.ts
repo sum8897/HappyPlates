@@ -52,6 +52,7 @@ import { EditmenuComponent } from './chefpage/editmenu/editmenu.component';
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { UploadBlogComponent } from './pages/upload-blog/upload-blog.component';
 import { AddEventComponent } from './chefpage/add-event/add-event.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { AddEventComponent } from './chefpage/add-event/add-event.component';
                  OrderHistryComponent,
                  EditmenuComponent,
                  UploadBlogComponent,
-                 AddEventComponent
+                 AddEventComponent,
+                 LoginPageComponent,
 
                 ],
   entryComponents: [],

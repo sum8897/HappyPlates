@@ -81,12 +81,12 @@ export class AppComponent {
       this.user.userDetails();
     })
     // alert('initialisation...');
-    if(localStorage.getItem('user_role')=="chef"){
-      this.router.navigateByUrl('/nav/chef-home')
-    }
-    else if(localStorage.getItem('user_role')=="customer"){
-      this.router.navigateByUrl('/nav/mainpage')
-    }
+    // if(localStorage.getItem('user_role')=="chef"){
+    //   this.router.navigateByUrl('/nav/chef-home')
+    // }
+    // else if(localStorage.getItem('user_role')=="customer"){
+    //   this.router.navigateByUrl('/nav/mainpage')
+    // }
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
