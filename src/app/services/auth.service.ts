@@ -22,14 +22,6 @@ export class AuthService {
       if (token)
         {
           return true;
-      //       if(user_type=="admin"){
-      //   console.log('admin')
-      //   this.router.navigateByUrl('/nav/chef-home');
-       
-      // }else{
-      //   this.router.navigateByUrl('/nav/mainpage');
-       
-      // }
           
         } else {
           return false;

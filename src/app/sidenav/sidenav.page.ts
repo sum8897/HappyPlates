@@ -112,8 +112,7 @@ export class SidenavPage implements OnInit {
   constructor(private router: Router,
     public menuCtrl: MenuController,
     public user: UserService) {
-      this.user.user_name=localStorage.getItem('user_name');
-     
+      this.user.user_name=localStorage.getItem('user_name'); 
     this.user_type=localStorage.getItem('user_role');
     this.NAV.filter((data)=>{
       if(data.role===this.user_type){
@@ -124,11 +123,11 @@ export class SidenavPage implements OnInit {
     console.log(this.sideMenu)
     if(this.sideMenu.length===0){
       console.log('length zero');
-      this.router.navigateByUrl('/nav/login')
+      this.router.navigateByUrl('nav/login')
     }else{
       console.log('length found');
       this.router.events.subscribe((event: RouterEvent) => {
-        // console.log(event)
+
         this.active = event.url
       });
     }
@@ -143,7 +142,7 @@ export class SidenavPage implements OnInit {
     localStorage.clear();
     localStorage.removeItem('amantran_token');
     this.menuCtrl.close();
-    this.router.navigate(['nav/login']);
+    this.router.navigate(['register']);
   }
   editProfile(){
     this.router.navigateByUrl('profile')

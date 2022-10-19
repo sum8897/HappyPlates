@@ -37,56 +37,37 @@ export class AppComponent {
               public user: UserService,
               public networkProvider:NetworkStatusService
   ) {
-    // this.user.user_type=localStorage.getItem('user_role');
-    // this.user.user_name=localStorage.getItem('user_name');
-    
-    // console.log(this.user.user_name)
-  
-    // this.sideMenuAdmin();
     this.initializeApp();
     this.sideMenu();
     this.backButtonEvent();
-    // if(this.user.user_type=="admin"){
-    //   this.sideMenuAdmin();
-    // this.user.chef_user=true;
-    // this.user.customer_user=false;
-    // console.log("admin chef user")
-    // }else{
-    //   this.sideMenu();
-    //   this.user.chef_user=false;
-    // this.user.customer_user=true;
-    // }
-    
-    // this.menuData=this.navigate.filter(data=>{
-    //   if(data.role==this.user_type){
-    //     console.log(typeof(data))
-    //     return this.menuData  ;
-    //   }
-    // })
-
-    //  this.NetworkButtonEvent()
      window.addEventListener('offline',()=>{
        this.openAlert();
      })
  
-     
   }
  ngOnInit(){
   this.sideMenu()
-  // this.user.menuData=this.navigate
-  // console.log(this.menuData)
  }
   initializeApp() {
     this.platform.ready().then(()=>{
-      this.user.userDetails();
+      // this.user.userDetails();
     })
-    // alert('initialisation...');
-    if(localStorage.getItem('user_role')=="chef"){
-      this.router.navigateByUrl('/nav/chef-home')
-    }
-    else if(localStorage.getItem('user_role')=="customer"){
-      this.router.navigateByUrl('/nav/mainpage')
-    }
+  //   alert('initialisation...');
+  // console.log(localStorage.getItem('amantran_token'));
+  // if(localStorage.getItem('amantran_token')==null){
+  //   alert('token not found');
+  //   this.router.navigateByUrl('/nav/login')
+  // }else{
+  //   console.log('token found')
+  //   if(localStorage.getItem('user_role')=="chef"){
+  //     this.router.navigateByUrl('/nav/chef-home')
+  //   }
+  //   else if(localStorage.getItem('user_role')=="customer"){
+  //     this.router.navigateByUrl('/nav/mainpage')
+  //   }
+  // }
+    
+  
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

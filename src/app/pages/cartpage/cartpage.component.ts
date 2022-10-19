@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, IonDatetime } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { format, parseISO } from 'date-fns';
+// import { format, parseISO } from 'date-fns';
 
 
 @Component({
@@ -13,9 +13,9 @@ import { format, parseISO } from 'date-fns';
 })
 export class CartpageComponent implements OnInit {
 
-  showPicker=false;
-  dateValue=format(new Date(),'yyyy-mm-dd')+'T09:00:00.000Z';
-  formateString='';
+  // showPicker=false;
+  // dateValue=format(new Date(),'yyyy-mm-dd')+'T09:00:00.000Z';
+  // formateString='';
   @ViewChild(IonDatetime) datetime:IonDatetime;
   constructor(public user: UserService,
               public auth: AuthService,
@@ -23,7 +23,7 @@ export class CartpageComponent implements OnInit {
               public router:Router) {
               this.user.menu();
               this.getcartItem();
-              this.setToday();
+              // this.setToday();
   }
 
   ngOnInit() { }
@@ -128,16 +128,16 @@ export class CartpageComponent implements OnInit {
     })
   }
 
-  setToday(){
-    this.formateString = format(parseISO(format(new Date (),'yyyy-MM-dd')+'T09:00:00.000Z'),
-                        'HH:mm,mmM d,yyyy');
-                        console.log(this.formateString)
-  }
-  dateChanged(value:any){
-this.dateValue=value;
-this.formateString=format(parseISO(value),'HH:mm,mmM d, yyyyy');
-this.showPicker=false;
-  }
+//   setToday(){
+//     this.formateString = format(parseISO(format(new Date (),'yyyy-MM-dd')+'T09:00:00.000Z'),
+//                         'HH:mm,mmM d,yyyy');
+//                         console.log(this.formateString)
+//   }
+//   dateChanged(value:any){
+// this.dateValue=value;
+// this.formateString=format(parseISO(value),'HH:mm,mmM d, yyyyy');
+// this.showPicker=false;
+//   }
   close(){
     this.datetime.cancel(true);
   }
