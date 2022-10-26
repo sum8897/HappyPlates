@@ -200,7 +200,7 @@ export class CartpageComponent implements OnInit {
         country: this.user.user_country_id,
         city: this.user.user_city_id,
         state: this.user.user_state_id,
-        deliverydate: "2022-10-20",
+        deliverydate: "2022-10-29 09:20:10",
         addresslat: 3443.44,
         addresslong: 434.444
       }
