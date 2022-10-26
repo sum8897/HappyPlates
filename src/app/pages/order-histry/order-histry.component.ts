@@ -27,6 +27,11 @@ orderedData:any;
       this.orderedData=this.orderedRes.data;
       this.user.dismiss();
   console.log(this.orderedData);
+  if(this.orderedData.length==0){
+    console.log('empty data')
+  }else{
+    console.log('Not Empty ')
+  }
     },err=>{
       this.user.dismiss();
       console.log(err)

@@ -63,7 +63,7 @@ export class ChefMenuReviewComponent implements OnInit {
     }
 
   }
-
+  formateString_api:any;
   setToday(){
     this.formateString = format(parseISO(format(new Date (),'yyyy-MM-dd')+'T09:00:00.000Z'),
                         'yyyy-MM-dd');
@@ -71,7 +71,8 @@ export class ChefMenuReviewComponent implements OnInit {
   }
   dateChanged(value:any){
 this.dateValue=value;
-this.formateString=format(parseISO(value),'yyyy-MM-dd HH:mm:ssXXX');
+this.formateString=format(parseISO(value),'dd/MM/yyyy hh:mm a');
+this.formateString_api=format(parseISO(value),'yyyy-MM-dd hh:mm:ss');
 this.showPicker=false;
 console.log(this.dateValue);
 console.log(this.formateString);
@@ -89,10 +90,11 @@ console.log(this.descriptionValue);
   console.log(this.dateValue);
   console.log(this.formateString);
   console.log(this.descriptionValue);
+  console.log(this.formateString_api);
 
  let body = {
   amount: this.selectedMenuData.counter * this.selectedMenuData.price,
-  deliverydate: this.formateString,
+  deliverydate: this.formateString_api,
   description: this.descriptionValue,
   qtty: this.selectedMenuData.counter,
   menuId: this.selectedMenuData.id
@@ -209,7 +211,17 @@ this.auth.addCartItem(body).subscribe((item_res) => {
       this.chef_name = this.chef_prof_res.data.firstname +" "+ this.chef_prof_res.data.lastname;
       this.chef_pro_img = this.chef_prof_res.data.prof_image;
       console.log(this.chef_pro_img);
- 
+      const endPath= this.chef_pro_img;
+
+      if(endPath==0){
+    console.log('length zero')
+        this.none=true;
+        this.no_none=false;
+      }else{
+   console.log('image found..')
+        this.none=false;
+        this.no_none=true;
+      }
       this.chef_specialisation = (this.chef_prof_res.data.specialization);
     }, err => {
       console.log(err)
