@@ -17,6 +17,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { ForgotpassComponent } from './pages/forgotpass/forgotpass.component';
 import { ItemListComponent } from './pages/item-list/item-list.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
 import { MenudetailsComponent } from './pages/menudetails/menudetails.component';
@@ -63,7 +64,7 @@ const routes: Routes = [
   },
   {
     path: 'loginpage',
-    component: LoginComponent
+    component: LoginPageComponent
   },
   {
     path: 'register',

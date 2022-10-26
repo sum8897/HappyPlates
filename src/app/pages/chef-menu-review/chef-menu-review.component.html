@@ -45,12 +45,12 @@
       </ion-segment>
     </div>
     <div class="chef-menu" *ngIf='menu'>
-      <ion-card style="border-radius: 11px;" *ngFor="let menu of menu_data_list">
+      <ion-card style="border-radius: 11px;" *ngFor="let menu of menu_data_list_all">
         <div style="display: inline-flex;width: 100%;">
           <div class="item-menu" style="display: inline-flex;width: 90%;">
             <div><img style="width: 85px;
              height: 85px;
-             border-radius: 11px;margin: 7px 0 5px 6px;" src="{{menu.medias[0].path}}">
+             border-radius: 11px;margin: 7px 0 5px 6px;" src="{{menu.path}}">
             </div>
             <div style="display: block;
          padding-left: 10px;
@@ -60,8 +60,13 @@
          font-weight: 500;
          margin-top: 7px;
          text-transform: capitalize;
-         color: #010101;" (click)="addItemClick()">{{menu.title}}
+         color: #010101;">{{menu.title}}
               </div>
+              <div style="font-size: 10px;
+              font-weight: 500;
+              text-transform: capitalize;
+              color: #010101;">{{menu.description}}
+                   </div>
               <div class="cart-item-price-main-count" style="display: inline-flex;width: 100%;margin-top: 10px;;">
                 <div class="cart-item-price" style="display: inline-flex;
            width: 60%;
@@ -177,7 +182,19 @@
 
   </div>
   <ion-card *ngIf="dateCard" class="countrycard">
-    <div class="crossCut" (click)="cityCard =! cityCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
- 
+    <div class="crossCut" (click)="dateCard =! dateCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
+    <ion-item (click)="showPicker =! showPicker">
+      <ion-label>Date</ion-label>
+      <ion-text slot="end">{{formateString}}</ion-text>
+    </ion-item>
+    <ion-datetime *ngIf="showPicker" min="{{dateValue}}" #datetime [value]="dateValue" size="cover" (ionChange)="dateChanged(datetime.value)"
+    showDefaultButtons="true" (ionCancel)="showPicker = false;">
+  </ion-datetime>
+     <ion-item>
+      <ion-input placeholder="Add Description(eg.add one item more)*" [(ngModel)]="descriptionValue"></ion-input>
+     </ion-item>
+     <div class="submit-div"><ion-button class="submit-login-button" (click)="addToCart()">Add to Cart</ion-button></div>
+   
   </ion-card>
+
 </ion-content>

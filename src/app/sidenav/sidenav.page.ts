@@ -91,13 +91,13 @@ export class SidenavPage implements OnInit {
           {
         title : "Chef Home",
         url   : "/nav/chef-home",
-        icon  : "search-outline",
+        icon  : "home-outline",
         role: "chef"
       },
       {
         title : "Add Menu",
         url   : "/nav/chef-add-menu",
-        icon  : "search-outline",
+        icon  : "restaurant-outline",
         role: "chef"
       },
       {
@@ -123,7 +123,7 @@ export class SidenavPage implements OnInit {
     console.log(this.sideMenu)
     if(this.sideMenu.length===0){
       console.log('length zero');
-      this.router.navigateByUrl('nav/login')
+      this.router.navigateByUrl('loginpage')
     }else{
       console.log('length found');
       this.router.events.subscribe((event: RouterEvent) => {
@@ -147,4 +147,5 @@ export class SidenavPage implements OnInit {
   editProfile(){
     this.router.navigateByUrl('profile')
   }
+
 }

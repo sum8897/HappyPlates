@@ -137,16 +137,26 @@ const routes: Routes = [
       component: ChefprofileComponent,
       canActivate: [AuthGuardGuard]
     },
+      // {
+      //   path: '',
+      //   redirectTo: '/nav/mainpage',
+      //   pathMatch: 'full'
+      // }
       {
         path: '',
-        redirectTo: '/nav/mainpage',
+        redirectTo: '/loginpage',
         pathMatch: 'full'
       }
     ]
   },
+  // {
+  //   path: '',
+  //   redirectTo: '/nav/mainpage',
+  //   pathMatch: 'full'
+  // }
   {
     path: '',
-    redirectTo: '/nav/mainpage',
+    redirectTo: '/loginpage',
     pathMatch: 'full'
   }
 ];

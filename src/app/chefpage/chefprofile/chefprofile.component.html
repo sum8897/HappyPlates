@@ -14,7 +14,7 @@
       <img class="profile-card-image" src="../../../assets/img/blog_1.jpg">
     </ion-card>
     <div class="profile-div-image">
-      <div> <img class="profile-image" src="../../../assets/img/chef_1.jpg">
+      <div> <img class="profile-image" src="{{user_ProfImage}}">
         <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon>
       </div>
       <div class="user-data">
@@ -241,32 +241,33 @@
      
         <div class="chef-menu" style="margin: 10px 0;">
           <div style="color: #1d5b74;margin: 10px;">My Item List</div>
-          <ion-card style="border-radius: 11px;margin: 5px 0;" *ngFor="let menu of menu_data_list">
+          <ion-card style="border-radius: 11px;margin: 5px 0;" *ngFor="let menu of menu_Array">
     
             <div style="display: inline-flex;width: 100%;">
              <div class="item-menu" style="display: inline-flex;width: 100%;">
                <div><img style="width: 85px;
                  height: 85px;
-                 border-radius: 11px;margin: 7px 0 5px 6px;" src="'http://103.139.58.242/~clientpro/amantran/public'{{menu.medias[0].path}}">
+                 border-radius: 11px;margin: 7px 0 5px 6px;" src="{{menu.path}}">
                  </div>
              <div style="display: block;
              padding-left: 10px;
              width: 65%;
              margin: 5px 0 0 0;">
-             <div style="font-size: 12px;
+             <div style="font-size: 15px;
              font-weight: 500;
-             margin-top: 7px;
-             color: #010101;">{{menu.description}}</div>
+             margin-top: 2px;
+             color: #010101;text-transform: capitalize;">{{menu.title}}</div>
+              <div style="font-size: 11px;
+              font-weight: 400;
+              color: #010101;">{{(menu.description).substring(0,30)}}...</div>
              <div class="cart-item-price-main-count" 
              style="display: inline-flex;width: 100%;margin-top: 10px;;">
                <div class="cart-item-price" 
                style="display: inline-flex;
-               width: 60%;
-               padding-top: 10px;">
+               width: 60%;">
                  <p style="margin-top: 0;
                  font-size: 18px;
                  font-weight: 600;">{{menu.price | currency:'INR':'symbol'}}</p>
-                 <p>{{menu.medias[0].path}}</p>
                  <!-- <del style="padding-left: 5px;
                  font-size: 12px;
                  padding-top: 7px;
@@ -298,8 +299,8 @@
               padding-top: 15px;
               text-align: center;
               font-size: 20px;">
-             <!-- <div style="height: 50%;"><ion-icon name="bag-handle-outline"></ion-icon></div>
-             <div style=""><ion-icon name="chevron-forward-outline"></ion-icon></div> -->
+             <div style="height: 50%;color: #1c5c75;"><ion-icon name="create-outline"></ion-icon></div>
+             <div style="color: #d32235;"><ion-icon name="trash-outline"></ion-icon></div>
            </div>
             </div>
       

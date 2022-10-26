@@ -20,17 +20,23 @@ ratingValue3:any=3;
 ratingValue2:any=2;
 ratingValue1:any=1;
 ratingValue:any;
-
+customerback:boolean=false;
+chefback:boolean=false;
 public form: FormGroup;
   constructor(public auth: AuthService,
               public user: UserService,
               private fb: FormBuilder,
               public modalCtrl: ModalController,) { 
                 this.userDetails();
-    //             this.rating3 = 0;
-    // this.form = this.fb.group({
-    //   rating: ['', Validators.required],
-    // })
+      if(localStorage.getItem('user_role')=="customer"){
+      this.customerback=true;
+      this.chefback=false;
+      console.log(this.customerback+ ""+this.chefback)
+      }else if(localStorage.getItem('user_role')=="chef"){
+        this.customerback=false;
+        this.chefback=true;
+        console.log(this.customerback+ ""+this.chefback)
+      }
               }
 
   ngOnInit() {}
@@ -40,6 +46,8 @@ public form: FormGroup;
   userAllData: any;
   user_location;
   user_phone;
+  user_image:any;
+  user_ProfImage:any='';
   userDetails() {
     this.user.present('');
     this.auth.getUserProfile().subscribe((data) => {
@@ -47,10 +55,20 @@ public form: FormGroup;
       this.userRes = data;
       this.userData = this.userRes.data;
       this.userAllData = this.userData[0];
+      this.user_image= this.userAllData.prof_image;
       this.user_name = this.userAllData.firstname + " " + this.userAllData.lastname;
       this.user_phone=this.userAllData.phone;
       this.user_location = this.userAllData.address+ this.userAllData.city+" "+this.userAllData.state+" "+ this.userAllData.pin;
       this.user.chef_id = this.userAllData.id;
+      console.log(this.user_image)
+      if(this.user_image===""){
+        console.log('image not foubd');
+        this.user_ProfImage='../../assets/img/user_icon.png';
+
+      }else{
+        console.log('image found...');
+        this.user_ProfImage= this.user_image;
+      }
       console.log(this.userAllData);
 
     }, err => {

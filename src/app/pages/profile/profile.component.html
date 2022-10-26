@@ -1,7 +1,10 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="customerback">
       <ion-back-button defaultHref="/nav/mainpage"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="start" *ngIf="chefback">
+      <ion-back-button defaultHref="/nav/chef-home"></ion-back-button>
     </ion-buttons>
     <ion-title>
       <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
@@ -11,7 +14,7 @@
 <ion-content>
   <div class="profile-div-image">
     <div class="pro-img">
-       <img class="profile-image" src="../../../assets/img/chef_1.jpg">
+       <img class="profile-image" src="{{user_ProfImage}}">
       <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon>
     </div>
     <div class="user-data">
@@ -69,7 +72,7 @@
           <div class="label-float">
             <ion-item lines="none" (click)="stateshow()" class="form-item">
               <ion-label>Select State</ion-label>
-            <ion-label style="font-size: 13px;" >{{statename}}</ion-label>
+            <ion-label style="font-size: 13px;" ><div>{{statename}}</div></ion-label>
             <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
               <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
                 required></ion-input> -->

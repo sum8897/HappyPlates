@@ -13,22 +13,23 @@ user_type:any;
      private auth: AuthService){
     this.user_type=localStorage.getItem('user_role');
   }
-
-  async canActivate(): Promise<boolean> {
-    const authed = await this.auth.isAuthenticated();
-    if (authed) {
-      
-      console.log('if true its automatically router on given full path in app-routing.module.');
-  
-      return true;
-     
-    } else {
-      console.log('false means token not available then we can route on login page again');
-      // this.navCtrl.navigateRoot('/nav/login');
-      this.navCtrl.navigateRoot('/register');
-      return false;
-    }
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return true;
   }
+  // async canActivate(): Promise<boolean> {
+  //   const authed = await this.auth.isAuthenticated();
+  //   if (authed) {
+  //     console.log('if true its automatically router on given full path in app-routing.module.');
+  //     return true;
+     
+  //   } else {
+  //     console.log('false means token not available then we can route on login page again');
+  //     this.navCtrl.navigateRoot('/nav/login');
+  //     return false;
+  //   }
+  // }
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

@@ -29,8 +29,8 @@
   <div class="chef-menu" style="margin: 10px 0;">
     <div style="color: #1d5b74;
     margin-top: 15px;
-    font-size: 20px;margin-left: 10px;">My Item List</div>
-    <div class="data_not_found" *ngIf="allorderedDataList==0" style="text-align:center;padding-top: 10vh;">
+    font-size: 20px;margin-left: 10px;">My Menu List</div>
+    <div class="data_not_found" *ngIf="user.menu_data_list==0" style="text-align:center;padding-top: 10vh;">
       <div class="data_not_found">No Data Found</div>  
     <ion-button expand="round" size="small" (click)="addMenu()">Add Menu</ion-button>
     </div>
@@ -40,7 +40,7 @@
        <div class="item-menu" style="display: inline-flex;width: 100%;">
          <div><img style="width: 85px;
            height: 85px;
-           border-radius: 11px;margin: 7px 0 5px 6px;" src="http://103.139.58.242/~clientpro/amantran/public{{menu.medias[0].path}}">
+           border-radius: 11px;margin: 7px 0 5px 6px;" src="{{menu.path}}">
            </div>
        <div style="display: block;
        padding-left: 10px;

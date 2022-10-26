@@ -91,6 +91,7 @@ export class ChefprofileComponent implements OnInit {
     })
   }
   menu_data; menu_data_list;
+  menu_Array:any=[];
   chefmenuData(chef_id) {
     this.user.present('wait...');
     this.auth.getSingleChefsAllMenu(chef_id).subscribe((data) => {
@@ -98,16 +99,39 @@ export class ChefprofileComponent implements OnInit {
       this.menu_data = data;
       this.menu_data_list = this.menu_data.data;
       console.log(this.menu_data_list);
-
+      for(let i=0;i<=this.menu_data_list.length;i++){
+        console.log(this.menu_data_list[i].medias[0]);
+        if(this.menu_data_list[i].medias[0]==undefined){
+          console.log('empty data');
+          this.menu_Array[i]={
+            'price':this.menu_data_list[i].price,
+            'title':this.menu_data_list[i].title,
+            'description':this.menu_data_list[i].description,
+            'userId':this.menu_data_list[i].userId,
+            'path': '../../../assets/img/blog_2.jpg',
+          }
+          console.log(this.menu_Array)
+        }else{
+          this.menu_Array[i]={
+            'price':this.menu_data_list[i].price,
+            'title':this.menu_data_list[i].title,
+            'description':this.menu_data_list[i].description,
+            'userId':this.menu_data_list[i].userId,
+            'path': this.menu_data_list[i].medias[0].path,
+          }
+        }
+        // console.log(this.menu_Array);
+      }
+  // console.log(this.menu_Array);
     }, err => {
       this.user.dismiss();
       console.log(err)
     })
   }
   imagepath: any = "";
-  pickImage(sourceType) {
+  pickImage(sourceType:any) {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 50,
       sourceType: sourceType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
@@ -117,7 +141,7 @@ export class ChefprofileComponent implements OnInit {
       // imageData is either a base64 encoded string or a file URI
       this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
       this.imagepath = imageData;
-      // alert(this.croppedImagePath);
+      alert(this.croppedImagePath);
       // console.log(this.croppedImagePath);
       // alert(imageData);
     }, (err) => {
@@ -159,11 +183,15 @@ export class ChefprofileComponent implements OnInit {
     let body = {
       mediafile: this.croppedImagePath
     };
+    alert("body"+JSON.stringify(body));
     this.user.present('uploading..');
     this.auth.uploadSingleMenuImage(body).subscribe(res => {
       this.user.dismiss();
+     
       this.uploadSingleRes = res;
+     
       this.uploadSingleResData = this.uploadSingleRes.data;
+      alert("Done: "+JSON.stringify(this.uploadSingleResData))
       this.multipleImageArray.push(this.uploadSingleResData.filename)
       // if(this.multipleImageArray.length=== 0){
       //   this.multipleImageArray.push(this.uploadSingleResData.filename)
@@ -176,8 +204,8 @@ export class ChefprofileComponent implements OnInit {
       //     }
       //   }
       // }
-
-      console.log(this.multipleImageArray);
+   alert(JSON.stringify(this.multipleImageArray))
+      console.log(JSON.stringify(this.multipleImageArray));
       // alert(res)
       // console.log(res);
     }, err => {
@@ -193,29 +221,40 @@ export class ChefprofileComponent implements OnInit {
   }
   menulist: any;
   onMenuSubmit(contactMenuForm: any) {
-    // alert(typeof (this.user.chef_id));
-    console.log(contactMenuForm.value);
-    this.menulist = contactMenuForm.value;
-    console.log("form" + JSON.stringify(contactMenuForm.value));
-    let menuList = {
-      userId: (this.user.chef_id),
-      title: contactMenuForm.value.foodname,
-      description: contactMenuForm.value.details,
-      price: contactMenuForm.value.regular_price,
-      media_files: this.multipleImageArray
+    console.log(this.selectedRadioGroup);
+    if(this.selectedRadioGroup==undefined){
+      alert('Please select Food Type...');
     }
-    console.log(menuList);
-    this.auth.uploadMenulist(menuList).subscribe(res => {
-      console.log(JSON.stringify(res));
-    }, err => {
-      console.log(err)
-    })
-    contactMenuForm.reset();
+    else{
+      console.log(contactMenuForm.value);
+      this.menulist = contactMenuForm.value;
+      console.log("form" + JSON.stringify(contactMenuForm.value));
+      let menuList = {
+        userId: (this.user.chef_id),
+        title: contactMenuForm.value.foodname,
+        description: contactMenuForm.value.details,
+        price: contactMenuForm.value.regular_price,
+        category: this.selectedRadioGroup,
+        media_files: this.multipleImageArray
+      }
+      alert(JSON.stringify(menuList));
+      console.log(menuList);
+      console.log(menuList);
+      this.auth.uploadMenulist(menuList).subscribe(res => {
+        console.log(JSON.stringify(res));
+        contactMenuForm.reset();
+      }, err => {
+        console.log(err)
+      })
+      
+    }
   }
 
   userRes: any;
   userData: any;
   userAllData: any;
+  user_image:any;
+  user_ProfImage:any='';
   userDetails() {
     this.user.present('');
     this.auth.getUserProfile().subscribe((data) => {
@@ -223,7 +262,17 @@ export class ChefprofileComponent implements OnInit {
       this.userRes = data;
       this.userData = this.userRes.data;
       this.userAllData = this.userData[0];
-      this.specialization = this.userAllData.specialization;
+      this.user_image= this.userAllData.prof_image;
+      this.specialization = (this.userAllData.specialization);
+      console.log(this.user_image)
+      if(this.user_image===""){
+        console.log('image not foubd');
+        this.user_ProfImage='../../assets/img/user_icon.png';
+
+      }else{
+        console.log('image found...');
+        this.user_ProfImage= this.user_image;
+      }
       this.user_name = this.userAllData.firstname + " " + this.userAllData.lastname;
       this.user_location = this.userAllData.address;
       this.user.chef_id = this.userAllData.id;

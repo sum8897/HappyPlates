@@ -52,22 +52,13 @@ export class AppComponent {
     this.platform.ready().then(()=>{
       // this.user.userDetails();
     })
-  //   alert('initialisation...');
-  // console.log(localStorage.getItem('amantran_token'));
-  // if(localStorage.getItem('amantran_token')==null){
-  //   alert('token not found');
-  //   this.router.navigateByUrl('/nav/login')
-  // }else{
-  //   console.log('token found')
-  //   if(localStorage.getItem('user_role')=="chef"){
-  //     this.router.navigateByUrl('/nav/chef-home')
-  //   }
-  //   else if(localStorage.getItem('user_role')=="customer"){
-  //     this.router.navigateByUrl('/nav/mainpage')
-  //   }
-  // }
-    
-  
+    // alert('initialisation...');
+    // if(localStorage.getItem('user_role')=="chef"){
+    //   this.router.navigateByUrl('/nav/chef-home')
+    // }
+    // else if(localStorage.getItem('user_role')=="customer"){
+    //   this.router.navigateByUrl('/nav/mainpage')
+    // }
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

@@ -88,6 +88,7 @@ ion-searchbar {
             margin     : 5px 0;
             overflow   : hidden;
             white-space: nowrap;
+            text-transform: capitalize;
         }
 
         .chef-specialization {
@@ -100,9 +101,11 @@ ion-searchbar {
             color    : #1c1c1c;
             padding  : 5px 0;
             font-size: 11px;
-            white-space: nowrap;
+            // white-space: nowrap;
             overflow: hidden;
-            text-overflow: clip;
+            text-overflow: ellipsis;
+            height: 100%;
+            text-transform: capitalize;
         }
 
         .chef-button {
@@ -354,6 +357,7 @@ ion-searchbar {
                     font-size  : 14px;
                     text-align : center;
                     padding-top: 15px;
+                    text-transform: capitalize;
                 }
 
                 .latest-event-details {
@@ -361,6 +365,7 @@ ion-searchbar {
                     font-weight: 400;
                     opacity    : 0.8;
                     padding    : 6px;
+                    text-overflow: ellipsis;
                 }
             }
 
@@ -424,6 +429,8 @@ ion-searchbar {
                     color      : #5b8794;
                     font-weight: 500;
                     line-height: normal;
+                    text-transform: capitalize;
+                    text-overflow: ellipsis;
                 }
 
                 .spna-date {

@@ -1,14 +1,14 @@
 <ion-app>
   <ion-menu contentId="main-content" side="start">
-    <div class="top-header">
+    <div class="top-header" >
       <div class="user-image">
-      <img class="user-img" src="../assets/img/user_1.jpg">
+      <img class="user-img" src="{{user.user_ProfImage}}">
       </div>
-      <div class="user-details">
-        <!-- <h3>{{user.user_name}}</h3> -->
+      <div class="user-details" >
         <h3>{{user.user_name}}</h3>
         <div class="user-contact"><ion-icon name="call-outline"></ion-icon><p class="contact">{{user.user_mobile}}</p></div>
-        <div class="ediit-menu-prfile" (click)="editProfile()"><ion-icon class="edit-menu-image" name="pencil-outline"></ion-icon></div>
+        <div class="ediit-menu-prfile" (click)="editProfile()" *ngIf="user.user_type1=='chef' "><ion-icon class="edit-menu-image" name="pencil-outline"></ion-icon></div>
+        <div class="ediit-menu-prfile" (click)="editProfile()" *ngIf="user.user_type1=='customer' "><ion-icon class="edit-menu-image" name="pencil-outline"></ion-icon></div>
       </div>
     </div>
 

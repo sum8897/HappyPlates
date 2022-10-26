@@ -1,8 +1,5 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <!-- <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons> -->
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
@@ -11,18 +8,7 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-
 <ion-content>
-
-  <!-- <div style="display: flex;justify-content: space-between;">
-    <div class="image">
-      <img style="width: 200px;height: 200px;border-radius: 10px;" src="{{croppedImagePath}}"> 
-    </div>
-     <div class="button">
-       <ion-button (click)="selectImage()" size="small" expand='round'>Click image</ion-button>
-     </div>
-  </div> -->
   <div class="card-full">
     <ion-searchbar placeholder="Search For Meal,Chef or Location" class="" [(ngModel)]="searchTermProfession" (ionChange)="filterItemProfession()"></ion-searchbar>
     <div class="chef-view">
@@ -31,10 +17,8 @@
     </div>
     <div class="slider-chef-div">
       <ion-slides [options]="slideOpts" class="slides-main">
-
         <ion-slide *ngFor="let chef of filterTermProfession">
           <ion-card class="slider-card">
-
             <!-- <img style="height: 98px;" [src]="getImage(chef[0].prof_image)"> -->
             <img style="height: 98px;" src={{chef[0].prof_image}}>
             <div class="chef-detail">
@@ -43,8 +27,7 @@
                 <img src="../../../assets/img/chef_icon.png">
                 <span class="chef-specialization">Specialises In:</span>
               </div>
-              <span class="chef-specialization-type">{{chef[0].specialization}}</span>
-              
+              <div class="chef-specialization-type">{{(chef[0].specialization).substring(0,45)}}</div>            
             </div>
             <div class="chef-button">
               <ion-button size="small" expand="round" class="see-menu" (click)="openSingleDetails(chef[0])">See Menu </ion-button>
@@ -99,7 +82,7 @@
     <div class="event-slider-div">
       <ion-slides [options]="slidesEvent" pager="true">
         <ion-slide *ngFor="let ev of latestEventAllData">
-          <ion-card class="event-card"><img src="../../../assets/img/blog_1.jpg"></ion-card>
+          <ion-card class="event-card"><img src="{{ev.event_image}}"></ion-card>
           <div class="event-details">
             <div class="event-div">
               <div class="event-name">{{ev.title}}</div>
@@ -127,7 +110,7 @@
             <ion-card class="blog-card">
               <img class="blog-img" style="width: 134px;height: 134px;" [src]="getblogImage(blog.blogs_image)">
               <ion-card-content class="blog-content">
-                <div class="blog-type">{{(blog.title).substring(0,50)}}..</div>
+                <div class="blog-type">{{(blog.title).substring(0,40)}}..</div>
                 <div class="spna-date"><img style="width: 10px;"
                     src="../../../assets/img/date.png"><span class="blog-date">{{blog.date}}</span></div>
               </ion-card-content>
@@ -149,7 +132,7 @@
   <div class="testimonials-top-upder-hideDiv">
     <div class="testimonial-image">
       <ion-avatar>
-        <img src="../../../assets/img/chef_1.jpg">
+        <img src="../../../assets/img/user_icon.png">
       </ion-avatar>
     </div>
 <div class="testimonial-details">

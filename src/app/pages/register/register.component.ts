@@ -208,12 +208,12 @@ export class RegisterComponent implements OnInit {
     country: ['', [Validators.required, Validators.maxLength(30)]],
     state: ['', [Validators.required, Validators.maxLength(30)]],
     city: ['', [Validators.required, Validators.maxLength(30)]],
-    specialization: ['', [Validators.required, Validators.maxLength(100)]],
-    aboutme: ['', [Validators.required, Validators.maxLength(100)]],
-    skills: ['', [Validators.required, Validators.maxLength(100)]],
-    description: ['', [Validators.required, Validators.maxLength(100)]],
+    specialization: ['', [Validators.required, Validators.maxLength(300)]],
+    aboutme: ['', [Validators.required, Validators.maxLength(300)]],
+    skills: ['', [Validators.required, Validators.maxLength(300)]],
+    description: ['', [Validators.required, Validators.maxLength(300)]],
     pin: ['', [Validators.required, Validators.pattern("(0/91)?[0-9]{10}"),]],
-    address: ['', [Validators.required, Validators.maxLength(100)]],
+    address: ['', [Validators.required, Validators.maxLength(300)]],
     phone: ['', [Validators.required, Validators.pattern("(0/91)?[0-9]{10}"),]],
     password: ['', [Validators.required, Validators.minLength(8),
     this.getpass.bind(this)]],
@@ -288,19 +288,19 @@ export class RegisterComponent implements OnInit {
     ],
     specialization: [
       { type: 'required', message: 'You must enter specialization' },
-      { type: 'maxlength', message: 'Name cant be longer than 100 characters' }
+      { type: 'maxlength', message: 'Name cant be longer than 300 characters' }
     ],
     skills: [
       { type: 'required', message: 'You must enter Skills' },
-      { type: 'maxlength', message: 'Name cant be longer than 100 characters' }
+      { type: 'maxlength', message: 'Name cant be longer than 300 characters' }
     ],
     description: [
       { type: 'required', message: 'You must enter Description' },
-      { type: 'maxlength', message: 'Name cant be longer than 100 characters' }
+      { type: 'maxlength', message: 'Name cant be longer than 300 characters' }
     ],
     aboutme: [
       { type: 'required', message: 'You must enter specialization' },
-      { type: 'maxlength', message: 'Name cant be longer than 100 characters' }
+      { type: 'maxlength', message: 'Name cant be longer than 300 characters' }
     ],
     country: [
       { type: 'required', message: 'You must enter Country' },
@@ -433,8 +433,10 @@ export class RegisterComponent implements OnInit {
       console.log(err.error)
     })
   }
+  checkValue;
   checkedValue(e: any) {
-    console.log(e.detail.checked)
+    console.log(e.detail.checked);
+    this.checkValue=e.detail.checked;
   }
   user_reg: any;
   submitForm() {
@@ -442,7 +444,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.selectState_id);
     console.log(this.cityId);
     if(this.selectState_id==undefined || this.cityId==undefined){
-      alert('Please Fill Details...')
+      alert('Please Select state and city...')
     }
     else{
     console.log('all good');

@@ -34,7 +34,7 @@
     </ion-list>
      <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" novalidate>
     <div class="label-float">
-      <ion-input type="text" formControlName="firstname" placeholder="Enter First Name " required="true"></ion-input>
+      <ion-input type="text" formControlName="firstname" placeholder="Enter First Name " required="true" ></ion-input>
       <label>First Name<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.firstname">
         <ng-container *ngIf="firstname.hasError(error.type) && (firstname.dirty || firstname.touched)">
@@ -43,7 +43,7 @@
       </div>
     </div>
     <div class="label-float">
-      <ion-input type="text" formControlName="lastname" placeholder="Enter Last Name " required="true"></ion-input>
+      <ion-input type="text" formControlName="lastname" placeholder="Enter Last Name " required="true" ></ion-input>
       <label>Last Name<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.lastname">
         <ng-container *ngIf="lastname.hasError(error.type) && (lastname.dirty || lastname.touched)">
@@ -52,7 +52,7 @@
       </div>
     </div>
     <div class="label-float">
-      <ion-input type="text" formControlName="phone" placeholder="Enter Phone " required="true"></ion-input>
+      <ion-input type="text" formControlName="phone" placeholder="Enter Phone " required="true" ></ion-input>
       <label>Phone<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.phone">
         <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="label-float">
-      <ion-input type="text" formControlName="email" placeholder="Enter Email " required="true"></ion-input>
+      <ion-input type="text" formControlName="email" placeholder="Enter Email " required="true" ></ion-input>
       <label>EMail<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.email">
         <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
@@ -70,8 +70,7 @@
       </div>
     </div>
     <div class="label-float">
-      <ion-item lines="none"  class="form-item"> <!-- (click)="minHeightShow()" -->
-  
+      <ion-item lines="none"  class="form-item"> <!-- (click)="minHeightShow()" --> 
         <ion-label>Country</ion-label>
       <ion-label>India</ion-label>
       <!-- <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon> -->
@@ -119,7 +118,7 @@
       </div> -->
     </div>
     <div class="label-float">
-      <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true"></ion-input>
+      <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true" ></ion-input>
       <label>Zip Code<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.lastname">
         <ng-container *ngIf="pin.hasError(error.type) && (pin.dirty || pin.touched)">
@@ -128,7 +127,7 @@
       </div>
     </div>
     <div class="label-float">
-      <ion-input type="text" formControlName="address" placeholder="Enter Address " required="true"></ion-input>
+      <ion-input type="text" formControlName="address" placeholder="Enter Address " required="true" ></ion-input>
       <label>Address<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.address">
         <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
@@ -137,7 +136,7 @@
       </div>
     </div>
     <div class="label-float">
-      <ion-input type="text" formControlName="password" placeholder="Enter Password " required="true"></ion-input>
+      <ion-input type="text" formControlName="password" placeholder="Enter Password " required="true" ></ion-input>
       <label>Password<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.password">
         <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
@@ -146,7 +145,7 @@
       </div>
     </div>
     <div class="label-float">
-      <ion-input type="text" formControlName="cpassword" placeholder="Enter Confirm Password " required="true"></ion-input>
+      <ion-input type="text" formControlName="cpassword" placeholder="Enter Confirm Password " required="true" ></ion-input>
       <label>Confirm Password<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.cpassword">
         <ng-container *ngIf="cpassword.hasError(error.type) && (cpassword.dirty || cpassword.touched)">
@@ -158,7 +157,7 @@
     <div class="check-checkbox">
       <ion-item lines='none'>
         <span>By signing up you agree to platform's <a>Terms of Service</a>and <a>Privacy Policy.</a></span>
-        <ion-checkbox slot="start" mode="md" class="remember-checkbox" value="yes" (ionChange)="checkedValue($event)"></ion-checkbox>
+        <ion-checkbox slot="start" mode="md" name="check" #ng class="remember-checkbox" value="yes" (ionChange)="checkedValue($event)" ngModel [ngModelOptions]="{standalone: true}"></ion-checkbox>
       </ion-item>
     </div>
     <div class="submit-div">
@@ -197,7 +196,7 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="email" placeholder="Enter Email " required="true"></ion-input>
+        <ion-input type="text" formControlName="email" placeholder="Enter Email " required="true" ></ion-input>
         <label>EMail<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.email">
           <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
@@ -206,7 +205,7 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="skills" placeholder="Enter Skills, Ex:Bachelor of Hotel Management (BHM) in Culinary " required="true"></ion-input>
+        <ion-input type="text" formControlName="skills" placeholder="Enter Skills, Ex:Bachelor of Hotel Management (BHM) in Culinary " required="true" ></ion-input>
         <label>Enter Skills<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.specialization">
           <ng-container *ngIf="skills.hasError(error.type) && (skills.dirty || skills.touched)">
@@ -215,7 +214,7 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="specialization" placeholder="Enter Specialization " required="true"></ion-input>
+        <ion-input type="text" formControlName="specialization" placeholder="Dosa, Italy, Samosa,Paneer tikka etc" required="true" ></ion-input>
         <label>Enter Specialization<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.specialization">
           <ng-container *ngIf="specialization.hasError(error.type) && (specialization.dirty || specialization.touched)">
@@ -224,7 +223,7 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="description" placeholder="Enter Description " required="true"></ion-input>
+        <ion-input type="text" formControlName="description" placeholder="Enter Description " required="true" ></ion-input>
         <label>Enter Description<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.specialization">
           <ng-container *ngIf="description.hasError(error.type) && (description.dirty || description.touched)">
@@ -233,7 +232,7 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="aboutme" placeholder="Enter About Me " required="true"></ion-input>
+        <ion-input type="text" formControlName="aboutme" placeholder="Enter About Me " required="true" ></ion-input>
         <label>Enter About Me<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.aboutme">
           <ng-container *ngIf="aboutme.hasError(error.type) && (aboutme.dirty || aboutme.touched)">
@@ -291,7 +290,7 @@
         </div> -->
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true"></ion-input>
+        <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true" ></ion-input>
         <label>Zip Code<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.lastname">
           <ng-container *ngIf="pin.hasError(error.type) && (pin.dirty || pin.touched)">
@@ -300,7 +299,7 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="address" placeholder="Enter Address " required="true"></ion-input>
+        <ion-input type="text" formControlName="address" placeholder="Enter Address " required="true" ></ion-input>
         <label>Address<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.address">
           <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
@@ -309,7 +308,7 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="password" placeholder="Enter Password " required="true"></ion-input>
+        <ion-input type="text" formControlName="password" placeholder="Enter Password " required="true" ></ion-input>
         <label>Password<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.password">
           <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
@@ -318,7 +317,7 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="cpassword" placeholder="Enter Confirm Password " required="true"></ion-input>
+        <ion-input type="text" formControlName="cpassword" placeholder="Enter Confirm Password " required="true" ></ion-input>
         <label>Confirm Password<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.cpassword">
           <ng-container *ngIf="cpassword.hasError(error.type) && (cpassword.dirty || cpassword.touched)">
@@ -342,7 +341,7 @@
       <div class="check-checkbox">
         <ion-item lines='none'>
           <span>By signing up you agree to platform's <a>Terms of Service</a>and <a>Privacy Policy.</a></span>
-          <ion-checkbox slot="start" mode="md" class="remember-checkbox" value="yes" (ionChange)="checkedValue($event)"></ion-checkbox>
+          <ion-checkbox slot="start" mode="md" name="check" #ng class="remember-checkbox" value="yes" (ionChange)="checkedValue($event)" ngModel [ngModelOptions]="{standalone: true}"></ion-checkbox>
         </ion-item>
       </div>
       <div class="submit-div">

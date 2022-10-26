@@ -58,7 +58,7 @@ getImage(imgPath:any){
  const endPath= imgPath.substring(60)
 //  console.log(endPath.length);
  if(endPath.length==0){
-   return '../../../assets/img/chef_1.jpg'
+   return '../../../assets/img/user_icon.png'
  }
  else{
    return imgPath;

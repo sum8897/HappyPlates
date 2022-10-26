@@ -170,7 +170,7 @@ export class CartpageComponent implements OnInit {
           role: 'confirm',
           handler: (alertData) => {
             console.log(alertData.name1);
-            if(alertData.name1===" " || alertData.name1==[]){
+            if(alertData.name1===" " || alertData.name1===[]){
               this.instructions=alertData.name1;
               console.log('Please Enter SomeThings...');
               
