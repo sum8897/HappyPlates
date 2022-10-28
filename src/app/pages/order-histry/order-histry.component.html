@@ -20,7 +20,7 @@
       </div>
       <div class="order-more" style="color: #e51934;font-weight: 500;">View Details</div>
     </div>
-    <ion-card style="border-radius: 10px;margin: 0;">
+    <ion-card style="border-radius: 10px;margin: 10px 0;" *ngFor="let ord of order.ordersdetails">
     <ion-list>
         <ion-item lines="none">
           <ion-thumbnail class="ordered-item-img">
@@ -29,9 +29,9 @@
           <ion-label>
         <div class="ordered-main-div">
     <div class="first-ordered-div">
-      <div class="ordered-item-name item_menu_name">{{ (order.dersdetails) }}</div>
-      <!-- <div class="ordered-item-name">{{ order.Menus[0].description }}</div>
-      <div class="ordered-item-price">{{ order.totalamount }}</div> -->
+      <div class="ordered-item-name item_menu_name">{{ ord.menudetail[0].title }}</div>
+      <div class="ordered-item-name">{{ ord.menudetail[0].description }}</div>
+      <div class="ordered-item-price">{{ ord.menudetail[0].price }}</div>
     </div>
     <div class="second-ordered-div">
       <div class="ordered-date">

@@ -207,7 +207,7 @@
               Regular Price is required *
           </span>
             </div>
-            <div class="city-pin" style="display: flex;">
+            <!-- <div class="city-pin" style="display: flex;">
               <div class="form-group label-float">
                 <ion-input type="number" name="other_price" #other_price="ngModel" required placeholder="Other Price * " ngModel></ion-input>
             
@@ -217,32 +217,46 @@
             </span>
               </div>
           
-              <!-- <div class="form-group label-float">
+              <div class="form-group label-float">
                 <ion-input type="tel" name="pin" #pin="ngModel" required placeholder="Pin * " ngModel></ion-input>
                 <span class="text-danger"
                 *ngIf="(pin.touched || contactMenuForm.submitted) && pin.errors?.required">
                 Pin is required *
             </span>
-              </div> -->
-            </div>
+              </div>
+            </div> -->
             <div class="form-group label-float" style="display: flex;">
              
-                <ion-radio-group  style="width: 100%;" (ionChange)="radioGroupChange($event)" #radioGroup>
-             <div style="display: flex;width: 100%;">
-              <div>Food Type</div>
-              <div style="display: flex;margin-left: 15px;">
-                <ion-radio slot="start" value="veg" style="margin: 0 5px;"></ion-radio>Veg
-              </div>
-              <div style="display: flex;">
-                <ion-radio slot="start" value="noveg" style="margin: 0 5px;"></ion-radio>Non Veg
-              </div>
-             </div>
-              
-               
-          
-                </ion-radio-group>
-            
+              <ion-radio-group  style="width: 100%;" (ionChange)="radioGroupChange($event)" #radioGroup>
+           <div style="display: flex;width: 100%;">
+            <div>Food Type</div>
+            <div style="display: flex;margin-left: 15px;">
+              <ion-radio slot="start" value="1" style="margin: 0 5px;"></ion-radio>Veg
             </div>
+            <div style="display: flex;">
+              <ion-radio slot="start" value="2" style="margin: 0 5px;"></ion-radio>Non Veg
+            </div>
+           </div>      
+              </ion-radio-group>
+          
+          </div>
+            <ion-list>
+              <ion-item lines="none" class="select-categoty-item">
+                <ion-select
+                  placeholder="Select fruit"
+                  (ionChange)="handleChange($event)"
+              style="width: 100%;"
+                >
+                  <ion-select-option value="1">Punjabi</ion-select-option>
+                  <ion-select-option value="2">Gujrati</ion-select-option>
+                  <ion-select-option value="3">North Indian</ion-select-option>
+                  <ion-select-option value="4">South Indian</ion-select-option>
+                  <ion-select-option value="5">Chicken Tikka</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+            
+           
             <div class="form-group label-float">
               <ion-textarea type="text" name="details" #details="ngModel" required placeholder="Details * " ngModel></ion-textarea>
               <span class="text-danger"

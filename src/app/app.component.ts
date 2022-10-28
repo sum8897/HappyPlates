@@ -50,7 +50,7 @@ export class AppComponent {
  }
   initializeApp() {
     this.platform.ready().then(()=>{
-      // this.user.userDetails();
+      this.user.userDetails();
     })
     // alert('initialisation...');
     // if(localStorage.getItem('user_role')=="chef"){

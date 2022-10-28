@@ -8,13 +8,19 @@
     width: 100%;
     display: flex;
     padding-left: 7px;
+    overflow: hidden;
+    margin-top: 5px;
+    white-space: nowrap;
     .first-ordered-div{
         width: 70%;
         margin-left: 5px;
         .ordered-item-name{
-            font-size: 15px;
+            font-size: 10px;
             font-weight: 500;
             font-family: sans-serif;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    white-space: nowrap;
         }
         .item_menu_name{
             color: #1c5c74;
@@ -35,6 +41,9 @@
             font-size: 12px;
         }
     }
+}
+ion-label{
+    height: 100%;
 }
 .order-card{
     background: #eef3f6;

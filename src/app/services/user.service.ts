@@ -61,6 +61,7 @@ export class UserService {
   user_pin:any;
   user_prof_image:any;
   user_ProfImage:any='';
+  user_email:any;
  userDetails(){
   if(localStorage.getItem('amantran_token')==null){
     console.log('user not logged in...')
@@ -88,8 +89,10 @@ export class UserService {
       this.user_location=this.userAllData.address +" "+this.userAllData.state.state_name+" "+this.userAllData.pin;
       
       this.user_mobile=this.userAllData.phone;
+      this.user_email=this.userAllData.email;
       console.log(this.userAllData.phone)
       localStorage.setItem('user_mobile',this.user_mobile);
+      localStorage.setItem('user_email',this.user_email);
       this.user_city=this.userAllData.city.city_name;
       this.user_city_id=this.userAllData.city.id;
       this.user_state=this.userAllData.state.state_name;
@@ -121,8 +124,8 @@ export class UserService {
           console.log('empty menu data')
         }
         for(let i=0;i<=this.menu_data_list_all.length;i++){
-
-    if(this.menu_data_list_all[i].medias[0]==undefined){
+          console.log(this.menu_data_list_all[i].medias.length);
+    if(this.menu_data_list_all[i].medias.length<0 || this.menu_data_list_all[i].medias[0]==undefined){
       console.log('empty data');
       this.menu_data_list[i]={
         'price':this.menu_data_list_all[i].price,
