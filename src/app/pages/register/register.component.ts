@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   matchedpass = false;
   getpas: any;
   croppedImagePath: any;
+  
   constructor(private auth: AuthService,
     public user: UserService,
     private router: Router,
@@ -479,9 +480,9 @@ export class RegisterComponent implements OnInit {
         // "country": this.country_id,
         // "state": this.selectState_id,
         // "city": this.cityId,
-        "country": 'India',
-        "state": 'Up',
-        "city": 'Mirzapur',
+        "country": this.country_id,
+        "state": this.selectState_id,
+        "city": this.cityId,
         "pin": this.registrationForm.value.pin,
         "address": this.registrationForm.value.address,
         "prof_image": this.croppedImagePath,

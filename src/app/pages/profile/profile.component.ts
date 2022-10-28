@@ -60,7 +60,9 @@ public form: FormGroup;
       this.user_name = this.userAllData.firstname + " " + this.userAllData.lastname;
       this.user_phone=this.userAllData.phone;
       this.cityname=this.userAllData.city.city_name;
+      this.cityId=this.userAllData.city.id;
       this.statename=this.userAllData.state.state_name;
+      this.selectState_id=this.userAllData.state.id;
       this.user_location = this.userAllData.address+ this.userAllData.city+" "+this.userAllData.state+" "+ this.userAllData.pin;
       this.user.chef_id = this.userAllData.id;
       console.log(this.user_image)
@@ -92,12 +94,30 @@ public form: FormGroup;
   onAddressSubmit(contactAddressForm: any) {
     console.log(contactAddressForm.value);
     console.log("form" + JSON.stringify(contactAddressForm.value));
-
+   if(contactAddressForm.value.firstname==undefined){
+    contactAddressForm.value.firstname=this.user.user_first_name;
+   }
+   if(contactAddressForm.value.lastname==undefined){
+    contactAddressForm.value.lastname=this.user.user_last_name;
+   }if(contactAddressForm.value.phone==undefined){
+    contactAddressForm.value.phone=this.user_phone;
+   }
+   if(this.selectState_id==undefined){
+    this.selectState_id=this.selectState_id;
+   }
+   if(this.cityId==undefined){
+    this.cityId=this.cityId;
+   }
+   if(contactAddressForm.value.pin==undefined){
+    contactAddressForm.value.pin=this.user.user_pin;
+   }
+if(contactAddressForm.value.location==undefined){
+  contactAddressForm.value.location=this.user.user_location;
+}
     let body = {
       'firstname': contactAddressForm.value.firstname,
       'lastname': contactAddressForm.value.lastname,
-      // 'email': this.userAllData.email,
-      'email': 'shiva@gmail.com',
+      'email': localStorage.getItem('user_email'),
       'password': localStorage.getItem('password'),
       'phone': contactAddressForm.value.phone,
       'country': this.country_id,

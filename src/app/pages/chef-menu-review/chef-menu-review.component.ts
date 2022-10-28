@@ -87,6 +87,11 @@ console.log(this.descriptionValue);
 //   console.log(this.formateString);
 
 // }else{
+  if(this.formateString_api==undefined){
+    this.formateString = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    console.log(this.formateString);
+    this.formateString_api=this.formateString;
+  }
   console.log(this.dateValue);
   console.log(this.formateString);
   console.log(this.descriptionValue);

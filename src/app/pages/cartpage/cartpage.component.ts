@@ -141,17 +141,18 @@ export class CartpageComponent implements OnInit {
   }
 
   cartDataRes: any;
-  cartDataList: any;
+  cartDataList: any='';
   tottal_Amount: any;
   cart_length;
   getcartItem() {
+    this.cartDataList='';
     this.auth.getCart().subscribe((data) => {
       this.cartDataRes = data;
       this.cartDataList = this.cartDataRes.data;
       console.log(this.cartDataList);
       this.cart_length=this.cartDataList.length;
       this.tottal_Amount=this.cartDataRes.totalamount
-      console.log(this.tottal_Amount)
+      console.log(this.cartDataRes)
       console.log(this.cartDataList.length)
 
     }, err => {

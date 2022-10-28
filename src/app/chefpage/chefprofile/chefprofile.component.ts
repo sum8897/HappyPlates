@@ -101,9 +101,9 @@ export class ChefprofileComponent implements OnInit {
       this.user.dismiss();
       this.menu_data = data;
       this.menu_data_list = this.menu_data.data;
-      console.log(this.menu_data_list);
+      // console.log(this.menu_data_list);
       for(let i=0;i<=this.menu_data_list.length;i++){
-        console.log(this.menu_data_list[i].medias[0]);
+        // console.log(this.menu_data_list[i].medias[0]);
         if(this.menu_data_list[i].medias[0]==undefined){
           console.log('empty data');
           this.menu_Array[i]={
@@ -111,6 +111,7 @@ export class ChefprofileComponent implements OnInit {
             'title':this.menu_data_list[i].title,
             'description':this.menu_data_list[i].description,
             'userId':this.menu_data_list[i].userId,
+        
             'path': '../../../assets/img/blog_2.jpg',
           }
           console.log(this.menu_Array)
@@ -120,10 +121,11 @@ export class ChefprofileComponent implements OnInit {
             'title':this.menu_data_list[i].title,
             'description':this.menu_data_list[i].description,
             'userId':this.menu_data_list[i].userId,
+           
             'path': this.menu_data_list[i].medias[0].path,
           }
         }
-        // console.log(this.menu_Array);
+        console.log(this.menu_Array);
       }
   // console.log(this.menu_Array);
     }, err => {
@@ -222,12 +224,19 @@ export class ChefprofileComponent implements OnInit {
     console.log("radioGroupChange", event.detail.value);
     this.selectedRadioGroup = event.detail.value;
   }
+  item_categoty:any;
+  handleChange(e:any) {
+    this.item_categoty=e.detail.value
+    console.log('ionChange fired with value: ' + this.item_categoty);
+  }
   menulist: any;
   onMenuSubmit(contactMenuForm: any) {
+    console.log(this.item_categoty);
     console.log(this.selectedRadioGroup);
     if(this.selectedRadioGroup==undefined){
       alert('Please select Food Type...');
     }
+    
     else{
       console.log(contactMenuForm.value);
       this.menulist = contactMenuForm.value;
@@ -237,18 +246,23 @@ export class ChefprofileComponent implements OnInit {
         title: contactMenuForm.value.foodname,
         description: contactMenuForm.value.details,
         price: contactMenuForm.value.regular_price,
-        category: this.selectedRadioGroup,
+        food_type: parseInt(this.selectedRadioGroup),
+        categoty: parseInt(this.item_categoty),
         media_files: this.multipleImageArray
       }
-      alert(JSON.stringify(menuList));
-      console.log(menuList);
-      console.log(menuList);
-      this.auth.uploadMenulist(menuList).subscribe(res => {
-        console.log(JSON.stringify(res));
-        contactMenuForm.reset();
-      }, err => {
-        console.log(err)
-      })
+      alert(typeof(menuList.categoty));
+      if(menuList.categoty==undefined){
+      alert('Please Select Food Categoty..')
+      }else{
+        console.log(menuList);
+        this.auth.uploadMenulist(menuList).subscribe(res => {
+          console.log(JSON.stringify(res));
+          contactMenuForm.reset();
+        }, err => {
+          console.log(err)
+        })
+      }
+   
       
     }
   }
@@ -309,6 +323,10 @@ export class ChefprofileComponent implements OnInit {
       console.log(err)
     })
   }
+
+
+
+
   menuData = [
     {
       id: 1,
