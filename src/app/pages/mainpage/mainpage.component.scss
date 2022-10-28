@@ -81,7 +81,8 @@ ion-searchbar {
     .slider-card {
         border-radius: 21px;
         margin       : 0;
-
+        min-height: 225px;
+        min-width: 147px;
         .chef-name {
             color      : #1c5c74;
             font-weight: 600;
@@ -344,7 +345,7 @@ ion-searchbar {
             width        : 80%;
             background   : white;
             border-radius: 9px;
-            margin-bottom: -170px;
+            margin-bottom: -225px;
             z-index      : 9999;
             box-shadow   : 2px 2px 2px 2px rgb(0 0 0 / 18%);
 

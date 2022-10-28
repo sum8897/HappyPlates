@@ -25,6 +25,7 @@
         h3{
             font-size: 16px;
             color: #1c5c74;
+            text-transform: capitalize;
         }
         .user-phone{
             font-size: 12px;
@@ -129,4 +130,9 @@
 .star_card{
     padding-bottom: 20px;
     padding-right: 10px;
+}
+.form-item{
+    background-color: transparent;
+    border: 2px solid #e1eaec;
+    border-radius: 21px;
 }

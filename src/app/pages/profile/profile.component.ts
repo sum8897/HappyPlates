@@ -48,6 +48,7 @@ public form: FormGroup;
   user_phone;
   user_image:any;
   user_ProfImage:any='';
+  
   userDetails() {
     this.user.present('');
     this.auth.getUserProfile().subscribe((data) => {
@@ -58,6 +59,8 @@ public form: FormGroup;
       this.user_image= this.userAllData.prof_image;
       this.user_name = this.userAllData.firstname + " " + this.userAllData.lastname;
       this.user_phone=this.userAllData.phone;
+      this.cityname=this.userAllData.city.city_name;
+      this.statename=this.userAllData.state.state_name;
       this.user_location = this.userAllData.address+ this.userAllData.city+" "+this.userAllData.state+" "+ this.userAllData.pin;
       this.user.chef_id = this.userAllData.id;
       console.log(this.user_image)
@@ -176,6 +179,7 @@ stateCard = false;
     }
     this.user.present('');
     this.auth.getState(body).subscribe(state_data => {
+      this.stateCard=true;
       this.state_res = state_data;
       this.state_data = this.state_res.state;
       this.user.dismiss();

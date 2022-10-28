@@ -27,6 +27,8 @@ orderedData:any;
       this.orderedData=this.orderedRes.data;
       this.user.dismiss();
   console.log(this.orderedData);
+  var mydate = new Date(this.orderedData[0].deliverydate);
+console.log(mydate.toDateString());
   if(this.orderedData.length==0){
     console.log('empty data')
   }else{
