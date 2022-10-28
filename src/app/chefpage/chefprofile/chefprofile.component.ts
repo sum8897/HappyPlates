@@ -60,6 +60,7 @@ export class ChefprofileComponent implements OnInit {
   updateRes: any;
   updateData: any;
   updateAllData: any;
+  country_id=1;
   onAddressSubmit(contactAddressForm: any) {
     console.log(contactAddressForm.value);
     console.log("form" + JSON.stringify(contactAddressForm.value));
@@ -70,7 +71,9 @@ export class ChefprofileComponent implements OnInit {
       'email': this.userAllData.email,
       'password': localStorage.getItem('password'),
       'phone': contactAddressForm.value.phone,
-      'city': contactAddressForm.value.city,
+      'country': this.country_id,
+      'state': this.selectState_id,
+      'city': this.cityId,
       'pin': contactAddressForm.value.pin,
       'address': contactAddressForm.value.location,
     }
@@ -327,4 +330,70 @@ export class ChefprofileComponent implements OnInit {
       offer: 4220
     },
   ]
+
+  stateCard = false;
+  state_res: any;
+  state_data: any;
+  stateshow() {
+    this.stateCard = true;
+    this.stateList();
+  }
+  cityCard: boolean = false;
+  city_data: any;
+  city_res: any;
+  cityshow() {
+    console.log('city show...');
+   
+    this.cityList(this.selectState_id);
+  }
+  cityList(state_id: any) {
+    console.log(state_id);
+    if(state_id==undefined){
+      alert('Please you have to select state first...')
+    }else{
+      this.cityCard = true;
+      let body = {
+        state_id: state_id,
+      }
+      this.user.present('');
+      this.auth.getCities(body).subscribe(state_data => {
+        this.city_res = state_data;
+        this.city_data = this.city_res.city;
+        this.user.dismiss();
+      }, err => {
+        this.user.dismiss();
+      })
+    }
+ 
+  }
+  cityname:any;
+  cityId:any;
+  selectCity(e: any) {
+    console.log(e.currentTarget.value.city_name);
+    this.cityname = e.currentTarget.value.city_name;
+    this.cityId = e.currentTarget.value.id;
+    this.cityCard = false;
+  }
+  selectState_id:any;
+  stateList() {
+    let body = {
+      country_id: 1,
+    }
+    this.user.present('');
+    this.auth.getState(body).subscribe(state_data => {
+      this.stateCard=true;
+      this.state_res = state_data;
+      this.state_data = this.state_res.state;
+      this.user.dismiss();
+    }, err => {
+      this.user.dismiss();
+    })
+  }
+  statename: any
+  selectState(e: any) {
+    console.log(e.currentTarget.value.state_name);
+    this.statename = e.currentTarget.value.state_name;
+    this.selectState_id = e.currentTarget.value.id;
+    this.stateCard = false;
+  }
 }

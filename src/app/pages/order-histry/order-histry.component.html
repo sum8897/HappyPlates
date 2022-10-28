@@ -12,30 +12,40 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-<ion-list>
-  <ion-card *ngFor="let order of orderedData">
-    <ion-item>
-      <ion-avatar class="ordered-item-img">
-        <img src="{{order.menu_image}}">
-      </ion-avatar>
-      <ion-label>
-    <div class="ordered-main-div">
-<div class="first-ordered-div">
-  <div class="ordered-item-name item_menu_name">{{ order.Menus[0].title }}</div>
-  <div class="ordered-item-name">{{ order.Menus[0].description }}</div>
-  <div class="ordered-item-price">{{ order.totalamount }}</div>
-  <!-- <div class="ordered-item-price" style="width: 70%;"><span>{{ order.address }}</span></div> -->
-</div>
-<div class="second-ordered-div">
-  <div class="ordered-date">
-    {{(order.deliverydate)}}
-</div>
-<div class="ordered-status">running</div>
-</div>
+  <div class="order-card" *ngFor="let order of orderedData">
+    <div class="order-id-date" style="display: flex;justify-content: space-between;padding: 15px 6px;font-size: 15px;">
+      <div class="date-id" style="display: flex;justify-content: space-around;">
+        <div class="order-id" style="color: #000306;font-weight: 500;">Order-{{order.orderId}}</div>
+        <div class="order-date" style="color: #a5a6aa;padding-left: 5px;">Date 22 Feb 22</div>
+      </div>
+      <div class="order-more" style="color: #e51934;font-weight: 500;">View Details</div>
     </div>
-      </ion-label>
-  
-    </ion-item>
+    <ion-card style="border-radius: 10px;margin: 0;">
+    <ion-list>
+        <ion-item lines="none">
+          <ion-thumbnail class="ordered-item-img">
+            <img src="../../../assets/img/user_icon.png">
+          </ion-thumbnail>
+          <ion-label>
+        <div class="ordered-main-div">
+    <div class="first-ordered-div">
+      <div class="ordered-item-name item_menu_name">{{ (order.dersdetails) }}</div>
+      <!-- <div class="ordered-item-name">{{ order.Menus[0].description }}</div>
+      <div class="ordered-item-price">{{ order.totalamount }}</div> -->
+    </div>
+    <div class="second-ordered-div">
+      <div class="ordered-date">
+        {{(order.deliverydate)}}
+    </div>
+    <div class="ordered-status">running</div>
+    </div>
+        </div>
+          </ion-label>
+      
+        </ion-item>
+     
+    </ion-list>
   </ion-card>
-</ion-list>
+  </div>
+
 </ion-content>

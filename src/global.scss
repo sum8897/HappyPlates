@@ -270,6 +270,7 @@ ion-input:not(:placeholder-shown):not(.invalid)+label {
         font-size: 15px;
         padding-left: 13px;
         margin-bottom: 2px;
+        text-transform: capitalize;
         }
         .user-specialization{
             display: inline-table;

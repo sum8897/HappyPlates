@@ -29,14 +29,23 @@ export class EventDetailsComponent implements OnInit {
   event_detailRes:any;
   event_detailsData:any;
   event_image:any;
+ event_date:any;
+ event_title:any;
+ event_location:any;
+ event_intro:any;
   eventsDetails(){
     this.user.present('');
     this.auth.getSingleEvents(this.ev_data).subscribe((data)=>{
+      this.user.dismiss();
       this.event_detailRes=data;
       this.event_detailsData= this.event_detailRes.data;
       this.event_image=this.event_detailsData.event_image;
-      console.log(data)
-this.user.dismiss();
+      console.log(data);   
+        this.event_date=this.event_detailsData.date,
+        this.event_image= this.event_detailsData.event_image,
+        this.event_title= this.event_detailsData.title,
+        this.event_location=this.event_detailsData.location,
+      this.event_intro= this.event_detailsData.intro
     },err=>{
       
       this.user.dismiss();

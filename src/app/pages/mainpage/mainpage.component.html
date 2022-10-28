@@ -20,7 +20,7 @@
         <ion-slide *ngFor="let chef of filterTermProfession">
           <ion-card class="slider-card">
             <!-- <img style="height: 98px;" [src]="getImage(chef[0].prof_image)"> -->
-            <img style="height: 98px;" src={{chef[0].prof_image}}>
+            <img style="height: 98px;min-width: 126px;" src={{chef[0].prof_image}}>
             <div class="chef-detail">
               <span class="chef-name">{{chef[0].firstname}} {{chef[0].lastname}}</span>
               <div class="chef-specialization-div">

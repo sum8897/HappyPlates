@@ -213,7 +213,7 @@ this.auth.addCartItem(body).subscribe((item_res) => {
       console.log(this.chef_pro_img);
       const endPath= this.chef_pro_img;
 
-      if(endPath==0){
+      if(endPath.length==0 || endPath.length==undefined){
     console.log('length zero')
         this.none=true;
         this.no_none=false;

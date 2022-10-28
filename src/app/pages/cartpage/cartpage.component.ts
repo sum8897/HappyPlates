@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, IonDatetime } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-// import { format, parseISO } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 
 @Component({
@@ -13,9 +13,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CartpageComponent implements OnInit {
 
-  // showPicker=false;
-  // dateValue=format(new Date(),'yyyy-mm-dd')+'T09:00:00.000Z';
-  // formateString='';
+  showPicker=false;
+  // dateValue=format(new Date(),'yyyy-MM-dd hh:mm:ss')+'T09:00:00.000Z';
+  formateString='';
   @ViewChild(IonDatetime) datetime:IonDatetime;
   constructor(public user: UserService,
               public auth: AuthService,
@@ -23,25 +23,45 @@ export class CartpageComponent implements OnInit {
               public router:Router) {
               this.user.menu();
               this.getcartItem();
-              // this.setToday();
+              this.setToday();
+              var currentdate = new Date();
+
+    var datetime = "Last Sync: " + currentdate.getDate() + "-"+(currentdate.getMonth()+1) 
+    + "-" + currentdate.getFullYear() + " "
+    + currentdate.getHours() + ":" 
+    + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+    console.log(datetime);
   }
 
   ngOnInit() { }
   ionViewWillEnter(){
 
   }
-  increaseItem(data) {
+  increaseItem(data:any) {
+    console.log(data)
    let itemPrePrice=data.qtty*data.amount
     data.qtty++;
     data.peritemTotal
     let itemPrice=data.qtty*data.amount;
+    console.log(itemPrice);
     let result=itemPrice-itemPrePrice
     this.tottal_Amount=this.tottal_Amount+result;
-    console.log(result);
-    console.log(this.tottal_Amount)
+    let body={
+      amount:itemPrice,
+      qtty:data.qtty
+    }
+    console.log(body);
+    // console.log(result);
+    // console.log(this.tottal_Amount);
+    this.auth.updateMenu(body,data.id).subscribe(res=>{
+      console.log(res);
+    },err=>{
+      console.log(err)
+    })
+
   }
   decreaseItem(data:any) {
-   
+   console.log(data)
     if (data.qtty ==1) {
       data.qtty=1;
       this.deleteAlertConfirm(data)
@@ -51,11 +71,22 @@ export class CartpageComponent implements OnInit {
       let itemPrePrice=data.qtty*data.amount
       data.qtty--;
       let itemPrice=data.qtty*data.amount;
+      console.log(itemPrice);
       let result=itemPrePrice-itemPrice
       console.log(data);
       this.tottal_Amount=this.tottal_Amount-result;
-      console.log(result);
-      console.log(this.tottal_Amount)
+      let body={
+        amount:itemPrice,
+        qtty:data.qtty
+      }
+      console.log(body);
+      this.auth.updateMenu(body,data.id).subscribe(res=>{
+        console.log(res);
+      },err=>{
+        console.log(err)
+      })
+      // console.log(result);
+      // console.log(this.tottal_Amount)
     }
   }
 
@@ -128,16 +159,11 @@ export class CartpageComponent implements OnInit {
     })
   }
 
-//   setToday(){
-//     this.formateString = format(parseISO(format(new Date (),'yyyy-MM-dd')+'T09:00:00.000Z'),
-//                         'HH:mm,mmM d,yyyy');
-//                         console.log(this.formateString)
-//   }
-//   dateChanged(value:any){
-// this.dateValue=value;
-// this.formateString=format(parseISO(value),'HH:mm,mmM d, yyyyy');
-// this.showPicker=false;
-//   }
+  setToday(){
+    this.formateString = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    console.log(this.formateString);
+
+  }
   close(){
     this.datetime.cancel(true);
   }
@@ -200,7 +226,7 @@ export class CartpageComponent implements OnInit {
         country: this.user.user_country_id,
         city: this.user.user_city_id,
         state: this.user.user_state_id,
-        deliverydate: "2022-10-29 09:20:10",
+        deliverydate: this.formateString,
         addresslat: 3443.44,
         addresslong: 434.444
       }

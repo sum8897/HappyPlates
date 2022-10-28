@@ -120,7 +120,7 @@ getAllEvents(){
   return this.http.get(this.url + 'api/events', { headers: headers }).pipe(tap(res => {
   }))
 }
-getSingleEvents(ev_id){
+getSingleEvents(ev_id:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
   // headers = headers.append('Content-Type', 'application/json');
@@ -462,6 +462,19 @@ getCities(state_id:any){
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.post(this.url + 'api/citys',state_id, { headers: headers }).pipe(tap(res => {
+  }))
+}
+updateMenu(menu_data:any,id:any){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.post(this.url + 'api/customercarts/customercarts/'+id,menu_data, { headers: headers }).pipe(tap(res => {
   }))
 }
 

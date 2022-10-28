@@ -109,15 +109,31 @@
               Phone Number is required *
           </span>
             </div>
-            <div class="city-pin" style="display: flex;">
-              <div class="form-group label-float">
-                <ion-input type="text" name="city" #city="ngModel" required placeholder="City * " ngModel></ion-input>
-            
-                <span class="text-danger"
-                *ngIf="(city.touched || contactAddressForm.submitted) && city.errors?.required">
-                City is required *
-            </span>
-              </div>
+            <div class="label-float">
+              <ion-item lines="none"  class="form-item"> <!-- (click)="minHeightShow()" -->       
+                <ion-label>Country</ion-label>
+              <ion-label>India</ion-label>
+              </ion-item>
+            </div>
+            <div class="label-float">
+              <ion-item lines="none" (click)="stateshow()" class="form-item">
+                <ion-label>Select State</ion-label>
+              <ion-label style="font-size: 13px;" ><div>{{statename}}</div></ion-label>
+              <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+              
+              </ion-item>
+             
+            </div>
+            <div class="label-float">
+              <ion-item lines="none" (click)="cityshow()" class="form-item">
+                <ion-label>City</ion-label>
+              <ion-label style="font-size: 13px;" [value]="user.user_city">{{cityname}}</ion-label>
+              <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+               
+              </ion-item>
+          
+            </div>
+            <div class="city-pin">
           
               <div class="form-group label-float">
                 <ion-input type="tel" name="pin" #pin="ngModel" required placeholder="Pin * " ngModel></ion-input>
@@ -419,5 +435,22 @@
     </ion-accordion>
   </ion-card>
   </ion-accordion-group>
- 
+  <ion-card *ngIf="stateCard" class="countrycard">
+    <div class="crossCut" (click)="stateCard =! stateCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
+      <ion-radio-group (ionChange)="selectState($event)">
+        <ion-item *ngFor="let h of state_data">
+          <ion-label>{{h.state_name}}</ion-label>
+          <ion-radio slot="start" [value]="h"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+  </ion-card>
+  <ion-card *ngIf="cityCard" class="countrycard">
+    <div class="crossCut" (click)="cityCard =! cityCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
+      <ion-radio-group (ionChange)="selectCity($event)">
+        <ion-item *ngFor="let h of city_data">
+          <ion-label>{{h.city_name}}</ion-label>
+          <ion-radio slot="start" [value]="h"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+  </ion-card>
 </ion-content>

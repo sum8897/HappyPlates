@@ -86,7 +86,9 @@ export class UserService {
       this.user_name=this.userAllData.firstname+" "+ this.userAllData.lastname;
       localStorage.setItem('user_name',this.user_name);
       this.user_location=this.userAllData.address +" "+this.userAllData.state.state_name+" "+this.userAllData.pin;
+      
       this.user_mobile=this.userAllData.phone;
+      console.log(this.userAllData.phone)
       localStorage.setItem('user_mobile',this.user_mobile);
       this.user_city=this.userAllData.city.city_name;
       this.user_city_id=this.userAllData.city.id;
