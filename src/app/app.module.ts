@@ -53,6 +53,7 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
 import { UploadBlogComponent } from './pages/upload-blog/upload-blog.component';
 import { AddEventComponent } from './chefpage/add-event/add-event.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
                  EditmenuComponent,
                  UploadBlogComponent,
                  AddEventComponent,
-                 LoginPageComponent
+                 LoginPageComponent,
+                 OrderDetailsComponent
 
                 ],
   entryComponents: [],

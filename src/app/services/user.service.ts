@@ -125,7 +125,7 @@ export class UserService {
         }
         for(let i=0;i<=this.menu_data_list_all.length;i++){
           console.log(this.menu_data_list_all[i].medias.length);
-    if(this.menu_data_list_all[i].medias.length<0 || this.menu_data_list_all[i].medias[0]==undefined){
+    if(this.menu_data_list_all[i].medias.length<1 || this.menu_data_list_all[i].medias[0]==undefined){
       console.log('empty data');
       this.menu_data_list[i]={
         'price':this.menu_data_list_all[i].price,

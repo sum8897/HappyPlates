@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon name="arrow-back-outline" class="back-button" (click)="dismiss()" slot="start"></ion-icon>
+    <ion-title style="text-align: center;color: #275879;margin-top: 15px;">
+      Order History
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="display: flex;justify-content: space-around;margin-top: 15px;">
+    <div>Order-123ou379</div>
+    <div>Date 22 Feb 21</div>
+  </div>
+  <div class="order-address">
+    <div>Deliver to:</div>
+    <div class="customer_name">Ashish Chaurasiya</div>
+    <div class="customer_address">
+      <div class="customer_city">Vill Bhatapuarawa Post Babura kalan Mirzapur</div>
+      <div class="customer_pin">231211</div>
+    </div>
+    <div class="customer_phone">Pho: +917897196188</div>
+  </div>
+  <div class="Selected" style="padding-left: 10px;
+  font-size: 13px;">Selected Items</div>
+  <ion-card style="border-radius: 10px;margin: 10px;" *ngFor="let ord of ev_data.ordersdetails">
+    <ion-list>
+      <ion-item lines="none">
+        <ion-thumbnail class="ordered-item-img">
+          <img src="{{ord.menu_img[0]}}">
+        </ion-thumbnail>
+        <ion-label text-wrap class="ion-text-wrap">
+          <div class="ordered-main-div">
+            <div class="first-ordered-div">
+              <div class="ordered-item-name item_menu_name">{{ ord.menudetail[0].title }}</div>
+              <div class="ordered-item-name">{{ ord.menudetail[0].description }}</div>
+              <div class="second-ordered-price" style="display: flex;
+      width: 100%;
+      justify-content: space-between;">
+                <!-- <div class="ordered-item-price">{{ ord.menudetail[0].price }}</div> -->
+                <div class="ordered-item-price"><i class="fa fa-inr" aria-hidden="true"></i> {{ ord.menudetail[0].price }}</div>
+                <div class="ordered-item-price" style="border: 1px solid #ecf0f3;
+        width: 48px;
+        border-radius: 11px;
+        font-size: 12px;
+        padding: 2px 5px;"><span style="color: #949494;">Qty&nbsp;</span>4</div>
+              </div>
+            </div>
+
+
+          </div>
+        </ion-label>
+
+      </ion-item>
+
+    </ion-list>
+  </ion-card>
+  <div class="line" style="border-top: 1px solid grey;
+  height: 20px;
+  margin: auto 10px;"></div>
+  <div class="total-amount">
+<div>Total  <i class="fa fa-inr" aria-hidden="true"></i> 1200.00</div>
+<div style="display: flex;
+justify-content: end;">
+  <div>Payment Status</div>
+  <div>Confirm</div>
+</div>
+<div style="display: flex;justify-content: end;">
+  <div>Payment Mode</div>
+  <div>Debit Card</div>
+</div>
+  </div>
+</ion-content>
