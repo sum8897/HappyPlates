@@ -18,27 +18,33 @@
         <div class="order-id" style="color: #000306;font-weight: 500;">Order-{{order.orderId}}</div>
         <div class="order-date" style="color: #a5a6aa;padding-left: 5px;">Date 22 Feb 22</div>
       </div>
-      <div class="order-more" style="color: #e51934;font-weight: 500;">View Details</div>
+      <div class="order-more" style="color: #e51934;font-weight: 500;" (click)="viewOrderDetails(order)">View Details</div>
     </div>
     <ion-card style="border-radius: 10px;margin: 10px 0;" *ngFor="let ord of order.ordersdetails">
     <ion-list>
         <ion-item lines="none">
           <ion-thumbnail class="ordered-item-img">
-            <img src="../../../assets/img/user_icon.png">
+            <img src="{{ord.menu_img[0]}}">
           </ion-thumbnail>
-          <ion-label>
+          <ion-label text-wrap class="ion-text-wrap">
         <div class="ordered-main-div">
-    <div class="first-ordered-div">
+            <div class="first-ordered-div">
       <div class="ordered-item-name item_menu_name">{{ ord.menudetail[0].title }}</div>
       <div class="ordered-item-name">{{ ord.menudetail[0].description }}</div>
-      <div class="ordered-item-price">{{ ord.menudetail[0].price }}</div>
-    </div>
-    <div class="second-ordered-div">
-      <div class="ordered-date">
-        {{(order.deliverydate)}}
-    </div>
-    <div class="ordered-status">running</div>
-    </div>
+      <div class="second-ordered-price" style="display: flex;
+      width: 100%;
+      justify-content: space-between;">
+        <!-- <div class="ordered-item-price">{{ ord.menudetail[0].price }}</div> -->
+        <div class="ordered-item-price"><i class="fa fa-inr" aria-hidden="true"></i> {{ord.menudetail[0].price }}</div>
+        <div class="ordered-item-price" style="border: 1px solid #ecf0f3;
+        width: 48px;
+        border-radius: 11px;
+        font-size: 12px;
+        padding: 2px 5px;"><span style="color: #949494;">Qty&nbsp;</span>4</div>
+</div>
+            </div>
+ 
+     
         </div>
           </ion-label>
       

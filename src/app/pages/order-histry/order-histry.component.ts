@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { OrderDetailsComponent } from '../order-details/order-details.component';
 
 @Component({
   selector: 'app-order-histry',
@@ -12,7 +14,8 @@ export class OrderHistryComponent implements OnInit {
 
   constructor(public auth: AuthService,
              public user: UserService,
-             public router: Router) { 
+             public router: Router,
+             private modalController: ModalController,) { 
                this.orderHistory()
              }
 
@@ -44,4 +47,14 @@ orderedData:any;
       console.log(err)
     })
   }
+
+
+ async viewOrderDetails(ev:any){
+  console.log((ev))
+ const modal = await this.modalController.create({
+   component: OrderDetailsComponent,
+   componentProps: {ev_data: ev}
+ });
+ return await modal.present();
+ }
 }
