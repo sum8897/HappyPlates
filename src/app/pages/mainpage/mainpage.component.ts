@@ -188,7 +188,8 @@ filterTermss=[];
     // }
   }
   async openSingleDetails(chef:any){
-    console.log(chef)
+    console.log(chef);
+    localStorage.setItem('chef_id',chef.id);
     this.user.chef_id=chef;
     this.router.navigateByUrl('/nav/chef-menu-review')
   }

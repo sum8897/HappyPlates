@@ -1,0 +1,30 @@
+.about-slider-div{
+    .img-card{
+        border-radius: 10px;
+        margin: 0 10px;
+        .img{
+    width: 100%;
+    height: 185px;
+    border-radius: 10px;
+    margin-bottom: -3px;
+        }
+    }
+}
+.menu-name{
+    text-align: center;
+    margin: 20px auto;
+    font-size: 21px;
+    text-transform: capitalize;
+    color: #1c5c75;
+}
+.desc-heading{
+    text-align: left;
+    margin-left: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.menu-desc{
+    margin: auto 20px;
+    line-height: 1.2;
+}

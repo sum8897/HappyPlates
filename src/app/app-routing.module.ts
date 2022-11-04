@@ -1,3 +1,4 @@
+import { AddEventComponent } from './chefpage/add-event/add-event.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ChefHomeComponent } from './chefpage/chef-home/chef-home.component';
@@ -29,6 +30,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { SearchComponent } from './pages/search/search.component';
 import { ViewallchefComponent } from './pages/viewallchef/viewallchef.component';
 import { AuthGuardGuard } from './services/auth-guard.guard';
+import { AddBlogsComponent } from './chefpage/add-blogs/add-blogs.component';
 
 
 const routes: Routes = [
@@ -136,6 +138,16 @@ const routes: Routes = [
   {
     path: 'chef-profile',
     component: ChefprofileComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'nav/chef-events',
+    component: AddEventComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'nav/chef-blogs',
+    component: AddBlogsComponent,
     canActivate: [AuthGuardGuard]
   },
   {

@@ -39,6 +39,7 @@ export class AppComponent {
   ) {
     this.initializeApp();
     this.sideMenu();
+    this.getDate();
     this.backButtonEvent();
      window.addEventListener('offline',()=>{
        this.openAlert();
@@ -142,6 +143,16 @@ async presentAlertConfirm() {
 }
 
 
+getDate(){
+  this.user.today = new Date();
+  var dd = String(this.user.today.getDate()).padStart(2, '0');
+  var mm = String(this.user.today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = this.user.today.getFullYear();
+
+  // this.today = mm + '/' + dd + '/' + yyyy;
+  this.user.today = yyyy +'-'+mm + '-' + dd;
+  console.log(this.user.today);
+}
 
   sideMenu()
   {

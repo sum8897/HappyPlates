@@ -6,11 +6,12 @@ import { CommonService } from 'src/app/services/common.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-add-event',
-  templateUrl: './add-event.component.html',
-  styleUrls: ['./add-event.component.scss'],
+  selector: 'app-add-blogs',
+  templateUrl: './add-blogs.component.html',
+  styleUrls: ['./add-blogs.component.scss'],
 })
-export class AddEventComponent implements OnInit {
+export class AddBlogsComponent implements OnInit {
+
   dataRes:any;
   dataList:any;
   eventListLength:any;
@@ -20,7 +21,7 @@ export class AddEventComponent implements OnInit {
   @ViewChild(IonDatetime) datetime:IonDatetime;
   constructor(private user: UserService,
     private auth: AuthService,
-    public common: CommonService,) {
+    private common: CommonService,) {
       this.user.menu();
       this.setToday();
     console.log(this.user.today);
@@ -55,33 +56,31 @@ console.log(this.formateString);
       this.dataList=this.dataRes.data;
       this.eventListLength=this.dataList.length;
       console.log(this.dataList.length);
-      alert(JSON.stringify(this.dataList))
+
     }, err => {
       this.user.dismiss();
     })
   }
 
   onAddressSubmit(contactAddressForm: any) {
-    // console.log(contactAddressForm.value);
-    // console.log("form" + JSON.stringify(contactAddressForm.value));
+    console.log(contactAddressForm.value);
+    console.log("form" + JSON.stringify(contactAddressForm.value));
         let blogs_data = {
           'title': contactAddressForm.value.title,
           'intro': contactAddressForm.value.into,
           'date': this.formateString_api,
           'userId': localStorage.getItem('user_id'),
-          // 'description': contactAddressForm.value.descr,
+          'description': contactAddressForm.value.descr,
           'location':'New Delhi',
-          'mediaId': this.common.multipleImageArray,
+          'mediaId': 1,
           'status': '1'
         }
-        alert(JSON.stringify(blogs_data));
         this.user.present('uploading...')
     this.auth.AddEvents(blogs_data).subscribe((data)=>{
     this.user.dismiss();
     this.getEventData();
     this.user.showToast('Event added successfully..');
     },err=>{
-      alert('Event did not added...');
       this.user.dismiss();
     })
   }
