@@ -20,7 +20,7 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
-    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" /> 
     <platform name="android">
         <preference name="Scheme" value="http" />
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
