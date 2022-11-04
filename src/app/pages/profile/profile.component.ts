@@ -125,6 +125,7 @@ if(contactAddressForm.value.location==undefined){
       'city': this.cityId,
       'pin': contactAddressForm.value.pin,
       'address': contactAddressForm.value.location,
+      'role': localStorage.getItem('user_role')
     }
     console.log(body)
     this.user.present('');

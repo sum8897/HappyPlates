@@ -31,9 +31,9 @@ export class CommonService {
                   // imageData is either a base64 encoded string or a file URI
                   this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
                   this.imagepath=imageData;
-                  // alert(this.croppedImagePath);
+                  alert("base64...  "+this.croppedImagePath);
                   // console.log(this.croppedImagePath);
-                  // alert(imageData);
+                  alert("imageOnly:  "+imageData);
                 }, (err) => {
                   // Handle error
                 });
@@ -78,7 +78,9 @@ export class CommonService {
                   this.user.dismiss();
                   this.uploadSingleRes=res;
             this.uploadSingleResData=this.uploadSingleRes.data;
-            this.multipleImageArray.push(this.uploadSingleResData.filename)
+            this.multipleImageArray.push(this.uploadSingleResData.filename);
+            alert(this.uploadSingleResData);
+            alert(this.multipleImageArray);
             // if(this.multipleImageArray.length=== 0){
             //   this.multipleImageArray.push(this.uploadSingleResData.filename)
             // }else{

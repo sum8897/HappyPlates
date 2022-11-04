@@ -12,6 +12,7 @@ export class UserService {
   menuData:any;
   customer_user:boolean;
   chef_id:any;
+  today:any;
   constructor(public toast:ToastController,
               public loadingController: LoadingController,
               public auth:AuthService
@@ -47,8 +48,8 @@ export class UserService {
   userRes:any;
   userData:any;
   userAllData:any;
-  specialization;
-  user_location;
+  specialization:any;
+  user_location:any;
   user_mobile:any;
   user_city:any;
   user_city_id:any;
@@ -62,6 +63,7 @@ export class UserService {
   user_prof_image:any;
   user_ProfImage:any='';
   user_email:any;
+  user_id:any;
  userDetails(){
   if(localStorage.getItem('amantran_token')==null){
     console.log('user not logged in...')
@@ -76,6 +78,8 @@ export class UserService {
       this.user_last_name=this.userAllData.lastname;
       this.user_pin=this.userAllData.pin;
       this.user_prof_image=this.userAllData.prof_image;
+     this.user_id=this.userAllData.id;
+     localStorage.setItem('user_id',this.user_id)
       console.log(this.user_prof_image);
       if(this.user_prof_image==""){
         console.log('user image not found');
@@ -100,6 +104,7 @@ export class UserService {
       this.user_country=this.userAllData.country.country_name;
       this.user_country_id=this.userAllData.country.id;
       this.chef_id=this.userAllData.id;
+      
       this.chefmenuData(this.chef_id);
     },err=>{
       console.log(err)
@@ -180,36 +185,36 @@ export class UserService {
       icon  : "reader-outline",
       role  : "customer"
     },
-    {
-      title : "Team",
-      url   : "/nav/team",
-      icon  : "person-add-outline",
-      role  : "customer"
-    },
-    {
-      title : "Testimonials",
-      url   : "/nav/testimonials",
-      icon  : "chatbox-ellipses-outline",
-      role  : "customer"
-    },
-    {
-      title : "FAQ",
-      url   : "/nav/faq",
-      icon  : "information-outline",
-      role  : "customer"
-    },
+    // {
+    //   title : "Team",
+    //   url   : "/nav/team",
+    //   icon  : "person-add-outline",
+    //   role  : "customer"
+    // },
+    // {
+    //   title : "Testimonials",
+    //   url   : "/nav/testimonials",
+    //   icon  : "chatbox-ellipses-outline",
+    //   role  : "customer"
+    // },
+    // {
+    //   title : "FAQ",
+    //   url   : "/nav/faq",
+    //   icon  : "information-outline",
+    //   role  : "customer"
+    // },
     {
       title : "Events",
       url   : "/nav/event",
       icon  : "basketball",
        role: "customer",
     },
-    {
-      title : "Photo Gallery ",
-      url   : "/nav/third",
-      icon  : "image",
-      role: "customer"
-    },
+    // {
+    //   title : "Photo Gallery ",
+    //   url   : "/nav/third",
+    //   icon  : "image",
+    //   role: "customer"
+    // },
     // {
     //   title : "Chef Account",
     //   url   : "/nav/chefaccount",
@@ -247,9 +252,21 @@ export class UserService {
         role: "chef"
       },
       {
-        title : "Chef Profile",
+        title : "Profile",
         url   : "/nav/chef-profile",
         icon  : "person-outline",
+        role: "chef"
+      },
+      {
+        title : "Events",
+        url   : "/nav/chef-events",
+        icon  : "calendar-outline",
+        role: "chef"
+      },
+      {
+        title : "Blogs",
+        url   : "/nav/chef-blogs",
+        icon  : "book-outline",
         role: "chef"
       },
 

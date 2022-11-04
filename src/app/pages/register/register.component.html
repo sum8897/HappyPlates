@@ -120,7 +120,7 @@
     <div class="label-float">
       <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true" ></ion-input>
       <label>Zip Code<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.lastname">
+      <div *ngFor="let error of errorMessages.pin">
         <ng-container *ngIf="pin.hasError(error.type) && (pin.dirty || pin.touched)">
           <small class="error-message">{{error.message}}</small>
         </ng-container>
@@ -160,13 +160,13 @@
         <ion-checkbox slot="start" mode="md" name="check" #ng class="remember-checkbox" value="yes" (ionChange)="checkedValue($event)" ngModel [ngModelOptions]="{standalone: true}"></ion-checkbox>
       </ion-item>
     </div>
-    <div class="submit-div">
-      <ion-button class="submit-login-button" expand="round" type="submit" >Submit</ion-button>
+    <div class="submit-div" >
+      <ion-button class="submit-login-button" expand="round" type="submit">Submit</ion-button>
     </div>
   </form>
   </div>
 
-  <div class="login-input-value" *ngIf="chef">
+   <div class="login-input-value" *ngIf="chef">
     <form [formGroup]="registrationForm" (ngSubmit)="submitForm()">
       <div class="label-float">
         <ion-input type="text" formControlName="firstname" placeholder="Enter First Name " required="true"></ion-input>
@@ -207,7 +207,7 @@
       <div class="label-float">
         <ion-input type="text" formControlName="skills" placeholder="Enter Skills, Ex:Bachelor of Hotel Management (BHM) in Culinary " required="true" ></ion-input>
         <label>Enter Skills<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.specialization">
+        <div *ngFor="let error of errorMessages.skills">
           <ng-container *ngIf="skills.hasError(error.type) && (skills.dirty || skills.touched)">
             <small class="error-message">{{error.message}}</small>
           </ng-container>
@@ -225,7 +225,7 @@
       <div class="label-float">
         <ion-input type="text" formControlName="description" placeholder="Enter Description " required="true" ></ion-input>
         <label>Enter Description<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.specialization">
+        <div *ngFor="let error of errorMessages.description">
           <ng-container *ngIf="description.hasError(error.type) && (description.dirty || description.touched)">
             <small class="error-message">{{error.message}}</small>
           </ng-container>
@@ -241,58 +241,36 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-item lines="none"  class="form-item"> <!-- (click)="minHeightShow()" -->
+        <ion-item lines="none"  class="form-item">
     
           <ion-label>Country</ion-label>
         <ion-label>India</ion-label>
-        <!-- <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon> -->
-          <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
-            required></ion-input> -->
+      
         </ion-item>
-        <!-- <ion-input type="text" formControlName="country" placeholder="Enter Country Name " required="true"></ion-input>
-        <label>Country Name<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.country">
-          <ng-container *ngIf="country.hasError(error.type) && (country.dirty || country.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div> -->
+     
       </div>
       <div class="label-float">
         <ion-item lines="none" (click)="stateshow()" class="form-item">
           <ion-label>Select State</ion-label>
         <ion-label>{{statename}}</ion-label>
         <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
-          <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
-            required></ion-input> -->
+      
         </ion-item>
-        <!-- <ion-input type="text" formControlName="state" placeholder="Enter State Name " required="true"></ion-input>
-        <label>State Name<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.state">
-          <ng-container *ngIf="state.hasError(error.type) && (state.dirty || state.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div> -->
+      
       </div>
       <div class="label-float">
         <ion-item lines="none" (click)="cityshow()" class="form-item">
           <ion-label>Select City</ion-label>
         <ion-label>{{cityname}}</ion-label>
         <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
-          <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
-            required></ion-input> -->
+       
         </ion-item>
-        <!-- <ion-input type="text" formControlName="city" placeholder="Enter City Name " required="true"></ion-input>
-        <label>City Name<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.city">
-          <ng-container *ngIf="city.hasError(error.type) && (city.dirty || city.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div> -->
+      
       </div>
       <div class="label-float">
         <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true" ></ion-input>
         <label>Zip Code<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.lastname">
+        <div *ngFor="let error of errorMessages.pin">
           <ng-container *ngIf="pin.hasError(error.type) && (pin.dirty || pin.touched)">
             <small class="error-message">{{error.message}}</small>
           </ng-container>
@@ -335,7 +313,7 @@
         </ion-item>
         <ion-item>
           <ion-avatar slot="start"><img src="{{croppedImagePath}}"></ion-avatar>
-          <!-- <ion-button slot="end" size="small" (click)="uploadImage()">upload</ion-button> -->
+        
           </ion-item>
       </ion-list>
       <div class="check-checkbox">
@@ -348,7 +326,7 @@
         <ion-button class="submit-login-button" expand="round" type="submit">Submit</ion-button>
       </div>
     </form>
-  </div>
+  </div> 
           <div class="create-new-account" id="create-new-account">
             <p class="create-account-p" (click)="clickLogin()">Already have an Account ?<a>Sign In</a></p>
           </div>

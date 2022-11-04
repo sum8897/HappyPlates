@@ -15,13 +15,23 @@ export class LoginComponent implements OnInit {
   user_token:any;
   user_name:any;
   user_type:any;
+  username:any;
+  password:any;
   constructor(private http: HttpClient,
     private router: Router,
     private auth: AuthService,
     private user: UserService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+this.username=localStorage.getItem('username');
+this.password=localStorage.getItem('password')
+   }
+  checkValue: any;
+  checkedValue(e: any) {
+    console.log(e.detail.checked);
+    this.checkValue = e.detail.checked;
+  }
   openSignUp() {
     this.router.navigateByUrl('/register')
   }
@@ -44,8 +54,11 @@ export class LoginComponent implements OnInit {
    
        if(this.checkValue==false){
        console.log(this.checkValue);
-       alert('')
+      //  alert('')
        }else{
+         localStorage.setItem('remember','true');
+         localStorage.setItem('username',contactForm.value.email);
+         localStorage.setItem('password',contactForm.value.password);
        console.log('true...');
        }
       this.user.present('wait...');
@@ -92,9 +105,5 @@ export class LoginComponent implements OnInit {
     }
 
   }
-  checkValue: any;
-  checkedValue(e: any) {
-    console.log(e.detail.checked);
-    this.checkValue = e.detail.checked;
-  }
+  
 }

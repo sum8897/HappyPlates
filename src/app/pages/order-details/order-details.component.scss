@@ -1,8 +1,35 @@
 .order-address {
-    border       : 1px solid grey;
-    border-radius: 21px;
-    margin       : 10px;
-    padding      : 10px;
+    border: 1px solid #dee9ed;
+    border-radius: 10px;
+    margin: 20px 15px 20px 10px;
+    padding: 15px 5px 15px 15px;
+    text-transform: capitalize;
+
+    .delivery_to {
+        color        : #e01f34;
+        font-size    : 13px;
+        margin-bottom: 5px;
+        text-transform: capitalize;
+    }
+
+    .customer_name {
+        color        : #000000;
+        font-weight  : 500;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+    }
+
+    .customer_city {
+        font-size  : 15px;
+        color      : #000;
+        font-weight: 400;
+        text-transform: capitalize;
+    }
+
+    .customer_phone {
+        margin-bottom: 5px;
+        margin-top   : 5px;
+    }
 }
 
 .ordered-item-img {
@@ -70,6 +97,13 @@ ion-label {
 }
 
 .total-amount {
-    margin    : 10px 10px 20px;
+    margin    : 10px 10px 30px;
     text-align: right;
+    .total{
+        border-bottom: 2px solid #f7f9fa;
+    margin: 10px auto;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #f7f9fa;
+    }
 }

@@ -54,6 +54,7 @@ import { UploadBlogComponent } from './pages/upload-blog/upload-blog.component';
 import { AddEventComponent } from './chefpage/add-event/add-event.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
+import { AddBlogsComponent } from './chefpage/add-blogs/add-blogs.component';
 
 
 @NgModule({
@@ -86,8 +87,10 @@ import { OrderDetailsComponent } from './pages/order-details/order-details.compo
                  EditmenuComponent,
                  UploadBlogComponent,
                  AddEventComponent,
+                 AddBlogsComponent,
                  LoginPageComponent,
-                 OrderDetailsComponent
+                 OrderDetailsComponent,
+                 
 
                 ],
   entryComponents: [],

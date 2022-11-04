@@ -101,8 +101,20 @@ export class SidenavPage implements OnInit {
         role: "chef"
       },
       {
-        title : "Chef Profile",
+        title : "Profile",
         url   : "/nav/chef-profile",
+        icon  : "person-outline",
+        role: "chef"
+      },
+      {
+        title : "Events",
+        url   : "/nav/cheg-events",
+        icon  : "person-outline",
+        role: "chef"
+      },
+      {
+        title : "Blogs",
+        url   : "/nav/chef-blogs",
         icon  : "person-outline",
         role: "chef"
       },
@@ -142,7 +154,7 @@ export class SidenavPage implements OnInit {
     localStorage.clear();
     localStorage.removeItem('amantran_token');
     this.menuCtrl.close();
-    this.router.navigate(['register']);
+    this.router.navigate(['nav/login']);
   }
   editProfile(){
     this.router.navigateByUrl('profile')

@@ -110,8 +110,7 @@ export class ChefprofileComponent implements OnInit {
             'price':this.menu_data_list[i].price,
             'title':this.menu_data_list[i].title,
             'description':this.menu_data_list[i].description,
-            'userId':this.menu_data_list[i].userId,
-        
+            'userId':this.menu_data_list[i].userId,     
             'path': '../../../assets/img/blog_2.jpg',
           }
           console.log(this.menu_Array)
@@ -120,8 +119,7 @@ export class ChefprofileComponent implements OnInit {
             'price':this.menu_data_list[i].price,
             'title':this.menu_data_list[i].title,
             'description':this.menu_data_list[i].description,
-            'userId':this.menu_data_list[i].userId,
-           
+            'userId':this.menu_data_list[i].userId,          
             'path': this.menu_data_list[i].medias[0].path,
           }
         }
@@ -133,6 +131,8 @@ export class ChefprofileComponent implements OnInit {
       console.log(err)
     })
   }
+
+  
   imagepath: any = "";
   pickImage(sourceType:any) {
     const options: CameraOptions = {
@@ -219,6 +219,8 @@ export class ChefprofileComponent implements OnInit {
       console.log(err.error)
     })
   }
+
+
   selectedRadioGroup: any;
   radioGroupChange(event: any) {
     console.log("radioGroupChange", event.detail.value);
