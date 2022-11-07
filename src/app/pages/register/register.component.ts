@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +33,8 @@ export class RegisterComponent implements OnInit {
     public navCtrl: NavController,
     public actionSheetController: ActionSheetController,
     private alertController: AlertController,
-    public camera: Camera,) { }
+    public camera: Camera,
+    public common: CommonService) { }
 
   ngOnInit() {
     this.type = 'customer';
@@ -443,101 +445,108 @@ export class RegisterComponent implements OnInit {
   user_reg: any;
   submitForm() {
     // console.log(this.registrationForm.value);
-    console.log(this.selectState_id);
-    console.log(this.cityId);
-    if(this.checkValue==false){
-  alert('Please mark the checkBox..');
-    }else{
-      if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname || this.registrationForm.value.phone || this.registrationForm.value.email || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.email || this.registrationForm.value.pin || this.registrationForm.value.address || this.registrationForm.value.password){
-        alert('Please Enter all required fields...');
-        console.log(this.registrationForm.value.phone.length)
-      }
-      else{
-      console.log('all good');
-      if (this.type == 'customer') {
-         if(this.registrationForm.value.phone.length){
-           alert('Please enter Valid Mobile Number')
-         }else{
-          this.user_reg = {
-            "firstname": this.registrationForm.value.firstname,
-            "lastname": this.registrationForm.value.lastname,
-            "phone": this.registrationForm.value.phone,
-            "email": this.registrationForm.value.email,
-            "country": this.country_id,
-            "state": this.selectState_id,
-            "city": this.cityId,
-            "pin": this.registrationForm.value.pin,
-            "address": this.registrationForm.value.address,
-            "prof_image": this.croppedImagePath,
-            "password": this.registrationForm.value.password,
-            "role": this.type,
-            "agreeterms": "Yes"
+    console.log(this.registrationForm.value.password);
+    if (this.type == 'customer'){
+      if(this.checkValue==false){
+        alert('Please mark the checkBox..');
           }
-     console.log(this.user_reg);
-     console.log(this.user_reg);
-     this.user.present('wait..');
-     this.auth.userRegister(this.user_reg).subscribe((response) => {
-       this.user.dismiss();
-       this.router.navigateByUrl('nav/login');
-       this.user.showToast('You are register successfully...');
-       console.log(response);
-     }, err => {
-       this.user.dismiss();
-       console.log('user Register Error' + JSON.stringify(err));
-     })
-         }
-      
-      }
-      else {
-        if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname || this.registrationForm.value.phone || this.registrationForm.value.email || this.registrationForm.value.specialization || this.registrationForm.value.skills || this.registrationForm.value.description || this.registrationForm.value.aboutme || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.pin || this.registrationForm.value.address || this.registrationForm.value.password){
-          alert('Please Enter all required fields...');
-          console.log(this.registrationForm.value.phone.length)
-        }else{
-          if(this.registrationForm.value.phone.length){
-            alert('Please enter Valid Mobile Number')
-          }else{
-            this.user_reg = {
-              "firstname": this.registrationForm.value.firstname,
-              "lastname": this.registrationForm.value.lastname,
-              "phone": this.registrationForm.value.phone,
-              "email": this.registrationForm.value.email,
-              'specialization': this.registrationForm.value.specialization,
-              'skills': this.registrationForm.value.skills,
-              'description': this.registrationForm.value.description,
-              'aboutme': this.registrationForm.value.aboutme,
-              "country": this.country_id,
-              "state": this.selectState_id,
-              "city": this.cityId,
-              "pin": this.registrationForm.value.pin,
-              "address": this.registrationForm.value.address,
-              "prof_image": this.croppedImagePath,
-              "password": this.registrationForm.value.password,
-              "role": this.type,
-              "agreeterms": "Yes"
-            }
+            else{
+               if(this.registrationForm.value.phone.length<10 || this.registrationForm.value.phone.length>10){
+                  alert('Please enter Valid Mobile Number');
+                  console.log(this.registrationForm.value.phone.length)
+                }
+                else if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname=="" ||this.registrationForm.value.phone=="" || this.registrationForm.value.email=="" || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.address==""){
+           alert('Please Enter all Details...');
+                }
+            else if(this.registrationForm.value.pin=="" || this.registrationForm.value.pin.length<6){
+                  alert('please enetr valid 6 digit zip code');
+     
+                }
+                else if(this.registrationForm.value.password="" || this.registrationForm.value.password.length<8) {
+           alert('please enetr minimum 8 digit password');
+                }
+                else{
+                  this.user_reg = {
+                    "firstname": this.registrationForm.value.firstname,
+                    "lastname": this.registrationForm.value.lastname,
+                    "phone": this.registrationForm.value.phone,
+                    "email": this.registrationForm.value.email,
+                    "country": this.country_id,
+                    "state": this.selectState_id,
+                    "city": this.cityId,
+                    "pin": this.registrationForm.value.pin,
+                    "address": this.registrationForm.value.address,
+                    "password": this.registrationForm.value.password,
+                    "role": this.type,
+                    "agreeterms": "yes",
+                    "prof_image": this.croppedImagePath,
+                  }
+             console.log(this.user_reg);
+            //  this.user.present('wait..');
+            //  this.auth.userRegister(this.user_reg).subscribe((response) => {
+            //    this.user.dismiss();
+            //    this.router.navigateByUrl('nav/login');
+            //    this.user.showToast('You are register successfully...');
+            //    console.log(response);
+            //  }, err => {
+            //    this.user.dismiss();
+            //    console.log('user Register Error' + JSON.stringify(err));
+            //  })
+
+
+                }
+          }
+    }
+    else{
+        // if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname || this.registrationForm.value.phone || this.registrationForm.value.email || this.registrationForm.value.specialization || this.registrationForm.value.skills || this.registrationForm.value.description || this.registrationForm.value.aboutme || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.pin || this.registrationForm.value.address || this.registrationForm.value.password){
+        //   alert('Please Enter all required fields...');
+        //   console.log(this.registrationForm.value.phone.length)
+        // }else{
+        //   if(this.registrationForm.value.phone.length){
+        //     alert('Please enter Valid Mobile Number')
+        //   }else{
+        //     this.user_reg = {
+        //       "firstname": this.registrationForm.value.firstname,
+        //       "lastname": this.registrationForm.value.lastname,
+        //       "phone": this.registrationForm.value.phone,
+        //       "email": this.registrationForm.value.email,
+        //       'specialization': this.registrationForm.value.specialization,
+        //       'skills': this.registrationForm.value.skills,
+        //       'description': this.registrationForm.value.description,
+        //       'aboutme': this.registrationForm.value.aboutme,
+        //       "country": this.country_id,
+        //       "state": this.selectState_id,
+        //       "city": this.cityId,
+        //       "pin": this.registrationForm.value.pin,
+        //       "address": this.registrationForm.value.address,
+        //       "prof_image": this.croppedImagePath,
+        //       "password": this.registrationForm.value.password,
+        //       "role": this.type,
+        //       "agreeterms": "Yes"
+        //     }
     
-            console.log(this.user_reg);
-            this.user.present('wait..');
-            this.auth.userRegister(this.user_reg).subscribe((response) => {
-              this.user.dismiss();
-              this.router.navigateByUrl('nav/login');
-              this.user.showToast('You are register successfully...');
-              console.log(response);
-            }, err => {
-              this.user.dismiss();
-              console.log('user Register Error' + JSON.stringify(err));
-            })
+        //     console.log(this.user_reg);
+        //     this.user.present('wait..');
+        //     this.auth.userRegister(this.user_reg).subscribe((response) => {
+        //       this.user.dismiss();
+        //       this.router.navigateByUrl('nav/login');
+        //       this.user.showToast('You are register successfully...');
+        //       console.log(response);
+        //     }, err => {
+        //       this.user.dismiss();
+        //       console.log('user Register Error' + JSON.stringify(err));
+        //     })
 
 
-          }
-        }
+        //   }
+        // }
       }
  
       }
      
-    }
+    
   
-  }
+  
   clickLogin() {
     this.router.navigateByUrl('nav/login')
   }
