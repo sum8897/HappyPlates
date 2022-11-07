@@ -136,6 +136,7 @@ if(contactAddressForm.value.location==undefined){
       this.user_location = this.userData.address;
       this.user_name = this.userData.firstname + " " + this.userData.lastname;
       console.log(this.userData);
+      this.user.showToast('Profile Update successfully..');
       // contactAddressForm.reset();
     }, err => {
       this.user.dismiss();

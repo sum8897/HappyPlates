@@ -14,18 +14,18 @@ export class AddBlogsComponent implements OnInit {
 
   dataRes:any;
   dataList:any;
-  eventListLength:any;
+  blogsListLength:any;
   showPicker=false;
-  dateValue=format(new Date(),'yyyy-MM-dd')+'T05:00:00.000Z';
+  dateValue=format(new Date(),'dd/MM/yyyy')+'T05:00:00.000Z';
   formateString='';
   @ViewChild(IonDatetime) datetime:IonDatetime;
   constructor(private user: UserService,
-    private auth: AuthService,
-    private common: CommonService,) {
-      this.user.menu();
-      this.setToday();
-    console.log(this.user.today);
-    this.getEventData();
+              private auth: AuthService,
+              public common: CommonService,) {
+              this.user.menu();
+               this.setToday();
+               console.log(this.user.today);
+               this.getAddedBlogsData();
   }
 
   ngOnInit() { }
@@ -36,27 +36,26 @@ export class AddBlogsComponent implements OnInit {
 formateString_api:any;
 setToday(){
   this.formateString = format(parseISO(format(new Date (),'yyyy-MM-dd')+'T09:00:00.000Z'),
-                      'yyyy-MM-dd');
+                      'dd/MM/yyyy');
                       console.log(this.formateString)
 }
 dateChanged(value:any){
 this.dateValue=value;
-this.formateString=format(parseISO(value),'yyyy-MM-dd');
-this.formateString_api=format(parseISO(value),'yyyy-MM-dd');
+this.formateString=format(parseISO(value),'dd/MM/yyyy');
+this.formateString_api=format(parseISO(value),'dd/MM/yyyy');
 this.showPicker=false;
 console.log(this.dateValue);
 console.log(this.formateString);
 }
 
-  getEventData() {
+  getAddedBlogsData() {
     this.user.present('');
-    this.auth.getAddedEvents().subscribe((event) => {
+    this.auth.getAddedBlogs().subscribe((blogs) => {
       this.user.dismiss();
-      this.dataRes=event;
+      this.dataRes= blogs;
       this.dataList=this.dataRes.data;
-      this.eventListLength=this.dataList.length;
-      console.log(this.dataList.length);
-
+      this.blogsListLength=this.dataList.length;
+      console.log(this.dataList);
     }, err => {
       this.user.dismiss();
     })
@@ -72,14 +71,15 @@ console.log(this.formateString);
           'userId': localStorage.getItem('user_id'),
           'description': contactAddressForm.value.descr,
           'location':'New Delhi',
-          'mediaId': 1,
+          'mediaId': this.common.multipleImageArray,
           'status': '1'
         }
         this.user.present('uploading...')
-    this.auth.AddEvents(blogs_data).subscribe((data)=>{
+    this.auth.postBlogs(blogs_data).subscribe((data)=>{
+      console.log(data);
     this.user.dismiss();
-    this.getEventData();
-    this.user.showToast('Event added successfully..');
+    this.getAddedBlogsData();
+    this.user.showToast('Blogs added successfully..');
     },err=>{
       this.user.dismiss();
     })

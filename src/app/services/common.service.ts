@@ -21,7 +21,7 @@ export class CommonService {
               imagepath:any="";
               pickImage(sourceType:any) {
                 const options: CameraOptions = {
-                  quality: 100,
+                  quality: 50,
                   sourceType: sourceType,
                   destinationType: this.camera.DestinationType.DATA_URL,
                   encodingType: this.camera.EncodingType.JPEG,

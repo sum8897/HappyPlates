@@ -17,13 +17,13 @@ export class ChefHomeComponent implements OnInit {
               public auth: AuthService,
               public modalCtrl: ModalController,
               public router: Router,) {
-    this.user.menu();
-    this.user.userDetails();
-    this.allOrders();
+              this.user.menu();
+              this.user.userDetails();
+              this.allOrders();
   }
 
   ngOnInit() { }
-allRes;
+allRes:any;
 allOrderedData:any;
 allorderedDataList:any;
   allOrders() {

@@ -173,6 +173,34 @@ getAllBlogs(){
   return this.http.get(this.url + 'api/blogs', { headers: headers }).pipe(tap(res => {
   }))
 }
+
+getAddedBlogs(){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.get(this.url + 'api/blogs/chefblogslist', { headers: headers }).pipe(tap(res => {
+  }))
+}
+
+postBlogs(blogs:any){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.post(this.url + 'api/blogs',blogs, { headers: headers }).pipe(tap(res => {
+  }))
+}
  
 getSingleBlogs(id){
   let token = localStorage.getItem('amantran_token');
@@ -433,19 +461,6 @@ editMenuByChef(check_data:any,id){
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append("Authorization", 'Bearer'+' '+ token);
   return this.http.put(this.url + 'api/menus/menu/'+id,check_data, { headers: headers }).pipe(tap(res => {
-  }))
-}
-postBlogs(blogs:any){
-  let token = localStorage.getItem('amantran_token');
-  var headers = new HttpHeaders();
-  // headers = headers.append('Content-Type', 'application/json');
-  headers.append('Content-Type', 'multipart/form-data');
-  headers = headers.append('Accept', 'application/json');
-  headers = headers.append('Access-Control-Allow-Origin', '*');
-  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
-  headers = headers.append('Connection', 'keep-alive');
-  headers = headers.append("Authorization", 'Bearer'+' '+ token);
-  return this.http.post(this.url + 'api/blogs',blogs, { headers: headers }).pipe(tap(res => {
   }))
 }
 

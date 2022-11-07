@@ -23,13 +23,14 @@
       <ion-item style="border: 1px dotted #dfe8ed;
       border-radius: 21px;
       text-align: center;">
-        <ion-label (click)="selectImage()">
-          <ion-icon name="add-outline" slot="start"></ion-icon>Upload Image
+       <ion-avatar style="font-size: 35px;padding-top: 7px;" slot="start"><ion-icon name="camera-outline"></ion-icon></ion-avatar>
+        <ion-label (click)="common.selectImage()" class="selectImage">
+        Select Image
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-avatar slot="start"><img src="{{croppedImagePath}}"></ion-avatar>
-        <!-- <ion-button slot="end" size="small" (click)="uploadImage()">upload</ion-button> -->
+        <ion-thumbnail style="width: 90px;height: 90px;" slot="start"> <img src="{{common.croppedImagePath}}"></ion-thumbnail>
+        <ion-button slot="end" size="small" (click)="common.uploadImage()"> {{common.multipleImageArray}}&nbsp;&nbsp;  upload</ion-button>
         </ion-item>
     </ion-list>
      <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" novalidate>
@@ -167,6 +168,20 @@
   </div>
 
    <div class="login-input-value" *ngIf="chef">
+    <ion-list>
+      <ion-item style="border: 1px dotted #dfe8ed;
+      border-radius: 21px;
+      text-align: center;">
+       <ion-avatar style="font-size: 35px;padding-top: 7px;" slot="start"><ion-icon name="camera-outline"></ion-icon></ion-avatar>
+        <ion-label (click)="common.selectImage()" class="selectImage">
+        Select Image
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail style="width: 90px;height: 90px;" slot="start"> <img src="{{common.croppedImagePath}}"></ion-thumbnail>
+        <ion-button slot="end" size="small" (click)="common.uploadImage()"> {{common.multipleImageArray}}&nbsp;&nbsp;  upload</ion-button>
+        </ion-item>
+    </ion-list>
     <form [formGroup]="registrationForm" (ngSubmit)="submitForm()">
       <div class="label-float">
         <ion-input type="text" formControlName="firstname" placeholder="Enter First Name " required="true"></ion-input>
@@ -286,7 +301,7 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="password" placeholder="Enter Password " required="true" ></ion-input>
+        <ion-input type="password" formControlName="password" placeholder="Enter Password " required="true" ></ion-input>
         <label>Password<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.password">
           <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
@@ -295,7 +310,7 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="cpassword" placeholder="Enter Confirm Password " required="true" ></ion-input>
+        <ion-input type="password" formControlName="cpassword" placeholder="Enter Confirm Password " required="true" ></ion-input>
         <label>Confirm Password<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.cpassword">
           <ng-container *ngIf="cpassword.hasError(error.type) && (cpassword.dirty || cpassword.touched)">
@@ -303,19 +318,6 @@
           </ng-container>
         </div>
       </div>
-      <ion-list>
-        <ion-item style="border: 1px dotted #dfe8ed;
-        border-radius: 21px;
-        text-align: center;">
-          <ion-label (click)="selectImage()">
-            <ion-icon name="add-outline" slot="start"></ion-icon>Upload Image
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-avatar slot="start"><img src="{{croppedImagePath}}"></ion-avatar>
-        
-          </ion-item>
-      </ion-list>
       <div class="check-checkbox">
         <ion-item lines='none'>
           <span>By signing up you agree to platform's <a>Terms of Service</a>and <a>Privacy Policy.</a></span>

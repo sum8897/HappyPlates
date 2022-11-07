@@ -18,9 +18,9 @@ export class AddEventComponent implements OnInit {
   dateValue=format(new Date(),'yyyy-MM-dd')+'T05:00:00.000Z';
   formateString='';
   @ViewChild(IonDatetime) datetime:IonDatetime;
-  constructor(private user: UserService,
-    private auth: AuthService,
-    public common: CommonService,) {
+  constructor(public user: UserService,
+              public auth: AuthService,
+           public common: CommonService,) {
       this.user.menu();
       this.setToday();
     console.log(this.user.today);
@@ -35,13 +35,13 @@ export class AddEventComponent implements OnInit {
 formateString_api:any;
 setToday(){
   this.formateString = format(parseISO(format(new Date (),'yyyy-MM-dd')+'T09:00:00.000Z'),
-                      'yyyy-MM-dd');
+                      'dd/MM/yyyy');
                       console.log(this.formateString)
 }
 dateChanged(value:any){
 this.dateValue=value;
-this.formateString=format(parseISO(value),'yyyy-MM-dd');
-this.formateString_api=format(parseISO(value),'yyyy-MM-dd');
+this.formateString=format(parseISO(value),'dd/MM/yyyy');
+this.formateString_api=format(parseISO(value),'dd/MM/yyyy');
 this.showPicker=false;
 console.log(this.dateValue);
 console.log(this.formateString);
@@ -54,8 +54,8 @@ console.log(this.formateString);
       this.dataRes=event;
       this.dataList=this.dataRes.data;
       this.eventListLength=this.dataList.length;
-      console.log(this.dataList.length);
-      alert(JSON.stringify(this.dataList))
+      console.log(this.dataList);
+      // alert(JSON.stringify(this.dataList))
     }, err => {
       this.user.dismiss();
     })
@@ -64,7 +64,7 @@ console.log(this.formateString);
   onAddressSubmit(contactAddressForm: any) {
     // console.log(contactAddressForm.value);
     // console.log("form" + JSON.stringify(contactAddressForm.value));
-        let blogs_data = {
+        let event_data = {
           'title': contactAddressForm.value.title,
           'intro': contactAddressForm.value.into,
           'date': this.formateString_api,
@@ -74,9 +74,9 @@ console.log(this.formateString);
           'mediaId': this.common.multipleImageArray,
           'status': '1'
         }
-        alert(JSON.stringify(blogs_data));
+        alert(JSON.stringify(event_data));
         this.user.present('uploading...')
-    this.auth.AddEvents(blogs_data).subscribe((data)=>{
+    this.auth.AddEvents(event_data).subscribe((data)=>{
     this.user.dismiss();
     this.getEventData();
     this.user.showToast('Event added successfully..');
