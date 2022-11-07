@@ -20,7 +20,7 @@ export class AddEventComponent implements OnInit {
   @ViewChild(IonDatetime) datetime:IonDatetime;
   constructor(public user: UserService,
               public auth: AuthService,
-              public common: CommonService,) {
+           public common: CommonService,) {
       this.user.menu();
       this.setToday();
     console.log(this.user.today);
@@ -35,13 +35,13 @@ export class AddEventComponent implements OnInit {
 formateString_api:any;
 setToday(){
   this.formateString = format(parseISO(format(new Date (),'yyyy-MM-dd')+'T09:00:00.000Z'),
-                      'yyyy-MM-dd');
+                      'dd/MM/yyyy');
                       console.log(this.formateString)
 }
 dateChanged(value:any){
 this.dateValue=value;
-this.formateString=format(parseISO(value),'yyyy-MM-dd');
-this.formateString_api=format(parseISO(value),'yyyy-MM-dd');
+this.formateString=format(parseISO(value),'dd/MM/yyyy');
+this.formateString_api=format(parseISO(value),'dd/MM/yyyy');
 this.showPicker=false;
 console.log(this.dateValue);
 console.log(this.formateString);

@@ -16,7 +16,7 @@ export class AddBlogsComponent implements OnInit {
   dataList:any;
   blogsListLength:any;
   showPicker=false;
-  dateValue=format(new Date(),'yyyy-MM-dd')+'T05:00:00.000Z';
+  dateValue=format(new Date(),'dd/MM/yyyy')+'T05:00:00.000Z';
   formateString='';
   @ViewChild(IonDatetime) datetime:IonDatetime;
   constructor(private user: UserService,
@@ -36,13 +36,13 @@ export class AddBlogsComponent implements OnInit {
 formateString_api:any;
 setToday(){
   this.formateString = format(parseISO(format(new Date (),'yyyy-MM-dd')+'T09:00:00.000Z'),
-                      'yyyy-MM-dd');
+                      'dd/MM/yyyy');
                       console.log(this.formateString)
 }
 dateChanged(value:any){
 this.dateValue=value;
-this.formateString=format(parseISO(value),'yyyy-MM-dd');
-this.formateString_api=format(parseISO(value),'yyyy-MM-dd');
+this.formateString=format(parseISO(value),'dd/MM/yyyy');
+this.formateString_api=format(parseISO(value),'dd/MM/yyyy');
 this.showPicker=false;
 console.log(this.dateValue);
 console.log(this.formateString);
