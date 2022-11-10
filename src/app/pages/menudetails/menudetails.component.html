@@ -1,25 +1,26 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-icon name="arrow-back-outline" class="back-button" (click)="dismiss()" slot="start"></ion-icon>
-    <ion-title class="title-text" style="text-align: center;">
+    <ion-title class="title-text" style="text-align: center;text-transform: capitalize;">
       {{menu_name}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <div class="about-slider-div">
-    <!-- <ion-slides [options]="slideOpts" class="slides-main" pager="true">
-      <ion-slide >
-        <ion-card class="contact-slider-card">
-         <img src="{{img}}" class="slider-image" />
-         {{img}}
+    <ion-slides [options]="slideOpts" class="slides-main" pager="true" *ngIf="ev_data.medias.length>0">
+      <ion-slide *ngFor="let img of menuMedia">
+        <ion-card class="contact-slider-card" style="height: 180px;width: 100%;border-radius: 10px;">
+         <img style="width: 100%;border-radius: 10px;" src="{{img.path}}" class="slider-image" />
         </ion-card>
       </ion-slide>
-        </ion-slides> -->
-        <ion-card class="img-card">
-          <img class="img" src="{{menuMedia}}">
+        </ion-slides>
+        <ion-card class="img-card" *ngIf="ev_data.medias.length==0">
+          <img class="img" src="../../../assets/img/user_icon.png">
         </ion-card>
         <div class="menu-name">{{menu_name}} </div>
+        <div class="desc-heading">Menu Category</div>
+        <div class="menu-desc" style="margin-bottom: 10px;">{{menu_category}}</div>
         <div class="desc-heading">Menu Description</div>
         <div class="menu-desc">{{menu_desc}}</div>
   </div>

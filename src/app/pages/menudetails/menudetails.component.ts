@@ -18,6 +18,9 @@ export class MenudetailsComponent implements OnInit {
     
     this.ev_data;
    }
+   slideOpts={
+
+   }
    menuArray:[
      {
       id:1,
@@ -26,19 +29,21 @@ export class MenudetailsComponent implements OnInit {
    ];
    menu_name:any;
    menu_desc:any;
+   menu_category:any;
 ionViewWillEnter(){
   console.log(this.ev_data);
   this.menu_name=this.ev_data.title;
   this.menu_desc=this.ev_data.description;
+  this.menu_category=this.ev_data.category.title;
   if(this.ev_data.medias==[] || this.ev_data.medias.length==0){
     console.log('menu media is empty');
     // this.menuMedia.push(this.menuArray);
-    this.menuMedia='../../../assets/img/user_icon.png';
+    // this.menuMedia=this.menuArray;
     
     // console.log(this.menuArray);
   }else{
-    console.log(this.ev_data.medias[0].path);
-    this.menuMedia=this.ev_data.medias[0].path;
+    console.log(this.ev_data.medias);
+    this.menuMedia=this.ev_data.medias;
     // this.menuArray=this.ev_data.medias
     // for(let i=0;i<=this.ev_data.medias.length;i++){
     //   this.menuMedia[i]={
