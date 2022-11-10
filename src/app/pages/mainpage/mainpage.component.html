@@ -127,7 +127,7 @@
   <div class="testimonial">
    <div class="testimonials-heading"><span>Testimonials</span></div>
    <ion-slides [options]="slidesLatest" pager="true" class="slides-testimonial">
-<ion-slide *ngFor="let test of testimonialsData">
+<ion-slide *ngFor="let test of testimonialsData" (click)="testimonialDetails(test)">
   <div class="testimonials-last-hideDiv">
   </div>
   <div class="testimonials-second-last-hideDiv">

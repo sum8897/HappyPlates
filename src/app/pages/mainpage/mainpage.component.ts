@@ -1,6 +1,7 @@
+import { TestimonialDetailsComponent } from './../testimonial-details/testimonial-details.component';
 import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import SwiperCore, { SwiperOptions } from 'swiper';
 // import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
@@ -68,7 +69,8 @@ export class MainpageComponent implements OnInit {
     private file: File,
     public auth: AuthService,
     public router: Router,
-    public user: UserService) {
+    public user: UserService,
+    public modalController: ModalController) {
     // this.menuData();
     this.chefAllData()
     this.testimonialsAllData();
@@ -295,6 +297,15 @@ latestchefsData:any;
   }
   onSlideChange() {
     console.log('slide change');
+  }
+
+  async testimonialDetails(testimonial:any){
+    console.log('event open'+ JSON.stringify(testimonial))
+    const modal = await this.modalController.create({
+      component: TestimonialDetailsComponent,
+      componentProps: {testimonial_data: testimonial}
+    });
+    return await modal.present();
   }
   chefData = [
     {

@@ -24,7 +24,7 @@
       <div class="user-data">
         <h3>{{chef_name}}</h3>
         <div class="user-specialization"><img src="../../../assets/img/chef_icon.png"><span
-            class="user-specialization-heading">Specialises In:</span><span>{{chef_specialisation}}</span>
+            class="user-specialization-heading">Specialises In:</span><span *ngIf="chef_specialisation !=null">{{(chef_specialisation).substring(0,30)}}</span>
         </div>
         <div class="rating-star">
           <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue0" [disabled]="false"></ngx-star-rating>

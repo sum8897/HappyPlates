@@ -152,9 +152,8 @@ export class CartpageComponent implements OnInit {
       console.log(this.cartDataList);
       this.cart_length=this.cartDataList.length;
       this.tottal_Amount=this.cartDataRes.totalamount
-      console.log(this.cartDataRes)
-      console.log(this.cartDataList.length)
-
+      console.log(this.cartDataRes);
+      console.log(this.cartDataList.length);
     }, err => {
       console.log(err.error)
     })

@@ -181,7 +181,7 @@ this.auth.addCartItem(body).subscribe((item_res) => {
           'title':this.menu_data_list[i].title,
           'price':this.menu_data_list[i].price,
           'description':this.menu_data_list[i].description,
-          'path': '../../../assets/img/blog_2.jpg',
+          'path': '../../../assets/img/user_icon.png',
           
         }
       }else{

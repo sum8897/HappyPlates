@@ -57,6 +57,7 @@ import { OrderDetailsComponent } from './pages/order-details/order-details.compo
 import { AddBlogsComponent } from './chefpage/add-blogs/add-blogs.component';
 import { AddedblogDetailsComponent } from './chefpage/addedblog-details/addedblog-details.component';
 import { AddedeventDetailsComponent } from './chefpage/addedevent-details/addedevent-details.component';
+import { TestimonialDetailsComponent } from './pages/testimonial-details/testimonial-details.component'
 
 
 @NgModule({
@@ -93,7 +94,9 @@ import { AddedeventDetailsComponent } from './chefpage/addedevent-details/addede
                  LoginPageComponent,
                  OrderDetailsComponent,
                  AddedblogDetailsComponent,
-                 AddedeventDetailsComponent
+                 AddedeventDetailsComponent,
+                 TestimonialDetailsComponent,
+                 ViewallchefComponent,
                  
 
                 ],

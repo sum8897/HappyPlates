@@ -11,11 +11,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./upload-blog.component.scss'],
 })
 export class UploadBlogComponent implements OnInit {
-  @Input() user_id:any;
+  @Input() user_id: any;
   constructor(private auth: AuthService,
-              private user:UserService,
-              private modalCtrl:ModalController,
-              public common: CommonService) { }
+    private user: UserService,
+    private modalCtrl: ModalController,
+    public common: CommonService) { }
   today: any;
   ngOnInit() {
     this.today = new Date();
@@ -39,17 +39,17 @@ export class UploadBlogComponent implements OnInit {
       'status': "1"
     }
     this.user.present('uploading...')
-this.auth.postBlogs(blogs_data).subscribe((data)=>{
-  this.user.showToast('Blog added successfully...');
-this.user.dismiss();
-this.dismiss();
-},err=>{
-  this.user.dismiss();
-  this.dismiss();
-})
+    this.auth.postBlogs(blogs_data).subscribe((data) => {
+      this.user.showToast('Blog added successfully...');
+      this.user.dismiss();
+      this.dismiss();
+    }, err => {
+      this.user.dismiss();
+      this.dismiss();
+    })
   }
 
-  dismiss(){
+  dismiss() {
     this.modalCtrl.dismiss();
-      }
+  }
 }

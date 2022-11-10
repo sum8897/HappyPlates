@@ -83,7 +83,6 @@ export class AuthService {
 getAllTestimonials(){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
-  // headers = headers.append('Content-Type', 'application/json');
   headers.append('Content-Type', 'multipart/form-data');
   headers = headers.append('Accept', 'application/json');
   headers = headers.append('Access-Control-Allow-Origin', '*');
@@ -93,6 +92,19 @@ getAllTestimonials(){
   return this.http.get(this.url + 'api/testimonials', { headers: headers }).pipe(tap(res => {
   }))
 }
+getSingleTestimonials(id:any){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.get(this.url + 'api/testimonials/show/'+id, { headers: headers }).pipe(tap(res => {
+  }))
+}
+
 getAllLatestChefs(){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();

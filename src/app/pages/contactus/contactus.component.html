@@ -39,26 +39,44 @@
   <ion-card class="contact-input">
     <h1 class="contact-project-input">Have any question</h1>
     <div class="login-input-value">
+      <form #contactAddressForm="ngForm" (ngSubmit)="onAddressSubmit(contactAddressForm)" >
       <div class="label-float contact-label-float">
-        <ion-input type="text" placeholder="Enter First Name "></ion-input>
+        <ion-input type="text" placeholder="Enter First Name " name="fullname" #fullname="ngModel" required ngModel></ion-input>
         <label>Full  Name<span class="span-star">*</span></label>
+        <span class="text-danger"
+        *ngIf="(fullname.touched || contactAddressForm.submitted) && fullname.errors?.required">
+        Full Name is required *
+    </span>
       </div>
       <div class="label-float contact-label-float">
-        <ion-input type="text"  placeholder="Enter Phone " ></ion-input>
+        <ion-input type="text"  placeholder="Enter Phone " name="phone" #phone="ngModel" required ngModel></ion-input>
         <label>Phone No<span class="span-star">*</span></label>
+        <span class="text-danger"
+        *ngIf="(phone.touched || contactAddressForm.submitted) && phone.errors?.required">
+        Phone is required *
+    </span>
       </div>
       <div class="label-float contact-label-float">
-        <ion-input type="text"  placeholder="Enter Email " ></ion-input>
+        <ion-input type="text"  placeholder="Enter Email " name="email" #email="ngModel" required ngModel></ion-input>
         <label>Email<span class="span-star">*</span></label>
+        <span class="text-danger"
+        *ngIf="(email.touched || contactAddressForm.submitted) && email.errors?.required">
+        Email is required *
+    </span>
       </div>
   
       <div class="label-float contact-label-float">
-        <ion-input type="text"  placeholder="Your name here" class="message-text"></ion-input>
+        <ion-input type="text"  placeholder="Your message is here please..." class="message-text" name="message" #message="ngModel" required ngModel></ion-input>
         <label>Message<span class="span-star">*</span></label>
+        <span class="text-danger"
+        *ngIf="(message.touched || contactAddressForm.submitted) && message.errors?.required">
+        Message is required *
+    </span>
       </div>
       <div class="submit-div">
-        <ion-button class="submit-login-button contact-button" expand="round">Sent Message</ion-button>
-          </div>
+        <ion-button class="submit-login-button contact-button" expand="round" type="submit" [disabled]="contactAddressForm.form.invalid">Sent Message</ion-button>
+      </div>
+</form>
     </div>
   </ion-card>
   
