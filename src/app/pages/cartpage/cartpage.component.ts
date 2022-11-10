@@ -159,7 +159,15 @@ export class CartpageComponent implements OnInit {
       console.log(err.error)
     })
   }
-
+  getImage(imgPath:any){
+    const endPath= imgPath;
+    if(endPath==undefined || endPath.length==0){
+      return '../../../assets/img/user_icon.png';
+    }
+    else{
+      return imgPath;
+    }
+   }
   setToday(){
     this.formateString = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
     console.log(this.formateString);
