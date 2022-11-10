@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
@@ -26,7 +27,8 @@ public form: FormGroup;
   constructor(public auth: AuthService,
               public user: UserService,
               private fb: FormBuilder,
-              public modalCtrl: ModalController,) { 
+              public modalCtrl: ModalController,
+              public router: Router) { 
                 this.userDetails();
       if(localStorage.getItem('user_role')=="customer"){
       this.customerback=true;
@@ -91,7 +93,10 @@ public form: FormGroup;
   updateData: any;
   updateAllData: any;
   country_id = 1;
+  body:any;
   onAddressSubmit(contactAddressForm: any) {
+    console.log(this.user_phone);
+    this.body='';
     console.log(contactAddressForm.value);
     console.log("form" + JSON.stringify(contactAddressForm.value));
    if(contactAddressForm.value.firstname==undefined){
@@ -101,6 +106,9 @@ public form: FormGroup;
     contactAddressForm.value.lastname=this.user.user_last_name;
    }if(contactAddressForm.value.phone==undefined){
     contactAddressForm.value.phone=this.user_phone;
+    
+   }else{
+    contactAddressForm.value.phone=contactAddressForm.value.phone;
    }
    if(this.selectState_id==undefined){
     this.selectState_id=this.selectState_id;
@@ -114,34 +122,52 @@ public form: FormGroup;
 if(contactAddressForm.value.location==undefined){
   contactAddressForm.value.location=this.user.user_location;
 }
-    let body = {
-      'firstname': contactAddressForm.value.firstname,
-      'lastname': contactAddressForm.value.lastname,
-      'email': localStorage.getItem('user_email'),
-      'password': localStorage.getItem('password'),
-      'phone': contactAddressForm.value.phone,
-      'country': this.country_id,
-      'state': this.selectState_id,
-      'city': this.cityId,
-      'pin': contactAddressForm.value.pin,
-      'address': contactAddressForm.value.location,
-      'role': localStorage.getItem('user_role')
-    }
-    console.log(body)
-    this.user.present('');
-    this.auth.updateProfileData(body).subscribe((data) => {
-      this.user.dismiss();
-      this.userRes = data;
-      this.userData = this.userRes.data;
-      this.user_location = this.userData.address;
-      this.user_name = this.userData.firstname + " " + this.userData.lastname;
-      console.log(this.userData);
-      this.user.showToast('Profile Update successfully..');
-      // contactAddressForm.reset();
-    }, err => {
-      this.user.dismiss();
-      console.log(err);
-    })
+
+  this.body = {
+    'firstname': contactAddressForm.value.firstname,
+    'lastname': contactAddressForm.value.lastname,
+    'email': localStorage.getItem('user_email'),
+    'password': localStorage.getItem('password'),
+    'phone': this.user_phone,
+    'country': this.country_id,
+    'state': this.selectState_id,
+    'city': this.cityId,
+    'pin': this.user.user_pin,
+    'address': contactAddressForm.value.location,
+    'role': localStorage.getItem('user_role')
+  }
+  console.log(this.body);
+  console.log((this.body.phone).toString().length);
+  console.log((this.body.pin).toString().length);
+  if((this.body.phone).toString().length<10 || (this.body.phone).toString().length>10){
+    alert('Please enter valid phone number.');
+  }
+  else if((this.body.pin).toString().length<6 || (this.body.pin).toString().length>6){
+alert('Zip code should be 6 digit only.')
+  }
+  else{
+  this.user.present('');
+  this.auth.updateProfileData(this.body).subscribe((data) => {
+    this.user.dismiss();
+    this.userRes = data;
+    this.userData = this.userRes.data;
+    this.user_location = this.userData.address;
+    this.user_name = this.userData.firstname + " " + this.userData.lastname;
+    // console.log(this.userData);
+    this.router.navigateByUrl('nav/mainpage');
+    this.user.showToast('Profile Update successfully..');
+     this.user.userDetails();
+  }, err => {
+    this.user.dismiss();
+    console.log(err);
+  })
+  }
+
+
+
+
+   
+    
   }
 async addBlogs(){
   const modal = await this.modalCtrl.create({  
