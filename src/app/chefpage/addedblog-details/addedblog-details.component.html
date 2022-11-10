@@ -7,36 +7,34 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
- 
-  <!-- <ion-card class="event-card-img">
-    <img class="card-img" [src]="getblogImage(event_image)">
+  <ion-card class="event-card-img">
+    <img class="card-img" src="{{blogs_image}}">
     <ion-card-content>
-      {{event_title}}
+      {{title}}
     </ion-card-content>
-  </ion-card> -->
-  <ion-slides [options]="slideOpts" class="slides-main" pager="true">
-    <ion-slide *ngFor="let event of event_image">
-      <ion-card class="contact-slider-card">
-       <img [src]="getblogImage(event)" class="slider-image" />
-      </ion-card>
-    </ion-slide>
-      </ion-slides>
+  </ion-card>
 
   <div class="event-location-date">
     <div class="event-date">
-      <img style="width: 10px;" src="../../../assets/img/time.png"><span>{{event_date}}</span>
+      <img style="width: 10px;" src="../../../assets/img/time.png"><span>{{date}}</span>
       </div>
     <div class="event-date"><img style="width: 10px;"
-        src="../../../assets/img/location.png"><span>{{event_location}}</span>
+        src="../../../assets/img/user_icon.png"><span>{{firstname}}</span>
       </div>
   </div>
   <div class="event-full-details">
  <div class="first-div">
    <span>
-{{event_intro}}
+{{intro}}
    </span>
  </div>
+ <div class="first-div">
+  <span>
+{{description}}
+  </span>
+</div>
  <div class="second-div">
    <span>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</span>
  </div>

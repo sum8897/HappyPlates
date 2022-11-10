@@ -33,6 +33,11 @@ export class EventDetailsComponent implements OnInit {
  event_title:any;
  event_location:any;
  event_intro:any;
+ slideOpts = {
+  initialSlide: 0,
+  speed: 400,
+  slidesPerView: 1,
+};
   eventsDetails(){
     this.user.present('');
     this.auth.getSingleEvents(this.ev_data).subscribe((data)=>{
@@ -41,17 +46,27 @@ export class EventDetailsComponent implements OnInit {
       this.event_detailsData= this.event_detailRes.data;
       this.event_image=this.event_detailsData.event_image;
       console.log(data);   
-        this.event_date=this.event_detailsData.date,
-        this.event_image= this.event_detailsData.event_image,
-        this.event_title= this.event_detailsData.title,
-        this.event_location=this.event_detailsData.location,
-      this.event_intro= this.event_detailsData.intro
+        this.event_date=this.event_detailsData.date;
+        this.event_image= this.event_detailsData.event_image;
+        this.event_title= this.event_detailsData.title;
+        this.event_location=this.event_detailsData.location;
+      this.event_intro= this.event_detailsData.intro;
+      console.log(this.event_image)
     },err=>{
       
       this.user.dismiss();
       console.log(err)
     })
   }
+  getblogImage(imgPath:any){
+    const endPath= imgPath;
+    if(endPath=="" || endPath==undefined){
+      return '../../../assets/img/user_icon.png'
+    }
+    else{
+      return imgPath;
+    }
+   }
   dismiss() {
     this.modalController.dismiss({
       // 'dismissed': true

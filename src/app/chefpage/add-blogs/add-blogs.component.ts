@@ -1,9 +1,12 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonDatetime } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { IonDatetime, ModalController } from '@ionic/angular';
 import { format, parseISO } from 'date-fns';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommonService } from 'src/app/services/common.service';
 import { UserService } from 'src/app/services/user.service';
+import { AddedblogDetailsComponent } from '../addedblog-details/addedblog-details.component';
 
 @Component({
   selector: 'app-add-blogs',
@@ -21,7 +24,9 @@ export class AddBlogsComponent implements OnInit {
   @ViewChild(IonDatetime) datetime:IonDatetime;
   constructor(private user: UserService,
               private auth: AuthService,
-              public common: CommonService,) {
+              public common: CommonService,
+              public router: Router,
+              public modalController: ModalController,) {
               this.user.menu();
                this.setToday();
                console.log(this.user.today);
@@ -84,5 +89,12 @@ console.log(this.formateString);
       this.user.dismiss();
     })
   }
-
+  async blogDetails(blog:any){
+    console.log('event open'+ JSON.stringify(blog))
+    const modal = await this.modalController.create({
+      component: AddedblogDetailsComponent,
+      componentProps: {blog_data: blog}
+    });
+    return await modal.present();
+  }
 }

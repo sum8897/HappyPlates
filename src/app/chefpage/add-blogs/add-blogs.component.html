@@ -1,8 +1,11 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="/nav/chef-home"></ion-back-button>
     </ion-buttons>
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
     <ion-title>
       <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
     </ion-title>
@@ -71,7 +74,7 @@
   </div>
   <div class="eventData" *ngIf="blogsListLength>0">
 <ion-list>
-  <ion-card *ngFor="let blog of dataList" class="blogCard">
+  <ion-card *ngFor="let blog of dataList" class="blogCard" (click)="blogDetails(blog)">
   <ion-item>
     <ion-thumbnail class="addedImage"><img src="{{blog.blogs_image}}"></ion-thumbnail>
     <ion-label style="padding-left: 10px;">

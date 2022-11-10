@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { CommonService } from 'src/app/services/common.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class UploadBlogComponent implements OnInit {
   @Input() user_id:any;
   constructor(private auth: AuthService,
               private user:UserService,
-              private modalCtrl:ModalController) { }
+              private modalCtrl:ModalController,
+              public common: CommonService) { }
   today: any;
   ngOnInit() {
     this.today = new Date();
@@ -21,8 +23,8 @@ export class UploadBlogComponent implements OnInit {
     var mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = this.today.getFullYear();
 
-    // this.today = mm + '/' + dd + '/' + yyyy;
-    this.today = yyyy +'-'+mm + '-' + dd;
+    this.today = dd + '/' + mm + '/' + yyyy;
+    // this.today = yyyy +'-'+mm + '-' + dd;
     console.log(this.today);
   }
   onAddressSubmit(contactAddressForm: any) {
@@ -38,6 +40,7 @@ export class UploadBlogComponent implements OnInit {
     }
     this.user.present('uploading...')
 this.auth.postBlogs(blogs_data).subscribe((data)=>{
+  this.user.showToast('Blog added successfully...');
 this.user.dismiss();
 this.dismiss();
 },err=>{

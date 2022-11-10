@@ -56,6 +56,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 import { AddBlogsComponent } from './chefpage/add-blogs/add-blogs.component';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
+import { AddedblogDetailsComponent } from './chefpage/addedblog-details/addedblog-details.component';
+import { AddedeventDetailsComponent } from './chefpage/addedevent-details/addedevent-details.component';
 
 
 @NgModule({
@@ -91,6 +93,8 @@ import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions
                  AddBlogsComponent,
                  LoginPageComponent,
                  OrderDetailsComponent,
+                 AddedblogDetailsComponent,
+                 AddedeventDetailsComponent
                  
 
                 ],
@@ -111,10 +115,11 @@ import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions
 
     Platform,
     StatusBar,
-    SplashScreen,
+    SplashScreen, 
     Network,
     Camera,
     File,
+    // CameraPreview,
     // SignInWithApple,
     // SQLite,
     AuthService,

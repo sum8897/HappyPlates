@@ -45,7 +45,7 @@ export class CommonService {
                     }
                   },
                   {
-                    text: 'Cancel',
+                    text: 'Cancel', 
                     role: 'cancel'
                   }
                   ]

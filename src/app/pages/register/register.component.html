@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="label-float">
-      <ion-input type="text" formControlName="phone" placeholder="Enter Phone " required="true" ></ion-input>
+      <ion-input type="number" pattern="[0-9]*" (ionInput)="onInput($event)" formControlName="phone" placeholder="Enter Phone " required="true" max="10" min='10' maxlength="10"></ion-input>
       <label>Phone<span class="span-star">*</span></label>
       <div *ngFor="let error of errorMessages.phone">
         <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
@@ -202,7 +202,7 @@
         </div>
       </div>
       <div class="label-float">
-        <ion-input type="text" formControlName="phone" placeholder="Enter Phone " required="true"></ion-input>
+        <ion-input type="number" pattern="[0-9]*" (ionInput)="onInput($event)" formControlName="phone" placeholder="Enter Phone " required="true" max="10" min='10' maxlength="10"></ion-input>
         <label>Phone<span class="span-star">*</span></label>
         <div *ngFor="let error of errorMessages.phone">
           <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">

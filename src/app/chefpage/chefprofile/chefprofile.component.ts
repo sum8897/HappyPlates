@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chefprofile',
@@ -25,7 +26,8 @@ export class ChefprofileComponent implements OnInit {
     public auth: AuthService,
     public actionSheetController: ActionSheetController,
     public camera: Camera,
-    private file: File,) {
+    private file: File,
+    public router:Router) {
     this.user.menu();
     this.userDetails();
 
@@ -51,7 +53,9 @@ export class ChefprofileComponent implements OnInit {
     this.auth.updateProfileData(body).subscribe((data) => {
       this.user.dismiss();
       console.log(data);
-      contactForm.reset();
+      this.user.showToast('Your details updated successfully...');
+      this.router.navigateByUrl('nav/chef-home');
+      // contactForm.reset();
     }, err => {
       this.user.dismiss();
       console.log(err);
@@ -76,6 +80,7 @@ export class ChefprofileComponent implements OnInit {
       'city': this.cityId,
       'pin': contactAddressForm.value.pin,
       'address': contactAddressForm.value.location,
+      'role': localStorage.getItem('user_role'),
     }
     console.log(body)
     this.user.present('');
@@ -86,7 +91,9 @@ export class ChefprofileComponent implements OnInit {
       this.user_location = this.userData.address;
       this.user_name = this.userData.firstname + " " + this.userData.lastname;
       this.specialization = this.userData.specialization;
-      console.log(this.userData);
+      // console.log(this.userData);
+      this.user.showToast('Your details updated successfully...');
+      this.router.navigateByUrl('nav/chef-home');
       // contactAddressForm.reset();
     }, err => {
       this.user.dismiss();
@@ -249,17 +256,19 @@ export class ChefprofileComponent implements OnInit {
         description: contactMenuForm.value.details,
         price: contactMenuForm.value.regular_price,
         food_type: parseInt(this.selectedRadioGroup),
-        categoty: parseInt(this.item_categoty),
+        category: parseInt(this.item_categoty),
         media_files: this.multipleImageArray
       }
-      alert(typeof(menuList.categoty));
-      if(menuList.categoty==undefined){
+      alert((menuList.category));
+      if(menuList.category==undefined){
       alert('Please Select Food Categoty..')
       }else{
         console.log(menuList);
         this.auth.uploadMenulist(menuList).subscribe(res => {
-          console.log(JSON.stringify(res));
-          contactMenuForm.reset();
+          // console.log(JSON.stringify(res));
+          this.router.navigateByUrl('nav/chef-home');
+          this.user.showToast('Menu added successfully...');
+          // contactMenuForm.reset();
         }, err => {
           console.log(err)
         })

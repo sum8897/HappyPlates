@@ -16,11 +16,23 @@ export class LoginPageComponent implements OnInit {
   user_token:any;
   user_name:any;
   user_type:any;
+  user_id:any;
+  user_pass:any;
+
   constructor(private http: HttpClient,
     private router: Router,
     private auth: AuthService,
     private user: UserService
-  ) { }
+  ) { 
+    if(localStorage.getItem('user_email')=='' || localStorage.getItem('password')==''){
+      this.user_name='';
+      this.user_pass='';
+    }else{
+      this.user_name=localStorage.getItem('user_email');
+      this.user_pass=localStorage.getItem('password');
+      console.log(this.user_name + ':' + this.user_pass);
+    }
+  }
 
   ngOnInit() { }
   openSignUp() {
@@ -47,7 +59,7 @@ export class LoginPageComponent implements OnInit {
        console.log(this.checkValue);
       //  alert('Please checked');
        }else{
-       console.log('true...');
+       console.log(this.checkValue);
        localStorage.setItem('username',contactForm.value.email);
        localStorage.setItem('password',contactForm.value.password);
        }
@@ -63,10 +75,12 @@ export class LoginPageComponent implements OnInit {
         this.user_name = this.user_response.user;
         this.user.user_type = (this.user_response.user_role).toLowerCase();
         this.user.user_name = this.user_name;
-        localStorage.setItem('user_name', this.user.user_name);
+        // localStorage.setItem('user_name', this.user.user_name);
+        localStorage.setItem('user_name',contactForm.value.email);
+       localStorage.setItem('password',contactForm.value.password);
         localStorage.setItem('user_role', this.user.user_type);
         this.user_type = localStorage.getItem('user_role');
-        localStorage.setItem('password', contactForm.value.password)
+        // localStorage.setItem('password', contactForm.value.password)
         this.user.NAV.filter((data) => {
 
           if (data.role === this.user_type) {
