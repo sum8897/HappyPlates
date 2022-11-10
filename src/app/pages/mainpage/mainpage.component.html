@@ -27,7 +27,8 @@
                 <img src="../../../assets/img/chef_icon.png">
                 <span class="chef-specialization">Specialises In:</span>
               </div>
-              <div class="chef-specialization-type">{{(chef[0].specialization).substring(0,45)}}</div>            
+              <div class="chef-specialization-type" *ngIf="chef[0].specialization !=null">{{(chef[0].specialization).substring(0,47)}}..</div>      
+              <div class="chef-specialization-type" *ngIf="chef[0].specialization ==null">Specialization will be available soon...</div>         
             </div>
             <div class="chef-button">
               <ion-button size="small" expand="round" class="see-menu" (click)="openSingleDetails(chef[0])">See Menu </ion-button>
@@ -59,9 +60,11 @@
                       <div class="chef-specialization-div">
                         <img style="width: 12px;height:13px;margin-bottom: -2px;" src="../../../assets/img/chef_icon.png">  
                         <span class="chef-specialization">Specialises In:</span>
-                        <span class="chef-specialization-type">{{latest.specialization}}</span>
+                        <span class="chef-specialization-type" *ngIf="latest.specialization ==null ">Not added by Chef</span>
+                        <span class="chef-specialization-type" *ngIf="latest.specialization !=null ">{{(latest.specialization).substring(0,90)}}</span>
                       </div>
-                      <div class="chef-specialization-details">{{(latest.aboutme).substring(0,75)}}...</div>
+                      <div class="chef-specialization-details" *ngIf="latest.aboutme ==null ">Chef did not add about details</div>
+                      <div class="chef-specialization-details" *ngIf="latest.aboutme !=null ">{{(latest.aboutme).substring(0,60)}}...</div>
                       <div class="chef-button">
                         <ion-button size="small" expand="round" (click)="openSingleDetails(latest)">See Menu </ion-button>
                       </div>
@@ -86,7 +89,7 @@
           <div class="event-details">
             <div class="event-div">
               <div class="event-name">{{ev.title}}</div>
-              <div class="latest-event-details">{{(ev.intro).substring(0,200)}}..</div>
+              <div class="latest-event-details" *ngIf="ev.intro !=null">{{(ev.intro).substring(0,200)}}..</div>
             </div>
             <div class="event-location-date">
               <div class="event-date"><img style="width: 10px;" src="../../../assets/img/time.png"><span>{{ev.date}}</span>
@@ -110,7 +113,7 @@
             <ion-card class="blog-card">
               <img class="blog-img" style="width: 134px;height: 134px;" [src]="getblogImage(blog.blogs_image)">
               <ion-card-content class="blog-content">
-                <div class="blog-type">{{(blog.title).substring(0,40)}}..</div>
+                <div class="blog-type" *ngIf="blog.title !=null">{{(blog.title).substring(0,40)}}..</div>
                 <div class="spna-date"><img style="width: 10px;"
                     src="../../../assets/img/date.png"><span class="blog-date">{{blog.date}}</span></div>
               </ion-card-content>
@@ -140,7 +143,7 @@
   <span class="testimonial-specialization">{{test.location}}</span>
 </div>
 <div class="testimonial-disc">
-  <div class="testimonial-detail-span">{{(test.title).substring(0,150)}}...
+  <div class="testimonial-detail-span" *ngIf="test.title !=null">{{(test.title).substring(0,150)}}...
 
   </div>
 </div>

@@ -1,5 +1,6 @@
+import { AddedeventDetailsComponent } from './../addedevent-details/addedevent-details.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonDatetime } from '@ionic/angular';
+import { IonDatetime, ModalController } from '@ionic/angular';
 import { format, parseISO } from 'date-fns';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommonService } from 'src/app/services/common.service';
@@ -20,7 +21,8 @@ export class AddEventComponent implements OnInit {
   @ViewChild(IonDatetime) datetime:IonDatetime;
   constructor(public user: UserService,
               public auth: AuthService,
-           public common: CommonService,) {
+           public common: CommonService,
+           public modalController: ModalController,) {
       this.user.menu();
       this.setToday();
     console.log(this.user.today);
@@ -85,5 +87,12 @@ console.log(this.formateString);
       this.user.dismiss();
     })
   }
-
+  async openEventDetails(ev_data){
+    console.log('event open'+ JSON.stringify(ev_data))
+    const modal = await this.modalController.create({
+      component: AddedeventDetailsComponent,
+      componentProps: {event_data: ev_data}
+    });
+    return await modal.present();
+  }
 }

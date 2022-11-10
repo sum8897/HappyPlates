@@ -151,7 +151,7 @@ export class SidenavPage implements OnInit {
     this.user.userDetails();
   }
   logout(){
-    localStorage.clear();
+    // localStorage.clear();
     localStorage.removeItem('amantran_token');
     this.menuCtrl.close();
     this.router.navigate(['loginpage']);

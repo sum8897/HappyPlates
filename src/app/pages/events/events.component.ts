@@ -12,10 +12,11 @@ import { EventDetailsComponent } from '../event-details/event-details.component'
 })
 export class EventsComponent implements OnInit {
 
-  constructor(private modalController: ModalController,
+  constructor(
      public auth: AuthService,
     public user: UserService,
-    public router: Router) { 
+    public router: Router,
+    public modalController: ModalController,) { 
       this.latestEvents();
       this.user.menu();
     }
@@ -54,7 +55,15 @@ export class EventsComponent implements OnInit {
       console.log(err)
     })
   }
-
+  getblogImage(imgPath:any){
+    const endPath= imgPath;
+    if(endPath=="" || endPath.length==0){
+      return '../../../assets/img/user_icon.png'
+    }
+    else{
+      return imgPath;
+    }
+   }
  async openEventDetails(ev:any){
    console.log('event open'+ JSON.stringify(ev.id))
   const modal = await this.modalController.create({

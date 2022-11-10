@@ -55,6 +55,8 @@ import { AddEventComponent } from './chefpage/add-event/add-event.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 import { AddBlogsComponent } from './chefpage/add-blogs/add-blogs.component';
+import { AddedblogDetailsComponent } from './chefpage/addedblog-details/addedblog-details.component';
+import { AddedeventDetailsComponent } from './chefpage/addedevent-details/addedevent-details.component';
 
 
 @NgModule({
@@ -90,6 +92,8 @@ import { AddBlogsComponent } from './chefpage/add-blogs/add-blogs.component';
                  AddBlogsComponent,
                  LoginPageComponent,
                  OrderDetailsComponent,
+                 AddedblogDetailsComponent,
+                 AddedeventDetailsComponent
                  
 
                 ],

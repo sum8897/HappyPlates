@@ -546,6 +546,17 @@ export class RegisterComponent implements OnInit {
      
     
   
+      onInput($event:any) {
+        let theEvent = $event || window.event,
+            key = theEvent.target.value,
+            
+            regex = /[0-9]+/g
+        if( !regex.test(key) ) {
+          let resp = $event.target.value.match(regex)
+          $event.target.value = resp ? resp.join('')  : ''
+        }
+        console.log(key.length);
+       }
   
   clickLogin() {
     this.router.navigateByUrl('nav/login')
