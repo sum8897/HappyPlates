@@ -291,7 +291,7 @@ export class ChefprofileComponent implements OnInit {
       this.userData = this.userRes.data;
       this.userAllData = this.userData[0];
       this.user_image= this.userAllData.prof_image;
-      this.specialization = (this.userAllData.specialization);
+      this.specialization = (this.userAllData.specialization).substring(0,20);
       console.log(this.user_image)
       if(this.user_image===""){
         console.log('image not foubd');

@@ -19,8 +19,11 @@
       </div>
       <div class="user-data">
         <h3>{{user_name}}</h3>
-        <div class="user-specialization"><img src="../../../assets/img/chef_icon.png"><span
-            class="user-specialization-heading">Specialises In:</span><span>{{specialization}}</span></div>
+        <div class="user-specialization"><img src="../../../assets/img/chef_icon.png">
+          <span class="user-specialization-heading">
+            Specialises In:
+          </span>
+          <div *ngIf="specialization !=null">{{specialization}}</div></div>
       </div>
     </div>
     </div>  
@@ -127,7 +130,7 @@
             <div class="label-float">
               <ion-item lines="none" (click)="cityshow()" class="form-item">
                 <ion-label>City</ion-label>
-              <ion-label style="font-size: 13px;" [value]="user.user_city">{{cityname}}</ion-label>
+              <ion-label style="font-size: 13px;">{{cityname}}</ion-label>
               <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
                
               </ion-item>

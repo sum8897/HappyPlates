@@ -11,6 +11,10 @@ export class ContactusComponent implements OnInit {
   constructor(public formBuilder: FormBuilder) { }
 
   ngOnInit() {}
+
+  onAddressSubmit(contactForm:any){
+
+  }
   submitForm() {
     console.log(this.ionicForm.value)
   }

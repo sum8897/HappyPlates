@@ -10,7 +10,7 @@
 </ion-header>
 <ion-content>
   <div class="card-full">
-    <ion-searchbar placeholder="Search For Meal,Chef or Location" class="" [(ngModel)]="searchTermProfession" (ionChange)="filterItemProfession()"></ion-searchbar>
+    <ion-searchbar placeholder="Search For Meal or Chef " class="" [(ngModel)]="searchTermProfession" (ionChange)="filterItemProfession()"></ion-searchbar>
     <div class="chef-view">
       <span class="chef-1">Chef</span>
       <span class="chef-more" (click)="clickViewChef()">View All Chef</span>
@@ -85,7 +85,7 @@
     <div class="event-slider-div">
       <ion-slides [options]="slidesEvent" pager="true">
         <ion-slide *ngFor="let ev of latestEventAllData">
-          <ion-card class="event-card"><img src="{{ev.event_image}}"></ion-card>
+          <ion-card class="event-card"><img src="{{ev.event_image[0]}}"></ion-card>
           <div class="event-details">
             <div class="event-div">
               <div class="event-name">{{ev.title}}</div>

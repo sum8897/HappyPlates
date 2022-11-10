@@ -247,15 +247,15 @@ export class RegisterComponent implements OnInit {
   get skills() {
     return this.registrationForm.get('skills');
   }
-  get country() {
-    return this.registrationForm.get('country')
-  }
-  get state() {
-    return this.registrationForm.get('state')
-  }
-  get city() {
-    return this.registrationForm.get('city')
-  }
+  // get country() {
+  //   return this.registrationForm.get('country')
+  // }
+  // get state() {
+  //   return this.registrationForm.get('state')
+  // }
+  // get city() {
+  //   return this.registrationForm.get('city')
+  // }
   get pin() {
     return this.registrationForm.get('pin')
   }
@@ -444,18 +444,21 @@ export class RegisterComponent implements OnInit {
   }
   user_reg: any;
   submitForm() {
-    // console.log(this.registrationForm.value);
+    console.log((this.registrationForm.value.phone).toString().length);
     console.log(this.registrationForm.value.password);
     if (this.type == 'customer'){
       if(this.checkValue==false){
         alert('Please mark the checkBox..');
           }
             else{
-               if(this.registrationForm.value.phone.length<10 || this.registrationForm.value.phone.length>10){
+               if((this.registrationForm.value.phone).toString().length<10){
                   alert('Please enter Valid Mobile Number');
                   console.log(this.registrationForm.value.phone.length)
                 }
-                else if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname=="" ||this.registrationForm.value.phone=="" || this.registrationForm.value.email=="" || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.address==""){
+                else if((this.registrationForm.value.phone).toString().length>10){
+                  alert('Please enter Valid Mobile Number');
+                }
+                else if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname=="" ||this.registrationForm.value.phone=="" || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.address==""){
            alert('Please Enter all Details...');
                 }
             else if(this.registrationForm.value.pin=="" || this.registrationForm.value.pin.length<6){
@@ -465,6 +468,12 @@ export class RegisterComponent implements OnInit {
                 else if(this.registrationForm.value.password="" || this.registrationForm.value.password.length<8) {
            alert('please enetr minimum 8 digit password');
                 }
+                else if((this.registrationForm.value.pin).toString().length<6){
+               alert('Zip code can not be less than 999999')
+                }
+                else if((this.registrationForm.value.pin).toString().length>6){
+                  alert('Zip code can not be greater than 999999')
+                   }
                 else{
                   this.user_reg = {
                     "firstname": this.registrationForm.value.firstname,
@@ -482,64 +491,74 @@ export class RegisterComponent implements OnInit {
                     "prof_image": this.croppedImagePath,
                   }
              console.log(this.user_reg);
-            //  this.user.present('wait..');
-            //  this.auth.userRegister(this.user_reg).subscribe((response) => {
-            //    this.user.dismiss();
-            //    this.router.navigateByUrl('nav/login');
-            //    this.user.showToast('You are register successfully...');
-            //    console.log(response);
-            //  }, err => {
-            //    this.user.dismiss();
-            //    console.log('user Register Error' + JSON.stringify(err));
-            //  })
+             this.user.present('wait..');
+             this.auth.userRegister(this.user_reg).subscribe((response) => {
+               this.user.dismiss();
+               this.router.navigateByUrl('nav/login');
+               this.user.showToast('You are register successfully...');
+               console.log(response);
+             }, err => {
+               this.user.dismiss();
+               console.log('user Register Error' + (err.error));
+             })
 
 
                 }
           }
     }
     else{
-        // if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname || this.registrationForm.value.phone || this.registrationForm.value.email || this.registrationForm.value.specialization || this.registrationForm.value.skills || this.registrationForm.value.description || this.registrationForm.value.aboutme || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.pin || this.registrationForm.value.address || this.registrationForm.value.password){
-        //   alert('Please Enter all required fields...');
-        //   console.log(this.registrationForm.value.phone.length)
-        // }else{
-        //   if(this.registrationForm.value.phone.length){
-        //     alert('Please enter Valid Mobile Number')
-        //   }else{
-        //     this.user_reg = {
-        //       "firstname": this.registrationForm.value.firstname,
-        //       "lastname": this.registrationForm.value.lastname,
-        //       "phone": this.registrationForm.value.phone,
-        //       "email": this.registrationForm.value.email,
-        //       'specialization': this.registrationForm.value.specialization,
-        //       'skills': this.registrationForm.value.skills,
-        //       'description': this.registrationForm.value.description,
-        //       'aboutme': this.registrationForm.value.aboutme,
-        //       "country": this.country_id,
-        //       "state": this.selectState_id,
-        //       "city": this.cityId,
-        //       "pin": this.registrationForm.value.pin,
-        //       "address": this.registrationForm.value.address,
-        //       "prof_image": this.croppedImagePath,
-        //       "password": this.registrationForm.value.password,
-        //       "role": this.type,
-        //       "agreeterms": "Yes"
-        //     }
+        if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname || this.registrationForm.value.phone || this.registrationForm.value.email || this.registrationForm.value.specialization || this.registrationForm.value.skills || this.registrationForm.value.description || this.registrationForm.value.aboutme || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.pin || this.registrationForm.value.address || this.registrationForm.value.password){
+          alert('Please Enter all required fields...');
+        }else{
+          if((this.registrationForm.value.phone).toString().length<10){
+            alert('Please enter Valid Mobile Number');
+            console.log((this.registrationForm.value.phone).toString().length)
+          }
+          else if((this.registrationForm.value.phone).toString().length>10){
+            alert('Please enter Valid Mobile Number');
+          }
+          else if((this.registrationForm.value.pin).toString().length<6){
+            alert('Zip code can not be less than 999999')
+             }
+             else if((this.registrationForm.value.pin).toString().length>6){
+               alert('Zip code can not be greater than 999999')
+                }
+          else{
+            this.user_reg = {
+              "firstname": this.registrationForm.value.firstname,
+              "lastname": this.registrationForm.value.lastname,
+              "phone": this.registrationForm.value.phone,
+              "email": this.registrationForm.value.email,
+              'specialization': this.registrationForm.value.specialization,
+              'skills': this.registrationForm.value.skills,
+              'description': this.registrationForm.value.description,
+              'aboutme': this.registrationForm.value.aboutme,
+              "country": this.country_id,
+              "state": this.selectState_id,
+              "city": this.cityId,
+              "pin": this.registrationForm.value.pin,
+              "address": this.registrationForm.value.address,
+              "prof_image": this.croppedImagePath,
+              "password": this.registrationForm.value.password,
+              "role": this.type,
+              "agreeterms": "Yes"
+            }
     
-        //     console.log(this.user_reg);
-        //     this.user.present('wait..');
-        //     this.auth.userRegister(this.user_reg).subscribe((response) => {
-        //       this.user.dismiss();
-        //       this.router.navigateByUrl('nav/login');
-        //       this.user.showToast('You are register successfully...');
-        //       console.log(response);
-        //     }, err => {
-        //       this.user.dismiss();
-        //       console.log('user Register Error' + JSON.stringify(err));
-        //     })
+            console.log(this.user_reg);
+            // this.user.present('wait..');
+            // this.auth.userRegister(this.user_reg).subscribe((response) => {
+            //   this.user.dismiss();
+            //   this.router.navigateByUrl('nav/login');
+            //   this.user.showToast('You are register successfully...');
+            //   console.log(response);
+            // }, err => {
+            //   this.user.dismiss();
+            //   console.log('user Register Error' + JSON.stringify(err));
+            // })
 
 
-        //   }
-        // }
+          }
+        }
       }
  
       }
