@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
+import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,69 @@ export class CommonService {
               private router:Router,
               public actionSheetController: ActionSheetController,
               public camera: Camera,
-              public modalCtrl: ModalController,) { }
+              public modalCtrl: ModalController,
+              public androidPermissions: AndroidPermissions ) { }
 
               imagepath:any="";
+              cameraSelect:any;
+              gallerySelect:any;
+              async selectImage() {
+                const actionSheet = await this.actionSheetController.create({
+                  header: "Select Image source",
+                  buttons: [{
+                    text: 'Load from Library',
+                    icon:'folder',
+                    handler: () => {
+                      this.cameraSelect=this.camera.PictureSourceType.PHOTOLIBRARY;
+                      this.openCamera();
+                      // this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+                    }
+                  },
+                  {
+                    text: 'Use Camera',
+                    icon:'camera',
+                    handler: () => {
+                      this.cameraSelect=this.camera.PictureSourceType.CAMERA;
+                      this.openCamera();
+                      // this.pickImage(this.camera.PictureSourceType.CAMERA);
+                    }
+                  },
+                  {
+                    text: 'Cancel',
+                    role: 'cancel'
+                  }
+                  ]
+                });
+                await actionSheet.present();
+              }
+              openCamera(){
+              alert('open camera with permission..');
+              alert(this.cameraSelect);
+                this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+                    result => {
+                        alert(result.hasPermission);
+                        if(!result.hasPermission) {
+                            this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
+                            .then( cam => {
+                                alert('permission result '+ JSON.stringify(cam) );
+                                alert(this.cameraSelect);
+                                this.pickImage(this.cameraSelect);
+                            })
+                            .catch( error => {
+                                alert('permission error occured '+ JSON.stringify(error) );
+                            });
+                        } else {
+                          alert(this.cameraSelect);
+                            this.pickImage(this.cameraSelect);
+                        }
+                    },
+                    err => {
+                        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA); 
+                        alert(this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA))
+                    });
+            }
               pickImage(sourceType:any) {
+                alert('pick image called..');
                 const options: CameraOptions = {
                   quality: 50,
                   sourceType: sourceType,
@@ -27,6 +87,8 @@ export class CommonService {
                   encodingType: this.camera.EncodingType.JPEG,
                   mediaType: this.camera.MediaType.PICTURE
                 }
+                alert(JSON.stringify(options));
+                alert('camera::: '+ JSON.stringify(this.camera))
                 this.camera.getPicture(options).then((imageData) => {
                   // imageData is either a base64 encoded string or a file URI
                   this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
@@ -39,31 +101,7 @@ export class CommonService {
                 });
               }
             
-              async selectImage() {
-                const actionSheet = await this.actionSheetController.create({
-                  header: "Select Image source",
-                  buttons: [{
-                    text: 'Load from Library',
-                    icon:'folder',
-                    handler: () => {
-                      this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
-                    }
-                  },
-                  {
-                    text: 'Use Camera',
-                    icon:'camera',
-                    handler: () => {
-                      this.pickImage(this.camera.PictureSourceType.CAMERA);
-                    }
-                  },
-                  {
-                    text: 'Cancel',
-                    role: 'cancel'
-                  }
-                  ]
-                });
-                await actionSheet.present();
-              }
+           
             
               uploadSingleRes:any;
               uploadSingleResData:any;

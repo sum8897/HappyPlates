@@ -106,4 +106,6 @@
     </edit-config>
     <engine name="ios" />
     <plugin name="cordova-plugin-file" spec="^6.0.2" />
+    <plugin name="cordova-plugin-android-permissions" spec="^1.1.4" />
+    <engine name="android" spec="~7.1.1" />
 </widget>

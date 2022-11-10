@@ -55,6 +55,7 @@ import { AddEventComponent } from './chefpage/add-event/add-event.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 import { AddBlogsComponent } from './chefpage/add-blogs/add-blogs.component';
+import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 
 
 @NgModule({
@@ -118,6 +119,7 @@ import { AddBlogsComponent } from './chefpage/add-blogs/add-blogs.component';
     // SQLite,
     AuthService,
     AuthGuardGuard,   
+    AndroidPermissions,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
