@@ -73,7 +73,6 @@ export class RegisterComponent implements OnInit {
 
   stateshow() {
     this.stateCard = true;
-    
     this.stateList();
   }
   cityCard: boolean = false;
@@ -196,7 +195,11 @@ export class RegisterComponent implements OnInit {
 
     await alert.present();
   }
-
+  passwordvalue:any
+  onInputPass(e){
+    console.log(e.target.value);
+    this.passwordvalue=e.target.value;
+  }
   checkParent: boolean;
   checkCheckbox(e: any) {
     console.log(e);
@@ -354,7 +357,7 @@ export class RegisterComponent implements OnInit {
       this.matched = true;
       this.matchedpass = false;
     }
-    console.log(formGroup.value)
+    console.log(formGroup.value);
   }
 
   imagepath: any = "";
@@ -444,8 +447,10 @@ export class RegisterComponent implements OnInit {
   }
   user_reg: any;
   submitForm() {
+    this.user_reg='';
     console.log((this.registrationForm.value.phone).toString().length);
     console.log(this.registrationForm.value.password);
+    console.log(this.passwordvalue.length);
     if (this.type == 'customer'){
       if(this.checkValue==false){
         alert('Please mark the checkBox..');
@@ -474,7 +479,11 @@ export class RegisterComponent implements OnInit {
                 else if((this.registrationForm.value.pin).toString().length>6){
                   alert('Zip code can not be greater than 999999')
                    }
+                   else if(this.passwordvalue==""){
+                     alert('Password must be at least 8 characters')
+                   }
                 else{
+                  console.log(this.registrationForm.value.password);
                   this.user_reg = {
                     "firstname": this.registrationForm.value.firstname,
                     "lastname": this.registrationForm.value.lastname,
@@ -485,7 +494,7 @@ export class RegisterComponent implements OnInit {
                     "city": this.cityId,
                     "pin": this.registrationForm.value.pin,
                     "address": this.registrationForm.value.address,
-                    "password": this.registrationForm.value.password,
+                    "password": this.passwordvalue,
                     "role": this.type,
                     "agreeterms": "yes",
                     "prof_image": this.croppedImagePath,

@@ -19,7 +19,7 @@
     </div>
 
     <div class="form-group label-float">
-      <ion-input type="text" name="password" #password="ngModel" required placeholder="Enter Password " ngModel></ion-input>
+      <ion-input type="password" name="password" #password="ngModel" required placeholder="Enter Password " ngModel></ion-input>
       <label>Password<span class="span-star">*</span></label>
       <span class="text-danger"
       *ngIf="(password.touched || contactForm.submitted) && password.errors?.required">
