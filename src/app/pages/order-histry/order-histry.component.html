@@ -29,7 +29,7 @@
           <ion-label text-wrap class="ion-text-wrap">
         <div class="ordered-main-div">
             <div class="first-ordered-div">
-      <div class="ordered-item-name item_menu_name">{{ ord.menudetail[0].title }}</div>
+      <div class="ordered-item-name item_menu_name" *ngIf="ord.menudetail[0].title !=undefined">{{ ord.menudetail[0].title }}</div>
       <div class="ordered-item-name">{{ ord.menudetail[0].description }}</div>
       <div class="second-ordered-price" style="display: flex;
       width: 100%;

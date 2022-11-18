@@ -24,7 +24,7 @@
         <ion-label (click)="common.selectImage()">
         Upload Image
         </ion-label>
-      </ion-item>
+      </ion-item> 
       <ion-item>
         <ion-thumbnail style="width: 90px;height: 90px;" slot="start"> <img style="border-radius: 10px;" src="{{common.croppedImagePath}}"></ion-thumbnail>
         <ion-button slot="end" size="small" (click)="common.uploadImage()"> {{common.multipleImageArray}}&nbsp;&nbsp;  upload</ion-button>
@@ -62,7 +62,7 @@
   </span>
     </div>
   <div class="submit-div">
-<ion-button class="submit-login-button" expand="round" type="submit" [disabled]="contactAddressForm.form.invalid">Add Event</ion-button>
+<ion-button class="submit-login-button" expand="round" type="submit" [disabled]="contactAddressForm.form.invalid">Add Blog</ion-button>
   </div>
 </form>
 
@@ -76,7 +76,8 @@
 <ion-list>
   <ion-card *ngFor="let blog of dataList" class="blogCard" (click)="blogDetails(blog)">
   <ion-item>
-    <ion-thumbnail class="addedImage"><img src="{{blog.blogs_image}}"></ion-thumbnail>
+    <ion-thumbnail class="addedImage" *ngIf="blog.blogs_image !='' "><img src="{{blog.blogs_image}}"></ion-thumbnail>
+    <ion-thumbnail class="addedImage" *ngIf="blog.blogs_image ==''"><img src="../../../assets/img/user_icon.png"></ion-thumbnail>
     <ion-label style="padding-left: 10px;">
       <h3>{{blog.title}}</h3>
       <p>{{blog.description}}</p>

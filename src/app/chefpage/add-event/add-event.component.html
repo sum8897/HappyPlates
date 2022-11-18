@@ -77,7 +77,8 @@
     <ion-list>
       <ion-card *ngFor="let event of dataList" class="blogCard" (click)="openEventDetails(event)">
       <ion-item>
-        <ion-thumbnail class="addedImage"><img src="{{event.event_image}}"></ion-thumbnail>
+        <ion-thumbnail class="addedImage" *ngIf="event.event_image.length >'0'"><img src="{{event.event_image[0]}}"></ion-thumbnail>
+        <ion-thumbnail class="addedImage" *ngIf="event.event_image.length=='0'"><img src="../../../assets/img/user_icon.png"></ion-thumbnail>
         <ion-label style="padding-left: 10px;">
           <h3 style="font-weight: 500;font-size: 17px;">{{event.title}}</h3>
           <h3 style="">{{event.title}}</h3>

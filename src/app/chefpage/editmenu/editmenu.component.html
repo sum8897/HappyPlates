@@ -8,19 +8,21 @@
 </ion-header>
 <ion-content>
   <div class="edit-chef-menu">
-    <!-- <ion-item style="border: 1px dotted #dfe8ed;
-    border-radius: 21px;
-    text-align: center;">
-      <ion-label (click)="common.selectImage()">
-        <ion-icon name="add-outline" slot="start"></ion-icon>Upload Image
-      </ion-label>
-    </ion-item> -->
-    <ion-item>
-      <ion-avatar style="width: 70px;height: 70px;" slot="start"><img src="{{common.croppedImagePath}}"></ion-avatar>
-      <ion-label>Menu Image</ion-label>
-      <!-- <ion-button slot="end" size="small" (click)="common.uploadImage()">upload</ion-button> -->
+    <ion-list>
+      <ion-item style="border: 1px dotted #dfe8ed;
+      border-radius: 21px;
+      text-align: center;">
+       <ion-avatar style="font-size: 35px;padding-top: 7px;" slot="start"><ion-icon name="camera-outline"></ion-icon></ion-avatar>
+        <ion-label (click)="selectImage()">
+        Select Image
+        </ion-label>
       </ion-item>
-    <form #contactMenuForm="ngForm" (ngSubmit)="common.onMenuSubmit(contactMenuForm)" >
+      <ion-item>
+        <ion-thumbnail style="width: 90px;height: 90px;" slot="start"> <img style="border-radius: 10px;" src="{{croppedImagePath}}"></ion-thumbnail>
+        <ion-button slot="end" size="small" (click)="uploadImage()"> {{multipleImageArray}}&nbsp;&nbsp;  upload</ion-button>
+        </ion-item>
+    </ion-list>
+    <form #contactMenuForm="ngForm" (ngSubmit)="onMenuSubmit(contactMenuForm)" >
       <div class="form-group label-float">
         <p class="price_name">Food Name *</p>
         <ion-input type="text" name="foodname" [(ngModel)]="common.food_name" [ngModelOptions]="{standalone: true}" #foodname="ngModel" required placeholder="Food Name * " ngModel ></ion-input>
@@ -31,23 +33,23 @@
       </div>
   
    
-      <div class="city-pin" style="display: flex;">
+      <div class="city-pin">
         <div class="form-group label-float">
-          <p class="price_name">Regular Price *</p>
+          <p class="price_name">Price *</p>
           <ion-input type="number" name="regular_price" [(ngModel)]="common.reg_price" [ngModelOptions]="{standalone: true}" #regular_price="ngModel" required placeholder="Regular Price * " ngModel></ion-input>
           <span class="text-danger"
           *ngIf="(regular_price.touched || contactMenuForm.submitted) && regular_price.errors?.required">
-          Regular Price is required *
+          Price is required *
       </span>
         </div>
-        <div class="form-group label-float">
+        <!-- <div class="form-group label-float">
           <p class="price_name">Other price *</p>
           <ion-input type="number" name="other_price" [(ngModel)]="common.others_price" [ngModelOptions]="{standalone: true}" #other_price="ngModel" required placeholder="Other Price * " ngModel></ion-input>     
           <span class="text-danger"
           *ngIf="(other_price.touched || contactMenuForm.submitted) && other_price.errors?.required">
           Other Price is required *
       </span>
-        </div>
+        </div> -->
     
         <!-- <div class="form-group label-float">
           <ion-input type="tel" name="pin" #pin="ngModel" required placeholder="Pin * " ngModel></ion-input>
@@ -57,20 +59,34 @@
       </span>
         </div> -->
       </div>
-      <div class="form-group label-float" style="display: flex;">
-       
-          <ion-radio-group  style="width: 100%;" [(ngModel)]="common.food_type" [ngModelOptions]="{standalone: true}" (ionChange)="common.radioGroupChange($event)" #radioGroup>
-       <div style="display: flex;width: 100%;">
-        <div>Food Type</div>
-        <div style="display: flex;margin-left: 15px;">
-          <ion-radio slot="start" value="veg"  style="margin: 0 5px;"></ion-radio>Veg
-        </div>
-        <div style="display: flex;">
-          <ion-radio slot="start" value="noveg" style="margin: 0 5px;"></ion-radio>Non Veg
-        </div>
-       </div>
-          </ion-radio-group>
-      </div>
+      <ion-list>
+        <ion-item lines="none" class="select-categoty-item">
+          <ion-select
+            placeholder="Select Food Type"
+            (ionChange)="foodChange($event)"
+        style="width: 100%;"
+        [(ngModel)]="selectedFoodCategory_id"
+        [ngModelOptions]="{standalone: true}"
+          >
+            <ion-select-option *ngFor="let f of foodType_data"  [value]="f.id">{{f.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-item lines="none" class="select-categoty-item">
+          <ion-select
+            placeholder="Select Food Categoty"
+            (ionChange)="handleChange($event)"
+        style="width: 100%;"
+        [(ngModel)]="selectedCategory_id"
+        [ngModelOptions]="{standalone: true}"
+          >
+            <ion-select-option *ngFor="let c of cat_data"  [value]="c.id">{{c.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
       <div class="form-group label-float">
         <p class="price_name">Description *</p>
         <ion-textarea type="text" name="details" [(ngModel)]="common.descr" [ngModelOptions]="{standalone: true}" #details="ngModel" required placeholder="Details * " ngModel></ion-textarea>
@@ -80,7 +96,7 @@
     </span>
       </div>
     <div class="submit-div">
-  <ion-button class="submit-login-button" expand="round" type="submit">Save Menu</ion-button>
+  <ion-button class="submit-login-button" expand="round" type="submit" (click)="submitMenu()">Save Menu</ion-button>
     </div>
   </form>
   </div>

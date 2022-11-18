@@ -1,5 +1,6 @@
+import { EditmenuComponent } from './../editmenu/editmenu.component';
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
@@ -11,17 +12,19 @@ import { File } from '@awesome-cordova-plugins/file/ngx';
   styleUrls: ['./chefaddmenu.component.scss'],
 })
 export class ChefaddmenuComponent implements OnInit {
-  croppedImagePath = "";
+ 
   constructor(public user: UserService,
     public auth: AuthService,
     public actionSheetController: ActionSheetController,
     public camera: Camera,
-    private file: File) { 
+    private file: File,
+    public modalCtrl: ModalController,) { 
     this.user.menu();
   }
 
   ngOnInit() {}
 
+  croppedImagePath = "";
   imagepath: any = "";
   pickImage(sourceType:any) {
     const options: CameraOptions = {
@@ -69,7 +72,6 @@ export class ChefaddmenuComponent implements OnInit {
   uploadSingleResData:any;
   multipleImageArray: any = [];
   uploadImage() {
-    // alert(this.croppedImagePath);
     let body = {
       mediafile: this.croppedImagePath
     };
@@ -87,6 +89,8 @@ export class ChefaddmenuComponent implements OnInit {
       console.log(err.error)
     })
   }
+
+
   selectedRadioGroup: any;
   radioGroupChange(event: any) {
     console.log("radioGroupChange", event.detail.value);
@@ -94,7 +98,7 @@ export class ChefaddmenuComponent implements OnInit {
   }
   menulist: any;
   onMenuSubmit(contactMenuForm: any) {
-    alert(typeof (this.user.chef_id));
+    // alert(typeof (this.user.chef_id));
     console.log(contactMenuForm.value);
     this.menulist = contactMenuForm.value;
     console.log("form" + JSON.stringify(contactMenuForm.value));
@@ -112,7 +116,30 @@ export class ChefaddmenuComponent implements OnInit {
     }, err => {
       console.log(err)
     })
-    contactMenuForm.reset();
+    // contactMenuForm.reset();
   }
-
+  async editMenu(menu_data_list_all:any){
+    console.log(menu_data_list_all);
+    const modal = await this.modalCtrl.create({  
+      component:   EditmenuComponent,
+      componentProps: {menu_data_list_all: menu_data_list_all}
+    });  
+    return await modal.present();  
+  }
+  deleteMenu(menu:any){
+    console.log(menu);
+    this.user.present('deleting');
+    this.auth.deleteMenuByChef(menu.id).subscribe((response)=>{
+    this.user.dismiss();
+    const items = this.user.menu_data_list.filter(item => item.id === menu.id);
+    const index = this.user.menu_data_list.indexOf(items[0]);
+    if (index > -1) {
+      this.user.menu_data_list.splice(index, 1);
+    }
+    console.log(this.user.menu_data_list);
+    console.log(this.user.menu_data_list.length)
+    },err=>{
+      this.user.dismiss();
+    })
+  }
 }

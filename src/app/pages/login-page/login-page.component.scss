@@ -117,7 +117,8 @@ ion-input:not(:placeholder-shown):not(.invalid)+label {
 
 .remember-forgot {
     display        : inline-flex;
-    justify-content: space-around;
+    // justify-content: space-around;
+    justify-content: right;
     width          : 100%;
 
     .remember-checkbox {
@@ -141,7 +142,7 @@ ion-input:not(:placeholder-shown):not(.invalid)+label {
         font-weight    : 500;
         text-decoration: underline;
         font-size: 13px;
-        margin-top: 18px;
+        // margin-top: 18px;
         padding-right: 25px;
     }
 }

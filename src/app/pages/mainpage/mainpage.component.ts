@@ -72,7 +72,7 @@ export class MainpageComponent implements OnInit {
     public user: UserService,
     public modalController: ModalController) {
     // this.menuData();
-    this.chefAllData()
+    this.chefAllData();
     this.testimonialsAllData();
     // this.latestChefsAllData();
     this.latestEvents();
@@ -200,10 +200,13 @@ filterTermss=[];
   testimonialsData: any;
 
   testimonialsAllData() {
+    this.user.present('');
     this.auth.getAllTestimonials().subscribe(res => {
+      this.user.dismiss();
       this.testimonialeRes = res;
       this.testimonialsData = this.testimonialeRes.data;
     }, err => {
+      this.user.dismiss();
       console.log(err)
     })
   }
@@ -284,11 +287,14 @@ latestchefsData:any;
   blogRes;
   blogDataAll;
   blogMainData(){
+    // this.user.present('');
     this.auth.getAllBlogs().subscribe((data)=>{
+      this.user.dismiss();
       // console.log(data);
       this.blogRes=data;
       this.blogDataAll=this.blogRes.data;
     },err=>{
+      this.user.dismiss();
       console.log('blog error..')
     })
   }

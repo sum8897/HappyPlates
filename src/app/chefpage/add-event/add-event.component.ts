@@ -73,7 +73,7 @@ console.log(this.formateString);
           'userId': localStorage.getItem('user_id'),
           // 'description': contactAddressForm.value.descr,
           'location':'New Delhi',
-          'mediaId': this.common.multipleImageArray,
+          'event_image': this.common.multipleImageArray,
           'status': '1'
         }
         alert(JSON.stringify(event_data));

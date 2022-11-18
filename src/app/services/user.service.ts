@@ -86,6 +86,7 @@ export class UserService {
         this.user_ProfImage='../../assets/img/user_icon.png';
       }else{
         this.user_ProfImage= this.userAllData.prof_image;
+        console.log(this.user_ProfImage);
         console.log('user image found');
       }
       this.user_name=this.userAllData.firstname+" "+ this.userAllData.lastname;
@@ -129,15 +130,19 @@ export class UserService {
           console.log('empty menu data')
         }
         for(let i=0;i<=this.menu_data_list_all.length;i++){
-          console.log(this.menu_data_list_all[i].medias.length);
-    if(this.menu_data_list_all[i].medias.length<1 || this.menu_data_list_all[i].medias[0]==undefined){
+          // console.log(this.menu_data_list_all[i].medias.length);
+    if(this.menu_data_list_all[i].medias==undefined || this.menu_data_list_all[i].medias.length<1 || this.menu_data_list_all[i].medias[0]==undefined){
       console.log('empty data');
       this.menu_data_list[i]={
-        'price':this.menu_data_list_all[i].price,
-        'title':this.menu_data_list_all[i].title,
-        'description':this.menu_data_list_all[i].description,
-        'userId':this.menu_data_list_all[i].userId,
-        'path': '../../../assets/img/blog_2.jpg',
+        'price': this.menu_data_list_all[i].price,
+        'title': this.menu_data_list_all[i].title,
+        'description': this.menu_data_list_all[i].description,
+        'userId': this.menu_data_list_all[i].userId,
+        'id': this.menu_data_list_all[i].id,
+        'path': '../../../assets/img/user_icon.png',
+        'category': this.menu_data_list_all[i].category,
+        'food_type': this.menu_data_list_all[i].food_type,
+        'menu_image': this.menu_data_list_all[i].menu_image,
       }
       console.log(this.menu_data_list)
     }else{
@@ -146,7 +151,11 @@ export class UserService {
         'title': this.menu_data_list_all[i].title,
         'description': this.menu_data_list_all[i].description,
         'userId': this.menu_data_list_all[i].userId,
+        'id': this.menu_data_list_all[i].id,
         'path': this.menu_data_list_all[i].medias[0].path,
+        'category': this.menu_data_list_all[i].category,
+        'food_type': this.menu_data_list_all[i].food_type,
+        'menu_image': this.menu_data_list_all[i].menu_image,
       }
     }
    

@@ -20,7 +20,7 @@
         <ion-slide *ngFor="let chef of filterTermProfession">
           <ion-card class="slider-card">
             <!-- <img style="height: 98px;" [src]="getImage(chef[0].prof_image)"> -->
-            <img style="height: 98px;min-width: 126px;" src={{chef[0].prof_image}}>
+            <img style="height: 98px;min-width: 126px;width: 100%;border-top-left-radius: 21px;border-bottom-right-radius: 21px;" src={{chef[0].prof_image}}>
             <div class="chef-detail">
               <span class="chef-name">{{chef[0].firstname}} {{chef[0].lastname}}</span>
               <div class="chef-specialization-div">
@@ -52,7 +52,7 @@
               <ion-list>
                 <ion-item lines="none">
                   <ion-avatar>
-                    <img style="height:100%;" [src]="getImage(latest.prof_image)">
+                    <img style="height:100%;width: 100%;" [src]="getImage(latest.prof_image)">
                   </ion-avatar>
                   <ion-label>
                     <div class="chef-detail">

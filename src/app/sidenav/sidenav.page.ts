@@ -124,6 +124,7 @@ export class SidenavPage implements OnInit {
   constructor(private router: Router,
     public menuCtrl: MenuController,
     public user: UserService) {
+      this.user.userDetails();
       this.user.user_name=localStorage.getItem('user_name'); 
     this.user_type=localStorage.getItem('user_role');
     this.NAV.filter((data)=>{

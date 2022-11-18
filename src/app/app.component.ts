@@ -103,7 +103,7 @@ const alert=await this.alertController.create({
 await alert.present();
   }
 backButtonEvent() {
-  this.platform.backButton.subscribeWithPriority(0, () => {
+  this.platform.backButton.subscribeWithPriority(99, () => {
     this.routerOutlets.forEach(async(outlet: IonRouterOutlet) => {
       if (this.router.url != '/home') {
         // await this.router.navigate(['/']);

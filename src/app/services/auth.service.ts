@@ -172,6 +172,20 @@ AddEvents(event_data:any){
   return this.http.post(this.url + 'api/events',event_data, { headers: headers }).pipe(tap(res => {
   }))
 }
+
+contactUsApi(query_data:any){
+  let token = localStorage.getItem('amantran_token');
+  var headers = new HttpHeaders();
+  // headers = headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'multipart/form-data');
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Access-Control-Allow-Origin', '*');
+  headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
+  headers = headers.append('Connection', 'keep-alive');
+  headers = headers.append("Authorization", 'Bearer'+' '+ token);
+  return this.http.post(this.url + 'api/contacts',query_data, { headers: headers }).pipe(tap(res => {
+  }))
+}
 getAllBlogs(){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();

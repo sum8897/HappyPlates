@@ -31,9 +31,9 @@ export class BlogComponent implements OnInit {
       this.blogDataAll = this.blogRes.data;
    
       for (let i = 0; i <= this.blogDataAll.length; i++) {
-        // console.log(this.blogDataAll[i].blogs_image);
-       if(this.blogDataAll[i].blogs_image== ""){
-         console.log(this.blogDataAll[i].blogs_image)
+        console.log(this.blogDataAll[i].blogs_image);
+       if(this.blogDataAll[i].blogs_image===undefined || this.blogDataAll[i].blogs_image==="" || this.blogDataAll[i].blogs_image==[]){
+        //  console.log(this.blogDataAll[i].blogs_image)
        this.blogDataArray[i]={
          'title': this.blogDataAll[i].title,
          'userId': this.blogDataAll[i].userId,

@@ -22,6 +22,30 @@ export class ChefprofileComponent implements OnInit {
   ratingValue3:any=3;
   ratingValue2:any=2;
   ratingValue1:any=1;
+
+  userRes: any;
+  userData: any;
+  userAllData: any;
+  user_image:any;
+  user_ProfImage:any='';
+
+  chef_about_me:any;
+  chef_address:any;
+  chef_city_name:any;
+  chef_city_id:any;
+  chef_state_name:any;
+  chef_state_id:any;
+  chef_description:any;
+  chef_email:any;
+  chef_firstname:any;
+  chef_id:any;
+  chef_lastname:any;
+  chef_phone:any;
+  chef_pin:any;
+  chef_role:any;
+  chef_skills:any;
+  chef_specialization:any;
+
   constructor(public user: UserService,
     public auth: AuthService,
     public actionSheetController: ActionSheetController,
@@ -33,33 +57,43 @@ export class ChefprofileComponent implements OnInit {
 
   }
   ionViewDidEnter() {
+    this.userDetails();
     // this.menuData(this.user.chef_id.id);
   }
   ngOnInit() { }
   onSubmit(contactForm: any) {
     console.log(contactForm.value)
+if(this.chef_specialization=="" || this.chef_skills=="" || this.chef_description==""){
+alert('Please fill all details.')
+}else{
+  let body = {
+    'firstname': this.userAllData.firstname,
+    'lastname': this.userAllData.lastname,
+    'email': this.userAllData.email,
+    'password': localStorage.getItem('password'),
+    'role': localStorage.getItem('user_role'),
+    'phone': localStorage.getItem('user_mobile'),
+    'description': this.chef_description,
+    'skills': this.chef_skills,
+    'specialization': this.chef_specialization,
+  }
+  console.log(body)
+  this.user.present('updating...');
+  this.auth.updateProfileData(body).subscribe((data) => {
+    this.user.dismiss();
+    console.log(data);
+    this.user.showToast('Your details updated successfully...');
+    this.router.navigateByUrl('nav/chef-home');
+   
+  }, err => {
+    this.user.dismiss();
+    console.log(err);
+  })
 
-    let body = {
-      'firstname': this.userAllData.firstname,
-      'lastname': this.userAllData.lastname,
-      'email': this.userAllData.email,
-      'password': localStorage.getItem('password'),
-      'description': contactForm.value.descr,
-      'skills': contactForm.value.skills,
-      'specialization': contactForm.value.specialization,
-    }
-    console.log(body)
-    this.user.present('');
-    this.auth.updateProfileData(body).subscribe((data) => {
-      this.user.dismiss();
-      console.log(data);
-      this.user.showToast('Your details updated successfully...');
-      this.router.navigateByUrl('nav/chef-home');
-      // contactForm.reset();
-    }, err => {
-      this.user.dismiss();
-      console.log(err);
-    })
+}
+  
+
+
   }
   updateRes: any;
   updateData: any;
@@ -68,42 +102,63 @@ export class ChefprofileComponent implements OnInit {
   onAddressSubmit(contactAddressForm: any) {
     console.log(contactAddressForm.value);
     console.log("form" + JSON.stringify(contactAddressForm.value));
+    if(this.chef_firstname=='' || this.chef_lastname=='' || this.chef_email=='' || this.chef_phone=='' || this.chef_pin=='' || this.user_location==''){
+      alert('please fill all required details.')
 
-    let body = {
-      'firstname': contactAddressForm.value.firstname,
-      'lastname': contactAddressForm.value.lastname,
-      'email': this.userAllData.email,
-      'password': localStorage.getItem('password'),
-      'phone': contactAddressForm.value.phone,
-      'country': this.country_id,
-      'state': this.selectState_id,
-      'city': this.cityId,
-      'pin': contactAddressForm.value.pin,
-      'address': contactAddressForm.value.location,
-      'role': localStorage.getItem('user_role'),
+    }else if((this.chef_phone).toString().length<10 || (this.chef_phone).toString().length>10){
+      alert('Please enter valid phone number.');
     }
-    console.log(body)
-    this.user.present('');
-    this.auth.updateProfileData(body).subscribe((data) => {
-      this.user.dismiss();
-      this.userRes = data;
-      this.userData = this.userRes.data;
-      this.user_location = this.userData.address;
-      this.user_name = this.userData.firstname + " " + this.userData.lastname;
-      this.specialization = this.userData.specialization;
-      // console.log(this.userData);
-      this.user.showToast('Your details updated successfully...');
-      this.router.navigateByUrl('nav/chef-home');
-      // contactAddressForm.reset();
-    }, err => {
-      this.user.dismiss();
-      console.log(err);
-    })
+    else if((this.chef_pin).toString().length<6 || (this.chef_pin).toString().length>6){
+  alert('Zip code should be 6 digit only.')
+    }
+  
+    else{
+        if(this.selectState_id==undefined){
+        this.selectState_id=this.chef_state_id;
+       }
+       if(this.cityId==undefined){
+        this.cityId=this.chef_city_id;
+       }
+  
+      let body = {
+        'firstname': this.chef_firstname,
+        'lastname': this.chef_lastname,
+        'email': this.chef_email,
+        'password': localStorage.getItem('password'),
+        'phone': this.chef_phone,
+        'country': this.country_id,
+        'state': this.selectState_id,
+        'city': this.cityId,
+        'pin': this.chef_pin,
+        'address': this.user_location,
+        'role': localStorage.getItem('user_role'),
+      }
+      console.log(body)
+      
+      this.user.present('Updating...');
+      this.auth.updateProfileData(body).subscribe((data) => {
+        this.user.dismiss();
+        this.userRes = data;
+        this.userData = this.userRes.data;
+        this.user_location = this.userData.address;
+        this.user_name = this.userData.firstname + " " + this.userData.lastname;
+        this.specialization = this.userData.specialization;
+        this.user.showToast('Your details updated successfully...');
+        this.router.navigateByUrl('nav/chef-home');
+      }, err => {
+        alert('Something went wrong please try after some times.');
+        this.user.dismiss();
+        console.log(err);
+      })
+     
+    }
+   
+
   }
   menu_data; menu_data_list;
   menu_Array:any=[];
   chefmenuData(chef_id) {
-    this.user.present('wait...');
+    // this.user.present('wait...');
     this.auth.getSingleChefsAllMenu(chef_id).subscribe((data) => {
       this.user.dismiss();
       this.menu_data = data;
@@ -118,7 +173,7 @@ export class ChefprofileComponent implements OnInit {
             'title':this.menu_data_list[i].title,
             'description':this.menu_data_list[i].description,
             'userId':this.menu_data_list[i].userId,     
-            'path': '../../../assets/img/blog_2.jpg',
+            'path': '../../../assets/img/user_icon.png',
           }
           console.log(this.menu_Array)
         }else{
@@ -278,11 +333,9 @@ export class ChefprofileComponent implements OnInit {
     }
   }
 
-  userRes: any;
-  userData: any;
-  userAllData: any;
-  user_image:any;
-  user_ProfImage:any='';
+ 
+  
+
   userDetails() {
     this.user.present('');
     this.auth.getUserProfile().subscribe((data) => {
@@ -291,7 +344,29 @@ export class ChefprofileComponent implements OnInit {
       this.userData = this.userRes.data;
       this.userAllData = this.userData[0];
       this.user_image= this.userAllData.prof_image;
-      this.specialization = (this.userAllData.specialization).substring(0,20);
+      this.specialization = (this.userAllData.specialization);
+
+      this.chef_about_me= this.userAllData.aboutme;
+      this.chef_address= this.userAllData.address;
+      this.chef_city_name= this.userAllData.city.city_name;
+      this.chef_city_id= this.userAllData.city.id;
+      this.chef_state_name= this.userAllData.state.state_name;
+      this.chef_state_id= this.userAllData.state.id;
+     
+      this.chef_email= this.userAllData.email; 
+      this.chef_firstname= this.userAllData.firstname;
+      this.chef_lastname= this.userAllData.lastname;
+      this.chef_id= this.userAllData.id;
+      this.chef_phone= this.userAllData.phone;
+      this.chef_pin= this.userAllData.pin;
+      this.chef_role= this.userAllData.role;
+      this.chef_skills= this.userAllData.skills;
+      this.chef_specialization= this.userAllData.specialization;
+      this.chef_description= this.userAllData.description;
+
+
+
+
       console.log(this.user_image)
       if(this.user_image===""){
         console.log('image not foubd');

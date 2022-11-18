@@ -51,6 +51,7 @@ allorderedDataList:any;
     return await modal.present();  
   }
   deleteMenu(menu:any){
+    console.log(menu);
     this.user.present('deleting');
     this.auth.deleteMenuByChef(menu.id).subscribe((response)=>{
     this.user.dismiss();

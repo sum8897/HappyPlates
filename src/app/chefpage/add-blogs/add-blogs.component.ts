@@ -71,12 +71,11 @@ console.log(this.formateString);
     console.log("form" + JSON.stringify(contactAddressForm.value));
         let blogs_data = {
           'title': contactAddressForm.value.title,
-          'intro': contactAddressForm.value.into,
-          'date': this.formateString_api,
           'userId': localStorage.getItem('user_id'),
+          'intro': contactAddressForm.value.into,
+          'date': this.formateString,         
           'description': contactAddressForm.value.descr,
-          'location':'New Delhi',
-          'mediaId': this.common.multipleImageArray,
+          'blogs_image': this.common.multipleImageArray,
           'status': '1'
         }
         this.user.present('uploading...')
