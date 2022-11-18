@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { flush } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+import { File } from '@awesome-cordova-plugins/file/ngx';
 import { Router } from '@angular/router';
 import { ActionSheetController, AlertController, NavController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
-import { File } from '@awesome-cordova-plugins/file/ngx';
+
+import { Device } from '@awesome-cordova-plugins/device/ngx';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -24,6 +26,14 @@ export class RegisterComponent implements OnInit {
   getpas: any;
   croppedImagePath: any;
  
+  capturedSnapURL:string;
+
+  cameraOptions: CameraOptions = {
+    quality: 20,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
   constructor(private auth: AuthService,
     public user: UserService,
     private router: Router,
@@ -31,10 +41,28 @@ export class RegisterComponent implements OnInit {
     private httpClient: HttpClient,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    public actionSheetController: ActionSheetController,
     private alertController: AlertController,
+    public actionSheetController: ActionSheetController,
     public camera: Camera,
-    public common: CommonService) { }
+    public common: CommonService,
+    private device: Device) { 
+    }
+
+    takeSnap() {
+      
+      this.camera.getPicture(this.cameraOptions).then((imageData) => {
+       
+        // this.camera.DestinationType.FILE_URI gives file URI saved in local
+        // this.camera.DestinationType.DATA_URL gives base64 URI
+        
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.capturedSnapURL = base64Image;
+      }, (err) => {
+        alert(JSON.stringify(err))
+        console.log(err);
+        // Handle error
+      });
+    }
 
   ngOnInit() {
     this.type = 'customer';
@@ -73,7 +101,6 @@ export class RegisterComponent implements OnInit {
 
   stateshow() {
     this.stateCard = true;
-    
     this.stateList();
   }
   cityCard: boolean = false;
@@ -196,7 +223,11 @@ export class RegisterComponent implements OnInit {
 
     await alert.present();
   }
-
+  passwordvalue:any
+  onInputPass(e:any){
+    console.log(e.target.value);
+    this.passwordvalue=e.target.value;
+  }
   checkParent: boolean;
   checkCheckbox(e: any) {
     console.log(e);
@@ -354,26 +385,26 @@ export class RegisterComponent implements OnInit {
       this.matched = true;
       this.matchedpass = false;
     }
-    console.log(formGroup.value)
+    console.log(formGroup.value);
   }
 
   imagepath: any = "";
-  pickImage(sourceType) {
+  pickImage(sourceType:any) {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 20,
       sourceType: sourceType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
+
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
       this.imagepath = imageData;
-      // alert(this.croppedImagePath);
-      // console.log(this.croppedImagePath);
-      // alert(imageData);
+      // alert(JSON.stringify(this.croppedImagePath));
     }, (err) => {
+      alert(JSON.stringify(err));
       // Handle error
     });
   }
@@ -404,38 +435,30 @@ export class RegisterComponent implements OnInit {
     await actionSheet.present();
   }
 
-  uploadSingleRes;
-  uploadSingleResData;
+  uploadSingleRes:any;
+  uploadSingleResData:any;
   multipleImageArray: any = [];
+  imageData:any='';
+  img:any;
   uploadImage() {
-    // alert(this.croppedImagePath);
+    this.imageData='';
+    this.img='';
     let body = {
       mediafile: this.croppedImagePath
     };
     this.auth.uploadSingleMenuImage(body).subscribe(res => {
       this.uploadSingleRes = res;
       this.uploadSingleResData = this.uploadSingleRes.data;
-      this.multipleImageArray.push(this.uploadSingleResData.filename)
-      // if(this.multipleImageArray.length=== 0){
-      //   this.multipleImageArray.push(this.uploadSingleResData.filename)
-      // }else{
-      //   for(let i=0;i<this.multipleImageArray.length;i++){
-      //     if(this.multipleImageArray[i] !=this.uploadSingleResData.filename){
-      //       this.multipleImageArray.push(this.uploadSingleResData.filename)
-      //     }else{
-      //       return this.multipleImageArray;
-      //     }
-      //   }
-      // }
-
-      console.log(this.multipleImageArray);
-      // alert(res)
-      // console.log(res);
+      // this.multipleImageArray.push(this.uploadSingleResData.filename);
+      this.imageData=this.uploadSingleResData.filename;
+      this.img=this.imageData;
     }, err => {
       alert(JSON.stringify(err))
       console.log(err.error)
     })
   }
+
+
   checkValue:any=true;
   checkedValue(e: any) {
     this.checkValue='';
@@ -444,8 +467,10 @@ export class RegisterComponent implements OnInit {
   }
   user_reg: any;
   submitForm() {
+    this.user_reg='';
     console.log((this.registrationForm.value.phone).toString().length);
     console.log(this.registrationForm.value.password);
+    console.log(this.passwordvalue.length);
     if (this.type == 'customer'){
       if(this.checkValue==false){
         alert('Please mark the checkBox..');
@@ -474,7 +499,11 @@ export class RegisterComponent implements OnInit {
                 else if((this.registrationForm.value.pin).toString().length>6){
                   alert('Zip code can not be greater than 999999')
                    }
+                   else if(this.passwordvalue==""){
+                     alert('Password must be at least 8 characters')
+                   }
                 else{
+                  console.log(this.registrationForm.value.password);
                   this.user_reg = {
                     "firstname": this.registrationForm.value.firstname,
                     "lastname": this.registrationForm.value.lastname,
@@ -485,12 +514,11 @@ export class RegisterComponent implements OnInit {
                     "city": this.cityId,
                     "pin": this.registrationForm.value.pin,
                     "address": this.registrationForm.value.address,
-                    "password": this.registrationForm.value.password,
+                    "password": this.passwordvalue,
                     "role": this.type,
                     "agreeterms": "yes",
-                    "prof_image": this.croppedImagePath,
+                    "prof_image": this.imageData,
                   }
-             console.log(this.user_reg);
              this.user.present('wait..');
              this.auth.userRegister(this.user_reg).subscribe((response) => {
                this.user.dismiss();
@@ -498,6 +526,7 @@ export class RegisterComponent implements OnInit {
                this.user.showToast('You are register successfully...');
                console.log(response);
              }, err => {
+              alert(JSON.stringify(err));
                this.user.dismiss();
                console.log('user Register Error' + (err.error));
              })
@@ -507,58 +536,70 @@ export class RegisterComponent implements OnInit {
           }
     }
     else{
-        if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname || this.registrationForm.value.phone || this.registrationForm.value.email || this.registrationForm.value.specialization || this.registrationForm.value.skills || this.registrationForm.value.description || this.registrationForm.value.aboutme || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.pin || this.registrationForm.value.address || this.registrationForm.value.password){
-          alert('Please Enter all required fields...');
-        }else{
-          if((this.registrationForm.value.phone).toString().length<10){
-            alert('Please enter Valid Mobile Number');
-            console.log((this.registrationForm.value.phone).toString().length)
+      if(this.checkValue==false){
+        alert('Please mark the checkBox..');
           }
-          else if((this.registrationForm.value.phone).toString().length>10){
-            alert('Please enter Valid Mobile Number');
-          }
-          else if((this.registrationForm.value.pin).toString().length<6){
-            alert('Zip code can not be less than 999999')
-             }
-             else if((this.registrationForm.value.pin).toString().length>6){
-               alert('Zip code can not be greater than 999999')
-                }
           else{
-            this.user_reg = {
-              "firstname": this.registrationForm.value.firstname,
-              "lastname": this.registrationForm.value.lastname,
-              "phone": this.registrationForm.value.phone,
-              "email": this.registrationForm.value.email,
-              'specialization': this.registrationForm.value.specialization,
-              'skills': this.registrationForm.value.skills,
-              'description': this.registrationForm.value.description,
-              'aboutme': this.registrationForm.value.aboutme,
-              "country": this.country_id,
-              "state": this.selectState_id,
-              "city": this.cityId,
-              "pin": this.registrationForm.value.pin,
-              "address": this.registrationForm.value.address,
-              "prof_image": this.croppedImagePath,
-              "password": this.registrationForm.value.password,
-              "role": this.type,
-              "agreeterms": "Yes"
+
+            if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname=="" || this.registrationForm.value.phone=="" || this.registrationForm.value.email=="" || this.registrationForm.value.specialization=="" || this.registrationForm.value.skills=="" || this.registrationForm.value.description=="" || this.registrationForm.value.aboutme=="" || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.pin=="" || this.registrationForm.value.address=="" || this.registrationForm.value.password==""){
+              alert('Please Enter all required fields...');
             }
-    
-            console.log(this.user_reg);
-            // this.user.present('wait..');
-            // this.auth.userRegister(this.user_reg).subscribe((response) => {
-            //   this.user.dismiss();
-            //   this.router.navigateByUrl('nav/login');
-            //   this.user.showToast('You are register successfully...');
-            //   console.log(response);
-            // }, err => {
-            //   this.user.dismiss();
-            //   console.log('user Register Error' + JSON.stringify(err));
-            // })
+            
+            else if((this.registrationForm.value.phone).toString().length>10){
+              alert('Please enter Valid Mobile Number');
+            }
+            else if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname=="" ||this.registrationForm.value.phone=="" || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.address==""){
+       alert('Please Enter all Details...');
+            }
+        else if(this.registrationForm.value.pin=="" || this.registrationForm.value.pin.length<6){
+              alert('please enetr valid 6 digit zip code');
+ 
+            }
+            else if(this.registrationForm.value.password="" || this.registrationForm.value.password.length<8) {
+       alert('please enetr minimum 8 digit password');
+            }
+            else if((this.registrationForm.value.pin).toString().length<6){
+           alert('Zip code can not be less than 999999')
+            }
+            else if((this.registrationForm.value.pin).toString().length>6){
+              alert('Zip code can not be greater than 999999')
+               }
+               else if(this.passwordvalue==""){
+                 alert('Password must be at least 8 characters')
+               }
 
-
+              else{
+                this.user_reg = {
+                  "firstname": this.registrationForm.value.firstname,
+                  "lastname": this.registrationForm.value.lastname,
+                  "phone": this.registrationForm.value.phone,
+                  "email": this.registrationForm.value.email,
+                  'specialization': this.registrationForm.value.specialization,
+                  'skills': this.registrationForm.value.skills,
+                  'description': this.registrationForm.value.description,
+                  'aboutme': this.registrationForm.value.aboutme,
+                  "country": this.country_id,
+                  "state": this.selectState_id,
+                  "city": this.cityId,
+                  "pin": this.registrationForm.value.pin,
+                  "address": this.registrationForm.value.address,
+                  "prof_image": this.imageData,
+                  "password": this.passwordvalue,
+                  "role": this.type,
+                  "agreeterms": "Yes"
+                }
+                this.user.present('wait..');
+                this.auth.userRegister(this.user_reg).subscribe((response) => {
+                  this.user.dismiss();
+                  this.router.navigateByUrl('nav/login');
+                  this.user.showToast('You are register successfully...');
+                  console.log(response);
+                }, err => {
+                  this.user.dismiss();
+                  console.log('user Register Error' + JSON.stringify(err));
+                })
+              }
           }
-        }
       }
  
       }

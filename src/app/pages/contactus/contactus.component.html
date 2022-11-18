@@ -49,7 +49,7 @@
     </span>
       </div>
       <div class="label-float contact-label-float">
-        <ion-input type="text"  placeholder="Enter Phone " name="phone" #phone="ngModel" required ngModel></ion-input>
+        <ion-input type="number"  placeholder="Enter Phone " name="phone" #phone="ngModel" required ngModel></ion-input>
         <label>Phone No<span class="span-star">*</span></label>
         <span class="text-danger"
         *ngIf="(phone.touched || contactAddressForm.submitted) && phone.errors?.required">

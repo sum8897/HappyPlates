@@ -33,7 +33,7 @@ export class EventsComponent implements OnInit {
     this.auth.getAllEvents().subscribe(data=>{
       this.latestEventRes=data;
       this.latestEventData=this.latestEventRes.data;
-      console.log(this.latestEventData);
+      // console.log(this.latestEventData);
       for(let i=0;i<this.latestEventData.length;i++){
             this.latestEventAllData[i]=
               {
@@ -50,7 +50,7 @@ export class EventsComponent implements OnInit {
               }
             
       }
-      console.log(this.latestEventAllData)
+      // console.log(this.latestEventAllData);
     },err=>{
       console.log(err)
     })

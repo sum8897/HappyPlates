@@ -22,7 +22,12 @@ export class ChefHomeComponent implements OnInit {
               this.allOrders();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.user.menu();
+   }
+   ionViewWillEnter(){
+
+   }
 allRes:any;
 allOrderedData:any;
 allorderedDataList:any;
@@ -33,7 +38,7 @@ allorderedDataList:any;
       this.allRes=data;
       this.allOrderedData=data;
       this.allorderedDataList=this.allOrderedData.data;
-      console.log(this.allorderedDataList);
+      // console.log(this.allorderedDataList);
       if(this.allorderedDataList.length==0){
         console.log('empty')
       }
@@ -43,7 +48,7 @@ allorderedDataList:any;
     })
   }
   async editMenu(menu_data_list_all:any){
-    console.log(menu_data_list_all);
+    // console.log(menu_data_list_all);
     const modal = await this.modalCtrl.create({  
       component:   EditmenuComponent,
       componentProps: {menu_data_list_all: menu_data_list_all}
@@ -59,8 +64,8 @@ allorderedDataList:any;
     if (index > -1) {
       this.user.menu_data_list.splice(index, 1);
     }
-    console.log(this.user.menu_data_list);
-    console.log(this.user.menu_data_list.length)
+    // console.log(this.user.menu_data_list);
+    // console.log(this.user.menu_data_list.length)
     },err=>{
       this.user.dismiss();
     })

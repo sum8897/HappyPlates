@@ -15,12 +15,12 @@
       <span class="chef-1">Chef</span>
       <span class="chef-more" (click)="clickViewChef()">View All Chef</span>
     </div>
-    <div class="slider-chef-div">
+    <div class="slider-chef-div"> 
       <ion-slides [options]="slideOpts" class="slides-main">
         <ion-slide *ngFor="let chef of filterTermProfession">
           <ion-card class="slider-card">
             <!-- <img style="height: 98px;" [src]="getImage(chef[0].prof_image)"> -->
-            <img style="height: 98px;min-width: 126px;" src={{chef[0].prof_image}}>
+            <img style="height: 98px;min-width: 126px;border-top-left-radius: 21px;border-top-right-radius: 21px;width: 100%;" src={{chef[0].prof_image}}>
             <div class="chef-detail">
               <span class="chef-name">{{chef[0].firstname}} {{chef[0].lastname}}</span>
               <div class="chef-specialization-div">
@@ -52,7 +52,7 @@
               <ion-list>
                 <ion-item lines="none">
                   <ion-avatar>
-                    <img style="height:100%;" [src]="getImage(latest.prof_image)">
+                    <img style="height:100%;width: 100%;" [src]="getImage(latest.prof_image)">
                   </ion-avatar>
                   <ion-label>
                     <div class="chef-detail">
@@ -85,7 +85,7 @@
     <div class="event-slider-div">
       <ion-slides [options]="slidesEvent" pager="true">
         <ion-slide *ngFor="let ev of latestEventAllData">
-          <ion-card class="event-card"><img src="{{ev.event_image[0]}}"></ion-card>
+          <ion-card class="event-card"><img src="{{ev.event_image[0]}}" (click)="openEventDetails(ev)"></ion-card>
           <div class="event-details">
             <div class="event-div">
               <div class="event-name">{{ev.title}}</div>
@@ -110,7 +110,7 @@
       <div class="blog-slider">
         <ion-slides [options]="slidesBlog" pager="false">
           <ion-slide *ngFor="let blog of blogDataAll" style="display: block;">
-            <ion-card class="blog-card">
+            <ion-card class="blog-card" (click)="showBlogModal(blog)">
               <img class="blog-img" style="width: 134px;height: 134px;" [src]="getblogImage(blog.blogs_image)">
               <ion-card-content class="blog-content">
                 <div class="blog-type" *ngIf="blog.title !=null">{{(blog.title).substring(0,40)}}..</div>

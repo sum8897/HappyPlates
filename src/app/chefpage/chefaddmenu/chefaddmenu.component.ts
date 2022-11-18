@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
+import { EditmenuComponent } from '../editmenu/editmenu.component';
 
 @Component({
   selector: 'app-chefaddmenu',
@@ -11,21 +12,24 @@ import { File } from '@awesome-cordova-plugins/file/ngx';
   styleUrls: ['./chefaddmenu.component.scss'],
 })
 export class ChefaddmenuComponent implements OnInit {
-  croppedImagePath = "";
+
   constructor(public user: UserService,
     public auth: AuthService,
     public actionSheetController: ActionSheetController,
     public camera: Camera,
-    private file: File) { 
+    private file: File,
+    public navCtrl:NavController,
+    public modalCtrl: ModalController) { 
     this.user.menu();
   }
 
   ngOnInit() {}
 
+  croppedImagePath = "";
   imagepath: any = "";
   pickImage(sourceType:any) {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 20,
       sourceType: sourceType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
@@ -69,7 +73,6 @@ export class ChefaddmenuComponent implements OnInit {
   uploadSingleResData:any;
   multipleImageArray: any = [];
   uploadImage() {
-    // alert(this.croppedImagePath);
     let body = {
       mediafile: this.croppedImagePath
     };
@@ -79,40 +82,83 @@ export class ChefaddmenuComponent implements OnInit {
       this.uploadSingleRes = res;
       this.uploadSingleResData = this.uploadSingleRes.data;
       this.multipleImageArray.push(this.uploadSingleResData.filename)
-
-      console.log(this.multipleImageArray);
+      this.user.showToast('Image Uploaded successfully');
+      // console.log(this.multipleImageArray);
     }, err => {
       this.user.dismiss();
       alert(JSON.stringify(err))
       console.log(err.error)
     })
   }
+
+ 
+
+  
+
   selectedRadioGroup: any;
   radioGroupChange(event: any) {
-    console.log("radioGroupChange", event.detail.value);
+    // console.log("radioGroupChange", event.detail.value);
     this.selectedRadioGroup = event.detail.value;
   }
+
+  item_categoty:any;
+  handleChange(e:any) {
+    this.item_categoty=e.detail.value
+    // console.log('ionChange fired with value: ' + this.item_categoty);
+  }
+
   menulist: any;
   onMenuSubmit(contactMenuForm: any) {
-    alert(typeof (this.user.chef_id));
-    console.log(contactMenuForm.value);
+    // alert(typeof (this.user.chef_id));
+    // console.log(contactMenuForm.value);
     this.menulist = contactMenuForm.value;
-    console.log("form" + JSON.stringify(contactMenuForm.value));
+    // console.log("form" + JSON.stringify(contactMenuForm.value));
     let menuList = {
-      userId: (this.user.chef_id).toString(),
+      userId: (this.user.chef_id),
       title: contactMenuForm.value.foodname,
       description: contactMenuForm.value.details,
       price: contactMenuForm.value.regular_price,
+      food_type: parseInt(this.selectedRadioGroup),
+      category: parseInt(this.item_categoty),
       media_files: this.multipleImageArray
     }
-    console.log(menuList);
+    // console.log(menuList);
+    this.user.present('uploading...');
     this.auth.uploadMenulist(menuList).subscribe(res => {
-      console.log(JSON.stringify(res));
-      this.user.showToast('Menu Uploaded Successfully...');
+      this.user.dismiss();
+      // console.log(JSON.stringify(res));
+      this.navCtrl.navigateRoot('nav/chef-home')
+      // this.router.navigateByUrl('nav/chef-home');
+      this.user.showToast('Menu added Successfully...');
     }, err => {
+      this.user.dismiss();
+      alert(JSON.stringify(err))
       console.log(err)
     })
-    contactMenuForm.reset();
+    // contactMenuForm.reset();
   }
-
+  async editMenu(menu_data_list_all:any){
+    console.log(menu_data_list_all);
+    const modal = await this.modalCtrl.create({  
+      component:   EditmenuComponent,
+      componentProps: {menu_data_list_all: menu_data_list_all}
+    });  
+    return await modal.present();  
+  }
+  deleteMenu(menu:any){
+    console.log(menu);
+    this.user.present('deleting');
+    this.auth.deleteMenuByChef(menu.id).subscribe((response)=>{
+    this.user.dismiss();
+    const items = this.user.menu_data_list.filter(item => item.id === menu.id);
+    const index = this.user.menu_data_list.indexOf(items[0]);
+    if (index > -1) {
+      this.user.menu_data_list.splice(index, 1);
+    }
+    console.log(this.user.menu_data_list);
+    console.log(this.user.menu_data_list.length)
+    },err=>{
+      this.user.dismiss();
+    })
+  }
 }

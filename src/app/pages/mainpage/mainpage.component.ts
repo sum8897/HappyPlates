@@ -1,13 +1,15 @@
 import { TestimonialDetailsComponent } from './../testimonial-details/testimonial-details.component';
 import { Component, OnInit } from '@angular/core';
-import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+// import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { ActionSheetController, ModalController } from '@ionic/angular';
-import { File } from '@awesome-cordova-plugins/file/ngx';
+// import { File } from '@awesome-cordova-plugins/file/ngx';
 import SwiperCore, { SwiperOptions } from 'swiper';
 // import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { EventDetailsComponent } from '../event-details/event-details.component';
+import { BlogdetailsComponent } from '../blogdetails/blogdetails.component';
 
 @Component({
   selector: 'app-mainpage',
@@ -28,10 +30,10 @@ export class MainpageComponent implements OnInit {
   menu_data:any;
   menu_data_list:any;
 
-  imagePickerOptions = {
-    maximumImagesCount: 1,
-    quality: 100
-  };
+  // imagePickerOptions = {
+  //   maximumImagesCount: 1,
+  //   quality: 50
+  // };
 
   slideOpts = {
     initialSlide: 0,
@@ -64,9 +66,10 @@ export class MainpageComponent implements OnInit {
     slidesPerView: 2.5,
   }
   user_type:any;
-  constructor(private camera: Camera,
+  constructor(
+    // private camera: Camera,
     public actionSheetController: ActionSheetController,
-    private file: File,
+    // private file: File,
     public auth: AuthService,
     public router: Router,
     public user: UserService,
@@ -95,6 +98,7 @@ export class MainpageComponent implements OnInit {
 
 
   menuData() {
+    this.menu_data_list='';
     // this.user.present('...');
     this.auth.getMenuData().subscribe((data) => {
       // this.user.dismiss();
@@ -117,6 +121,7 @@ filterTermss=[];
   chefsResp: any;
   chefsRespoData: any;
   chefAllData() {
+    this.chefsRespoData='';
     // this.user.present('...');
     this.auth.getAllChefData().subscribe((res) => {
       this.user.dismiss();
@@ -208,7 +213,7 @@ filterTermss=[];
     })
   }
   getImage(imgPath:any){
-   const endPath= imgPath.substring(60)
+   const endPath= imgPath;
    if(endPath.length==0){
      return '../../../assets/img/user_icon.png';
    }
@@ -217,9 +222,9 @@ filterTermss=[];
    }
   }
   getblogImage(imgPath:any){
-   const endPath= imgPath.substring(62);
+   const endPath= imgPath;
    if(endPath.length==0){
-     return '../../../assets/img/chef_1.jpg'
+     return '../../../assets/img/user_icon.png'
    }
    else{
      return imgPath;
@@ -274,6 +279,15 @@ latestchefsData:any;
       console.log(err)
     })
   }
+  async openEventDetails(ev:any){
+    console.log('event open'+ JSON.stringify(ev.id))
+   const modal = await this.modalController.create({
+     component: EventDetailsComponent,
+     componentProps: {ev_data: ev.id}
+   });
+   return await modal.present();
+   }
+
   seeChefMenu() {
     this.router.navigateByUrl('nav/chef-menu-review')
   }
@@ -292,6 +306,28 @@ latestchefsData:any;
       console.log('blog error..')
     })
   }
+  blogSingleRes;
+  blogSingleData;
+  async showBlogModal(blog) {
+    let id = blog.id;
+    console.log(id)
+    this.blogSingleData = "";
+    this.auth.getSingleBlogs(id).subscribe(async res => {
+
+      this.blogSingleRes = res;
+      console.log(this.blogSingleRes)
+      this.blogSingleData = this.blogSingleRes.data;
+      console.log(this.blogSingleData);
+      const modal = await this.modalController.create({
+        component: BlogdetailsComponent,
+        componentProps: { blogname: this.blogSingleData }
+      });
+      return await modal.present();
+    }, err => {
+      console.log(err)
+    })
+
+  }
   viewAllBlogs(){
     this.router.navigateByUrl('nav/blog-all')
   }
@@ -300,7 +336,7 @@ latestchefsData:any;
   }
 
   async testimonialDetails(testimonial:any){
-    console.log('event open'+ JSON.stringify(testimonial))
+    // console.log('event open'+ JSON.stringify(testimonial));
     const modal = await this.modalController.create({
       component: TestimonialDetailsComponent,
       componentProps: {testimonial_data: testimonial}
@@ -381,45 +417,45 @@ latestchefsData:any;
   ]
 
 
-  pickImage(sourceType) {
-    const options: CameraOptions = {
-      quality: 100,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      // Handle error
-    });
-  }
+  // pickImage(sourceType:any) {
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     sourceType: sourceType,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE
+  //   }
+  //   this.camera.getPicture(options).then((imageData) => {
+      
+  //     this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
+  //   }, (err) => {
+      
+  //   });
+  // }
 
-  async selectImage() {
-    const actionSheet = await this.actionSheetController.create({
-      header: "Select Image source",
-      buttons: [{
-        text: 'Load from Library',
-        handler: () => {
-          this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
-        }
-      },
-      {
-        text: 'Use Camera',
-        handler: () => {
-          this.pickImage(this.camera.PictureSourceType.CAMERA);
-        }
-      },
-      {
-        text: 'Cancel',
-        role: 'cancel'
-      }
-      ]
-    });
-    await actionSheet.present();
-  }
+  // async selectImage() {
+  //   const actionSheet = await this.actionSheetController.create({
+  //     header: "Select Image source",
+  //     buttons: [{
+  //       text: 'Load from Library',
+  //       handler: () => {
+  //         this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+  //       }
+  //     },
+  //     {
+  //       text: 'Use Camera',
+  //       handler: () => {
+  //         this.pickImage(this.camera.PictureSourceType.CAMERA);
+  //       }
+  //     },
+  //     {
+  //       text: 'Cancel',
+  //       role: 'cancel'
+  //     }
+  //     ]
+  //   });
+  //   await actionSheet.present();
+  // }
 
   // AppleSignIn() {
 

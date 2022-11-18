@@ -47,7 +47,11 @@ const routes: Routes = [
     redirectTo: 'loginpage',
     pathMatch: 'full'
   },
-  // { path: 'mainpage', component: MainpageComponent, canActivate: [AuthGuardGuard]},
+  // { 
+  //   path: 'mainpage', 
+  // component: MainpageComponent,
+  //  canActivate: [AuthGuardGuard]
+  // },
   {
     path: 'nav/mainpage',
     component: MainpageComponent

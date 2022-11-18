@@ -64,6 +64,16 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
+      if(localStorage.getItem('user_role')=="chef"){
+        this.router.navigateByUrl('/nav/chef-home')
+      }
+      else if(localStorage.getItem('user_role')=="customer"){
+        this.router.navigateByUrl('/nav/mainpage')
+      }
+      else{
+        this.router.navigateByUrl('loginpage')
+      }
+
       this.network.onConnect().subscribe(data => {
         this.networkProvider.setNetworkStatus(data.type);
         this.displayNetworkUpdate(data.type);
@@ -103,21 +113,43 @@ const alert=await this.alertController.create({
 await alert.present();
   }
 backButtonEvent() {
-  this.platform.backButton.subscribeWithPriority(0, () => {
-    this.routerOutlets.forEach(async(outlet: IonRouterOutlet) => {
-      if (this.router.url != '/home') {
-        // await this.router.navigate(['/']);
-        await this.location.back();
-      } else if (this.router.url === '/home') {
-        if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
-          this.lastTimeBackPress = new Date().getTime();
-          this.presentAlertConfirm();
-        } else {
-          navigator['app'].exitApp();
+  if(localStorage.getItem('user_role')=="chef"){
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      // alert(this.router.url);
+      this.routerOutlets.forEach(async(outlet: IonRouterOutlet) => {
+        if (this.router.url != 'nav/chef-home') {
+          // await this.router.navigate(['/']);
+          await this.location.back();
+        } else if (this.router.url === 'nav/chef-home') {
+          if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
+            this.lastTimeBackPress = new Date().getTime();
+            this.presentAlertConfirm();
+          } else {
+            navigator['app'].exitApp();
+          }
         }
-      }
+      });
     });
-  });
+  }
+  else{
+    this.platform.backButton.subscribeWithPriority(0, () => {
+      this.routerOutlets.forEach(async(outlet: IonRouterOutlet) => {
+        // alert(this.router.url);
+        if (this.router.url != 'nav/mainpage') {
+          // await this.router.navigate(['/']);
+          await this.location.back();
+        } else if (this.router.url === 'nav/mainpage') {
+          if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
+            this.lastTimeBackPress = new Date().getTime();
+            this.presentAlertConfirm();
+          } else {
+            navigator['app'].exitApp();
+          }
+        }
+      });
+    });
+  }
+ 
 }
 displayNetworkUpdate(connectionState: string) {
   console.log(connectionState)

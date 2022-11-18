@@ -451,3 +451,24 @@ ion-title{
 //         }
 //     }
 // }
+.photo{
+    margin: 10px 20px;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: justify;
+    p{
+        margin: 2px 0; 
+    }
+}
+.selectImage{
+    text-align: right;
+    font-size: 18px;
+    padding-top: 10px;
+}
+.select-categoty-item{
+    background-color: transparent;
+    border: 2px solid #e1eaec;
+    border-radius: 21px;
+    outline: none;
+    margin: 0 30px;
+}

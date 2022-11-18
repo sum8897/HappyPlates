@@ -54,7 +54,7 @@ export class CommonService {
               }
               openCamera(){
               alert('open camera with permission..');
-              alert(this.cameraSelect);
+              // alert(this.cameraSelect);
                 this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
                     result => {
                         alert(result.hasPermission);
@@ -63,14 +63,14 @@ export class CommonService {
                             .then( cam => {
                                 alert('permission result '+ JSON.stringify(cam) );
                                 alert(this.cameraSelect);
-                                this.pickImage(this.cameraSelect);
+                                this.pickImage('CAMERA');
                             })
                             .catch( error => {
                                 alert('permission error occured '+ JSON.stringify(error) );
                             });
                         } else {
                           alert(this.cameraSelect);
-                            this.pickImage(this.cameraSelect);
+                            this.pickImage('CAMERA');
                         }
                     },
                     err => {
@@ -131,7 +131,7 @@ export class CommonService {
             //   }
             // }
             
-            console.log(this.multipleImageArray);
+            // console.log(this.multipleImageArray);
                   // alert(res)
                   // console.log(res);
                 },err=>{
@@ -143,24 +143,24 @@ export class CommonService {
 
               selectedRadioGroup:any;
           radioGroupChange(event:any) {
-                console.log("radioGroupChange",event.detail.value);
+                // console.log("radioGroupChange",event.detail.value);
                 this.selectedRadioGroup = event.detail.value;
               }
 
               food_name:any;
               reg_price:any;
               others_price:any;
-              food_type:any;
+              food_type:any='1';
               descr:any;
               menu_media:any;
               user_id:any;
               menu_id:any;
   menulist:any;
   onMenuSubmit(contactMenuForm:any){
-    console.log((this.menu_media).slice(15,35))
-    console.log(contactMenuForm.value);
+    // console.log((this.menu_media).slice(15,35))
+    // console.log(contactMenuForm.value);
     this.menulist=contactMenuForm.value;
-    console.log("form" + JSON.stringify(contactMenuForm.value));
+    // console.log("form" + JSON.stringify(contactMenuForm.value));
     let menuList={
       userId: (this.user.chef_id).toString(),
       title: this.food_name,
@@ -169,11 +169,11 @@ export class CommonService {
       media_files: this.menu_media.slice(15,35)
       // media_files: this.multipleImageArray
        }
-       console.log(menuList);
+      //  console.log(menuList);
        this.user.present('updating...');
    this.auth.editMenuByChef(menuList,this.menu_id).subscribe(res=>{
      this.user.dismiss();
-     console.log(JSON.stringify(res));
+    //  console.log(JSON.stringify(res));
      this.dismiss();
      this.user.userDetails();
    },err=>{

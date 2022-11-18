@@ -15,7 +15,7 @@ import { SwiperModule } from 'swiper/angular';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
 import { EventsComponent } from './pages/events/events.component';
 import { EventDetailsComponent } from './pages/event-details/event-details.component';
-import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 // import { SignInWithApple } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 import { LoginComponent } from './pages/login/login.component';
@@ -60,6 +60,7 @@ import { AddedblogDetailsComponent } from './chefpage/addedblog-details/addedblo
 import { AddedeventDetailsComponent } from './chefpage/addedevent-details/addedevent-details.component';
 import { TestimonialDetailsComponent } from './pages/testimonial-details/testimonial-details.component'
 
+import { Device } from '@awesome-cordova-plugins/device/ngx';
 
 @NgModule({
   declarations: [AppComponent,
@@ -122,6 +123,7 @@ import { TestimonialDetailsComponent } from './pages/testimonial-details/testimo
     Network,
     Camera,
     File,
+    Device,
     // CameraPreview,
     // SignInWithApple,
     // SQLite,

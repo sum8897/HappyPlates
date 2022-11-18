@@ -20,10 +20,12 @@
       <div class="user-data">
         <h3>{{user_name}}</h3>
         <div class="user-specialization"><img src="../../../assets/img/chef_icon.png">
-          <span class="user-specialization-heading">
+          <span class="user-specialization-heading" *ngIf="specialization !=null">
             Specialises In:
           </span>
-          <div *ngIf="specialization !=null">{{specialization}}</div></div>
+          <span>{{chef_skills}}</span>
+          <!-- <div *ngIf="specialization !=null">{{chef_specialization}}</div> -->
+        </div>
       </div>
     </div>
     </div>  
@@ -37,7 +39,7 @@
         <div class="ion-padding login-input-value" slot="content">
             <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" >
             <div class="form-group label-float">
-              <ion-input type="text" name="specialization" #specialization="ngModel" required placeholder="Specialises In * " ngModel></ion-input>
+              <ion-input type="text" name="specialization" [(ngModel)]="chef_specialization" [ngModelOptions]="{standalone: true}" #specialization="ngModel" required placeholder="Specialises In * " ngModel></ion-input>
               <span class="text-danger"
               *ngIf="(specialization.touched || contactForm.submitted) && specialization.errors?.required">
               specialization is required *
@@ -45,33 +47,33 @@
             </div>
         
             <div class="form-group label-float">
-              <ion-input type="text" name="skills" #skills="ngModel" required placeholder="Skills * " ngModel></ion-input>
+              <ion-input type="text" name="skills" #skills="ngModel" [(ngModel)]="chef_skills" [ngModelOptions]="{standalone: true}" required placeholder="Skills * " ngModel></ion-input>
               <span class="text-danger"
               *ngIf="(skills.touched || contactForm.submitted) && skills.errors?.required">
               Skills is required *
           </span>
             </div>
             <div class="form-group label-float">
-              <ion-textarea type="text" name="descr" #descr="ngModel" required placeholder="Description * " ngModel></ion-textarea>
+              <ion-textarea type="text" name="descr" #descr="ngModel" [(ngModel)]="chef_description" [ngModelOptions]="{standalone: true}" required placeholder="Description * " ngModel></ion-textarea>
               <span class="text-danger"
               *ngIf="(descr.touched || contactForm.submitted) && descr.errors?.required">
               Descriptionis required *
           </span>
             </div>
           <div class="submit-div">
-        <ion-button class="submit-login-button" expand="round" type="submit">Save About Me</ion-button>
+        <ion-button class="submit-login-button" expand="round" type="submit">Update About Me</ion-button>
           </div>
         </form>
         <div class="address-show">
           <div class="name-address">
-            <div class="name">Specialises In: {{specialization}}</div>
+            <div class="name">Specialises In: &nbsp;{{chef_specialization}}</div>
             <div class="edit"><ion-button class="edit-button">Edit <ion-icon name="create-outline"></ion-icon></ion-button></div>
           </div>
          <div class="address-in-details">
-          <ion-text style="width: 80%;"><span>Skills: Bachelor of Hotel Management (BHM) in Culinary.</span></ion-text>
+          <ion-text style="width: 80%;"><span>Skills:&nbsp;&nbsp;{{chef_skills}} </span></ion-text>
          </div>
          <div class="address-in-details">
-          <ion-text style="width: 80%;"><span>Description: B.Sc. in Hospitality and Hotel Management. B.Sc. in Hospitality and Hotel Management.</span></ion-text>
+          <ion-text style="width: 80%;"><span>Description:&nbsp;&nbsp; {{chef_description}}</span></ion-text>
          </div>
         </div>
         <!-- </div> --> 
@@ -90,7 +92,7 @@
         <div class="ion-padding login-input-value" slot="content">
             <form #contactAddressForm="ngForm" (ngSubmit)="onAddressSubmit(contactAddressForm)" >
             <div class="form-group label-float">
-              <ion-input type="text" name="firstname" #firstname="ngModel" required placeholder="First Name * " ngModel></ion-input>
+              <ion-input type="text" name="firstname" #firstname="ngModel" [(ngModel)]="chef_firstname" required placeholder="First Name * " ngModel></ion-input>
           
               <span class="text-danger"
               *ngIf="(firstname.touched || contactAddressForm.submitted) && firstname.errors?.required">
@@ -98,7 +100,7 @@
           </span>
             </div>
             <div class="form-group label-float">
-              <ion-input type="text" name="lastname" #lastname="ngModel" required placeholder="Last Name * " ngModel></ion-input>
+              <ion-input type="text" name="lastname" #lastname="ngModel" [(ngModel)]="chef_lastname" required placeholder="Last Name * " ngModel></ion-input>
           
               <span class="text-danger"
               *ngIf="(lastname.touched || contactAddressForm.submitted) && lastname.errors?.required">
@@ -106,7 +108,7 @@
           </span>
             </div>
             <div class="form-group label-float">
-              <ion-input type="tel" name="phone" #phone="ngModel" required placeholder="Phone Number * " ngModel></ion-input>
+              <ion-input type="tel" name="phone" #phone="ngModel" [(ngModel)]="chef_phone" required placeholder="Phone Number * " ngModel></ion-input>
               <span class="text-danger"
               *ngIf="(phone.touched || contactAddressForm.submitted) && phone.errors?.required">
               Phone Number is required *
@@ -121,7 +123,7 @@
             <div class="label-float">
               <ion-item lines="none" (click)="stateshow()" class="form-item">
                 <ion-label>Select State</ion-label>
-              <ion-label style="font-size: 13px;" ><div>{{statename}}</div></ion-label>
+              <ion-label style="font-size: 13px;" ><div>{{chef_state_name}}</div></ion-label>
               <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
               
               </ion-item>
@@ -130,7 +132,7 @@
             <div class="label-float">
               <ion-item lines="none" (click)="cityshow()" class="form-item">
                 <ion-label>City</ion-label>
-              <ion-label style="font-size: 13px;">{{cityname}}</ion-label>
+              <ion-label style="font-size: 13px;">{{chef_city_name}}</ion-label>
               <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
                
               </ion-item>
@@ -139,7 +141,7 @@
             <div class="city-pin">
           
               <div class="form-group label-float">
-                <ion-input type="tel" name="pin" #pin="ngModel" required placeholder="Pin * " ngModel></ion-input>
+                <ion-input type="tel" name="pin" #pin="ngModel" [(ngModel)]="chef_pin" required placeholder="Pin * " ngModel></ion-input>
                 <span class="text-danger"
                 *ngIf="(pin.touched || contactAddressForm.submitted) && pin.errors?.required">
                 Pin is required *
@@ -147,20 +149,20 @@
               </div>
             </div>
             <div class="form-group label-float">
-              <ion-input type="text" name="location" #location="ngModel" required placeholder="Location * " ngModel></ion-input>
+              <ion-input type="text" name="location" #location="ngModel" [(ngModel)]="user_location" required placeholder="Location * " ngModel></ion-input>
               <span class="text-danger"
               *ngIf="(location.touched || contactAddressForm.submitted) && location.errors?.required">
               Location is required *
           </span>
             </div>
           <div class="submit-div">
-        <ion-button class="submit-login-button" expand="round" type="submit">Save Address</ion-button>
+        <ion-button class="submit-login-button" expand="round" type="submit">Update Address</ion-button>
           </div>
         </form>
         <div class="address-show">
           <div class="name-address">
-            <div class="name">{{user_name}}</div>
-            <div class="edit"><ion-button class="edit-button">Edit <ion-icon name="create-outline"></ion-icon></ion-button></div>
+            <div class="name">{{chef_firstname}} {{chef_lastname}}</div>
+            <!-- <div class="edit"><ion-button class="edit-button">Edit <ion-icon name="create-outline"></ion-icon></ion-button></div> -->
           </div>
          <div class="address-in-details">
           <ion-text style="width: 80%;"><span>{{user_location}}</span></ion-text>
@@ -204,10 +206,10 @@
             </div>
         
             <div class="form-group label-float">
-              <ion-input type="number" name="regular_price" #regular_price="ngModel" required placeholder="Regular Price * " ngModel></ion-input>
+              <ion-input type="number" name="regular_price" #regular_price="ngModel" required placeholder="Price * " ngModel></ion-input>
               <span class="text-danger"
               *ngIf="(regular_price.touched || contactMenuForm.submitted) && regular_price.errors?.required">
-              Regular Price is required *
+              Price is required *
           </span>
             </div>
             <!-- <div class="city-pin" style="display: flex;">
