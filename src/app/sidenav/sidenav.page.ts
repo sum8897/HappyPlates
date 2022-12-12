@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router, RouterEvent } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { UserService } from '../services/user.service';
 
 
@@ -120,10 +120,11 @@ export class SidenavPage implements OnInit {
       },
 
   ]
-  user_type;
+  user_type:any;
   constructor(private router: Router,
     public menuCtrl: MenuController,
-    public user: UserService) {
+    public user: UserService,
+    public alertController: AlertController,) {
       this.user.userDetails();
       this.user.user_name=localStorage.getItem('user_name'); 
     this.user_type=localStorage.getItem('user_role');
@@ -152,7 +153,7 @@ export class SidenavPage implements OnInit {
     this.user.userDetails();
   }
   logout(){
-    // localStorage.clear();
+    localStorage.clear();
     localStorage.removeItem('amantran_token');
     this.menuCtrl.close();
     this.router.navigate(['loginpage']);
@@ -160,5 +161,26 @@ export class SidenavPage implements OnInit {
   editProfile(){
     this.router.navigateByUrl('profile')
   }
-
+  showExitConfirm() {
+    this.alertController.create({
+      header: 'BonHomey',
+      message: 'Are you sure you want to logout?',
+      backdropDismiss: false,
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          console.log('Application exit prevented!');
+        }
+      }, {
+        text: 'Logout',
+        handler: () => {
+          this.logout();
+        }
+      }]
+    })
+      .then(alert => {
+        alert.present();
+      });
+  }
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import { Router } from '@angular/router';
+import { EditmenuComponent } from '../editmenu/editmenu.component';
 
 @Component({
   selector: 'app-chefprofile',
@@ -12,22 +13,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./chefprofile.component.scss'],
 })
 export class ChefprofileComponent implements OnInit {
-  croppedImagePath = "";
+ 
   specialization: any;
   user_name: any;
   user_location: any;
+  userRes:any;
+  userAllData:any;
+  userData:any;
+  user_image:any;
+  user_ProfImage:any;
 
   ratingValue5:any=5;
   ratingValue4:any=4;
   ratingValue3:any=3;
   ratingValue2:any=2;
   ratingValue1:any=1;
-
-  userRes: any;
-  userData: any;
-  userAllData: any;
-  user_image:any;
-  user_ProfImage:any='';
 
   chef_about_me:any;
   chef_address:any;
@@ -51,16 +51,18 @@ export class ChefprofileComponent implements OnInit {
     public actionSheetController: ActionSheetController,
     public camera: Camera,
     private file: File,
+    public modalCtrl: ModalController,
     public router:Router) {
     this.user.menu();
     this.userDetails();
 
   }
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     this.userDetails();
     // this.menuData(this.user.chef_id.id);
   }
   ngOnInit() { }
+
   onSubmit(contactForm: any) {
     console.log(contactForm.value)
 if(this.chef_specialization=="" || this.chef_skills=="" || this.chef_description==""){
@@ -73,6 +75,10 @@ alert('Please fill all details.')
     'password': localStorage.getItem('password'),
     'role': localStorage.getItem('user_role'),
     'phone': localStorage.getItem('user_mobile'),
+    'country': this.country_id,
+    'state': this.chef_state_id,
+    'city': this.chef_city_id,
+    'pin': this.chef_pin,
     'description': this.chef_description,
     'skills': this.chef_skills,
     'specialization': this.chef_specialization,
@@ -83,17 +89,40 @@ alert('Please fill all details.')
     this.user.dismiss();
     console.log(data);
     this.user.showToast('Your details updated successfully...');
-    this.router.navigateByUrl('nav/chef-home');
+    this.router.navigate(['nav/chef-home']);
    
   }, err => {
     this.user.dismiss();
+    this.user.showToast(JSON.stringify(err.errors));
     console.log(err);
   })
 
 }
   
-
-
+    // let body = {
+    //   'firstname': this.userAllData.firstname,
+    //   'lastname': this.userAllData.lastname,
+    //   'email': this.userAllData.email,
+    //   'password': localStorage.getItem('password'),
+    //   'role': localStorage.getItem('user_role'),
+    //   'phone': localStorage.getItem('user_mobile'),
+    //   'description': contactForm.value.descr,
+    //   'skills': contactForm.value.skills,
+    //   'specialization': contactForm.value.specialization,
+    // }
+    // console.log(body);
+    // this.user.present('uploading...');
+    // this.auth.updateProfileData(body).subscribe((data) => {
+    //   this.user.dismiss();
+    //   console.log(data);
+    //   this.user.showToast('Your details updated successfully...');
+    //   this.router.navigateByUrl('nav/chef-home');
+     
+    // }, err => {
+    //   this.user.showToast(JSON.stringify(err));
+    //   this.user.dismiss();
+    //   console.log(err);
+    // })
   }
   updateRes: any;
   updateData: any;
@@ -144,7 +173,7 @@ alert('Please fill all details.')
         this.user_name = this.userData.firstname + " " + this.userData.lastname;
         this.specialization = this.userData.specialization;
         this.user.showToast('Your details updated successfully...');
-        this.router.navigateByUrl('nav/chef-home');
+        this.router.navigate(['nav/chef-home']);
       }, err => {
         alert('Something went wrong please try after some times.');
         this.user.dismiss();
@@ -155,7 +184,7 @@ alert('Please fill all details.')
    
 
   }
-  menu_data; menu_data_list;
+  menu_data:any; menu_data_list:any;
   menu_Array:any=[];
   chefmenuData(chef_id) {
     // this.user.present('wait...');
@@ -172,7 +201,10 @@ alert('Please fill all details.')
             'price':this.menu_data_list[i].price,
             'title':this.menu_data_list[i].title,
             'description':this.menu_data_list[i].description,
-            'userId':this.menu_data_list[i].userId,     
+            'userId':this.menu_data_list[i].userId,   
+            'id': this.menu_data_list[i].id,
+            'category':this.menu_data_list[i].category,
+            'food_type':this.menu_data_list[i].food_type,
             'path': '../../../assets/img/user_icon.png',
           }
           console.log(this.menu_Array)
@@ -181,7 +213,11 @@ alert('Please fill all details.')
             'price':this.menu_data_list[i].price,
             'title':this.menu_data_list[i].title,
             'description':this.menu_data_list[i].description,
-            'userId':this.menu_data_list[i].userId,          
+            'userId':this.menu_data_list[i].userId,  
+            'id': this.menu_data_list[i].id,
+            'category':this.menu_data_list[i].category,
+            'food_type':this.menu_data_list[i].food_type,
+            'menu_image': this.menu_data_list[i].menu_image,          
             'path': this.menu_data_list[i].medias[0].path,
           }
         }
@@ -195,27 +231,32 @@ alert('Please fill all details.')
   }
 
   
+  croppedImagePath: any;
   imagepath: any = "";
   pickImage(sourceType:any) {
+    this.croppedImagePath='';
     const options: CameraOptions = {
-      quality: 50,
+      quality: 20,
       sourceType: sourceType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
-    this.camera.getPicture(options).then((imageData) => {
+  
+    this.camera.getPicture(options).then((image) => {
+ 
       // imageData is either a base64 encoded string or a file URI
-      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
-      this.imagepath = imageData;
-      alert(this.croppedImagePath);
-      // console.log(this.croppedImagePath);
-      // alert(imageData);
+      this.croppedImagePath = 'data:image/jpeg;base64,' + image;
+      this.imagepath = image;
+      // alert(JSON.stringify(this.croppedImagePath));
+  
     }, (err) => {
-      // Handle error
+      alert(JSON.stringify(err));
+  
     });
   }
-
+  
+  
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
       header: "Select Image source",
@@ -241,46 +282,39 @@ alert('Please fill all details.')
     });
     await actionSheet.present();
   }
-
-  uploadSingleRes;
-  uploadSingleResData;
+  
+  uploadSingleRes:any;
+  uploadSingleResData:any;
   multipleImageArray: any = [];
+  imageData:any='';
+  img:any;
   uploadImage() {
-    // alert(this.croppedImagePath);
     let body = {
+      // mediafile: this.capturedSnapURL
       mediafile: this.croppedImagePath
     };
-    alert("body"+JSON.stringify(body));
-    this.user.present('uploading..');
+    this.user.present('uploading...');
     this.auth.uploadSingleMenuImage(body).subscribe(res => {
       this.user.dismiss();
-     
       this.uploadSingleRes = res;
-     
       this.uploadSingleResData = this.uploadSingleRes.data;
-      alert("Done: "+JSON.stringify(this.uploadSingleResData))
-      this.multipleImageArray.push(this.uploadSingleResData.filename)
-      // if(this.multipleImageArray.length=== 0){
-      //   this.multipleImageArray.push(this.uploadSingleResData.filename)
-      // }else{
-      //   for(let i=0;i<this.multipleImageArray.length;i++){
-      //     if(this.multipleImageArray[i] !=this.uploadSingleResData.filename){
-      //       this.multipleImageArray.push(this.uploadSingleResData.filename)
-      //     }else{
-      //       return this.multipleImageArray;
-      //     }
-      //   }
-      // }
-   alert(JSON.stringify(this.multipleImageArray))
-      console.log(JSON.stringify(this.multipleImageArray));
-      // alert(res)
-      // console.log(res);
+      this.multipleImageArray.push(this.uploadSingleResData.filename);
+      this.imageData=this.uploadSingleResData.filename;
+      this.img=this.imageData;
+  
+      // alert(JSON.stringify(this.uploadSingleResData));
+      // alert(JSON.stringify(this.multipleImageArray));
+    
     }, err => {
-      this.user.dismiss();
-      alert(JSON.stringify(err))
+      this.user.dismiss(); 
+      alert(JSON.stringify(err.errors));
       console.log(err.error)
     })
   }
+
+ 
+
+  
 
 
   selectedRadioGroup: any;
@@ -297,10 +331,15 @@ alert('Please fill all details.')
   onMenuSubmit(contactMenuForm: any) {
     console.log(this.item_categoty);
     console.log(this.selectedRadioGroup);
-    if(this.selectedRadioGroup==undefined){
+    if(contactMenuForm.value.foodname=="" || contactMenuForm.value.regular_price=="" || contactMenuForm.value.details==""){
+      alert('Please fill all detaills');
+    }
+   else if(this.selectedRadioGroup==undefined){
       alert('Please select Food Type...');
     }
-    
+    else if(this.item_categoty==undefined){
+      alert('Please Select Food Categoty..')
+    }
     else{
       console.log(contactMenuForm.value);
       this.menulist = contactMenuForm.value;
@@ -314,27 +353,28 @@ alert('Please fill all details.')
         category: parseInt(this.item_categoty),
         media_files: this.multipleImageArray
       }
-      alert((menuList.category));
-      if(menuList.category==undefined){
-      alert('Please Select Food Categoty..')
-      }else{
+      // alert((menuList.category));  
+     
+    
+     
         console.log(menuList);
+        this.user.present('uploading...');
         this.auth.uploadMenulist(menuList).subscribe(res => {
-          // console.log(JSON.stringify(res));
-          this.router.navigateByUrl('nav/chef-home');
+          this.user.dismiss();
+          this.router.navigate(['nav/chef-home']);
           this.user.showToast('Menu added successfully...');
-          // contactMenuForm.reset();
         }, err => {
+          this.user.dismiss();
+          // alert('Somethings went wrong,Please try after sometimes.');
+          alert(JSON.stringify(err.errors));
           console.log(err)
-        })
-      }
-   
-      
+        })     
     }
+
   }
 
  
-  
+ 
 
   userDetails() {
     this.user.present('');
@@ -344,8 +384,6 @@ alert('Please fill all details.')
       this.userData = this.userRes.data;
       this.userAllData = this.userData[0];
       this.user_image= this.userAllData.prof_image;
-      this.specialization = (this.userAllData.specialization);
-
       this.chef_about_me= this.userAllData.aboutme;
       this.chef_address= this.userAllData.address;
       this.chef_city_name= this.userAllData.city.city_name;
@@ -364,9 +402,7 @@ alert('Please fill all details.')
       this.chef_specialization= this.userAllData.specialization;
       this.chef_description= this.userAllData.description;
 
-
-
-
+      this.specialization = (this.userAllData.specialization).substring(0,20);
       console.log(this.user_image)
       if(this.user_image===""){
         console.log('image not foubd');
@@ -388,6 +424,7 @@ alert('Please fill all details.')
     })
   }
 
+  
 
   updatepassRes:any;
   onPasswordSubmit(updatePass: any) {
@@ -403,7 +440,7 @@ alert('Please fill all details.')
       this.updatepassRes=data;
       // console.log(data);
       this.user.showToast(this.updatepassRes.message)
-      updatePass.reset();
+      // updatePass.reset();
     }, err => {
       this.user.dismiss();
       console.log(err)
@@ -499,5 +536,35 @@ alert('Please fill all details.')
     this.statename = e.currentTarget.value.state_name;
     this.selectState_id = e.currentTarget.value.id;
     this.stateCard = false;
+  }
+
+
+  async editMenu(menu_data_list_all:any){
+    console.log(menu_data_list_all);
+    const modal = await this.modalCtrl.create({  
+      component:   EditmenuComponent,
+      componentProps: {menu_data_list_all: menu_data_list_all}
+    });  
+    return await modal.present();  
+  }
+
+  deleteMenu(menu:any){
+    console.log(menu);
+    this.user.present('deleting');
+    this.auth.deleteMenuByChef(menu.id).subscribe((response)=>{
+    this.user.dismiss();
+    const items = this.menu_Array.filter(item => item.id === menu.id);
+    const index = this.menu_Array.indexOf(items[0]);
+    if (index > -1) {
+      this.menu_Array.splice(index, 1);
+    }
+    console.log(this.menu_Array);
+    console.log(this.menu_Array.length);
+    alert('Menu Deleted successfully.')
+    },err=>{
+      console.log(err.errors);
+      alert(JSON.stringify(err.errors))
+      this.user.dismiss();
+    })
   }
 }

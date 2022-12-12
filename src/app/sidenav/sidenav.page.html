@@ -4,7 +4,7 @@
       <div class="user-image">
       <img class="user-img" src="{{user.user_ProfImage}}">
       </div>
-      <div class="user-details" >
+      <div class="user-details" (click)="editProfile()">
         <h3>{{user.user_name}}</h3>
         <div class="user-contact"><ion-icon name="call-outline"></ion-icon><p class="contact">{{user.user_mobile}}</p></div>
         <div class="ediit-menu-prfile" (click)="editProfile()" *ngIf="user.user_type1=='chef' "><ion-icon class="edit-menu-image" name="pencil-outline"></ion-icon></div>
@@ -26,7 +26,7 @@
       </ion-list>
      
     </ion-content>
-    <ion-item lines='none' class="logout" (click)="logout()">
+    <ion-item lines='none' class="logout" (click)="showExitConfirm()">
       <ion-icon name="power-outline" slot="start" class="menu-list-icon"></ion-icon>
       Logout
     </ion-item>

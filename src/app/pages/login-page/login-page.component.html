@@ -1,6 +1,6 @@
 <ion-content class="login-container">
   <div class="bg-image">
-  <img src="../../../assets/img/login_bg.jpeg">
+  <img style="width: 100%;" src="../../../assets/img/login_bg.jpeg">
   </div>
   <div class="login-input">
   <div class="app-name">
@@ -14,7 +14,7 @@
       <label>EMail<span class="span-star">*</span></label>
       <span class="text-danger"
       *ngIf="(email.touched || contactForm.submitted) && email.errors?.required">
-      username is required *
+      Email is required *
   </span>
     </div>
 

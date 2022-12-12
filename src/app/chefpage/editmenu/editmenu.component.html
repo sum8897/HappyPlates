@@ -8,19 +8,25 @@
 </ion-header>
 <ion-content>
   <div class="edit-chef-menu">
+    <div class="photo"> First you have to upload image after that you have to fill below all required data
+    </div>
     <ion-list>
       <ion-item style="border: 1px dotted #dfe8ed;
       border-radius: 21px;
-      text-align: center;">
+      text-align: center;" lines="none">
        <ion-avatar style="font-size: 35px;padding-top: 7px;" slot="start"><ion-icon name="camera-outline"></ion-icon></ion-avatar>
         <ion-label (click)="selectImage()">
         Select Image
         </ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-thumbnail style="width: 90px;height: 90px;" slot="start"> <img style="border-radius: 10px;" src="{{croppedImagePath}}"></ion-thumbnail>
-        <ion-button slot="end" size="small" (click)="uploadImage()"> {{multipleImageArray}}&nbsp;&nbsp;  upload</ion-button>
+        <ion-label style="font-size: 12px;overflow: hidden;white-space: nowrap;">
+          {{imageData}}
+        </ion-label>
+       <ion-button size="small" (click)="uploadImage()">upload</ion-button>
         </ion-item>
+       
     </ion-list>
     <form #contactMenuForm="ngForm" (ngSubmit)="onMenuSubmit(contactMenuForm)" >
       <div class="form-group label-float">
@@ -83,6 +89,10 @@
         [ngModelOptions]="{standalone: true}"
           >
             <ion-select-option *ngFor="let c of cat_data"  [value]="c.id">{{c.name}}</ion-select-option>
+            <!-- <ion-select-option value="2">Gujrati</ion-select-option>
+            <ion-select-option value="3">North Indian</ion-select-option>
+            <ion-select-option value="4">South Indian</ion-select-option>
+            <ion-select-option value="5">Chicken Tikka</ion-select-option> -->
           </ion-select>
         </ion-item>
       </ion-list>
@@ -95,8 +105,8 @@
         Details is required *
     </span>
       </div>
-    <div class="submit-div">
-  <ion-button class="submit-login-button" expand="round" type="submit" (click)="submitMenu()">Save Menu</ion-button>
+    <div class="submit-div"  style="margin-bottom: 15vh;">
+  <ion-button class="submit-login-button" expand="round" type="submit" (click)="submitMenu()">Update Menu</ion-button>
     </div>
   </form>
   </div>

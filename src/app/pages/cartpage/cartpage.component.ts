@@ -250,7 +250,9 @@ export class CartpageComponent implements OnInit {
     }
   
   }
-
+  editProfile(){
+    this.router.navigateByUrl('profile')
+  }
 
   cartArray = [
     {

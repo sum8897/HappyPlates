@@ -16,15 +16,17 @@
     </ion-card>
     <div class="profile-div-image">
       <div *ngIf="none"> <img class="profile-image" src="../../../assets/img/user_icon.png">
-        <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon>
+        <!-- <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon> -->
       </div>
       <div *ngIf="no_none"> <img class="profile-image" src="{{chef_pro_img}}">
-        <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon>
+        <!-- <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon> -->
       </div>
       <div class="user-data">
         <h3>{{chef_name}}</h3>
         <div class="user-specialization"><img src="../../../assets/img/chef_icon.png"><span
-            class="user-specialization-heading">Specialises In:</span><span *ngIf="chef_specialisation !=null">{{(chef_specialisation).substring(0,30)}}</span>
+            class="user-specialization-heading">Specialises In:</span>
+            <span *ngIf="chef_specialisation !=null">{{(chef_specialisation).substring(0,30)}}</span>
+            <span *ngIf="chef_specialisation ==null">No Specialization</span>
         </div>
         <div class="rating-star">
           <ngx-star-rating [id]="'rating1'" [(ngModel)]="ratingValue0" [disabled]="false"></ngx-star-rating>
@@ -40,7 +42,7 @@
         </ion-segment-button>
         <ion-segment-button value="review">
 
-          <ion-label><i class="fa-solid fa-star"></i>&nbsp;&nbsp;Review</ion-label>
+          <ion-label><i class="fa-sharp fa-solid fa-star-sharp"></i>&nbsp;&nbsp;Review</ion-label>
         </ion-segment-button>
       </ion-segment>
     </div>

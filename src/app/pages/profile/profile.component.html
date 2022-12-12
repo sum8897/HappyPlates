@@ -13,7 +13,7 @@
 </ion-header>
 <ion-content>
   <div class="profile-div-image">
-    <div class="pro-img">
+    <div class="pro-img" (click)="selectImage()">
        <img class="profile-image" src="{{user_ProfImage}}">
       <ion-icon class="profile-edit-icon" name="pencil-outline"></ion-icon>
     </div>
@@ -33,7 +33,7 @@
     <ion-card class="accordion-card">
     <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
       <ion-item slot="header" color="light">
-        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-icon name="home-outline" slot="start"></ion-icon>
         <ion-label style="text-align: right;">My Address</ion-label>
       </ion-item>
       <div class="ion-padding login-input-value" slot="content">
@@ -125,7 +125,7 @@
     <ion-card class="accordion-card">
     <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
       <ion-item slot="header" color="light">
-        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-icon name="star-outline" slot="start"></ion-icon>
         <ion-label style="text-align: right;">My Reviews</ion-label>
       </ion-item>
       <div class="ion-padding login-input-value" slot="content">

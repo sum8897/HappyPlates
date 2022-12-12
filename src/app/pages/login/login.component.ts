@@ -88,11 +88,11 @@ this.password=localStorage.getItem('password')
         if (this.user.user_type == "chef") {
           this.user.chef_user = true;
           this.user.customer_user = false;
-          this.router.navigateByUrl('/nav/chef-home')
+          this.router.navigate(['/nav/chef-home'])
         } else {
           this.user.customer_user = true;
           this.user.chef_user = false;
-          this.router.navigateByUrl('/nav/mainpage')
+          this.router.navigate(['/nav/mainpage'])
         }
 
       }, err => {

@@ -106,12 +106,15 @@
 
 .countrycard{
     position: fixed;
-    top: 0;
+    top: 6vh;
     bottom: 0;
     left: 0;
     right: 0;
     // background: rgb(41 40 40 / 80%);
     z-index: 9999;
+    border: 1px solid grey;
+    border-radius: 11px;
+    margin-top: 4vh;
     overflow-y: overlay;
 }
 .crossCut{

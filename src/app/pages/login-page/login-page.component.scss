@@ -136,7 +136,9 @@ ion-input:not(:placeholder-shown):not(.invalid)+label {
 }
 
 .forgot-div {
+    text-align: right;
     .forgot-p {
+        text-align: right;
         color          : #1e5c75;
         opacity        : 1;
         font-weight    : 500;

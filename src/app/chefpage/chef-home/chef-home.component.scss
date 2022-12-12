@@ -8,6 +8,8 @@ ion-card{
     opacity: 999;
     border-radius: 10px;
     padding: 10px 5px;
+    box-shadow: 1px 3px 5px 5px rgb(242 242 242);
+    z-index: 9999999;
     .orderId-date{
         display: flex;
     justify-content: space-between;
@@ -39,4 +41,41 @@ ion-card{
     font-size: 20px;
     margin-bottom: 15px;
     font-family: sans-serif;
+}
+.addedImage{
+    width: 90px;
+    height: 105px;
+    --border-radius: 11px;
+    margin-top: -5px;
+}
+.order-card{
+    padding: 0;
+    ion-list{
+        padding: 0;
+    }
+    .text-label{
+
+        padding-left: 10px;
+        height: 100%;
+        padding-top: 17px;
+        font-size: 15px;
+        line-height: 1.4;
+        h4{
+            font-size: 15px;
+            strong{
+                padding-right: 11px;
+        font-size: 20px;
+            }
+        }
+        ion-icon{
+            padding-right: 5px;
+            color: red;
+        }
+    }
+    .address{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-transform: capitalize;
+        // padding-left: 18px;
+    }
 }

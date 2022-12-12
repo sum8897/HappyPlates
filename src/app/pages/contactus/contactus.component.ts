@@ -34,7 +34,7 @@ export class ContactusComponent implements OnInit {
       this.auth.contactUsApi(body).subscribe((data) => {
         this.user.dismiss();
         this.user.showToast('Thanks for submitting the form.We will connect with you soon...');
-        this.router.navigateByUrl('nav/mainpage');
+        this.router.navigate(['nav/mainpage']);
       }, err => {
         this.user.dismiss();
       })

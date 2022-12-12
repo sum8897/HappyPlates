@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { ChefOrderDetailsComponent } from '../chef-order-details/chef-order-details.component';
 import { EditmenuComponent } from '../editmenu/editmenu.component';
 
 @Component({
@@ -17,16 +18,23 @@ export class ChefHomeComponent implements OnInit {
               public auth: AuthService,
               public modalCtrl: ModalController,
               public router: Router,) {
-              this.user.menu();
+              // this.user.menu();
               this.user.userDetails();
-              this.allOrders();
+              // this.allOrders();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.user.menu();
+   }
+   ionViewWillEnter(){
+    this.user.menu();
+    this.allOrders();
+   }
 allRes:any;
 allOrderedData:any;
-allorderedDataList:any;
+allorderedDataList:any='';
   allOrders() {
+    this.allorderedDataList='';
     // this.user.present('');
     this.auth.getChefOrders().subscribe((data) => {
       // this.user.dismiss();
@@ -60,15 +68,26 @@ allorderedDataList:any;
     if (index > -1) {
       this.user.menu_data_list.splice(index, 1);
     }
-    console.log(this.user.menu_data_list);
-    console.log(this.user.menu_data_list.length)
+    alert('Menu Deleted successfully.')
+    // console.log(this.user.menu_data_list);
+    // console.log(this.user.menu_data_list.length)
     },err=>{
       this.user.dismiss();
+      this.user.showToast(JSON.stringify(err.errors))
     })
   }
   addMenu(){
     this.router.navigateByUrl('/nav/chef-profile')
   }
+ async orderDetails(order:any){
+    const modal = await this.modalCtrl.create({
+      component: ChefOrderDetailsComponent,
+      componentProps: {order_data: order}
+    });
+    return await modal.present();
+  }
+
+
   orderDData = [
     {
       id: 1,

@@ -86,7 +86,7 @@
       <ion-card class="accordion-card">
       <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
         <ion-item slot="header" color="light">
-          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          <ion-icon name="home-outline" slot="start"></ion-icon>
           <ion-label style="text-align: right;">My Address</ion-label>
         </ion-item>
         <div class="ion-padding login-input-value" slot="content">
@@ -178,7 +178,7 @@
       <ion-card class="accordion-card">
       <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
         <ion-item slot="header" color="light">
-          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          <ion-icon name="restaurant-outline" slot="start"></ion-icon>
           <ion-label style="text-align: right;">My Menu Items</ion-label>
         </ion-item>
         <div class="ion-padding login-input-value" slot="content">
@@ -334,8 +334,8 @@
               padding-top: 15px;
               text-align: center;
               font-size: 20px;">
-             <div style="height: 50%;color: #1c5c75;"><ion-icon name="create-outline"></ion-icon></div>
-             <div style="color: #d32235;"><ion-icon name="trash-outline"></ion-icon></div>
+             <div style="height: 50%;color: #1c5c75;" (click)="editMenu(menu)"><ion-icon name="create-outline"></ion-icon></div>
+             <div style="color: #d32235;" (click)="deleteMenu(menu)"><ion-icon name="trash-outline"></ion-icon></div>
            </div>
             </div>
       
@@ -357,7 +357,7 @@
           
        
         <ion-item slot="header" color="light">
-          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          <ion-icon name="star-outline" slot="start"></ion-icon>
           <ion-label style="text-align: right;">My Reviews</ion-label>
         </ion-item>
         <div class="ion-padding login-input-value" slot="content">
@@ -417,7 +417,7 @@
     <ion-card class="accordion-card">
     <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
       <ion-item slot="header" color="light">
-        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
         <ion-label style="text-align: right;">Update Password</ion-label>
       </ion-item>
       <div class="ion-padding login-input-value" slot="content">

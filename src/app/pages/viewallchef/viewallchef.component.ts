@@ -74,7 +74,8 @@ async openSingleDetails(chef:any){
   //   }
   // });
   // return await modal.present();
-  localStorage.setItem('chef_id',chef);
+  console.log(chef)
+  localStorage.setItem('chef_id',chef.id);
   this.user.chef_id=chef;
   this.router.navigateByUrl('/nav/chef-menu-review')
 }

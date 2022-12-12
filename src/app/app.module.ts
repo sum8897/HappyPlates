@@ -1,3 +1,5 @@
+import { ChefOrderDetailsComponent } from './chefpage/chef-order-details/chef-order-details.component';
+import { AboutusComponent } from './pages/aboutus/aboutus.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -15,7 +17,7 @@ import { SwiperModule } from 'swiper/angular';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
 import { EventsComponent } from './pages/events/events.component';
 import { EventDetailsComponent } from './pages/event-details/event-details.component';
-import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 // import { SignInWithApple } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 import { LoginComponent } from './pages/login/login.component';
@@ -55,10 +57,12 @@ import { AddEventComponent } from './chefpage/add-event/add-event.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 import { AddBlogsComponent } from './chefpage/add-blogs/add-blogs.component';
+import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 import { AddedblogDetailsComponent } from './chefpage/addedblog-details/addedblog-details.component';
 import { AddedeventDetailsComponent } from './chefpage/addedevent-details/addedevent-details.component';
 import { TestimonialDetailsComponent } from './pages/testimonial-details/testimonial-details.component'
 
+import { Device } from '@awesome-cordova-plugins/device/ngx';
 
 @NgModule({
   declarations: [AppComponent,
@@ -68,7 +72,6 @@ import { TestimonialDetailsComponent } from './pages/testimonial-details/testimo
                  LoginComponent,
                  RegisterComponent,
                  OtpComponent,
-                 RegisterComponent,
                  ContactusComponent,
                  BlogdetailsComponent,
                  ChefaccountComponent,
@@ -97,7 +100,8 @@ import { TestimonialDetailsComponent } from './pages/testimonial-details/testimo
                  AddedeventDetailsComponent,
                  TestimonialDetailsComponent,
                  ViewallchefComponent,
-                 
+                 AboutusComponent,
+                 ChefOrderDetailsComponent
 
                 ],
   entryComponents: [],
@@ -117,14 +121,17 @@ import { TestimonialDetailsComponent } from './pages/testimonial-details/testimo
 
     Platform,
     StatusBar,
-    SplashScreen,
+    SplashScreen, 
     Network,
     Camera,
     File,
+    Device,
+    // CameraPreview,
     // SignInWithApple,
     // SQLite,
     AuthService,
     AuthGuardGuard,   
+    AndroidPermissions,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon name="arrow-back-outline" class="back-button" (click)="dismiss()" slot="start"></ion-icon>
+    <ion-title style="text-align: center;">
+      <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-slides [options]="slideOpts" class="slides-main" pager="true">
+    <ion-slide *ngFor="let event of menu_image">
+      <ion-card class="contact-slider-card">
+       <img [src]="getblogImage(event)" class="slider-image" />
+      </ion-card>
+    </ion-slide>
+      </ion-slides>
+      <div class="order-name">{{order_data.ordersdetails[0].menudetail[0].title }}</div>
+      <div class="totalItem"><span>Total Item:</span> <div><ion-icon name="at-outline"></ion-icon>{{order_data.totalqtty}}</div></div>
+      <div class="event-location-date">
+        <div class="event-date">
+          <ion-icon name="id-card-outline"></ion-icon><span>{{order_data.orderId}}</span>
+          </div>
+        <div class="event-date">
+          <ion-icon name="calendar-outline"></ion-icon><span>{{(order_data.deliverydate).substring(0,10)}}</span>
+          </div>
+      </div>
+      <div class="order-desc">{{order_data.ordersdetails[0].menudetail[0].description }}</div>
+    <div class="order-address">
+      <div class="address-heading">Delivery Address &nbsp;<ion-icon name="home-outline"></ion-icon></div>
+      <div class="addresss">{{order_data.address}}</div>
+    </div>
+    <div class="common">
+    <div class="common-first">
+      <div class="common-first-heading">Item Price</div>
+      <div class="number">{{order_data.ordersdetails[0].menudetail[0].price | currency:'INR':'symbol'}}</div>
+       </div>
+    <div class="common-second">
+      <div class="common-second-heading">Total Price</div>
+      <div class="number">{{order_data.totalamount | currency:'INR':'symbol'}}</div>
+    </div>
+    </div>
+
+    <div class="deliveryStatus">
+        <div class="common-first-heading">Status</div>
+        <div class="status" *ngIf="order_data.deliverystatus=='1'">Delivered</div>
+        <div class="status" *ngIf="order_data.deliverystatus=='0'">Pending</div>
+      </div>
+</ion-content>

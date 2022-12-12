@@ -1,3 +1,4 @@
+import { LoginPageComponent } from './../pages/login-page/login-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ChefHomeComponent } from '../chefpage/chef-home/chef-home.component';
@@ -143,9 +144,10 @@ const routes: Routes = [
       //   pathMatch: 'full'
       // }
       {
-        path: '',
-        redirectTo: '/loginpage',
-        pathMatch: 'full'
+        path: 'loginpage',
+        component: LoginPageComponent,
+        // redirectTo: '/loginpage',
+        // pathMatch: 'full'
       }
     ]
   },
@@ -154,11 +156,11 @@ const routes: Routes = [
   //   redirectTo: '/nav/mainpage',
   //   pathMatch: 'full'
   // }
-  {
-    path: '',
-    redirectTo: '/loginpage',
-    pathMatch: 'full'
-  }
+  // {
+  //   path: '',
+  //   redirectTo: '/loginpage',
+  //   pathMatch: 'full'
+  // }
 ];
 
 @NgModule({

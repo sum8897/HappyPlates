@@ -42,18 +42,18 @@
       <form #contactAddressForm="ngForm" (ngSubmit)="onAddressSubmit(contactAddressForm)" >
       <div class="label-float contact-label-float">
         <ion-input type="text" placeholder="Enter First Name " name="fullname" #fullname="ngModel" required ngModel></ion-input>
-        <label>Full  Name<span class="span-star">*</span></label>
+        <label>Full Name<span class="span-star">*</span></label>
         <span class="text-danger"
         *ngIf="(fullname.touched || contactAddressForm.submitted) && fullname.errors?.required">
         Full Name is required *
     </span>
       </div>
       <div class="label-float contact-label-float">
-        <ion-input type="number"  placeholder="Enter Phone " name="phone" #phone="ngModel" required ngModel></ion-input>
-        <label>Phone No<span class="span-star">*</span></label>
+        <ion-input type="number"  placeholder="Enter Phone Number" name="phone" #phone="ngModel" required ngModel></ion-input>
+        <label>Phone Number<span class="span-star">*</span></label>
         <span class="text-danger"
         *ngIf="(phone.touched || contactAddressForm.submitted) && phone.errors?.required">
-        Phone is required *
+        Phone Number is required *
     </span>
       </div>
       <div class="label-float contact-label-float">

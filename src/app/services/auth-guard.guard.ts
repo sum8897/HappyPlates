@@ -10,13 +10,25 @@ import { AuthService } from './auth.service';
 export class AuthGuardGuard implements CanActivate, CanActivateChild, CanLoad {
 user_type:any;
   constructor (private navCtrl: NavController,
-     private auth: AuthService){
-    this.user_type=localStorage.getItem('user_role');
+     private auth: AuthService,
+     ){
+    this.user_type=localStorage.getItem('user_role',
+    );
   }
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+  canActivate():boolean{
+    console.log('if true its automatically router on given full path in app-routing.module.');
+      if(this.auth.isAuthenticated()){
+        // if(localStorage.getItem('user_role')==='customer'){
+        // this.navCtrl.navigateRoot('/nav/mainpage');
+        // }else{
+        //   this.navCtrl.navigateRoot('/nav/chef-home');
+        // }
+        return true;
+      }else{
+        console.log('Your are not authorized...');
+        this.navCtrl.navigateRoot(['/loginpage']);
+      }
+  
   }
   // async canActivate(): Promise<boolean> {
   //   const authed = await this.auth.isAuthenticated();
@@ -26,7 +38,7 @@ user_type:any;
      
   //   } else {
   //     console.log('false means token not available then we can route on login page again');
-  //     this.navCtrl.navigateRoot('/nav/login');
+  //     this.navCtrl.navigateRoot('/loginpage');
   //     return false;
   //   }
   // }

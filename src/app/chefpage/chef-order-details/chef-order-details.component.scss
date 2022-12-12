@@ -1,0 +1,109 @@
+.slider-image{
+    width: 100%;
+}
+.contact-slider-card{
+    height: 180px;
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px;
+    img{
+        border-radius: 10px;
+    }
+}
+.event-location-date{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 10px;
+    background: #f4f5f8;
+    padding: 8px 12px;
+    border-radius: 21px;
+    font-size: 15px;
+    ion-icon{
+        color: red;
+    }
+    .event-date{
+        display: inline-flex;
+        img{
+            height: 10px;
+            width: 10px;
+        }
+        span{
+            padding-left: 5px;
+        }
+    }
+}
+.order-name{
+    text-align: center;
+    margin: 10px auto 0;
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: 500;
+    color: #1a5d74;
+}
+.order-desc{
+    text-align: left;
+    margin: 20px;
+    line-height: 1.2;
+}
+.order-address{
+    margin: auto 20px;
+    .address-heading{
+        text-transform: capitalize;
+        font-weight: 500;
+        color: #1a5d74;
+    }
+    .addresss{
+        padding-left: 23vh;
+        text-transform: capitalize;
+    }
+}
+.totalItem{
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    color: #1a5d74;
+    ion-icon{
+        color: #1a5d74;
+    }
+}
+.common{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f4f5f8;
+    border-radius: 11px;
+    margin:25px 10px;
+    .common-first{
+        .common-first-heading{
+            text-transform: capitalize;
+            font-weight: 500;
+            color: #1a5d74;
+        } 
+        .number{
+            font-size: 12px;
+        }
+    }
+    .common-second{
+        .common-second-heading{
+            text-transform: capitalize;
+            font-weight: 500;
+            color: #1a5d74;
+        } 
+        .number{
+            font-size: 12px;
+        }
+    }
+}
+.deliveryStatus{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f4f5f8;
+    border-radius: 11px;
+    margin:25px 10px;
+    .common-first-heading{
+        text-transform: capitalize;
+        font-weight: 500;
+        color: #1a5d74;
+    } 
+}

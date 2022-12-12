@@ -19,7 +19,7 @@
   <div class="address-show" style="margin: 10px 12px;" *ngIf="cart_length>0">
     <div class="name-address">
       <div class="name">{{user.user_name}}</div>
-      <div class="edit">
+      <div class="edit" (click)="editProfile()">
         <ion-button class="edit-button">Edit <ion-icon name="create-outline"></ion-icon>
         </ion-button>
       </div>

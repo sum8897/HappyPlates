@@ -2,35 +2,37 @@
   <ion-toolbar>
     <ion-icon name="arrow-back-outline" class="back-button" (click)="dismiss()" slot="start"></ion-icon>
     <ion-title class="title-text" style="text-align: center;">
-     <!-- {{blogname.title}} -->
-     <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
-     <!-- About Us -->
+      <!-- {{blogname.title}} -->
+      <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
+      <!-- About Us -->
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <div class="about-slider-div">
-   <ion-card style="height: 180px;border-radius: 10px;box-shadow: none;">
-     <img style="border-radius: 10px;" [src]="getblogImage(blogs_image)">
-   </ion-card>
+    <ion-card style="height: 180px;border-radius: 10px;box-shadow: none;">
+      <img style="border-radius: 10px;width: 100%;" [src]="getblogImage(blogs_image)">
+    </ion-card>
   </div>
   <div class="blog-name">
     <p class="blog-script-name" style="text-align: center;font-size: 20px;">{{title}}</p>
   </div>
   <div class="blog-date-admin-icon">
- <div class="blog-date-icon"><img src="../../../assets/img/date.png"><span class="blog-date-text">{{date}}</span></div>
- <div class="blog-admin-icon"><img src="../../../assets/img/location.png"><span class="blog-admin-text">Admin</span></div>
+    <div class="blog-date-icon"><img src="../../../assets/img/date.png"><span class="blog-date-text">{{date}}</span>
+    </div>
+    <div class="blog-admin-icon"><img src="../../../assets/img/location.png"><span class="blog-admin-text">Admin</span>
+    </div>
   </div>
- 
+
   <div class="blog-paragraph">
     <h6 class="blog-paragraph-h6">{{intro}}
-      </h6>
-      <h6 class="blog-paragraph-h6"> {{description}}
-        </h6>
-        <h6 class="blog-paragraph-h6">The cuisine of India is as ancient as it is varied, and in this 
-          attractive, oversized volume, food expert A.K. Achaya captures 
-          the full range and history of the Indian diet, from prehistoric
-           times to the modern era. An informative volume that boasts over
-          </h6>
+    </h6>
+    <h6 class="blog-paragraph-h6"> {{description}}
+    </h6>
+    <h6 class="blog-paragraph-h6">The cuisine of India is as ancient as it is varied, and in this
+      attractive, oversized volume, food expert A.K. Achaya captures
+      the full range and history of the Indian diet, from prehistoric
+      times to the modern era. An informative volume that boasts over
+    </h6>
   </div>
-  </ion-content>
+</ion-content>

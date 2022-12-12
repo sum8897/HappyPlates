@@ -42,15 +42,20 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./sidenav/sidenav.module').then(m => m.SidenavPageModule)
   },
-  {
-    path: '',
-    redirectTo: 'loginpage',
-    pathMatch: 'full'
-  },
-  // { path: 'mainpage', component: MainpageComponent, canActivate: [AuthGuardGuard]},
+  // {
+  //   path: '',
+  //   redirectTo: 'loginpage',
+  //   pathMatch: 'full'
+  // },
+  // { 
+  //   path: 'mainpage', 
+  // component: MainpageComponent,
+  //  canActivate: [AuthGuardGuard]
+  // },
   {
     path: 'nav/mainpage',
-    component: MainpageComponent
+    component: MainpageComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'event',

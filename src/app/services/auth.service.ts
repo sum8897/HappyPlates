@@ -15,18 +15,17 @@ export class AuthService {
   url='http://103.139.58.242/~clientpro/bonhomey/public/';
   // url='http://103.139.58.242/~clientpro/bonhomey/apitest/test.php/'
 
-  isAuthenticated():any{
-    let token = localStorage.getItem('amantran_token')
-    let user_type=localStorage.getItem('user_role')
-      if (token)
-        {
-          return true;
-        } else {
-          return false;
-        }
+  isAuthenticated(){
+    // let token = localStorage.getItem('amantran_token')
+    // let user_type=localStorage.getItem('user_role')
+    //   if (token)
+    //     {
+    //       return true;
+    //     } else {
+    //       return false;
+    //     }
+    return !!localStorage.getItem('amantran_token');
   }
-
- 
 
   userRegister(body: any): Observable<any> {
     let headers = new HttpHeaders();
@@ -92,6 +91,9 @@ getAllTestimonials(){
   return this.http.get(this.url + 'api/testimonials', { headers: headers }).pipe(tap(res => {
   }))
 }
+
+
+
 getSingleTestimonials(id:any){
   let token = localStorage.getItem('amantran_token');
   var headers = new HttpHeaders();
@@ -389,7 +391,7 @@ getUserProfile() {
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append('Authorization', 'Bearer'+' '+ token.replace(/^\s+|\s+$/gm,''));
-  console.log(headers);
+  // console.log(headers);
   return this.http.get(this.url + 'api/users/details', { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -445,7 +447,7 @@ getChefOrders() {
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append('Authorization', 'Bearer'+' '+ token);
-  console.log(headers);
+  // console.log(headers);
   return this.http.get(this.url + 'api/orders/cheforder', { headers: headers }).pipe(tap(res => {
   }))
 }
@@ -501,7 +503,7 @@ getCountry() {
   headers = headers.append('Accept-Encoding', 'gzip,deflate,br');
   headers = headers.append('Connection', 'keep-alive');
   headers = headers.append('Authorization', 'Bearer'+' '+ token);
-  console.log(headers);
+  // console.log(headers);
   return this.http.get(this.url + 'api/country', { headers: headers }).pipe(tap(res => {
   }))
 }

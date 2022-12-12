@@ -1,7 +1,10 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <!-- <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/nav/mainpage"></ion-back-button>
     </ion-buttons>
     <ion-title>
       <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
@@ -30,8 +33,8 @@
        <div style="font-size: 12px;
        font-weight: 600;
        margin-top: 7px;
-       white-space: normal;
-       color: #010101;">{{ev.title}}
+       white-space: nowrap;text-transform: capitalize;overflow: hidden;
+       color: #010101;"  *ngIf="ev.title !=null">{{(ev.title).substring(0,70)}}
        </div>
        <div class="cart-item-price-main-count" 
        style="display: block;width: 100%;margin-top: 5px;">

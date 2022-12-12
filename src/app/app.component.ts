@@ -27,9 +27,9 @@ export class AppComponent {
   menuData:any=[];
 
   constructor(
-    private alertController: AlertController,
-              private location: Location,
-              private platform: Platform,
+              public alertController: AlertController,
+              public location: Location,
+              public platform: Platform,
               private statusBar: StatusBar,
               private splashScreen: SplashScreen,
               private router : Router,
@@ -40,107 +40,189 @@ export class AppComponent {
     this.initializeApp();
     this.sideMenu();
     this.getDate();
-    this.backButtonEvent();
-     window.addEventListener('offline',()=>{
-       this.openAlert();
-     })
+    // this.backButtonEvent();
+    //  window.addEventListener('offline',()=>{
+    //    this.openAlert();
+    //  })
  
   }
  ngOnInit(){
   this.sideMenu()
  }
   initializeApp() {
-    this.platform.ready().then(()=>{
-      this.user.userDetails();
-    })
-    // alert('initialisation...');
-    // if(localStorage.getItem('user_role')=="chef"){
-    //   this.router.navigateByUrl('/nav/chef-home')
-    // }
-    // else if(localStorage.getItem('user_role')=="customer"){
-    //   this.router.navigateByUrl('/nav/mainpage')
-    // }
+
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+     
+      if(localStorage.getItem('user_role')=="chef"){
+        this.user.userDetails();
+        this.router.navigateByUrl('/nav/chef-home');
+      }
+      else if(localStorage.getItem('user_role')=="customer"){
+        this.user.userDetails();
+        this.router.navigateByUrl('/nav/mainpage')
+      }
+      else{
+        this.router.navigateByUrl('loginpage');
+      }
 
-      this.network.onConnect().subscribe(data => {
-        this.networkProvider.setNetworkStatus(data.type);
-        this.displayNetworkUpdate(data.type);
-      }, error => {
-        console.log(error);
-      });
+      // this.network.onConnect().subscribe(data => {
+      //   this.networkProvider.setNetworkStatus(data.type);
+      //   this.displayNetworkUpdate(data.type);
+      // }, error => {
+      //   console.log(error);
+      // });
 
-      this.network.onDisconnect().subscribe(data => {
-        console.log(data);
-        this.networkProvider.setNetworkStatus(data.type);
-        this.displayNetworkUpdate(data.type);
-      }, error => {
-        console.log(error);
-      });
+      // this.network.onDisconnect().subscribe(data => {
+      //   console.log(data);
+      //   this.networkProvider.setNetworkStatus(data.type);
+      //   this.displayNetworkUpdate(data.type);
+      // }, error => {
+      //   console.log(error);
+      // });
+
     });
 
+    this.platform.backButton.subscribeWithPriority(99, (processNextHandler) => {
+      console.log('Back press handler!');
+   if(localStorage.getItem('user_role')==='customer'){
+    if (this.location.isCurrentPathEqualTo("/nav/mainpage")) {
+      this.showExitConfirm();
+      processNextHandler();
+    } else {
+      // Navigate to back page
+      console.log('Navigate to back page');
+      this.location.back();
+
+    }
+   }else{
+    if (this.location.isCurrentPathEqualTo("/nav/chef-home")) {
+      this.showExitConfirm();
+      processNextHandler();
+    } else {
+
+      // Navigate to back page
+      console.log('Navigate to back page');
+      this.location.back();
+
+    }
+   }
+
+    });
+    // this.platform.backButton.subscribeWithPriority(5, () => {
+    //   console.log('Handler called to force close!');
+    //   this.alertController.getTop().then(r => {
+    //     if (r) {
+    //       navigator['app'].exitApp();
+    //     }
+    //   }).catch(e => {
+    //     console.log(e);
+    //   })
+    // });
+
   }
 
-  NetworkButtonEvent(){
-    this.platform.backButton.subscribeWithPriority(111,()=>{
-    
-     // this.router.navigate(['']) 
-     navigator["app"].exitApp;
-    })
-  }
- async openAlert(){
-const alert=await this.alertController.create({
-  header: 'Check Network Connection',
-  message: 'You do not have Internet Connection',
-  buttons:[{
-    text:'ok',
-    // handler:()=>{
-    //   navigator['app'].exitApp();
-    // }
-  }]
-});
-await alert.present();
-  }
-backButtonEvent() {
-  this.platform.backButton.subscribeWithPriority(99, () => {
-    this.routerOutlets.forEach(async(outlet: IonRouterOutlet) => {
-      if (this.router.url != '/home') {
-        // await this.router.navigate(['/']);
-        await this.location.back();
-      } else if (this.router.url === '/home') {
-        if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
-          this.lastTimeBackPress = new Date().getTime();
-          this.presentAlertConfirm();
-        } else {
+  showExitConfirm() {
+    this.alertController.create({
+      header: 'BonHomey Confirmation',
+      message: 'Do you want to close the BonHomey app?',
+      backdropDismiss: false,
+      buttons: [{
+        text: 'Stay',
+        role: 'cancel',
+        handler: () => {
+          console.log('Application exit prevented!');
+        }
+      }, {
+        text: 'Exit',
+        handler: () => {
           navigator['app'].exitApp();
         }
-      }
-    });
-  });
-}
-displayNetworkUpdate(connectionState: string) {
-  console.log(connectionState)
-}
-async presentAlertConfirm() {
-  const alert = await this.alertController.create({
-    header: 'BonHomey Confirmation',
-    message: 'Are you sure you want to exit BonHomey App?',
-    buttons: [{
-      text: 'Cancel',
-      role: 'cancel',
-      cssClass: 'secondary',
-      handler: (blah) => {}
-    }, {
-      text: 'Close App',
-      handler: () => {
-        navigator['app'].exitApp();
-      }
-    }]
-  });
+      }]
+    })
+      .then(alert => {
+        alert.present();
+      });
+  }
 
-  await alert.present();
-}
+//   NetworkButtonEvent(){
+//     this.platform.backButton.subscribeWithPriority(99,()=>{
+//      navigator["app"].exitApp;
+//     })
+//   }
+//  async openAlert(){
+// const alert=await this.alertController.create({
+//   header: 'Check Network Connection',
+//   message: 'You do not have Internet Connection',
+//   buttons:[{
+//     text:'ok',
+//     handler:()=>{
+//       navigator['app'].exitApp();
+//     }
+//   }]
+// });
+// await alert.present();
+//   }
+// backButtonEvent() {
+//   if(localStorage.getItem('user_role')=="chef"){
+//     this.platform.backButton.subscribeWithPriority(99, () => {
+//       this.routerOutlets.forEach(async(outlet: IonRouterOutlet) => {
+//         if (this.router.url != 'nav/chef-home') {
+//           await this.location.back();
+//         } else if (this.router.url === 'nav/chef-home') {
+//           if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
+//             this.lastTimeBackPress = new Date().getTime();
+//             this.presentAlertConfirm();
+//           } else {
+//             navigator['app'].exitApp();
+//           }
+//         }
+//       });
+//     });
+//   }
+//   else{
+//     this.platform.backButton.subscribeWithPriority(99, () => {
+//       this.routerOutlets.forEach(async(outlet: IonRouterOutlet) => {
+//         if (this.router.url != 'nav/mainpage') {
+//           await this.location.back();
+//         } else if (this.router.url === 'nav/mainpage') {
+//           alert((this.router.url).length+ this.router.url)
+//           if (new Date().getTime() - this.lastTimeBackPress >= this.timePeriodToExit) {
+//             this.lastTimeBackPress = new Date().getTime();
+//             this.presentAlertConfirm();
+//           } else {
+//             navigator['app'].exitApp();
+//           }
+//         }
+//       });
+//     });
+//   }
+ 
+// }
+// displayNetworkUpdate(connectionState: string) {
+//   console.log(connectionState)
+// }
+// async presentAlertConfirm() {
+//       this.user.showToast('called');
+//   const alert = await this.alertController.create({
+//     header: 'BonHomey Confirmation',
+//     message: 'Are you sure you want to exit BonHomey App?',
+//     buttons: [{
+//       text: 'Cancel',
+//       role: 'cancel',
+//       cssClass: 'secondary',
+//       handler: (blah) => {}
+//     }, {
+//       text: 'Close App',
+//       handler: () => {
+//         navigator['app'].exitApp();
+//       }
+//     }]
+//   });
+
+//   await alert.present();
+// }
 
 
 getDate(){
@@ -149,8 +231,8 @@ getDate(){
   var mm = String(this.user.today.getMonth() + 1).padStart(2, '0'); //January is 0!
   var yyyy = this.user.today.getFullYear();
 
-  // this.today = mm + '/' + dd + '/' + yyyy;
-  this.user.today = yyyy +'-'+mm + '-' + dd;
+  this.user.today = mm + '/' + dd + '/' + yyyy;
+  // this.user.today = yyyy +'-'+mm + '-' + dd;
   console.log(this.user.today);
 }
 
@@ -236,7 +318,7 @@ getDate(){
   logout(){
     localStorage.clear();
     localStorage.removeItem('amantran_token');
-    this.router.navigateByUrl('login');
+    this.router.navigate(['loginpage']);
   }
  
 }

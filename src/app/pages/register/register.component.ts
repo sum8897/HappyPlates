@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { flush } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+import { File } from '@awesome-cordova-plugins/file/ngx';
 import { Router } from '@angular/router';
 import { ActionSheetController, AlertController, NavController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
-import { File } from '@awesome-cordova-plugins/file/ngx';
+
+import { Device } from '@awesome-cordova-plugins/device/ngx';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -24,6 +26,14 @@ export class RegisterComponent implements OnInit {
   getpas: any;
   croppedImagePath: any;
  
+  capturedSnapURL:string;
+
+  cameraOptions: CameraOptions = {
+    quality: 20,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
   constructor(private auth: AuthService,
     public user: UserService,
     private router: Router,
@@ -31,10 +41,28 @@ export class RegisterComponent implements OnInit {
     private httpClient: HttpClient,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    public actionSheetController: ActionSheetController,
     private alertController: AlertController,
+    public actionSheetController: ActionSheetController,
     public camera: Camera,
-    public common: CommonService) { }
+    public common: CommonService,
+    private device: Device) { 
+    }
+
+    takeSnap() {
+      
+      this.camera.getPicture(this.cameraOptions).then((imageData) => {
+       
+        // this.camera.DestinationType.FILE_URI gives file URI saved in local
+        // this.camera.DestinationType.DATA_URL gives base64 URI
+        
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.capturedSnapURL = base64Image;
+      }, (err) => {
+        alert(JSON.stringify(err))
+        console.log(err);
+        // Handle error
+      });
+    }
 
   ngOnInit() {
     this.type = 'customer';
@@ -82,22 +110,29 @@ export class RegisterComponent implements OnInit {
   cityId:any;
   cityshow() {
     console.log('city show...');
-    this.cityCard = true;
+    
     this.cityList(this.selectState_id);
   }
   cityList(state_id: any) {
-    console.log(state_id)
-    let body = {
-      state_id: state_id,
+    console.log(state_id);
+    if(state_id==undefined){
+      alert('You have to select State first.');
+    }else{
+      let body = {
+        state_id: state_id,
+      }
+      this.user.present('wait...');
+      this.auth.getCities(body).subscribe(state_data => {
+        this.city_res = state_data;
+        this.city_data = this.city_res.city;
+        this.cityCard = true;
+        this.user.dismiss();
+      }, err => {
+        this.user.dismiss();
+        alert('Something went wrong, Please try afetr sometimes.')
+      })
     }
-    this.user.present('');
-    this.auth.getCities(body).subscribe(state_data => {
-      this.city_res = state_data;
-      this.city_data = this.city_res.city;
-      this.user.dismiss();
-    }, err => {
-      this.user.dismiss();
-    })
+   
   }
   selectCity(e: any) {
     console.log(e.currentTarget.value.city_name);
@@ -196,36 +231,53 @@ export class RegisterComponent implements OnInit {
     await alert.present();
   }
   passwordvalue:any
-  onInputPass(e){
+  onInputPass(e:any){
     console.log(e.target.value);
     this.passwordvalue=e.target.value;
+  }
+  cpasswordvalue:any
+  onInputCPass(e:any){
+    console.log(e.target.value);
+    this.cpasswordvalue=e.target.value;
   }
   checkParent: boolean;
   checkCheckbox(e: any) {
     console.log(e);
     console.log(this.checkParent)
   }
-  registrationForm = this.formBuilder.group({
+  registrationForm = this.formBuilder.group(
+    {
     firstname: ['', [Validators.required, Validators.maxLength(30)]],
     lastname: ['', [Validators.required, Validators.maxLength(30)]],
     email: ['', [Validators.required,
     Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')
     ]],
-    country: ['', [Validators.required, Validators.maxLength(30)]],
-    state: ['', [Validators.required, Validators.maxLength(30)]],
-    city: ['', [Validators.required, Validators.maxLength(30)]],
+    country: ['', [Validators.required,]],
+    state: ['', [Validators.required,]],
+    city: ['', [Validators.required, ]],
     specialization: ['', [Validators.required, Validators.maxLength(300)]],
     aboutme: ['', [Validators.required, Validators.maxLength(300)]],
     skills: ['', [Validators.required, Validators.maxLength(300)]],
     description: ['', [Validators.required, Validators.maxLength(300)]],
-    pin: ['', [Validators.required, Validators.pattern("(0/91)?[0-9]{10}"),]],
-    address: ['', [Validators.required, Validators.maxLength(300)]],
+    pin: ['', [Validators.required, 
+      Validators.pattern("(0/91)?[0-9]{6}"),
+      // Validators.maxLength(6),
+      // Validators.minLength(6)
+    ]],
+    address: ['', [Validators.required, Validators.maxLength(300),]],
     phone: ['', [Validators.required, Validators.pattern("(0/91)?[0-9]{10}"),]],
-    password: ['', [Validators.required, Validators.minLength(8),
-    this.getpass.bind(this)]],
-    cpassword: ['', [Validators.required, Validators.minLength(8),
-    this.matchpass.bind(this)]],
-  });
+    password: ['',
+              [Validators.required, 
+                Validators.minLength(8),
+                this.getpass.bind(this)]],
+    cpassword: ['', [Validators.required, 
+                 Validators.minLength(8),
+                this.matchpass.bind(this)]],
+  },
+
+
+  );
+
   get firstname() {
     return this.registrationForm.get("firstname");
   }
@@ -286,7 +338,8 @@ export class RegisterComponent implements OnInit {
     ],
     phone: [
       { type: 'required', message: 'You must enter phone number' },
-      { type: 'pattern', message: 'Please enter 10 digit phone number only' }
+      { type: 'pattern', message: 'Please enter 10 digit phone number only' },
+      { type: 'maxlength', message: 'phone cant be longer than 10 digit' }
     ],
     email: [
       { type: 'required', message: 'You must enter Email' },
@@ -294,39 +347,39 @@ export class RegisterComponent implements OnInit {
     ],
     specialization: [
       { type: 'required', message: 'You must enter specialization' },
-      { type: 'maxlength', message: 'Name cant be longer than 300 characters' }
+      { type: 'maxlength', message: 'Specialization cant be longer than 300 characters' }
     ],
     skills: [
       { type: 'required', message: 'You must enter Skills' },
-      { type: 'maxlength', message: 'Name cant be longer than 300 characters' }
+      { type: 'maxlength', message: 'Skills cant be longer than 300 characters' }
     ],
     description: [
       { type: 'required', message: 'You must enter Description' },
-      { type: 'maxlength', message: 'Name cant be longer than 300 characters' }
+      { type: 'maxlength', message: 'Description cant be longer than 300 characters' }
     ],
     aboutme: [
-      { type: 'required', message: 'You must enter specialization' },
-      { type: 'maxlength', message: 'Name cant be longer than 300 characters' }
+      { type: 'required', message: 'You must enter about me' },
+      { type: 'maxlength', message: 'About me cant be longer than 300 characters' }
     ],
     country: [
       { type: 'required', message: 'You must enter Country' },
-      { type: 'maxlength', message: 'Name cant be longer than 30 characters' }
+
     ],
     city: [
       { type: 'required', message: 'You must enter city name' },
-      { type: 'maxlength', message: 'Name cant be longer than 30 characters' }
+
     ],
     state: [
       { type: 'required', message: 'You must enter State name' },
-      { type: 'maxlength', message: 'Name cant be longer than 30 characters' }
+
     ],
     pin: [
-      { type: 'required', message: 'You must enter pin code' },
-      { type: 'maxlength', message: 'Name cant be longer than 6 characters' }
+      { type: 'required', message: 'You must enter zip code' },
+      { type: 'pattern', message: 'Zip code required 6 characters only.' },
     ],
     address: [
       { type: 'required', message: 'You must enter Address' },
-      { type: 'maxlength', message: 'Name cant be longer than 30 characters' }
+      { type: 'maxlength', message: 'Address cant be longer than 300 characters' }
     ],
 
     password: [
@@ -361,22 +414,22 @@ export class RegisterComponent implements OnInit {
   }
 
   imagepath: any = "";
-  pickImage(sourceType) {
+  pickImage(sourceType:any) {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 20,
       sourceType: sourceType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
+
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
       this.imagepath = imageData;
-      // alert(this.croppedImagePath);
-      // console.log(this.croppedImagePath);
-      // alert(imageData);
+      // alert(JSON.stringify(this.croppedImagePath));
     }, (err) => {
+      alert(JSON.stringify(err));
       // Handle error
     });
   }
@@ -407,38 +460,30 @@ export class RegisterComponent implements OnInit {
     await actionSheet.present();
   }
 
-  uploadSingleRes;
-  uploadSingleResData;
+  uploadSingleRes:any;
+  uploadSingleResData:any;
   multipleImageArray: any = [];
+  imageData:any='';
+  img:any;
   uploadImage() {
-    // alert(this.croppedImagePath);
+    this.imageData='';
+    this.img='';
     let body = {
       mediafile: this.croppedImagePath
     };
     this.auth.uploadSingleMenuImage(body).subscribe(res => {
       this.uploadSingleRes = res;
       this.uploadSingleResData = this.uploadSingleRes.data;
-      this.multipleImageArray.push(this.uploadSingleResData.filename)
-      // if(this.multipleImageArray.length=== 0){
-      //   this.multipleImageArray.push(this.uploadSingleResData.filename)
-      // }else{
-      //   for(let i=0;i<this.multipleImageArray.length;i++){
-      //     if(this.multipleImageArray[i] !=this.uploadSingleResData.filename){
-      //       this.multipleImageArray.push(this.uploadSingleResData.filename)
-      //     }else{
-      //       return this.multipleImageArray;
-      //     }
-      //   }
-      // }
-
-      console.log(this.multipleImageArray);
-      // alert(res)
-      // console.log(res);
+      // this.multipleImageArray.push(this.uploadSingleResData.filename);
+      this.imageData=this.uploadSingleResData.filename;
+      this.img=this.imageData;
     }, err => {
       alert(JSON.stringify(err))
       console.log(err.error)
     })
   }
+
+
   checkValue:any=true;
   checkedValue(e: any) {
     this.checkValue='';
@@ -446,6 +491,7 @@ export class RegisterComponent implements OnInit {
     this.checkValue=e.detail.checked;
   }
   user_reg: any;
+  user_res:any;
   submitForm() {
     this.user_reg='';
     console.log((this.registrationForm.value.phone).toString().length);
@@ -455,7 +501,9 @@ export class RegisterComponent implements OnInit {
       if(this.checkValue==false){
         alert('Please mark the checkBox..');
           }
+          
             else{
+              console.log(this.registrationForm.value.cpassword);
                if((this.registrationForm.value.phone).toString().length<10){
                   alert('Please enter Valid Mobile Number');
                   console.log(this.registrationForm.value.phone.length)
@@ -470,8 +518,8 @@ export class RegisterComponent implements OnInit {
                   alert('please enetr valid 6 digit zip code');
      
                 }
-                else if(this.registrationForm.value.password="" || this.registrationForm.value.password.length<8) {
-           alert('please enetr minimum 8 digit password');
+                else if(this.registrationForm.value.password="" || (this.registrationForm.value.password).toString().length<8) {
+           alert('please enter minimum 8 digit Password');
                 }
                 else if((this.registrationForm.value.pin).toString().length<6){
                alert('Zip code can not be less than 999999')
@@ -481,6 +529,9 @@ export class RegisterComponent implements OnInit {
                    }
                    else if(this.passwordvalue==""){
                      alert('Password must be at least 8 characters')
+                   }
+                   else if(this.passwordvalue != this.registrationForm.value.cpassword){
+                     alert('Password and Confrim Password should be same.')
                    }
                 else{
                   console.log(this.registrationForm.value.password);
@@ -495,20 +546,31 @@ export class RegisterComponent implements OnInit {
                     "pin": this.registrationForm.value.pin,
                     "address": this.registrationForm.value.address,
                     "password": this.passwordvalue,
+                    "cpassword": this.registrationForm.value.cpassword,
                     "role": this.type,
                     "agreeterms": "yes",
-                    "prof_image": this.croppedImagePath,
+                    "prof_image": this.imageData,
                   }
-             console.log(this.user_reg);
+                  console.log(this.user_reg);
              this.user.present('wait..');
              this.auth.userRegister(this.user_reg).subscribe((response) => {
+               this.user_res=response;
                this.user.dismiss();
-               this.router.navigateByUrl('nav/login');
-               this.user.showToast('You are register successfully...');
                console.log(response);
+               if(this.user_res.error==='Email  already exists'){
+                 alert('Email already exists,Please try with another Email.');
+               }
+               else if(this.user_res.error==='Phone  already exists'){
+                 alert('Phone number alreday exists , Please try with another Phone number.')
+               }else{
+                this.router.navigate(['/loginpage']);
+                this.user.showToast('You are register successfully...');
+               }
+              
              }, err => {
+              alert(JSON.stringify(err.errors));
                this.user.dismiss();
-               alert(JSON.stringify(err.error));
+              
              })
 
 
@@ -526,18 +588,18 @@ export class RegisterComponent implements OnInit {
               alert('Please Enter all required fields...');
             }
             
-            else if((this.registrationForm.value.phone).toString().length>10){
+            else if((this.registrationForm.value.phone).toString().length>10 || (this.registrationForm.value.phone).toString().length<10){
               alert('Please enter Valid Mobile Number');
             }
             else if(this.registrationForm.value.firstname=="" || this.registrationForm.value.lastname=="" ||this.registrationForm.value.phone=="" || this.selectState_id==undefined || this.cityId==undefined || this.registrationForm.value.address==""){
        alert('Please Enter all Details...');
             }
-        else if(this.registrationForm.value.pin=="" || this.registrationForm.value.pin.length<6){
-              alert('please enetr valid 6 digit zip code');
+        else if(this.registrationForm.value.pin=="" || (this.registrationForm.value.pin).toString().length<6){
+              alert('please enter valid 6 digit Zip code');
  
             }
-            else if(this.registrationForm.value.password="" || this.registrationForm.value.password.length<8) {
-       alert('please enetr minimum 8 digit password');
+            else if(this.registrationForm.value.password="" || (this.registrationForm.value.password).toString().length<8) {
+       alert('please enetr minimum 8 digit Password');
             }
             else if((this.registrationForm.value.pin).toString().length<6){
            alert('Zip code can not be less than 999999')
@@ -548,7 +610,9 @@ export class RegisterComponent implements OnInit {
                else if(this.passwordvalue==""){
                  alert('Password must be at least 8 characters')
                }
-
+               else if(this.passwordvalue != this.registrationForm.value.cpassword){
+                alert('Password and Confrim Password should be same.')
+              }
               else{
                 this.user_reg = {
                   "firstname": this.registrationForm.value.firstname,
@@ -564,34 +628,32 @@ export class RegisterComponent implements OnInit {
                   "city": this.cityId,
                   "pin": this.registrationForm.value.pin,
                   "address": this.registrationForm.value.address,
-                  "prof_image": this.croppedImagePath,
+                  "prof_image": this.imageData,
                   "password": this.passwordvalue,
+                  "cpassword": this.registrationForm.value.cpassword,
                   "role": this.type,
                   "agreeterms": "Yes"
                 }
-        
-                console.log(this.user_reg);
                 this.user.present('wait..');
                 this.auth.userRegister(this.user_reg).subscribe((response) => {
+                  this.user_res=response;
                   this.user.dismiss();
-                  this.router.navigateByUrl('nav/login');
-                  this.user.showToast('You are register successfully...');
                   console.log(response);
+                  if(this.user_res.error==='Email  already exists'){
+                    alert('Email already exists,Please try with another Email.');
+                  }
+                  else if(this.user_res.error==='Phone  already exists'){
+                    alert('Phone number alreday exists , Please try with another Phone number.')
+                  }else{
+                    this.router.navigate(['/loginpage']);
+                   this.user.showToast('You are register successfully...');
+                  }
                 }, err => {
                   this.user.dismiss();
-                  alert(JSON.stringify(err.error));
+                  console.log(JSON.stringify(err.errors));
                 })
-    
-    
               }
-
-
-            
-
-
           }
-       
-
       }
  
       }
@@ -611,6 +673,6 @@ export class RegisterComponent implements OnInit {
        }
   
   clickLogin() {
-    this.router.navigateByUrl('nav/login')
+    this.router.navigateByUrl('/loginpage')
   }
 }

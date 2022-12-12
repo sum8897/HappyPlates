@@ -1,8 +1,11 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="/nav/chef-home"></ion-back-button>
     </ion-buttons>
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
     <ion-title>
       Add Menu
     </ion-title>
@@ -11,23 +14,38 @@
 <ion-content>
   <div >
   
-    <ion-list>
-      <ion-item style="border: 1px dotted #dfe8ed;
-      border-radius: 21px;
-      text-align: center;">
-        <ion-label (click)="selectImage()">
-          <ion-icon name="add-outline" slot="start"></ion-icon>Upload Image
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-avatar slot="start"><img src="{{croppedImagePath}}"></ion-avatar>
-        <ion-button slot="end" size="small" (click)="uploadImage()">upload</ion-button>
+    <ion-item slot="header" color="light" lines="none">
+      <ion-icon name="restaurant-outline" slot="start"></ion-icon>
+      <ion-label style="text-align: right;">Add Menu Items</ion-label>
+    </ion-item>
+    <div class="ion-padding login-input-value" slot="content">
+      <div class="photo">
+        <p>1.Select Image from gallery or Camera</p>
+        <p>2.Upload Image on server</p>
+        <p>3.After uploading image, You have to fill below all required details</p>           
+        <p>4.Click for submit data</p>                          
+      </div>
+      <ion-list>
+        <ion-item style="border: 1px dotted #dfe8ed;
+        border-radius: 21px;
+        text-align: center;"
+        lines="none">
+         <ion-avatar style="font-size: 45px;padding-top: 7px;" slot="start"><ion-icon name="camera-outline"></ion-icon></ion-avatar>
+          <ion-label (click)="selectImage()" class="selectImage">
+          Select Image
+          </ion-label>
         </ion-item>
-    </ion-list>
+        <ion-item lines="none">
+          <ion-thumbnail style="width: 90px;height: 90px;border-radius: 11px;" slot="start"> <img style="border-radius: 11px;" src="{{croppedImagePath}}"></ion-thumbnail>
+          <ion-label style="font-size: 12px;overflow: hidden;white-space: nowrap;">
+            {{imageData}}
+          </ion-label>
+         <ion-button size="small" (click)="uploadImage()">Upload</ion-button>
+          </ion-item>
+      </ion-list>
         <form #contactMenuForm="ngForm" (ngSubmit)="onMenuSubmit(contactMenuForm)" >
         <div class="form-group label-float">
-          <ion-input type="text" name="foodname" #foodname="ngModel" required placeholder="Food Name * " ngModel></ion-input>
-      
+          <ion-input type="text" name="foodname" #foodname="ngModel" required placeholder="Food Name * " ngModel></ion-input>      
           <span class="text-danger"
           *ngIf="(foodname.touched || contactMenuForm.submitted) && foodname.errors?.required">
           Food Name is required *
@@ -41,7 +59,7 @@
           Regular Price is required *
       </span>
         </div>
-        <div class="city-pin">
+        <!-- <div class="city-pin" style="display: flex;">
           <div class="form-group label-float">
             <ion-input type="number" name="other_price" #other_price="ngModel" required placeholder="Other Price * " ngModel></ion-input>
         
@@ -51,32 +69,46 @@
         </span>
           </div>
       
-          <!-- <div class="form-group label-float">
+          <div class="form-group label-float">
             <ion-input type="tel" name="pin" #pin="ngModel" required placeholder="Pin * " ngModel></ion-input>
             <span class="text-danger"
             *ngIf="(pin.touched || contactMenuForm.submitted) && pin.errors?.required">
             Pin is required *
         </span>
-          </div> -->
-        </div>
-        <div class="form-group label-float" style="display: flex;">
+          </div>
+        </div> -->
+        <div class="form-group label-float" style="display: flex;margin: 10px;">
          
-            <ion-radio-group  style="width: 100%;" (ionChange)="radioGroupChange($event)" #radioGroup>
-         <div style="display: flex;width: 100%;">
-          <div>Food Type</div>
-          <div style="display: flex;margin-left: 15px;">
-            <ion-radio slot="start" value="veg" style="margin: 0 5px;"></ion-radio>Veg
-          </div>
-          <div style="display: flex;">
-            <ion-radio slot="start" value="noveg" style="margin: 0 5px;"></ion-radio>Non Veg
-          </div>
-         </div>
-          
-           
-      
-            </ion-radio-group>
-        
+          <ion-radio-group  style="width: 100%;" (ionChange)="radioGroupChange($event)" #radioGroup>
+       <div style="display: flex;width: 100%;">
+        <div>Food Type</div>
+        <div style="display: flex;margin-left: 15px;">
+          <ion-radio slot="start" value="1" style="margin: 0 5px;"></ion-radio>Veg
         </div>
+        <div style="display: flex;">
+          <ion-radio slot="start" value="2" style="margin: 0 5px;"></ion-radio>Non Veg
+        </div>
+       </div>      
+          </ion-radio-group>
+      
+      </div>
+      <ion-list>
+        <ion-item lines="none" class="select-categoty-item">
+          <ion-select
+            placeholder="Select Food Categoty"
+            (ionChange)="handleChange($event)"
+        style="width: 100%;"
+          >
+            <ion-select-option value="1">Punjabi</ion-select-option>
+            <ion-select-option value="2">Gujrati</ion-select-option>
+            <ion-select-option value="3">North Indian</ion-select-option>
+            <ion-select-option value="4">South Indian</ion-select-option>
+            <ion-select-option value="5">Chicken Tikka</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+        
+       
         <div class="form-group label-float">
           <ion-textarea type="text" name="details" #details="ngModel" required placeholder="Details * " ngModel></ion-textarea>
           <span class="text-danger"
@@ -84,11 +116,11 @@
           Details is required *
       </span>
         </div>
-      <div class="submit-div">
+      <div class="submit-div" style="margin-bottom: 50px;">
     <ion-button class="submit-login-button" expand="round" type="submit">Save Menu</ion-button>
       </div>
-    </form>
- 
+    </form>     
+
     <div class="chef-menu" style="margin: 10px 0;">
       <div style="color: #1d5b74;margin: 10px;">My Item List</div>
 
@@ -140,14 +172,14 @@
           padding-top: 15px;
           text-align: center;
           font-size: 20px;">
-         <div style="height: 50%;"><ion-icon name="create-outline" (click)="editMenu(menu)"></ion-icon></div>
-         <div style=""><ion-icon name="trash-outline" (click)="deleteMenu(menu)"></ion-icon></div>
+         <div style="height: 50%;" ><ion-icon name="create-outline" ></ion-icon></div>
+         <div style="" (click)="deleteMenu(menu)"><ion-icon name="trash-outline"></ion-icon></div>
        </div>
         </div>
   
       </ion-card>
 
      </div>
-     
     </div>
+  </div>
 </ion-content>
