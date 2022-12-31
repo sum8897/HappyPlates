@@ -1,11 +1,11 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start" *ngIf="customerback">
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="/nav/mainpage"></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="start" *ngIf="chefback">
+    <!-- <ion-buttons slot="start" *ngIf="chefback">
       <ion-back-button defaultHref="/nav/chef-home"></ion-back-button>
-    </ion-buttons>
+    </ion-buttons> -->
     <ion-title>
       <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
     </ion-title>
@@ -192,17 +192,24 @@
 </ion-card> -->
 
 </div>
-<ion-card *ngIf="stateCard" class="countrycard">
-  <div class="crossCut" (click)="stateCard =! stateCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
-    <ion-radio-group (ionChange)="selectState($event)">
-      <ion-item *ngFor="let h of state_data">
-        <ion-label>{{h.state_name}}</ion-label>
-        <ion-radio slot="start" [value]="h"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
-</ion-card>
 
-<ion-card *ngIf="cityCard" class="countrycard">
+<div class="bottomDiv"></div>
+</ion-content>
+
+<div class="overlay" *ngIf="stateCard">
+  <ion-card  class="countrycard">
+    <div class="crossCut" (click)="stateCard =! stateCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
+      <ion-radio-group (ionChange)="selectState($event)">
+        <ion-item *ngFor="let h of state_data">
+          <ion-label>{{h.state_name}}</ion-label>
+          <ion-radio slot="start" [value]="h"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+  </ion-card>
+</div>
+
+<div class="overlay" *ngIf="cityCard">
+<ion-card  class="countrycard">
   <div class="crossCut" (click)="cityCard =! cityCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
     <ion-radio-group (ionChange)="selectCity($event)">
       <ion-item *ngFor="let h of city_data">
@@ -211,4 +218,4 @@
       </ion-item>
     </ion-radio-group>
 </ion-card>
-</ion-content>
+</div>

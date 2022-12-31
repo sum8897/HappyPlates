@@ -1,22 +1,21 @@
 .chef-segment{
     margin-top: 25px;
-    margin-left: 20px;
-    margin-right: 20px;
   .segment-button-checked{
     background: red;
-    border-radius: 21px;
+    border-radius: 50px;
     --indicator-color: none;
     color: white;
     letter-spacing: 0px;
+    --box-shadow:none;
 }
 }
 .form-item{
     border: 2px solid #e1eaec;
-    border-radius: 21px;
+    border-radius: 50px;
 }
 .register-segment{
     background: #dae5e9;
-    border-radius: 21px;
+    border-radius: 50px;
     height: 50px;
 }
 .submit-div{
@@ -36,20 +35,30 @@
 }
 .create-new-account{
     text-align: right;
-    margin-right: 25px;
     .create-account-p{
         font-size: 13px;
+        text-align: center;
     }
 }
 #create-new-account{
     margin-top: 0;
-    padding-bottom: 70px;
 }
 .error-message{
     color: red;
     padding-left: 15px;
-    font-size: 10px;
+    font-size: 12px;
 }
+
+    .overlay{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgb(41 40 40 / 80%);
+        z-index: 9999;
+        overflow-y: overlay;
+    }
 .countrycard{
     position: fixed;
     top: 0;
@@ -79,4 +88,7 @@
     font-weight: 500;
     opacity: 9999;
     color: #000;
+}
+.privacy-block{
+    margin:10px 0 15px;
 }

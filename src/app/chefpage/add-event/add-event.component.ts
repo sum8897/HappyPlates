@@ -58,32 +58,6 @@ export class AddEventComponent implements OnInit {
   }
 
 
-  croppedImagePath: any;
-  imagepath: any = "";
-  pickImage(sourceType: any) {
-    this.croppedImagePath = '';
-    const options: CameraOptions = {
-      quality: 20,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-
-    this.camera.getPicture(options).then((image) => {
-      // alert(image);
-      // imageData is either a base64 encoded string or a file URI
-      this.croppedImagePath = 'data:image/jpeg;base64,' + image;
-      this.imagepath = image;
-      // alert(JSON.stringify(this.croppedImagePath));
-
-    }, (err) => {
-      alert(JSON.stringify(err));
-
-    });
-  }
-
-
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
       header: "Select Image source",
@@ -110,6 +84,35 @@ export class AddEventComponent implements OnInit {
     await actionSheet.present();
   }
 
+  croppedImagePath: any;
+  imagepath: any = "";
+  pickImage(sourceType: any) {
+    this.croppedImagePath = '';
+    const options: CameraOptions = {
+      quality: 20,
+      sourceType: sourceType,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((image) => {
+      // alert(image);
+      // imageData is either a base64 encoded string or a file URI
+      this.croppedImagePath = 'data:image/jpeg;base64,' + image;
+      this.imagepath = image;
+      this.uploadImage();
+      // alert(JSON.stringify(this.croppedImagePath));
+
+    }, (err) => {
+      alert(JSON.stringify(err));
+
+    });
+  }
+
+
+ 
+
   uploadSingleRes: any;
   uploadSingleResData: any;
   multipleImageArray: any = [];
@@ -120,7 +123,7 @@ export class AddEventComponent implements OnInit {
       // mediafile: this.capturedSnapURL
       mediafile: this.croppedImagePath
     };
-    this.user.present('uploading...');
+    this.user.present('uploading....');
     this.auth.uploadSingleMenuImage(body).subscribe(res => {
       this.user.dismiss();
       this.uploadSingleRes = res;
@@ -170,10 +173,11 @@ export class AddEventComponent implements OnInit {
       'status': '1'
     }
     // alert(JSON.stringify(event_data));
-    this.user.present('uploading...')
+    this.user.present('uploading....')
     this.auth.AddEvents(event_data).subscribe((data) => {
       this.user.dismiss();
       // this.getEventData();
+      contactAddressForm.reset();
       this.router.navigate(['nav/chef-home']);
       this.user.showToast('Event added successfully..');
     }, err => {

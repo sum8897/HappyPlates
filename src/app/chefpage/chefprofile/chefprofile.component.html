@@ -8,7 +8,7 @@
   </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content style="padding-bottom: 60px;">
   <div class="profile-top-div">
     <ion-card class="profile-card">
       <img class="profile-card-image" src="../../../assets/img/blog_1.jpg">
@@ -67,7 +67,7 @@
         <div class="address-show">
           <div class="name-address">
             <div class="name">Specialises In: &nbsp;{{chef_specialization}}</div>
-            <div class="edit"><ion-button class="edit-button">Edit <ion-icon name="create-outline"></ion-icon></ion-button></div>
+            <!-- <div class="edit"><ion-button class="edit-button">Edit <ion-icon name="create-outline"></ion-icon></ion-button></div> -->
           </div>
          <div class="address-in-details">
           <ion-text style="width: 80%;"><span>Skills:&nbsp;&nbsp;{{chef_skills}} </span></ion-text>
@@ -182,19 +182,24 @@
           <ion-label style="text-align: right;">My Menu Items</ion-label>
         </ion-item>
         <div class="ion-padding login-input-value" slot="content">
-        <ion-list>
-          <ion-item style="border: 1px dotted #dfe8ed;
-          border-radius: 21px;
-          text-align: center;">
-            <ion-label (click)="selectImage()">
-              <ion-icon name="add-outline" slot="start"></ion-icon>Upload Image
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start"><img src="{{croppedImagePath}}"></ion-avatar>
-            <ion-button slot="end" size="small" (click)="uploadImage()">upload</ion-button>
+          <ion-list>
+            <ion-item style="border: 1px dotted #dfe8ed;
+            border-radius: 21px;
+            text-align: center;"
+            lines="none">
+             <ion-avatar style="font-size: 45px;padding-top: 7px;" slot="start"><ion-icon name="camera-outline"></ion-icon></ion-avatar>
+              <ion-label (click)="selectImage()" class="selectImage">
+              Select Image
+              </ion-label>
             </ion-item>
-        </ion-list>
+            <ion-item lines="none">
+              <ion-thumbnail style="width: 90px;height: 90px;border-radius: 11px;" slot="start"> <img style="border-radius: 11px;" src="{{croppedImagePath}}"></ion-thumbnail>
+              <ion-label style="font-size: 12px;overflow: hidden;white-space: nowrap;">
+                {{imageData}}
+              </ion-label>
+             <!-- <ion-button size="small" (click)="uploadImage()">Upload</ion-button> -->
+              </ion-item>
+          </ion-list>
             <form #contactMenuForm="ngForm" (ngSubmit)="onMenuSubmit(contactMenuForm)" >
             <div class="form-group label-float">
               <ion-input type="text" name="foodname" #foodname="ngModel" required placeholder="Food Name * " ngModel></ion-input>
@@ -212,25 +217,7 @@
               Price is required *
           </span>
             </div>
-            <!-- <div class="city-pin" style="display: flex;">
-              <div class="form-group label-float">
-                <ion-input type="number" name="other_price" #other_price="ngModel" required placeholder="Other Price * " ngModel></ion-input>
-            
-                <span class="text-danger"
-                *ngIf="(other_price.touched || contactMenuForm.submitted) && other_price.errors?.required">
-                Other Price is required *
-            </span>
-              </div>
-          
-              <div class="form-group label-float">
-                <ion-input type="tel" name="pin" #pin="ngModel" required placeholder="Pin * " ngModel></ion-input>
-                <span class="text-danger"
-                *ngIf="(pin.touched || contactMenuForm.submitted) && pin.errors?.required">
-                Pin is required *
-            </span>
-              </div>
-            </div> -->
-            <div class="form-group label-float" style="display: flex;">
+            <div class="form-group label-float" style="display: flex;margin: 10px auto 10px 30px;">
              
               <ion-radio-group  style="width: 100%;" (ionChange)="radioGroupChange($event)" #radioGroup>
            <div style="display: flex;width: 100%;">
@@ -276,8 +263,14 @@
      
         <div class="chef-menu" style="margin: 10px 0;">
           <div style="color: #1d5b74;margin: 10px;">My Item List</div>
-          <ion-card style="border-radius: 11px;margin: 5px 0;" *ngFor="let menu of menu_Array">
-    
+          <div class="noEvent data_not_found" *ngIf="user.menu_data_list==0">
+            <img src="../../../assets/img/no_data_found.webp">
+            <div class="data_not_found">
+              
+              No Data Found</div>  
+          </div>
+          <ion-card style="border-radius: 11px;margin: 10px;box-shadow: 1px 3px 5px 5px rgba(242,242,242,255)" *ngFor="let menu of user.menu_data_list">
+
             <div style="display: inline-flex;width: 100%;">
              <div class="item-menu" style="display: inline-flex;width: 100%;">
                <div><img style="width: 85px;
@@ -287,14 +280,14 @@
              <div style="display: block;
              padding-left: 10px;
              width: 65%;
-             margin: 5px 0 0 0;">
-             <div style="font-size: 15px;
+             margin: 5px 0 0 0;text-transform: capitalize;">
+             <div style="font-size: 17px;
              font-weight: 500;
-             margin-top: 2px;
-             color: #010101;text-transform: capitalize;">{{menu.title}}</div>
-              <div style="font-size: 11px;
-              font-weight: 400;
-              color: #010101;">{{(menu.description).substring(0,30)}}...</div>
+             color: #010101;">{{menu.title}}</div>
+               <div style="font-size: 12px;
+               font-weight: 500;
+               margin-top: 3px;
+               color: #010101;">{{(menu.description).substring(0,50)}}..</div>
              <div class="cart-item-price-main-count" 
              style="display: inline-flex;width: 100%;margin-top: 10px;;">
                <div class="cart-item-price" 
@@ -309,20 +302,7 @@
                  opacity: 99999;
          color: #a9a9a9;">{{menu.offer | currency:'INR':'symbol'}}</del> -->
                </div>
-               <!-- <div class="cart-item-count" 
-               style="display: inline-flex;
-               width: 35%;
-               border: 1px solid #edf1f3;
-               border-radius: 5px;
-               justify-content: space-around;
-               padding-top: 5px;
-               margin-right: -2px;
-               margin-top: 8px;
-               height: 25px;">
-                 <ion-icon name="remove-outline" class="cart-delete-icon"></ion-icon>
-                 <span>5</span>
-                 <ion-icon name="add-outline" class="cart-delete-icon"></ion-icon>
-               </div> -->
+              
              </div>
              </div>
              </div>
@@ -334,8 +314,8 @@
               padding-top: 15px;
               text-align: center;
               font-size: 20px;">
-             <div style="height: 50%;color: #1c5c75;" (click)="editMenu(menu)"><ion-icon name="create-outline"></ion-icon></div>
-             <div style="color: #d32235;" (click)="deleteMenu(menu)"><ion-icon name="trash-outline"></ion-icon></div>
+             <div style="height: 50%;" (click)="editMenu(menu)"><ion-icon name="create-outline"></ion-icon></div>
+             <div style=""><ion-icon name="trash-outline" (click)="user.deleteMenu(menu)" style="color: #dc1f32;"></ion-icon></div>
            </div>
             </div>
       
@@ -413,7 +393,7 @@
       <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
     </ion-item>
   </ion-list> -->
-  <ion-accordion-group>
+  <ion-accordion-group style="padding-bottom: 60px;">
     <ion-card class="accordion-card">
     <ion-accordion value="first" toggleIcon="chevron-down-circle" toggleIconSlot="end">
       <ion-item slot="header" color="light">
@@ -454,7 +434,13 @@
     </ion-accordion>
   </ion-card>
   </ion-accordion-group>
-  <ion-card *ngIf="stateCard" class="countrycard">
+
+
+  <div class="bottomDiv"></div>
+</ion-content>
+
+<div class="overlay" *ngIf="stateCard">
+  <ion-card  class="countrycard">
     <div class="crossCut" (click)="stateCard =! stateCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
       <ion-radio-group (ionChange)="selectState($event)">
         <ion-item *ngFor="let h of state_data">
@@ -463,7 +449,9 @@
         </ion-item>
       </ion-radio-group>
   </ion-card>
-  <ion-card *ngIf="cityCard" class="countrycard">
+  </div>
+  <div class="overlay" *ngIf="cityCard">
+  <ion-card  class="countrycard">
     <div class="crossCut" (click)="cityCard =! cityCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
       <ion-radio-group (ionChange)="selectCity($event)">
         <ion-item *ngFor="let h of city_data">
@@ -472,4 +460,4 @@
         </ion-item>
       </ion-radio-group>
   </ion-card>
-</ion-content>
+  </div>

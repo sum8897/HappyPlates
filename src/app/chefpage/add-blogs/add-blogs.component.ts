@@ -31,40 +31,19 @@ export class AddBlogsComponent implements OnInit {
               public modalController: ModalController,
               public actionSheetController: ActionSheetController,
               public camera: Camera,) {
-                this.getAddedBlogsData();
-              this.user.menu();
+                // this.getAddedBlogsData();
+              // this.user.menu();
                this.setToday();
                console.log(this.user.today);
                
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // this.getAddedBlogsData();
+   }
 
   ionViewWillEnter(){
     this.getAddedBlogsData();
-  }
-
-  croppedImagePath: any;
-  imagepath: any = "";
-  pickImage(sourceType:any) {
-    const options: CameraOptions = {
-      quality: 20,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-      // alert(imageData);
-      // imageData is either a base64 encoded string or a file URI
-      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
-      this.imagepath = imageData;
-      // alert(JSON.stringify(this.croppedImagePath));
-
-    }, (err) => {
-      alert(JSON.stringify(err));
-    });
   }
 
   async selectImage() {
@@ -93,6 +72,32 @@ export class AddBlogsComponent implements OnInit {
     await actionSheet.present();
   }
 
+  croppedImagePath: any;
+  imagepath: any = "";
+  pickImage(sourceType:any) {
+    const options: CameraOptions = {
+      quality: 20,
+      sourceType: sourceType,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // alert(imageData);
+      // imageData is either a base64 encoded string or a file URI
+      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
+      this.imagepath = imageData;
+      this.uploadImage();
+      // alert(JSON.stringify(this.croppedImagePath));
+
+    }, (err) => {
+      alert(JSON.stringify(err));
+    });
+  }
+
+ 
+
   uploadSingleRes:any;
   uploadSingleResData:any;
   multipleImageArray: any = [];
@@ -105,7 +110,7 @@ export class AddBlogsComponent implements OnInit {
       // mediafile: this.capturedSnapURL
       mediafile: this.croppedImagePath
     };
-    this.user.present('uploading...');
+    this.user.present('uploading....');
     this.auth.uploadSingleMenuImage(body).subscribe(res => {
       this.user.dismiss();
       this.uploadSingleRes = res;
@@ -167,10 +172,11 @@ console.log(this.formateString);
           'blog_images': this.imageData,
           'status': '1'
         }
-        this.user.present('uploading...');
+        this.user.present('uploading....');
     this.auth.postBlogs(blogs_data).subscribe((data)=>{
       // console.log(data);
     this.user.dismiss();
+    contactAddressForm.reset();
     this.router.navigate(['nav/chef-home']);
     // this.getAddedBlogsData();
     this.user.showToast('Blogs added successfully..');

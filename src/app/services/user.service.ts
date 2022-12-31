@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, AlertController } from '@ionic/angular';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -15,6 +15,7 @@ export class UserService {
   today: any;
   constructor(public toast: ToastController,
     public loadingController: LoadingController,
+    public alertController: AlertController,
     public auth: AuthService
   ) { }
   chefMenuType: any;
@@ -66,6 +67,7 @@ export class UserService {
   user_id: any;
   userDetails() {
     this.user_ProfImage='';
+    this.userAllData='';
     if (localStorage.getItem('amantran_token') == null) {
       console.log('user not logged in...')
     } else {
@@ -105,7 +107,7 @@ export class UserService {
         this.user_country = this.userAllData.country.country_name;
         this.user_country_id = this.userAllData.country.id;
         this.chef_id = this.userAllData.id;
-
+        localStorage.setItem('chef_id',this.chef_id);
         this.chefmenuData(this.chef_id);
       }, err => {
         console.log(err)
@@ -119,7 +121,7 @@ export class UserService {
   chefmenuData(chef_id: any) {
     this.menu_data_list=[];
     if (localStorage.getItem('amantran_token') == null) {
-      
+      this.menu_data_list=[];
       console.log('user not logged in...');
     } else {
       // this.present('wait...');
@@ -132,9 +134,9 @@ export class UserService {
           console.log('empty menu data')
         }
         for (let i = 0; i <= this.menu_data_list_all.length; i++) {
-          // console.log(this.menu_data_list_all[i].medias.length);
+          console.log(this.menu_data_list_all[i].medias[0]);
           if (this.menu_data_list_all[i].medias.length < 1 || this.menu_data_list_all[i].medias[0] == undefined) {
-            console.log('empty data');
+            // console.log('empty data');
             this.menu_data_list[i] = {
               'price': this.menu_data_list_all[i].price,
               'title': this.menu_data_list_all[i].title,
@@ -170,6 +172,53 @@ export class UserService {
     }
 
   }
+  deleteMenu(menu_data:any) {
+    this.alertController.create({
+      header: 'BonHomey Alert!',
+      message: 'Are you sure you want to Delete this menu ?',
+      backdropDismiss: false,
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'danger',
+        handler: () => {
+          console.log('Menu not deleted!');
+        }
+      }, {
+        text: 'Confirm',
+        cssClass: 'success',
+        handler: () => {
+          this.showExitConfirm(menu_data);
+        }
+      }]
+    })
+      .then(alert => {
+        alert.present();
+      });
+  }
+  
+   showExitConfirm(menu){
+    console.log(menu);
+    this.present('deleting');
+    this.auth.deleteMenuByChef(menu.id).subscribe((response)=>{
+    this.dismiss();
+    const items = this.menu_data_list.filter(item => item.id === menu.id);
+    const index = this.menu_data_list.indexOf(items[0]);
+    if (index > -1) {
+      this.menu_data_list.splice(index, 1);
+    }
+    alert('Menu Deleted successfully.')
+    // console.log(this.user.menu_data_list);
+    // console.log(this.user.menu_data_list.length)
+    },err=>{
+      this.dismiss();
+      this.showToast(JSON.stringify(err.errors))
+    })
+  }
+
+
+
+
   sideMenu = [];
   NAV = [
     {

@@ -19,16 +19,18 @@ export class ChefHomeComponent implements OnInit {
               public modalCtrl: ModalController,
               public router: Router,) {
               // this.user.menu();
-              this.user.userDetails();
-              // this.allOrders();
+              // this.user.userDetails();
+              this.allOrders();
   }
 
   ngOnInit() {
+    this.user.userDetails();
     this.user.menu();
+
    }
    ionViewWillEnter(){
     this.user.menu();
-    this.allOrders();
+    // this.allOrders();
    }
 allRes:any;
 allOrderedData:any;
@@ -58,26 +60,24 @@ allorderedDataList:any='';
     });  
     return await modal.present();  
   }
-  deleteMenu(menu:any){
-    console.log(menu);
-    this.user.present('deleting');
-    this.auth.deleteMenuByChef(menu.id).subscribe((response)=>{
-    this.user.dismiss();
-    const items = this.user.menu_data_list.filter(item => item.id === menu.id);
-    const index = this.user.menu_data_list.indexOf(items[0]);
-    if (index > -1) {
-      this.user.menu_data_list.splice(index, 1);
-    }
-    alert('Menu Deleted successfully.')
-    // console.log(this.user.menu_data_list);
-    // console.log(this.user.menu_data_list.length)
-    },err=>{
-      this.user.dismiss();
-      this.user.showToast(JSON.stringify(err.errors))
-    })
-  }
+  // deleteMenu(menu:any){
+  //   console.log(menu);
+  //   this.user.present('deleting');
+  //   this.auth.deleteMenuByChef(menu.id).subscribe((response)=>{
+  //   this.user.dismiss();
+  //   const items = this.user.menu_data_list.filter(item => item.id === menu.id);
+  //   const index = this.user.menu_data_list.indexOf(items[0]);
+  //   if (index > -1) {
+  //     this.user.menu_data_list.splice(index, 1);
+  //   }
+  //   alert('Menu Deleted successfully.')
+  //   },err=>{
+  //     this.user.dismiss();
+  //     this.user.showToast(JSON.stringify(err.errors))
+  //   })
+  // }
   addMenu(){
-    this.router.navigateByUrl('/nav/chef-profile')
+    this.router.navigateByUrl('/nav/chef-add-menu')
   }
  async orderDetails(order:any){
     const modal = await this.modalCtrl.create({

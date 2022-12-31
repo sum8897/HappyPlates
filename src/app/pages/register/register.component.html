@@ -1,373 +1,360 @@
 <ion-content class="login-container">
   <div class="bg-image">
     <img src="../../../assets/img/login_bg.jpeg">
-    </div>
-    <div class="login-input">
-      <div class="app-name">
-        <h1>BonHomey</h1>
-<span>Welcome! SignUp and get started</span>
-      </div>
-   <div class="chef-segment">
-    <ion-segment value="customer" class="register-segment" [(ngModel)]="type" (ionChange)="segmentChanged($event)"> 
-      <ion-segment-button value="customer">
-        <ion-label>I'M A CUSTOMER</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="chef">
-        <ion-label>I'M A CHEF</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-   </div>
-
-   <div class="login-input-value" *ngIf="customer">
-    <ion-list>
-      <ion-item style="border: 1px dotted #dfe8ed;
-      border-radius: 21px;
-      text-align: center;">
-       <ion-avatar style="font-size: 35px;padding-top: 7px;" slot="start"><ion-icon name="camera-outline"></ion-icon></ion-avatar>
-        <ion-label (click)="selectImage()" class="selectImage">
-        Select Image
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail style="width: 90px;height: 90px;border-radius: 11px;" slot="start"> <img style="border-radius: 11px;" src="{{croppedImagePath}}"></ion-thumbnail>
-        <ion-label style="font-size: 12px;">
-          {{imageData}}
-        </ion-label>
-       <ion-button size="small" (click)="uploadImage()">upload</ion-button>
-        </ion-item>
-    </ion-list>
-     <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" novalidate>
-    <div class="label-float">
-      <ion-input type="text" formControlName="firstname" placeholder="Enter First Name " required="true" ></ion-input>
-      <label>First Name<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.firstname">
-        <ng-container *ngIf="firstname.hasError(error.type) && (firstname.dirty || firstname.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
-    </div>
-    <div class="label-float">
-      <ion-input type="text" formControlName="lastname" placeholder="Enter Last Name " required="true" ></ion-input>
-      <label>Last Name<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.lastname">
-        <ng-container *ngIf="lastname.hasError(error.type) && (lastname.dirty || lastname.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
-    </div>
-    <div class="label-float">
-      <ion-input type="number" pattern="[0-9]*" (ionInput)="onInput($event)" formControlName="phone" placeholder="Enter Phone Number" required="true" max="10" min='10' maxlength="10"></ion-input>
-      <label>Phone Number<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.phone">
-        <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
-    </div>
-    <div class="label-float">
-      <ion-input type="text" formControlName="email" placeholder="Enter Email " required="true" ></ion-input>
-      <label>EMail<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.email">
-        <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
-    </div>
-    <div class="label-float">
-      <ion-item lines="none"  class="form-item"> <!-- (click)="minHeightShow()" --> 
-        <ion-label>Country</ion-label>
-      <ion-label>India</ion-label>
-      <!-- <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon> -->
-        <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
-          required></ion-input> -->
-      </ion-item>
-      <!-- <ion-input type="text" formControlName="country" placeholder="Enter Country Name " required="true"></ion-input>
-      <label>Country Name<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.country">
-        <ng-container *ngIf="country.hasError(error.type) && (country.dirty || country.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div> -->
-    </div>
-    <div class="label-float">
-      <ion-item lines="none" (click)="stateshow()" class="form-item">
-        <ion-label>Select State</ion-label>
-      <ion-label>{{statename}}</ion-label>
-      <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
-        <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
-          required></ion-input> -->
-      </ion-item>
-      <!-- <ion-input type="text" formControlName="state" placeholder="Enter State Name " required="true"></ion-input>
-      <label>State Name<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.state">
-        <ng-container *ngIf="state.hasError(error.type) && (state.dirty || state.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div> -->
-    </div>
-    <div class="label-float">
-      <ion-item lines="none" (click)="cityshow()" class="form-item">
-        <ion-label>Select City</ion-label>
-      <ion-label>{{cityname}}</ion-label>
-      <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
-        <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
-          required></ion-input> -->
-      </ion-item>
-      <!-- <ion-input type="text" formControlName="city" placeholder="Enter City Name " required="true"></ion-input>
-      <label>City Name<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.city">
-        <ng-container *ngIf="city.hasError(error.type) && (city.dirty || city.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div> -->
-    </div>
-    <div class="label-float">
-      <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true" ></ion-input>
-      <label>Zip Code<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.pin">
-        <ng-container *ngIf="pin.hasError(error.type) && (pin.dirty || pin.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
-    </div>
-    <div class="label-float">
-      <ion-input type="text" formControlName="address" placeholder="Enter Address " required="true" ></ion-input>
-      <label>Address<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.address">
-        <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
-    </div>
-    <div class="label-float">
-      <ion-input type="password" (ionInput)="onInputPass($event)" formControlName="password" placeholder="Enter Password " required ></ion-input>
-      <label>Password<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.password">
-        <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
-    </div>
-    <div class="label-float">
-      <ion-input type="password" formControlName="cpassword" placeholder="Enter Confirm Password " required="true" ></ion-input>
-      <label>Confirm Password<span class="span-star">*</span></label>
-      <div *ngFor="let error of errorMessages.cpassword">
-        <ng-container *ngIf="cpassword.hasError(error.type) && (cpassword.dirty || cpassword.touched)">
-          <small class="error-message">{{error.message}}</small>
-        </ng-container>
-      </div>
-    </div>
-  
-    <div class="check-checkbox">
-      <ion-item lines='none'>
-        <span>By signing up you agree to platform's <a>Terms of Service</a>and <a>Privacy Policy.</a></span>
-        <ion-checkbox slot="start" mode="md" name="check" #ng class="remember-checkbox" value="yes" (ionChange)="checkedValue($event)" ngModel [ngModelOptions]="{standalone: true}"></ion-checkbox>
-      </ion-item>
-    </div>
-    <div class="submit-div" >
-      <ion-button class="submit-login-button" expand="round" type="submit">Submit</ion-button>
-    </div>
-  </form>
   </div>
+  <div class="login-input">
+    <div class="login-input-box">
+      <div class="app-name">
+        <div class="login-logo-div">
+          <img src="../../../assets/img/logo.png">
+        </div>
+        <span>Welcome! SignUp and get started</span>
+      </div>
+      <div class="chef-segment">
+        <ion-segment value="customer" class="register-segment" [(ngModel)]="type" (ionChange)="segmentChanged($event)">
+          <ion-segment-button value="customer">
+            <ion-label>I'M A CUSTOMER</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="chef">
+            <ion-label>I'M A CHEF</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      <div class="login-input-value" *ngIf="customer">
+        <div class="upload-profilepic">
+          <div class="profile-img" *ngIf="imageData==''"><img class="uploadedImg" src="../../../assets/img/user.png"></div>
+          <div class="profile-img" *ngIf="imageData !=''"><img class="uploadedImg" src="{{croppedImagePath}}"></div>
+          <div (click)="selectImage()"><ion-button fill="clear">Upload Profile Pic</ion-button></div>
+        </div>
 
-
-
-   <div class="login-input-value" *ngIf="chef">
-    <ion-list>
-      <ion-item style="border: 1px dotted #dfe8ed;
-      border-radius: 21px;
-      text-align: center;">
-       <ion-avatar style="font-size: 35px;padding-top: 7px;" slot="start"><ion-icon name="camera-outline"></ion-icon></ion-avatar>
-        <ion-label (click)="selectImage()" class="selectImage">
-        Select Image
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail style="width: 90px;height: 90px;border-radius: 11px;" slot="start"> <img style="border-radius: 11px;" src="{{croppedImagePath}}"></ion-thumbnail>
-        <ion-label style="font-size: 12px;">
-          {{imageData}}
-        </ion-label>
-        <ion-button size="small" (click)="uploadImage()">upload</ion-button>
-        </ion-item>
-    </ion-list>
-    <form [formGroup]="registrationForm" (ngSubmit)="submitForm()">
-      <div class="label-float">
-        <ion-input type="text" formControlName="firstname" placeholder="Enter First Name " required="true"></ion-input>
-        <label>First Name<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.firstname">
-          <ng-container *ngIf="firstname.hasError(error.type) && (firstname.dirty || firstname.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="label-float">
-        <ion-input type="text" formControlName="lastname" placeholder="Enter Last Name " required="true"></ion-input>
-        <label>Last Name<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.lastname">
-          <ng-container *ngIf="lastname.hasError(error.type) && (lastname.dirty || lastname.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="label-float">
-        <ion-input type="number" pattern="[0-9]*" (ionInput)="onInput($event)" formControlName="phone" placeholder="Enter Phone Number " required="true" max="10" min='10' maxlength="10"></ion-input>
-        <label>Phone Number<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.phone">
-          <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="label-float">
-        <ion-input type="text" formControlName="email" placeholder="Enter Email " required="true" ></ion-input>
-        <label>EMail<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.email">
-          <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="label-float">
-        <ion-input type="text" formControlName="skills" placeholder="Enter Skills, Ex:Bachelor of Hotel Management (BHM) in Culinary " required="true" ></ion-input>
-        <label>Enter Skills<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.skills">
-          <ng-container *ngIf="skills.hasError(error.type) && (skills.dirty || skills.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="label-float">
-        <ion-input type="text" formControlName="specialization" placeholder="Dosa, Italy, Samosa,Paneer tikka etc" required="true" ></ion-input>
-        <label>Enter Specialization<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.specialization">
-          <ng-container *ngIf="specialization.hasError(error.type) && (specialization.dirty || specialization.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="label-float">
-        <ion-input type="text" formControlName="description" placeholder="Enter Description " required="true" ></ion-input>
-        <label>Enter Description<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.description">
-          <ng-container *ngIf="description.hasError(error.type) && (description.dirty || description.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="label-float">
-        <ion-input type="text" formControlName="aboutme" placeholder="Enter About Me " required="true" ></ion-input>
-        <label>Enter About Me<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.aboutme">
-          <ng-container *ngIf="aboutme.hasError(error.type) && (aboutme.dirty || aboutme.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="label-float">
-        <ion-item lines="none"  class="form-item">
-    
-          <ion-label>Country</ion-label>
-        <ion-label>India</ion-label>
-      
-        </ion-item>
-     
-      </div>
-      <div class="label-float">
-        <ion-item lines="none" (click)="stateshow()" class="form-item">
-          <ion-label>Select State</ion-label>
-        <ion-label>{{statename}}</ion-label>
-        <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
-      
-        </ion-item>
-      
-      </div>
-      <div class="label-float">
-        <ion-item lines="none" (click)="cityshow()" class="form-item">
-          <ion-label>Select City</ion-label>
-        <ion-label>{{cityname}}</ion-label>
-        <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
-       
-        </ion-item>
-      
-      </div>
-      <div class="label-float">
-        <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true" ></ion-input>
-        <label>Zip Code<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.pin">
-          <ng-container *ngIf="pin.hasError(error.type) && (pin.dirty || pin.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="label-float">
-        <ion-input type="text" formControlName="address" placeholder="Enter Address " required="true" ></ion-input>
-        <label>Address<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.address">
-          <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="label-float">
-        <ion-input type="password" name='password' (ionInput)="onInputPass($event)" formControlName="password" placeholder="Enter Password " required="true" ></ion-input>
-        <label>Password<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.password">
-          <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="label-float">
-        <ion-input type="password"  (ionInput)="onInputCPass($event)" formControlName="cpassword" placeholder="Enter Confirm Password " required="true" ></ion-input>
-        <label>Confirm Password<span class="span-star">*</span></label>
-        <div *ngFor="let error of errorMessages.cpassword">
-          <ng-container *ngIf="cpassword.hasError(error.type) && (cpassword.dirty || cpassword.touched)">
-            <small class="error-message">{{error.message}}</small>
-          </ng-container>
-        </div>
-      </div>
-      <div class="check-checkbox">
-        <ion-item lines='none'>
-          <span>By signing up you agree to platform's <a>Terms of Service</a>and <a>Privacy Policy.</a></span>
-          <ion-checkbox slot="start" mode="md" name="check" #ng class="remember-checkbox" value="yes" (ionChange)="checkedValue($event)" ngModel [ngModelOptions]="{standalone: true}"></ion-checkbox>
-        </ion-item>
-      </div>
-      <div class="submit-div">
-        <ion-button class="submit-login-button" expand="round" type="submit">Submit</ion-button>
-      </div>
-    </form>
-  </div>  
-          <div class="create-new-account" id="create-new-account">
-            <p class="create-account-p" (click)="clickLogin()">Already have an Account ?<a>Sign In</a></p>
+        <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" novalidate>
+          <div class="label-float">
+            <ion-input type="text" formControlName="firstname" placeholder="Enter First Name " required="true"></ion-input>
+            <label>First Name <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.firstname">
+              <ng-container *ngIf="firstname.hasError(error.type) && (firstname.dirty || firstname.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
           </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="lastname" placeholder="Enter Last Name " required="true"></ion-input>
+            <label>Last Name <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.lastname">
+              <ng-container *ngIf="lastname.hasError(error.type) && (lastname.dirty || lastname.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="number" pattern="[0-9]*" (ionInput)="onInput($event)" formControlName="phone" placeholder="Enter Phone Number" required="true" max="10" min='10' maxlength="10"></ion-input>
+            <label>Phone Number <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.phone">
+              <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="email" placeholder="Enter Email " required="true"></ion-input>
+            <label>EMail <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.email">
+              <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-item lines="none" class="form-item">
+              <!-- (click)="minHeightShow()" -->
+              <ion-label>Country</ion-label>
+              <ion-label>India</ion-label>
+              <!-- <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon> -->
+              <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
+            required></ion-input> -->
+            </ion-item>
+            <!-- <ion-input type="text" formControlName="country" placeholder="Enter Country Name " required="true"></ion-input><label>Country Name<span class="span-star">*</span></label><div *ngFor="let error of errorMessages.country"><ng-container *ngIf="country.hasError(error.type) && (country.dirty || country.touched)"><small class="error-message">{{error.message}}</small></ng-container></div> -->
+          </div>
+          <div class="label-float">
+            <ion-item lines="none" (click)="stateshow()" class="form-item">
+              <ion-label>Select State</ion-label>
+              <ion-label>{{statename}}</ion-label>
+              <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+              <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
+            required></ion-input> -->
+            </ion-item>
+            <!-- <ion-input type="text" formControlName="state" placeholder="Enter State Name " required="true"></ion-input><label>State Name<span class="span-star">*</span></label><div *ngFor="let error of errorMessages.state"><ng-container *ngIf="state.hasError(error.type) && (state.dirty || state.touched)"><small class="error-message">{{error.message}}</small></ng-container></div> -->
+          </div>
+          <div class="label-float">
+            <ion-item lines="none" (click)="cityshow()" class="form-item">
+              <ion-label>Select City</ion-label>
+              <ion-label>{{cityname}}</ion-label>
+              <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+              <!-- <ion-input name="user_y" type="text" #emp_name="ngModel" placeholder="Employee Name" ngModel
+            required></ion-input> -->
+            </ion-item>
+            <!-- <ion-input type="text" formControlName="city" placeholder="Enter City Name " required="true"></ion-input><label>City Name<span class="span-star">*</span></label><div *ngFor="let error of errorMessages.city"><ng-container *ngIf="city.hasError(error.type) && (city.dirty || city.touched)"><small class="error-message">{{error.message}}</small></ng-container></div> -->
+          </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true"></ion-input>
+            <label>Zip Code <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.pin">
+              <ng-container *ngIf="pin.hasError(error.type) && (pin.dirty || pin.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="address" placeholder="Enter Address " required="true"></ion-input>
+            <label>Address <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.address">
+              <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="password" (ionInput)="onInputPass($event)" formControlName="password" placeholder="Enter Password " required></ion-input>
+            <label>Password <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.password">
+              <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="password" formControlName="cpassword" placeholder="Enter Confirm Password " required="true"></ion-input>
+            <label>Confirm Password <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.cpassword">
+              <ng-container *ngIf="cpassword.hasError(error.type) && (cpassword.dirty || cpassword.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="check-checkbox privacy-block">
+            <ion-item lines='none'>
+              <span>By signing up you agree to platform's <a>Terms of Service</a>and <a>Privacy Policy.</a>
+              </span>
+              <ion-checkbox slot="start" mode="md" name="check" #ng class="remember-checkbox" value="yes" (ionChange)="checkedValue($event)" ngModel [ngModelOptions]="{standalone: true}"></ion-checkbox>
+            </ion-item>
+          </div>
+          <div class="submit-div">
+            <ion-button class="submit-login-button" expand="full" shape="round" type="submit">Submit</ion-button>
+          </div>
+        </form>
+      </div>
+      <div class="login-input-value" *ngIf="chef">
+
+        <div class="upload-profilepic">
+          <div class="profile-img" *ngIf="imageData==''"><img class="uploadedImg" src="../../../assets/img/user.png"></div>
+          <div class="profile-img" *ngIf="imageData !=''"><img class="uploadedImg" src="{{croppedImagePath}}"></div>
+          <div (click)="selectImage()"><ion-button fill="clear">Upload Profile Pic</ion-button></div>
+        </div>
+        <form [formGroup]="registrationForm" (ngSubmit)="submitForm()">
+          <div class="label-float">
+            <ion-input type="text" formControlName="firstname" placeholder="Enter First Name " required="true"></ion-input>
+            <label>First Name <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.firstname">
+              <ng-container *ngIf="firstname.hasError(error.type) && (firstname.dirty || firstname.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="lastname" placeholder="Enter Last Name " required="true"></ion-input>
+            <label>Last Name <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.lastname">
+              <ng-container *ngIf="lastname.hasError(error.type) && (lastname.dirty || lastname.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="number" pattern="[0-9]*" (ionInput)="onInput($event)" formControlName="phone" placeholder="Enter Phone Number " required="true" max="10" min='10' maxlength="10"></ion-input>
+            <label>Phone Number <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.phone">
+              <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="email" placeholder="Enter Email " required="true"></ion-input>
+            <label>EMail <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.email">
+              <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="skills" placeholder="Enter Skills, Ex:Bachelor of Hotel Management (BHM) in Culinary " required="true"></ion-input>
+            <label>Enter Skills <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.skills">
+              <ng-container *ngIf="skills.hasError(error.type) && (skills.dirty || skills.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="specialization" placeholder="Dosa, Italy, Samosa,Paneer tikka etc" required="true"></ion-input>
+            <label>Enter Specialization <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.specialization">
+              <ng-container *ngIf="specialization.hasError(error.type) && (specialization.dirty || specialization.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="description" placeholder="Enter Description " required="true"></ion-input>
+            <label>Enter Description <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.description">
+              <ng-container *ngIf="description.hasError(error.type) && (description.dirty || description.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="aboutme" placeholder="Enter About Me " required="true"></ion-input>
+            <label>Enter About Me <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.aboutme">
+              <ng-container *ngIf="aboutme.hasError(error.type) && (aboutme.dirty || aboutme.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-item lines="none" class="form-item">
+              <ion-label>Country</ion-label>
+              <ion-label>India</ion-label>
+            </ion-item>
+          </div>
+          <div class="label-float">
+            <ion-item lines="none" (click)="stateshow()" class="form-item">
+              <ion-label>Select State</ion-label>
+              <ion-label>{{statename}}</ion-label>
+              <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+            </ion-item>
+          </div>
+          <div class="label-float">
+            <ion-item lines="none" (click)="cityshow()" class="form-item">
+              <ion-label>Select City</ion-label>
+              <ion-label>{{cityname}}</ion-label>
+              <ion-icon name="chevron-down-outline" style="color: #1c5c75;"></ion-icon>
+            </ion-item>
+          </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="pin" placeholder="Enter ZipCode " required="true"></ion-input>
+            <label>Zip Code <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.pin">
+              <ng-container *ngIf="pin.hasError(error.type) && (pin.dirty || pin.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="text" formControlName="address" placeholder="Enter Address " required="true"></ion-input>
+            <label>Address <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.address">
+              <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="password" name='password' (ionInput)="onInputPass($event)" formControlName="password" placeholder="Enter Password " required="true"></ion-input>
+            <label>Password <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.password">
+              <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="label-float">
+            <ion-input type="password" (ionInput)="onInputCPass($event)" formControlName="cpassword" placeholder="Enter Confirm Password " required="true"></ion-input>
+            <label>Confirm Password <span class="span-star">*</span>
+            </label>
+            <div *ngFor="let error of errorMessages.cpassword">
+              <ng-container *ngIf="cpassword.hasError(error.type) && (cpassword.dirty || cpassword.touched)">
+                <small class="error-message">{{error.message}}</small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="check-checkbox">
+            <ion-item lines='none'>
+              <span>By signing up you agree to platform's <a>Terms of Service</a>and <a>Privacy Policy.</a>
+              </span>
+              <ion-checkbox slot="start" mode="md" name="check" #ng class="remember-checkbox" value="yes" (ionChange)="checkedValue($event)" ngModel [ngModelOptions]="{standalone: true}"></ion-checkbox>
+            </ion-item>
+          </div>
+          <div class="submit-div">
+            <ion-button class="submit-login-button" expand="round" type="submit">Submit</ion-button>
+          </div>
+        </form>
+      </div>
+      <div class="create-new-account" id="create-new-account">
+        <p class="create-account-p" (click)="clickLogin()">Already have an Account ? <a>Sign In</a>
+        </p>
+      </div>
     </div>
-
-    <ion-card *ngIf="minheightcard" class="countrycard">
-      <div class="crossCut" (click)="minheightcard =! minheightcard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
-        <ion-radio-group (ionChange)="selectMinHeight($event)">
-          <ion-item *ngFor="let h of country_data">
-            <ion-label>{{h.country_name}}</ion-label>
-            <ion-radio slot="start" [value]="h"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-    </ion-card>
-    <ion-card *ngIf="stateCard" class="countrycard">
-      <div class="crossCut" (click)="stateCard =! stateCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
-        <ion-radio-group (ionChange)="selectState($event)">
-          <ion-item *ngFor="let h of state_data">
-            <ion-label>{{h.state_name}}</ion-label>
-            <ion-radio slot="start" [value]="h"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-    </ion-card>
-
-    <ion-card *ngIf="cityCard" class="countrycard">
-      <div class="crossCut" (click)="cityCard =! cityCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
-        <ion-radio-group (ionChange)="selectCity($event)">
-          <ion-item *ngFor="let h of city_data">
-            <ion-label>{{h.city_name}}</ion-label>
-            <ion-radio slot="start" [value]="h"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
-    </ion-card>
+  </div>
+  <div class="bottomDiv"></div>
 </ion-content>
+<div class="overlay" *ngIf="minheightcard">
+  <ion-card class="countrycard">
+    <div class="crossCut" (click)="minheightcard =! minheightcard">
+      <ion-icon name="close-outline" class="closed"></ion-icon>
+    </div>
+    <ion-radio-group (ionChange)="selectMinHeight($event)">
+      <ion-item *ngFor="let h of country_data">
+        <ion-label>{{h.country_name}}</ion-label>
+        <ion-radio slot="start" [value]="h"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-card>
+</div>
+<div class="overlay" *ngIf="stateCard">
+  <ion-card class="countrycard">
+    <div class="crossCut" (click)="stateCard =! stateCard">
+      <ion-icon name="close-outline" class="closed"></ion-icon>
+    </div>
+    <ion-radio-group (ionChange)="selectState($event)">
+      <ion-item *ngFor="let h of state_data">
+        <ion-label>{{h.state_name}}</ion-label>
+        <ion-radio slot="start" [value]="h"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-card>
+</div>
+<div class="overlay" *ngIf="cityCard">
+  <ion-card class="countrycard">
+    <div class="crossCut" (click)="cityCard =! cityCard">
+      <ion-icon name="close-outline" class="closed"></ion-icon>
+    </div>
+    <ion-radio-group (ionChange)="selectCity($event)">
+      <ion-item *ngFor="let h of city_data">
+        <ion-label>{{h.city_name}}</ion-label>
+        <ion-radio slot="start" [value]="h"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-card>
+</div>

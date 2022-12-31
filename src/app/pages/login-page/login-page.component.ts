@@ -1,8 +1,10 @@
+import { ForgotpassComponent } from './../forgotpass/forgotpass.component';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login-page',
@@ -22,7 +24,8 @@ export class LoginPageComponent implements OnInit {
   constructor(private http: HttpClient,
     private router: Router,
     private auth: AuthService,
-    private user: UserService
+    private user: UserService,
+    public modalCtrl: ModalController
   ) { 
     if(localStorage.getItem('user_email')=='' || localStorage.getItem('password')==''){
       this.user_name='';
@@ -36,10 +39,18 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() { }
   openSignUp() {
-    this.router.navigateByUrl('/register')
+    console.log('signup');
+    // this.router.navigateByUrl('/register');
+    this.router.navigate(['/signup']);
   }
-  forgetPass() {
-    this.router.navigateByUrl('/forgotpass')
+  async forgetPass() {
+    // this.router.navigateByUrl('/forgotpass')
+    const modal = await this.modalCtrl.create({
+      component: ForgotpassComponent,
+      cssClass: 'my-custom-class',
+      componentProps: { policydata: 'forgetpass'}
+    });
+    return await modal.present();
   }
   onSubmit(contactForm:any) {
     console.log(contactForm.value);

@@ -30,11 +30,13 @@ export class MenudetailsComponent implements OnInit {
    menu_name:any;
    menu_desc:any;
    menu_category:any;
+   menu_price:any;
 ionViewWillEnter(){
   console.log(this.ev_data);
   this.menu_name=this.ev_data.title;
   this.menu_desc=this.ev_data.description;
   this.menu_category=this.ev_data.category.title;
+  this.menu_price=this.ev_data.price;
   if(this.ev_data.medias==[] || this.ev_data.medias.length==0){
     console.log('menu media is empty');
     // this.menuMedia.push(this.menuArray);

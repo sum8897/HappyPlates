@@ -9,6 +9,8 @@ import { Location } from '@angular/common';
 import { UserService } from './services/user.service';
 import { NetworkStatusService } from './services/network-status.service';
 
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -24,6 +26,8 @@ export class AppComponent {
   navigateChef: any;
   user_type;
  
+
+
   menuData:any=[];
 
   constructor(
@@ -35,7 +39,8 @@ export class AppComponent {
               private router : Router,
               private network: Network,
               public user: UserService,
-              public networkProvider:NetworkStatusService
+              public networkProvider:NetworkStatusService,
+              public so: ScreenOrientation
   ) {
     this.initializeApp();
     this.sideMenu();
@@ -44,8 +49,14 @@ export class AppComponent {
     //  window.addEventListener('offline',()=>{
     //    this.openAlert();
     //  })
- 
+  
+    
+   
   }
+
+ 
+
+
  ngOnInit(){
   this.sideMenu()
  }
@@ -81,6 +92,8 @@ export class AppComponent {
       // }, error => {
       //   console.log(error);
       // });
+      this.so.lock(this.so.ORIENTATIONS.PORTRAIT);
+     
 
     });
 

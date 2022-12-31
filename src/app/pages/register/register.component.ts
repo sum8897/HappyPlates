@@ -371,7 +371,6 @@ export class RegisterComponent implements OnInit {
     ],
     state: [
       { type: 'required', message: 'You must enter State name' },
-
     ],
     pin: [
       { type: 'required', message: 'You must enter zip code' },
@@ -413,27 +412,6 @@ export class RegisterComponent implements OnInit {
     console.log(formGroup.value);
   }
 
-  imagepath: any = "";
-  pickImage(sourceType:any) {
-    const options: CameraOptions = {
-      quality: 20,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
-      this.imagepath = imageData;
-      // alert(JSON.stringify(this.croppedImagePath));
-    }, (err) => {
-      alert(JSON.stringify(err));
-      // Handle error
-    });
-  }
-
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
       header: "Select Image source",
@@ -460,6 +438,31 @@ export class RegisterComponent implements OnInit {
     await actionSheet.present();
   }
 
+  imagepath: any = '';
+  pickImage(sourceType:any) {
+    this.imagepath='';
+    const options: CameraOptions = {
+      quality: 20,
+      sourceType: sourceType,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
+      this.imagepath = imageData;
+      this.uploadImage();
+      // alert(JSON.stringify(this.croppedImagePath));
+    }, (err) => {
+      alert(JSON.stringify(err));
+      // Handle error
+    });
+  }
+
+
+
   uploadSingleRes:any;
   uploadSingleResData:any;
   multipleImageArray: any = [];
@@ -471,13 +474,16 @@ export class RegisterComponent implements OnInit {
     let body = {
       mediafile: this.croppedImagePath
     };
+    this.user.present('uploading...');
     this.auth.uploadSingleMenuImage(body).subscribe(res => {
+      this.user.dismiss();
       this.uploadSingleRes = res;
       this.uploadSingleResData = this.uploadSingleRes.data;
       // this.multipleImageArray.push(this.uploadSingleResData.filename);
       this.imageData=this.uploadSingleResData.filename;
       this.img=this.imageData;
     }, err => {
+      this.user.dismiss();
       alert(JSON.stringify(err))
       console.log(err.error)
     })

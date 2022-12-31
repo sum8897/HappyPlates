@@ -1,0 +1,36 @@
+<ion-content class="login-container">
+  <div class="bg-image">
+    <img src="../../../assets/img/login_bg.jpeg">
+    </div>
+    <div class="login-input">
+      <div class="app-name">
+        <h1>BonHomey</h1>
+<span>Welcome! SignUp and get started</span>
+      </div>
+   <div class="chef-segment">
+    <ion-segment value="customer" class="register-segment" [(ngModel)]="type" (ionChange)="segmentChanged($event)"> 
+      <ion-segment-button value="customer">
+        <ion-label>I'M A CUSTOMER</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="chef">
+        <ion-label>I'M A CHEF</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+   </div>
+   <div class="login-input-value" *ngIf="customer">
+    <app-registercustomer></app-registercustomer>
+    </div>  
+   <div class="login-input-value" *ngIf="chef">
+   <app-registerchef></app-registerchef>
+  </div>
+
+
+          <!-- <div class="create-new-account" id="create-new-account">
+            <p class="create-account-p" (click)="clickLogin()">Already have an Account ?<a>Sign In</a></p>
+          </div> -->
+    </div>
+
+   
+    <div class="bottomDiv"></div>
+</ion-content>
+

@@ -16,8 +16,8 @@
   showDefaultButtons="true" (ionCancel)="showPicker = false;">
 </ion-datetime>
   <div class="ion-padding login-input-value">
-    <div class="photo"> First you have to upload image after that you have to fill below all required data
-    </div>
+    <!-- <div class="photo"> First you have to upload image after that you have to fill below all required data
+    </div> -->
     <ion-list>
       <ion-item style="border: 1px dotted #dfe8ed;
       border-radius: 21px;
@@ -32,7 +32,6 @@
         <ion-label style="font-size: 12px;">
           {{imageData}}
         </ion-label>
-       <ion-button size="small" (click)="uploadImage()">upload</ion-button>
         </ion-item>
     </ion-list>
     <form #contactAddressForm="ngForm" (ngSubmit)="onAddressSubmit(contactAddressForm)" >
@@ -40,7 +39,7 @@
       <ion-input type="text" name="title" #title="ngModel" required placeholder="Title * " ngModel></ion-input>
       <span class="text-danger"
       *ngIf="(title.touched || contactAddressForm.submitted) && title.errors?.required">
-      Blog Name is required *
+      Blog title is required *
   </span>
     </div>
     <div class="form-group label-float">
@@ -75,7 +74,8 @@
 <div>
   <div style="padding-left: 15px;font-weight: 600;color: #1c5c75;font-size: 18px;">Added Blogs List</div>
   <div class="noEvent" *ngIf="blogsListLength==0">
-    You did not Add any Events
+    <img src="../../../assets/img/no_data_found.webp">
+    <p>You did not Add any Blogs</p>
   </div>
   <div class="eventData" *ngIf="blogsListLength>0">
 <ion-list>
@@ -84,7 +84,7 @@
     <ion-thumbnail class="addedImage" *ngIf="blog.blogs_image !=''"><img src="{{blog.blogs_image}}"></ion-thumbnail>
     <ion-thumbnail class="addedImage" *ngIf="blog.blogs_image ==''"><img src="../../../assets/img/user_icon.png"></ion-thumbnail>
     <ion-label style="padding-left: 10px;">
-      <h3>{{blog.title}}</h3>
+      <h3 style="text-transform: capitalize;">{{blog.title}}</h3>
       <p>{{blog.description}}</p>
     </ion-label>
   </ion-item>
@@ -92,4 +92,5 @@
 </ion-list>
   </div>
 </div>
+<div class="bottomDiv"></div>
 </ion-content>

@@ -22,6 +22,9 @@
         <div class="desc-heading">Menu Category</div>
         <div class="menu-desc" style="margin-bottom: 10px;">{{menu_category}}</div>
         <div class="desc-heading">Menu Description</div>
-        <div class="menu-desc">{{menu_desc}}</div>
+        <div class="menu-desc" style="margin-bottom: 10px;">{{menu_desc}}</div>
+        <div class="desc-heading">Menu Price per item</div>
+        <div class="menu-desc">{{menu_price | currency:'INR':'symbol'}}</div>
   </div>
+  <div class="bottomDiv"></div>
 </ion-content>

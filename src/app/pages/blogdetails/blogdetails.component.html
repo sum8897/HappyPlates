@@ -3,19 +3,19 @@
     <ion-icon name="arrow-back-outline" class="back-button" (click)="dismiss()" slot="start"></ion-icon>
     <ion-title class="title-text" style="text-align: center;">
       <!-- {{blogname.title}} -->
-      <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png">
+      <!-- <img class="headerimg" style="width: 150px;" src="../../../assets/img/logo.png"> -->
       <!-- About Us -->
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <div class="about-slider-div">
-    <ion-card style="height: 180px;border-radius: 10px;box-shadow: none;">
-      <img style="border-radius: 10px;width: 100%;" [src]="getblogImage(blogs_image)">
+    <ion-card style="height: 180px;border-radius: 10px;box-shadow: none;margin-top: 20px;">
+      <img style="border-radius: 10px;width: 100%;height: -webkit-fill-available;" [src]="getblogImage(blogs_image)">
     </ion-card>
   </div>
   <div class="blog-name">
-    <p class="blog-script-name" style="text-align: center;font-size: 20px;">{{title}}</p>
+    <p class="blog-script-name" style="text-align: center;font-size: 20px;text-transform: capitalize;">{{title}}</p>
   </div>
   <div class="blog-date-admin-icon">
     <div class="blog-date-icon"><img src="../../../assets/img/date.png"><span class="blog-date-text">{{date}}</span>
@@ -35,4 +35,5 @@
       times to the modern era. An informative volume that boasts over
     </h6>
   </div>
+  <div class="bottomDiv"></div>
 </ion-content>

@@ -38,7 +38,7 @@ export class UploadBlogComponent implements OnInit {
       'description': contactAddressForm.value.descr,
       'status': "1"
     }
-    this.user.present('uploading...')
+    this.user.present('uploading....')
     this.auth.postBlogs(blogs_data).subscribe((data) => {
       this.user.showToast('Blog added successfully...');
       this.user.dismiss();

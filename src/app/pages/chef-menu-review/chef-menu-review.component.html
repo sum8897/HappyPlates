@@ -184,7 +184,12 @@
     </div>
 
   </div>
-  <ion-card *ngIf="dateCard" class="countrycard">
+
+  <div class="bottomDiv"></div>
+</ion-content>
+
+<div class="overlay" *ngIf="dateCard">
+  <ion-card  class="countrycard">
     <div class="crossCut" (click)="dateCard =! dateCard"><ion-icon  name="close-outline" class="closed"></ion-icon></div>
     <ion-item (click)="showPicker =! showPicker">
       <ion-label>Date</ion-label>
@@ -199,5 +204,4 @@
      <div class="submit-div"><ion-button class="submit-login-button" (click)="addToCart()">Add to Cart</ion-button></div>
    
   </ion-card>
-
-</ion-content>
+  </div>

@@ -1,52 +1,43 @@
 <ion-content class="login-container">
   <div class="bg-image">
-  <img style="width: 100%;" src="../../../assets/img/login_bg.jpeg">
+    <img style="width: 100%;" src="../../../assets/img/login_bg.jpeg">
   </div>
   <div class="login-input">
-  <div class="app-name">
-    <h1>BonHomey</h1>
-    <span>Welcome! SignUp and get started</span>
-  </div>
-  <div class="login-input-value">
-    <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" >
-    <div class="form-group label-float">
-      <ion-input type="email" name="email" #email="ngModel" required placeholder="Enter Email " ngModel></ion-input>
-      <label>EMail<span class="span-star">*</span></label>
-      <span class="text-danger"
-      *ngIf="(email.touched || contactForm.submitted) && email.errors?.required">
-      Email is required *
-  </span>
+    <div class="login-input-box">
+      <div class="app-name">
+        <div class="login-logo-div">
+          <img src="../../../assets/img/logo.png">
+        </div>
+        <span>Welcome! SignUp and get started</span>
+      </div>
+      <div class="login-input-value">
+        <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+          <div class="form-group label-float">
+            <ion-input type="email" name="email" #email="ngModel" required placeholder="Enter Email " ngModel></ion-input>
+            <label>Email <span class="span-star">*</span>
+            </label>
+            <span class="text-danger" *ngIf="(email.touched || contactForm.submitted) && email.errors?.required"> Email is required * </span>
+          </div>
+          <div class="form-group label-float">
+            <ion-input type="password" name="password" #password="ngModel" required placeholder="Enter Password " ngModel></ion-input>
+            <label>Password <span class="span-star">*</span>
+            </label>
+            <span class="text-danger" *ngIf="(password.touched || contactForm.submitted) && password.errors?.required"> Password is required * </span>
+          </div>
+          <div class="remember-forgot">
+            <div class="forgot-div">
+              <p class="forgot-p" (click)="forgetPass()">Forgot Password</p>
+            </div>
+          </div>
+          <div class="submit-div">
+            <ion-button class="submit-login-button" expand="full" shape="round" type="submit">Log In</ion-button>
+          </div>
+        </form>
+      </div>
+      <div class="create-new-account">
+        <p class="create-account-p" (click)="openSignUp()">Don't have an account <a>Sign Up</a>
+        </p>
+      </div>
     </div>
-
-    <div class="form-group label-float">
-      <ion-input type="password" name="password" #password="ngModel" required placeholder="Enter Password " ngModel></ion-input>
-      <label>Password<span class="span-star">*</span></label>
-      <span class="text-danger"
-      *ngIf="(password.touched || contactForm.submitted) && password.errors?.required">
-      password is required *
-  </span>
-    </div>
-  
-
-  <div class="remember-forgot">
-<!-- <div class="check-checkbox">
-  <ion-item lines='none'>
-    <ion-label>Remember Me</ion-label>
-    <ion-checkbox slot="start" mode="md" name="check" #ng class="remember-checkbox" value="yes" (ionChange)="checkedValue($event)" ngModel></ion-checkbox>
-  </ion-item>
-</div> -->
-   <div class="forgot-div">
-    <p class="forgot-p" (click)="forgetPass()">Forgot Password</p>
-   </div>
   </div>
-  <div class="submit-div">
-<ion-button class="submit-login-button" expand="round" type="submit">Log In</ion-button>
-  </div>
-</form>
-</div>
-  <div class="create-new-account">
-    <p class="create-account-p" (click)="openSignUp()">Don't have an account<a>Sign Up</a></p>
-  </div>
-  </div>
-
 </ion-content>

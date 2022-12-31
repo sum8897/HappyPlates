@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
   userAllData: any;
   user_location;
   user_phone;
+  user_email:any;
   user_image: any;
   user_ProfImage: any = '';
 
@@ -67,6 +68,8 @@ export class ProfileComponent implements OnInit {
       this.user_image = this.userAllData.prof_image;
       this.user_name = this.userAllData.firstname + " " + this.userAllData.lastname;
       this.user_phone = this.userAllData.phone;
+      this.user_email= this.userAllData.email;
+      localStorage.setItem('user_email',this.user_email);
       this.cityname = this.userAllData.city.city_name;
       this.cityId = this.userAllData.city.id;
       this.statename = this.userAllData.state.state_name;
@@ -261,31 +264,6 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  croppedImagePath: any;
-  imagepath: any = "";
-  pickImage(sourceType: any) {
-    const options: CameraOptions = {
-      quality: 20,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-      // alert(imageData);
-      // imageData is either a base64 encoded string or a file URI
-      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
-      this.user_ProfImage=this.croppedImagePath;
-      this.imagepath = imageData;
-      this.uploadImage();
-      // alert(JSON.stringify(this.croppedImagePath));
-
-    }, (err) => {
-      alert(JSON.stringify(err));
-    });
-  }
-
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
       header: "Select Image source",
@@ -312,6 +290,33 @@ export class ProfileComponent implements OnInit {
     await actionSheet.present();
   }
 
+  croppedImagePath: any;
+  imagepath: any = "";
+  pickImage(sourceType: any) {
+    const options: CameraOptions = {
+      quality: 20,
+      sourceType: sourceType,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // alert(imageData);
+      // imageData is either a base64 encoded string or a file URI
+      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
+      this.user_ProfImage=this.croppedImagePath;
+      this.imagepath = imageData;
+      this.uploadImage();
+      // alert(JSON.stringify(this.croppedImagePath));
+
+    }, (err) => {
+      alert(JSON.stringify(err));
+    });
+  }
+
+ 
+
   uploadSingleRes: any;
   uploadSingleResData: any;
   multipleImageArray: any = [];
@@ -324,14 +329,14 @@ export class ProfileComponent implements OnInit {
       // mediafile: this.capturedSnapURL
       mediafile: this.croppedImagePath
     };
-    this.user.present('uploading...');
+    this.user.present('uploading....');
     this.auth.uploadSingleMenuImage(body).subscribe(res => {
       this.user.dismiss();
       this.uploadSingleRes = res;
       this.uploadSingleResData = this.uploadSingleRes.data;
       // this.multipleImageArray.push(this.uploadSingleResData.filename);
       this.imageData = this.uploadSingleResData.filename;
-      alert(this.imageData);
+      // alert(this.imageData);
       // this.img = this.imageData;
       this.updateUserProfile(this.imageData);
        if(this.imageData=''){
@@ -369,10 +374,12 @@ updateUserProfile(image:any){
    }
  this.user.present('updating...');
    this.auth.updateProfileData(body).subscribe((res)=>{
+   this.user.userDetails();
   this.user.dismiss();
    },err=>{
     this.user.dismiss();
-     alert(JSON.stringify(err));
+    //  alert(JSON.stringify(err));
+    alert("User Profile image not updated, Please try after sometimes");
    })
 
   }else{
@@ -397,12 +404,15 @@ updateUserProfile(image:any){
      }
    this.user.present('updating...');
      this.auth.updateProfileData(body).subscribe((res)=>{
+      this.user.userDetails();
     this.user.dismiss();
      },err=>{
       this.user.dismiss();
-       alert(JSON.stringify(err));
+       alert("User Profile image not updated, Please try after sometimes");
      })
   }
 
 }
+
+
 }

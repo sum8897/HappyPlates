@@ -11,7 +11,8 @@ import { OrderDetailsComponent } from '../order-details/order-details.component'
   styleUrls: ['./order-histry.component.scss'],
 })
 export class OrderHistryComponent implements OnInit {
-
+ noData:boolean;
+ datafound:boolean;
   constructor(public auth: AuthService,
              public user: UserService,
              public router: Router,
@@ -29,10 +30,14 @@ orderedData:any;
       this.orderedRes=order;
       this.orderedData=this.orderedRes.data;
       this.user.dismiss();
-  console.log(this.orderedData);
+  console.log(this.orderedData.length);
   if(this.orderedData=="" || this.orderedData.length==0 || this.orderedData==[]){
-    console.log('no data found')
+    console.log('no data found');
+    this.noData=true;
+    this.datafound=false;
   }else{
+    this.noData=false;
+    this.datafound=true;
     var mydate = new Date(this.orderedData[0].deliverydate);
     console.log(mydate.toDateString());
       if(this.orderedData.length==0){

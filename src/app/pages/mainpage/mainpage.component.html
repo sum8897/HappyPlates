@@ -83,8 +83,8 @@
     <div class="event-heading"> Latest Event</div>
     <div class="event-slider-div">
       <ion-slides [options]="slidesEvent" pager="true">
-        <ion-slide *ngFor="let ev of latestEventAllData">
-          <ion-card class="event-card"><img src="{{ev.event_image[0]}}" (click)="openEventDetails(ev)"></ion-card>
+        <ion-slide *ngFor="let ev of latestEventAllData" (click)="openEventDetails(ev)">
+          <ion-card class="event-card"><img src="{{ev.event_image[0]}}"></ion-card>
           <div class="event-details">
             <div class="event-div">
               <div class="event-name" *ngIf="ev.title !=null">{{(ev.title).substring(0,50)}}</div>
@@ -194,6 +194,5 @@
     <ion-icon expand="full" name="logo-apple" slot="start"></ion-icon>
     Sign in with Apple
   </ion-button> -->
-<div style="height: 20px;">
-</div>
+  <div class="bottomDiv"></div>
 </ion-content>

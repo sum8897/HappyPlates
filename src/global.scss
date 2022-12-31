@@ -35,16 +35,15 @@
     width : 100%;
 }
 .login-input {
-    height                 : 65vh;
-    border-top-left-radius : 21px;
-    border-top-right-radius: 21px;
-    width                  : 100%;
-    background-color       : #fff;
-    right                  : 0;
-    bottom                 : 0;
-    // margin-top: -5vh;
-    opacity                : 0.9;
-    margin-top             : -30px;
+min-height: 75vh;
+    border-radius: 35px 35px 0 0;
+    width: 100%;
+    background-color: #ffffff;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    top: 25vh;
 }
 .app-name {
     text-align : center;
@@ -70,29 +69,27 @@
     width: 100%;
     .submit-login-button{
         --background: #1c5c75;
-        border-radius: 21px;
-        width: 80%;
-        margin-top: 4vh;
+        height:45px;
     }
 }
 .create-new-account{
-    text-align: center;
+    text-align: right;
     margin-top: 30px;
+    padding-right: 18px;
     .create-account-p{
         font-size: 15px;
     }
     a{
         color: #1c5c75;
-        margin-left: 5px;
-        text-decoration: underline;
-        opacity: 1;
+        border-bottom: 1px solid #1c5c75;
+        font-style: italic;
+        opacity: 999;
     }
 }
 
 .label-float {
     position   : relative;
     padding-top: 13px;
-    margin     : 0 30px;
 
     &.invalid {
         label {
@@ -107,7 +104,7 @@
     ion-input {
         background-color  : transparent;
         border            : 2px solid #e1eaec;
-        border-radius     : 21px;
+        border-radius     : 50px;
         outline           : none;
         min-width         : 100%;
         padding           : 15px 0;
@@ -226,12 +223,48 @@ ion-input:not(:placeholder-shown):not(.invalid)+label {
     background: #550d18;
     
 }
-.text-danger{
+.text-danger , .error-message{
     color: red;
     padding-left: 10px;
     font-size: 12px
 }
-
+.form-item{
+    border: 2px solid #e1eaec;
+    border-radius: 50px;
+}
+.overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgb(41 40 40 / 80%);
+    z-index: 9999;
+    overflow-y: overlay;
+}
+.remember-checkbox {
+    margin-right: 10px;
+}
+.check-checkbox{
+    span{
+        font-size: 13px;
+    }
+    a{
+        color: #1c5c75;
+        border-bottom: 1px solid #1c5c75;
+        font-style: italic;
+        // font-weight: 500;
+    }
+}
+.crossCut{
+    text-align: right;
+    padding-right: 20px;
+    padding-top: 15px;
+}
+.closed{
+    font-size: 30px;
+    color: red;
+}
 .profile-top-div{
     position: relative;
     .profile-card{
@@ -476,8 +509,99 @@ ion-title{
     outline: none;
     margin: 0 30px;
 }
+.noEvent{
+    text-align: center;
+    img{
+        width: 200px;
+        height: 150px;
+        margin-bottom: -15px;
+    }
+}
+.eventData{
+    margin-bottom: 60px;
+}
+.bottomDiv{
+    height: 40px;
+}
+//******   USed for android only not for ios ***//
 ion-toolbar{
     height: 85px;
-    --padding-top: 25px;
-    padding-top: 25px;
+    --padding-top: 45px;
+    padding-top: 45px;
+}
+ion-footer{
+    ion-toolbar{
+        height: 85px;
+        padding-top: 0;
+        --padding-top: 0;
+        margin-bottom: 30px;
+    }  
+}
+// ****above code used for android
+
+.app-name {
+    text-align : center;
+
+    span {
+        font-size  : 12px;
+        font-weight: 500;
+    }
+}
+.login-input-box{
+    max-width:450px;
+    padding:25px 35px;
+    margin:auto;
+}
+.parentdiv{
+    margin: auto 30px;
+}
+.login-logo-div{
+    img{
+        width:100%;
+        max-width:175px;
+    }
+}
+ion-button{
+  --box-shadow:none;
+}
+ion-segment-button {
+  --box-shadow:none;
+}
+.upload-profilepic{
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    padding: 30px 0 5px;
+    flex-direction: column;
+
+    .profile-img{
+        border-radius: 10px;
+        height: 80px;
+        width: 80px;
+        background-color: #fff;
+        // padding: 5px;
+        border: #dae5e9 solid 2px;
+        .uploadedImg{
+         width: 78px;
+         height: 78px;
+         border-radius: 10px;
+        }
+    }
+    ion-button{
+        color: #373737;
+        text-transform: capitalize;
+        margin: 15px;
+        border-radius: 35px;
+        background-color: #dae5e9;
+    }
+}
+
+.item-native{
+    .icon-inner{
+        display: block;
+        height: 100%;
+        width: 55%;
+    }
 }

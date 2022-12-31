@@ -31,7 +31,7 @@ export class BlogComponent implements OnInit {
       this.blogDataAll = this.blogRes.data;
    
       for (let i = 0; i <= this.blogDataAll.length; i++) {
-        console.log(this.blogDataAll[i].blogs_image);
+        // console.log(this.blogDataAll[i].blogs_image);
        if(this.blogDataAll[i].blogs_image===undefined || this.blogDataAll[i].blogs_image==="" || this.blogDataAll[i].blogs_image==[]){
         //  console.log(this.blogDataAll[i].blogs_image)
        this.blogDataArray[i]={
@@ -61,14 +61,14 @@ export class BlogComponent implements OnInit {
   blogSingleData;
   async showBlogModal(blog) {
     let id = blog.id;
-    console.log(id)
+    // console.log(id)
     this.blogSingleData = "";
     this.auth.getSingleBlogs(id).subscribe(async res => {
 
       this.blogSingleRes = res;
       console.log(this.blogSingleRes)
       this.blogSingleData = this.blogSingleRes.data;
-      console.log(this.blogSingleData);
+      // console.log(this.blogSingleData);
       const modal = await this.modalCtrl.create({
         component: BlogdetailsComponent,
         componentProps: { blogname: this.blogSingleData }

@@ -1,3 +1,6 @@
+import { PolicyComponent } from './pages/policy/policy.component';
+import { SignupPageModule } from './pages/signup/signup.module';
+import { ChefuserprofileComponent } from './pages/chefuserprofile/chefuserprofile.component';
 import { ChefOrderDetailsComponent } from './chefpage/chef-order-details/chef-order-details.component';
 import { AboutusComponent } from './pages/aboutus/aboutus.component';
 import { NgModule } from '@angular/core';
@@ -63,6 +66,7 @@ import { AddedeventDetailsComponent } from './chefpage/addedevent-details/addede
 import { TestimonialDetailsComponent } from './pages/testimonial-details/testimonial-details.component'
 
 import { Device } from '@awesome-cordova-plugins/device/ngx';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @NgModule({
   declarations: [AppComponent,
@@ -101,7 +105,9 @@ import { Device } from '@awesome-cordova-plugins/device/ngx';
                  TestimonialDetailsComponent,
                  ViewallchefComponent,
                  AboutusComponent,
-                 ChefOrderDetailsComponent
+                 ChefOrderDetailsComponent,
+                 ChefuserprofileComponent,
+                 PolicyComponent
 
                 ],
   entryComponents: [],
@@ -132,6 +138,7 @@ import { Device } from '@awesome-cordova-plugins/device/ngx';
     AuthService,
     AuthGuardGuard,   
     AndroidPermissions,
+    ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

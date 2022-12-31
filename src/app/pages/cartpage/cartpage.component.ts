@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { format, parseISO } from 'date-fns';
 
+declare var RazorpayCheckout :any;
 
 @Component({
   selector: 'app-cartpage',
@@ -16,6 +17,10 @@ export class CartpageComponent implements OnInit {
   showPicker=false;
   // dateValue=format(new Date(),'yyyy-MM-dd hh:mm:ss')+'T09:00:00.000Z';
   formateString='';
+  paymentAmount: number=300;
+  currency: string='USD';
+  currencyIcon:string ='$';
+  razor_key='rzp_test_1DP5mm0lFG5ag';
   @ViewChild(IonDatetime) datetime:IonDatetime;
   constructor(public user: UserService,
               public auth: AuthService,
@@ -92,13 +97,13 @@ export class CartpageComponent implements OnInit {
 
   async deleteAlertConfirm(data:any) {
     const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'Do You want to Delete this Item... ',
+      header: 'Alert!',
+      message: 'Do You want to Delete this Item.',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary',
+          cssClass: 'danger',
           handler: (blah) => {
             console.log('Confirm Cancel: blah');
           }
@@ -250,6 +255,43 @@ export class CartpageComponent implements OnInit {
     }
   
   }
+
+
+  payWithRazor() {
+    var options = {
+      description: 'BonHomey',
+      image: 'https://i.imgur.com/3g7nmJC.png',
+      currency: this.currency, // your 3 letter currency code
+      key: this.razor_key, // your Key Id from Razorpay dashboard
+      amount: this.paymentAmount, // Payment amount in smallest denomiation e.g. cents for USD
+      name: 'Ashish Chaurasiya',
+      prefill: {
+        email: 'admin@enappd.com',
+        contact: '9621323231',
+        name: 'Enappd'
+      },
+      theme: {
+        color: '#F37254'
+      },
+      modal: {
+        ondismiss: function () {
+          alert('dismissed')
+        }
+      }
+    };
+
+    var successCallback = function (payment_id) {
+      alert('payment_id: ' + payment_id);
+    };
+
+    var cancelCallback = function (error) {
+      alert("..."+error.description + ' (Error  ' + error.code + ')' + JSON.stringify(error));
+    };
+
+    RazorpayCheckout.open(options, successCallback, cancelCallback);
+  }
+
+  
   editProfile(){
     this.router.navigateByUrl('profile')
   }

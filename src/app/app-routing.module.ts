@@ -1,3 +1,4 @@
+import { ChefuserprofileComponent } from './pages/chefuserprofile/chefuserprofile.component';
 import { AddEventComponent } from './chefpage/add-event/add-event.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
@@ -39,9 +40,14 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
+    path: 'signup',
+    loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignupPageModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./sidenav/sidenav.module').then(m => m.SidenavPageModule)
   },
+
   // {
   //   path: '',
   //   redirectTo: 'loginpage',
@@ -111,6 +117,10 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
+    path: 'chefprofile',
+    component: ChefuserprofileComponent
+  },
+  {
     path: 'faq',
     component: FaqComponent
   },
@@ -158,6 +168,10 @@ const routes: Routes = [
   {
     path:'nav/blog-all',
     component: BlogComponent
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
   }
 ];
 

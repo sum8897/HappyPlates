@@ -17,8 +17,8 @@
 </ion-datetime>
 
   <div class="ion-padding login-input-value">
-    <div class="photo"> First you have to upload image after that you have to fill below all required data
-    </div>
+    <!-- <div class="photo"> First you have to upload image after that you have to fill below all required data
+    </div> -->
     <ion-list>
       <ion-item style="border: 1px dotted #dfe8ed;
       border-radius: 21px;
@@ -33,8 +33,9 @@
         <ion-thumbnail style="width: 90px;height: 90px;border-radius: 11px;" slot="start"> <img style="border-radius: 11px;" src="{{croppedImagePath}}"></ion-thumbnail>
         <ion-label style="font-size: 12px;overflow: hidden;white-space: nowrap;">
           {{imageData}}
+          <p>{{multipleImageArray}}</p>
         </ion-label>
-       <ion-button size="small" (click)="uploadImage()">upload</ion-button>
+       <!-- <ion-button size="small" (click)="uploadImage()">upload</ion-button> -->
         </ion-item>
     </ion-list>
     <form #contactAddressForm="ngForm" (ngSubmit)="onAddressSubmit(contactAddressForm)" >
@@ -77,21 +78,22 @@
 <div>
   <div style="padding-left: 15px;font-weight: 600;color: #1c5c75;font-size: 18px;">Added Events List</div>
   <div class="noEvent" *ngIf="eventListLength==0">
-    You did not Add any Events
+    <img src="../../../assets/img/no_data_found.webp">
+    <p>You did not Add any Events</p>
   </div>
   <div class="eventData" *ngIf="eventListLength>0">
     <ion-list>
       <ion-card *ngFor="let event of dataList" class="blogCard" (click)="openEventDetails(event)">
-      <ion-item>
+      <ion-item detail>
         <ion-thumbnail class="addedImage" *ngIf="event.event_image.length >'0'"><img src="{{event.event_image[0]}}"></ion-thumbnail>
         <ion-thumbnail class="addedImage" *ngIf="event.event_image.length =='0'"><img src="../../../assets/img/user_icon.png"></ion-thumbnail>
         <ion-label style="padding-left: 10px;">
-          <h3 style="font-weight: 500;font-size: 17px;">{{event.title}}</h3>
-          <h3 style="">{{event.title}}</h3>
-          <p>{{event.intro}}</p>
+          <h3 style="font-weight: 500;font-size: 17px;text-transform: capitalize;">{{event.title}}</h3>
+          <h3 style="text-transform: capitalize;">{{event.title}}</h3>
+          <p style="text-transform: capitalize;">{{event.intro}}</p>
           <div class="date-location" style="display: flex;width: 100%;margin-top: 5px;">
-          <div class="date2" style="display: inline-flex;width: 50%;"><ion-icon style="color: red;" name="calendar-outline"></ion-icon>&nbsp;&nbsp;<p>{{event.date}}</p></div>
-          <div class="location" style="display: inline-flex;"><ion-icon style="color: red;" name="location-outline"></ion-icon>&nbsp;&nbsp;<p>{{event.location}}</p></div>
+          <div class="date2" style="display: inline-flex;width: 50%;"><ion-icon style="color: red;" name="calendar-outline"></ion-icon>&nbsp;<p>{{event.date}}</p></div>
+          <div class="location" style="display: inline-flex;"><ion-icon style="color: red;" name="location-outline"></ion-icon>&nbsp;<p>{{event.location}}</p></div>
           </div>
         </ion-label>
       </ion-item>
@@ -99,4 +101,5 @@
     </ion-list>
   </div>
 </div>
+<div class="bottomDiv"></div>
 </ion-content>

@@ -22,27 +22,11 @@ export class ChefaddmenuComponent implements OnInit {
     public modalCtrl: ModalController,
     public router:Router) { 
     this.user.menu();
+    this.user.chefmenuData(localStorage.getItem('chef_id'));
   }
 
   ngOnInit() {}
 
-  croppedImagePath = "";
-  imagepath: any = "";
-  pickImage(sourceType:any) {
-    const options: CameraOptions = {
-      quality: 20,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
-      this.imagepath = imageData;
-    }, (err) => {
-      // Handle error
-    });
-  }
 
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
@@ -70,6 +54,27 @@ export class ChefaddmenuComponent implements OnInit {
     await actionSheet.present();
   }
 
+  croppedImagePath = "";
+  imagepath: any = "";
+  pickImage(sourceType:any) {
+    const options: CameraOptions = {
+      quality: 20,
+      sourceType: sourceType,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
+      this.imagepath = imageData;
+      this.uploadImage();
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+  
+
   uploadSingleRes:any;
   uploadSingleResData:any;
   multipleImageArray: any = [];
@@ -78,7 +83,7 @@ export class ChefaddmenuComponent implements OnInit {
     let body = {
       mediafile: this.croppedImagePath
     };
-    this.user.present('uploading..');
+    this.user.present('uploading...');
     this.auth.uploadSingleMenuImage(body).subscribe(res => {
       this.user.dismiss();
       this.uploadSingleRes = res;
@@ -129,13 +134,13 @@ export class ChefaddmenuComponent implements OnInit {
         category: parseInt(this.item_categoty),
         media_files: this.multipleImageArray
       }
-      
           console.log(menuList);
   
-          this.user.present('uploading...');
+          this.user.present('uploading....');
           this.auth.uploadMenulist(menuList).subscribe(res => {
             this.user.dismiss();
             console.log(JSON.stringify(res));
+            contactMenuForm.reset();
             this.router.navigate(['nav/chef-home']);
             this.user.showToast('Menu added successfully...');
           }, err => {
@@ -158,23 +163,23 @@ export class ChefaddmenuComponent implements OnInit {
     });  
     return await modal.present();  
   }
-  deleteMenu(menu:any){
-    console.log(menu);
-    this.user.present('deleting');
-    this.auth.deleteMenuByChef(menu.id).subscribe((response)=>{
-    this.user.dismiss();
-    const items = this.user.menu_data_list.filter(item => item.id === menu.id);
-    const index = this.user.menu_data_list.indexOf(items[0]);
-    if (index > -1) {
-      this.user.menu_data_list.splice(index, 1);
-    }
-    console.log(this.user.menu_data_list);
-    console.log(this.user.menu_data_list.length);
-    alert('Menu Deleted successfully.')
-    },err=>{
-      console.log(err.errors);
-      alert(JSON.stringify(err.errors))
-      this.user.dismiss();
-    })
-  }
+  // deleteMenu(menu:any){
+  //   console.log(menu);
+  //   this.user.present('deleting');
+  //   this.auth.deleteMenuByChef(menu.id).subscribe((response)=>{
+  //   this.user.dismiss();
+  //   const items = this.user.menu_data_list.filter(item => item.id === menu.id);
+  //   const index = this.user.menu_data_list.indexOf(items[0]);
+  //   if (index > -1) {
+  //     this.user.menu_data_list.splice(index, 1);
+  //   }
+  //   console.log(this.user.menu_data_list);
+  //   console.log(this.user.menu_data_list.length);
+  //   alert('Menu Deleted successfully.')
+  //   },err=>{
+  //     console.log(err.errors);
+  //     alert(JSON.stringify(err.errors))
+  //     this.user.dismiss();
+  //   })
+  // }
 }

@@ -111,7 +111,7 @@ alert('Please fill all details.')
     //   'specialization': contactForm.value.specialization,
     // }
     // console.log(body);
-    // this.user.present('uploading...');
+    // this.user.present('uploading....');
     // this.auth.updateProfileData(body).subscribe((data) => {
     //   this.user.dismiss();
     //   console.log(data);
@@ -184,78 +184,48 @@ alert('Please fill all details.')
    
 
   }
-  menu_data:any; menu_data_list:any;
-  menu_Array:any=[];
-  chefmenuData(chef_id) {
-    // this.user.present('wait...');
-    this.auth.getSingleChefsAllMenu(chef_id).subscribe((data) => {
-      this.user.dismiss();
-      this.menu_data = data;
-      this.menu_data_list = this.menu_data.data;
-      // console.log(this.menu_data_list);
-      for(let i=0;i<=this.menu_data_list.length;i++){
-        // console.log(this.menu_data_list[i].medias[0]);
-        if(this.menu_data_list[i].medias[0]==undefined){
-          console.log('empty data');
-          this.menu_Array[i]={
-            'price':this.menu_data_list[i].price,
-            'title':this.menu_data_list[i].title,
-            'description':this.menu_data_list[i].description,
-            'userId':this.menu_data_list[i].userId,   
-            'id': this.menu_data_list[i].id,
-            'category':this.menu_data_list[i].category,
-            'food_type':this.menu_data_list[i].food_type,
-            'path': '../../../assets/img/user_icon.png',
-          }
-          console.log(this.menu_Array)
-        }else{
-          this.menu_Array[i]={
-            'price':this.menu_data_list[i].price,
-            'title':this.menu_data_list[i].title,
-            'description':this.menu_data_list[i].description,
-            'userId':this.menu_data_list[i].userId,  
-            'id': this.menu_data_list[i].id,
-            'category':this.menu_data_list[i].category,
-            'food_type':this.menu_data_list[i].food_type,
-            'menu_image': this.menu_data_list[i].menu_image,          
-            'path': this.menu_data_list[i].medias[0].path,
-          }
-        }
-        console.log(this.menu_Array);
-      }
-  // console.log(this.menu_Array);
-    }, err => {
-      this.user.dismiss();
-      console.log(err)
-    })
-  }
+  // menu_data:any; menu_data_list:any;
+  // menu_Array:any=[];
+  // chefmenuData(chef_id) {
+  //   this.auth.getSingleChefsAllMenu(chef_id).subscribe((data) => {
+  //     this.user.dismiss();
+  //     this.menu_data = data;
+  //     this.menu_data_list = this.menu_data.data;
+  //     for(let i=0;i<=this.menu_data_list.length;i++){
+  //       if(this.menu_data_list[i].medias[0]==undefined){
+  //         console.log('empty data');
+  //         this.menu_Array[i]={
+  //           'price':this.menu_data_list[i].price,
+  //           'title':this.menu_data_list[i].title,
+  //           'description':this.menu_data_list[i].description,
+  //           'userId':this.menu_data_list[i].userId,   
+  //           'id': this.menu_data_list[i].id,
+  //           'category':this.menu_data_list[i].category,
+  //           'food_type':this.menu_data_list[i].food_type,
+  //           'path': '../../../assets/img/user_icon.png',
+  //         }
+  //         console.log(this.menu_Array)
+  //       }else{
+  //         this.menu_Array[i]={
+  //           'price':this.menu_data_list[i].price,
+  //           'title':this.menu_data_list[i].title,
+  //           'description':this.menu_data_list[i].description,
+  //           'userId':this.menu_data_list[i].userId,  
+  //           'id': this.menu_data_list[i].id,
+  //           'category':this.menu_data_list[i].category,
+  //           'food_type':this.menu_data_list[i].food_type,
+  //           'menu_image': this.menu_data_list[i].menu_image,          
+  //           'path': this.menu_data_list[i].medias[0].path,
+  //         }
+  //       }
+  //       console.log(this.menu_Array);
+  //     }
+  //   }, err => {
+  //     this.user.dismiss();
+  //     console.log(err)
+  //   })
+  // }
 
-  
-  croppedImagePath: any;
-  imagepath: any = "";
-  pickImage(sourceType:any) {
-    this.croppedImagePath='';
-    const options: CameraOptions = {
-      quality: 20,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-  
-    this.camera.getPicture(options).then((image) => {
- 
-      // imageData is either a base64 encoded string or a file URI
-      this.croppedImagePath = 'data:image/jpeg;base64,' + image;
-      this.imagepath = image;
-      // alert(JSON.stringify(this.croppedImagePath));
-  
-    }, (err) => {
-      alert(JSON.stringify(err));
-  
-    });
-  }
-  
   
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
@@ -282,6 +252,35 @@ alert('Please fill all details.')
     });
     await actionSheet.present();
   }
+
+  croppedImagePath: any;
+  imagepath: any = "";
+  pickImage(sourceType:any) {
+    this.croppedImagePath='';
+    const options: CameraOptions = {
+      quality: 20,
+      sourceType: sourceType,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+  
+    this.camera.getPicture(options).then((image) => {
+ 
+      // imageData is either a base64 encoded string or a file URI
+      this.croppedImagePath = 'data:image/jpeg;base64,' + image;
+      this.imagepath = image;
+      this.uploadImage();
+      // alert(JSON.stringify(this.croppedImagePath));
+  
+    }, (err) => {
+      alert(JSON.stringify(err));
+  
+    });
+  }
+  
+  
+  
   
   uploadSingleRes:any;
   uploadSingleResData:any;
@@ -293,7 +292,7 @@ alert('Please fill all details.')
       // mediafile: this.capturedSnapURL
       mediafile: this.croppedImagePath
     };
-    this.user.present('uploading...');
+    this.user.present('uploading....');
     this.auth.uploadSingleMenuImage(body).subscribe(res => {
       this.user.dismiss();
       this.uploadSingleRes = res;
@@ -358,7 +357,7 @@ alert('Please fill all details.')
     
      
         console.log(menuList);
-        this.user.present('uploading...');
+        this.user.present('uploading....');
         this.auth.uploadMenulist(menuList).subscribe(res => {
           this.user.dismiss();
           this.router.navigate(['nav/chef-home']);
@@ -417,7 +416,7 @@ alert('Please fill all details.')
       this.user.chef_id = this.userAllData.id;
       console.log(this.userAllData);
       console.log(this.specialization);
-      this.chefmenuData(this.user.chef_id);
+      // this.chefmenuData(this.user.chef_id);
     }, err => {
       this.user.dismiss();
       console.log(err)
@@ -548,23 +547,23 @@ alert('Please fill all details.')
     return await modal.present();  
   }
 
-  deleteMenu(menu:any){
-    console.log(menu);
-    this.user.present('deleting');
-    this.auth.deleteMenuByChef(menu.id).subscribe((response)=>{
-    this.user.dismiss();
-    const items = this.menu_Array.filter(item => item.id === menu.id);
-    const index = this.menu_Array.indexOf(items[0]);
-    if (index > -1) {
-      this.menu_Array.splice(index, 1);
-    }
-    console.log(this.menu_Array);
-    console.log(this.menu_Array.length);
-    alert('Menu Deleted successfully.')
-    },err=>{
-      console.log(err.errors);
-      alert(JSON.stringify(err.errors))
-      this.user.dismiss();
-    })
-  }
+  // deleteMenu(menu:any){
+  //   console.log(menu);
+  //   this.user.present('deleting');
+  //   this.auth.deleteMenuByChef(menu.id).subscribe((response)=>{
+  //   this.user.dismiss();
+  //   const items = this.menu_Array.filter(item => item.id === menu.id);
+  //   const index = this.menu_Array.indexOf(items[0]);
+  //   if (index > -1) {
+  //     this.menu_Array.splice(index, 1);
+  //   }
+  //   console.log(this.menu_Array);
+  //   console.log(this.menu_Array.length);
+  //   alert('Menu Deleted successfully.')
+  //   },err=>{
+  //     console.log(err.errors);
+  //     alert(JSON.stringify(err.errors))
+  //     this.user.dismiss();
+  //   })
+  // }
 }

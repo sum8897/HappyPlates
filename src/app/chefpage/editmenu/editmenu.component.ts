@@ -107,23 +107,7 @@ foodChange(e:any) {
   onMenuSubmit(contactMenuForm:any){
   console.log(contactMenuForm.value);
   }
-  croppedImagePath = "";
-  imagepath: any = "";
-  pickImage(sourceType:any) {
-    const options: CameraOptions = {
-      quality: 20,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
-      this.imagepath = imageData;
-    }, (err) => {
-      // Handle error
-    });
-  }
+
 
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
@@ -151,6 +135,27 @@ foodChange(e:any) {
     await actionSheet.present();
   }
 
+
+  croppedImagePath = "";
+  imagepath: any = "";
+  pickImage(sourceType:any) {
+    const options: CameraOptions = {
+      quality: 20,
+      sourceType: sourceType,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      this.croppedImagePath = 'data:image/jpeg;base64,' + imageData;
+      this.imagepath = imageData;
+      this.uploadImage();
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+ 
   uploadSingleRes:any;
   uploadSingleResData:any;
   multipleImageArray: any = [];
@@ -159,7 +164,7 @@ foodChange(e:any) {
     let body = { 
       mediafile: this.croppedImagePath
     };
-    this.user.present('uploading...');
+    this.user.present('uploading....');
     this.auth.uploadSingleMenuImage(body).subscribe(res => {
       this.user.dismiss();
       this.uploadSingleRes = res;
@@ -199,6 +204,7 @@ alert('Please enter all required details*');
       // alert(typeof(this.menu_image));
       this.user.present('updating...');
       this.auth.editMenuByChef(this.menuList,this.menu_id).subscribe((data)=>{
+        this.user.chefmenuData(localStorage.getItem('chef_id'));
         this.user.menu();
       this.user.dismiss();
       this.dismiss();

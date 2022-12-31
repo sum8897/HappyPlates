@@ -1,11 +1,14 @@
 .top-header{
     background: #1c5c75;
     border-bottom-left-radius: 21px;
+    width: 100%;
     min-height: 90px;
     display: flex;
     padding: 24px 0;
+    padding-top: 35px;
 }
 .user-image{
+    width: 35%;
     .user-img{
         width: 75px;
         height: 75px;
@@ -16,9 +19,16 @@
 }
 .user-details{
     color: #fff;
+    overflow   : hidden;
+    white-space: nowrap;
+    width: 65;
     h3{
         font-size: 17px;
-        font-weight: 900;
+        font-weight: 900;    
+        overflow   : hidden;
+        white-space: nowrap; 
+        text-transform: capitalize;
+        text-overflow: ellipsis;
     }
 
 }
@@ -55,7 +65,7 @@
     opacity: 1;
     font-size: 20px;
     border-radius: 21px;
-    margin: 0 14px 15px 14px;
+    margin: 0 14px 50px 14px;
     .menu-list-icon{
     color: white;
     }

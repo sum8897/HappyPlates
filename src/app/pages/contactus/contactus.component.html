@@ -41,7 +41,7 @@
     <div class="login-input-value">
       <form #contactAddressForm="ngForm" (ngSubmit)="onAddressSubmit(contactAddressForm)" >
       <div class="label-float contact-label-float">
-        <ion-input type="text" placeholder="Enter First Name " name="fullname" #fullname="ngModel" required ngModel></ion-input>
+        <ion-input type="text" placeholder="Enter Full Name " name="fullname" #fullname="ngModel" required ngModel></ion-input>
         <label>Full Name<span class="span-star">*</span></label>
         <span class="text-danger"
         *ngIf="(fullname.touched || contactAddressForm.submitted) && fullname.errors?.required">
@@ -79,5 +79,5 @@
 </form>
     </div>
   </ion-card>
-  
+  <div class="bottomDiv"></div>
 </ion-content>

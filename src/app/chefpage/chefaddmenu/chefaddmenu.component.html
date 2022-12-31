@@ -19,12 +19,6 @@
       <ion-label style="text-align: right;">Add Menu Items</ion-label>
     </ion-item>
     <div class="ion-padding login-input-value" slot="content">
-      <div class="photo">
-        <p>1.Select Image from gallery or Camera</p>
-        <p>2.Upload Image on server</p>
-        <p>3.After uploading image, You have to fill below all required details</p>           
-        <p>4.Click for submit data</p>                          
-      </div>
       <ion-list>
         <ion-item style="border: 1px dotted #dfe8ed;
         border-radius: 21px;
@@ -40,7 +34,7 @@
           <ion-label style="font-size: 12px;overflow: hidden;white-space: nowrap;">
             {{imageData}}
           </ion-label>
-         <ion-button size="small" (click)="uploadImage()">Upload</ion-button>
+         <!-- <ion-button size="small" (click)="uploadImage()">Upload</ion-button> -->
           </ion-item>
       </ion-list>
         <form #contactMenuForm="ngForm" (ngSubmit)="onMenuSubmit(contactMenuForm)" >
@@ -59,25 +53,7 @@
           Regular Price is required *
       </span>
         </div>
-        <!-- <div class="city-pin" style="display: flex;">
-          <div class="form-group label-float">
-            <ion-input type="number" name="other_price" #other_price="ngModel" required placeholder="Other Price * " ngModel></ion-input>
-        
-            <span class="text-danger"
-            *ngIf="(other_price.touched || contactMenuForm.submitted) && other_price.errors?.required">
-            Other Price is required *
-        </span>
-          </div>
-      
-          <div class="form-group label-float">
-            <ion-input type="tel" name="pin" #pin="ngModel" required placeholder="Pin * " ngModel></ion-input>
-            <span class="text-danger"
-            *ngIf="(pin.touched || contactMenuForm.submitted) && pin.errors?.required">
-            Pin is required *
-        </span>
-          </div>
-        </div> -->
-        <div class="form-group label-float" style="display: flex;margin: 10px;">
+        <div class="form-group label-float" style="display: flex;margin: 10px auto 10px 30px;">
          
           <ion-radio-group  style="width: 100%;" (ionChange)="radioGroupChange($event)" #radioGroup>
        <div style="display: flex;width: 100%;">
@@ -124,8 +100,11 @@
     <div class="chef-menu" style="margin: 10px 0;">
       <div style="color: #1d5b74;margin: 10px;">My Item List</div>
 
-      <div class="data_not_found" *ngIf="user.menu_data_list==0" style="text-align:center;padding-top: 10vh;">
-        <div class="data_not_found">No Data Found</div>  
+      <div class="noEvent data_not_found" *ngIf="user.menu_data_list==0">
+        <img src="../../../assets/img/no_data_found.webp">
+        <div class="data_not_found">
+          
+          No Data Found</div>  
       </div>
       <ion-card style="border-radius: 11px;margin: 10px;" *ngFor="let menu of user.menu_data_list">
   
@@ -154,11 +133,6 @@
              <p style="margin-top: 0;
              font-size: 18px;
              font-weight: 600;">{{menu.price | currency:'INR':'symbol'}}</p>
-             <!-- <del style="padding-left: 5px;
-             font-size: 12px;
-             padding-top: 7px;
-             opacity: 99999;
-     color: #a9a9a9;">{{menu.offer | currency:'INR':'symbol'}}</del> -->
            </div>
           
          </div>
@@ -172,8 +146,8 @@
           padding-top: 15px;
           text-align: center;
           font-size: 20px;">
-         <div style="height: 50%;" ><ion-icon name="create-outline" ></ion-icon></div>
-         <div style="" (click)="deleteMenu(menu)"><ion-icon name="trash-outline"></ion-icon></div>
+         <div style="height: 50%;" (click)="editMenu(menu)"><ion-icon name="create-outline" ></ion-icon></div>
+         <div style="" (click)="user.deleteMenu(menu)"><ion-icon name="trash-outline" style="color: #dc1f32;"></ion-icon></div>
        </div>
         </div>
   
@@ -182,4 +156,5 @@
      </div>
     </div>
   </div>
+  <div class="bottomDiv"></div>
 </ion-content>

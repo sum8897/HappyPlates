@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router, RouterEvent } from '@angular/router';
-import { AlertController, MenuController } from '@ionic/angular';
+import { AlertController, MenuController, NavController } from '@ionic/angular';
 import { UserService } from '../services/user.service';
 
 
@@ -124,7 +124,8 @@ export class SidenavPage implements OnInit {
   constructor(private router: Router,
     public menuCtrl: MenuController,
     public user: UserService,
-    public alertController: AlertController,) {
+    public alertController: AlertController,
+    private navController: NavController) {
       this.user.userDetails();
       this.user.user_name=localStorage.getItem('user_name'); 
     this.user_type=localStorage.getItem('user_role');
@@ -152,14 +153,19 @@ export class SidenavPage implements OnInit {
   ngOnInit() { 
     this.user.userDetails();
   }
-  logout(){
-    localStorage.clear();
-    localStorage.removeItem('amantran_token');
-    this.menuCtrl.close();
-    this.router.navigate(['loginpage']);
-  }
+
   editProfile(){
-    this.router.navigateByUrl('profile')
+    if(localStorage.getItem('user_role')==""){
+      this.router.navigate(['loginpage']);
+    }else{
+      if(localStorage.getItem('user_role')=='chef'){
+        this.router.navigateByUrl('chefprofile');
+      }else{
+        this.router.navigateByUrl('profile');
+      }
+    }
+  
+   
   }
   showExitConfirm() {
     this.alertController.create({
@@ -182,5 +188,12 @@ export class SidenavPage implements OnInit {
       .then(alert => {
         alert.present();
       });
+  }
+  logout(){
+    localStorage.clear();
+    localStorage.removeItem('amantran_token');
+    this.menuCtrl.close();
+    this.navController.pop();
+    this.router.navigate(['loginpage']);
   }
 }
